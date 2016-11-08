@@ -33,7 +33,7 @@ namespace OptikPlanner
             CalendarItem calendarItem = e.Item;
             calendarItem.Text = "You just double clicked me!";
             
-
+            //Danny lugter lidt af egerntisserier
 
         }
     }

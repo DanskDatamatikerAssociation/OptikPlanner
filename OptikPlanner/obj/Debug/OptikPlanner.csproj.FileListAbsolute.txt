@@ -20,3 +20,6 @@ C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner
 C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.Form1.resources
 C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.Properties.Resources.resources
 C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.csproj.GenerateResource.Cache
+C:\Users\Daniel\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\OptikPlanner.exe.config
+C:\Users\Daniel\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.exe
+C:\Users\Daniel\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.pdb
