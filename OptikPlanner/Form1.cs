@@ -31,7 +31,7 @@ namespace OptikPlanner
         private void calendar1_ItemDoubleClick(object sender, CalendarItemEventArgs e)
         {
             CalendarItem calendarItem = e.Item;
-            calendarItem.BackgroundColor = Color.Blue;
+            calendarItem.Text = "You just double clicked me!";
             
 
 
