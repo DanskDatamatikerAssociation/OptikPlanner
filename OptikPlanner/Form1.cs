@@ -35,6 +35,7 @@ namespace OptikPlanner
             
             //Danny lugter lidt af egerntisserier
 
+            //det løgn det gør han slet ikk heeh
         }
     }
 }
