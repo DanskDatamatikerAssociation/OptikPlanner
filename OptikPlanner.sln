@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OptikPlanner", "OptikPlanner\OptikPlanner.csproj", "{20706859-8D02-469C-A93C-5819B7A3F449}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Windows.Forms.Calendar", "..\..\..\..\Downloads\Software\System_Windows_Forms_Calendar_003\System.Windows.Forms.Calendar\System.Windows.Forms.Calendar\System.Windows.Forms.Calendar.csproj", "{25649F08-3046-4891-ADB8-7EA787B57063}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Windows.Forms.Calendar", "System.Windows.Forms.Calendar\System.Windows.Forms.Calendar.csproj", "{25649F08-3046-4891-ADB8-7EA787B57063}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
