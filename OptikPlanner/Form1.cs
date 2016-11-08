@@ -26,7 +26,6 @@ namespace OptikPlanner
             CalendarItem calendarItem = new CalendarItem(calendar1, DateTime.Now, DateTime.Now.AddMinutes(10.0),
                 "TestItem");
             calendar1.Items.Add(calendarItem);
-            //hejehj
         }
 
         private void calendar1_ItemDoubleClick(object sender, CalendarItemEventArgs e)
