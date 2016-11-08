@@ -9,3 +9,14 @@ C:\Users\Danny\Documents\Visual Studio 2015\Projects\OptikPlanner\OptikPlanner\b
 C:\Users\Danny\Documents\Visual Studio 2015\Projects\OptikPlanner\OptikPlanner\bin\Debug\System.Windows.Forms.Calendar.pdb
 C:\Users\Danny\Documents\Visual Studio 2015\Projects\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.exe
 C:\Users\Danny\Documents\Visual Studio 2015\Projects\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.pdb
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\OptikPlanner.exe.config
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.exe
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.pdb
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\OptikPlanner.exe
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\OptikPlanner.pdb
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\System.Windows.Forms.Calendar.dll
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\System.Windows.Forms.Calendar.pdb
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.csprojResolveAssemblyReference.cache
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.Form1.resources
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.Properties.Resources.resources
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.csproj.GenerateResource.Cache
