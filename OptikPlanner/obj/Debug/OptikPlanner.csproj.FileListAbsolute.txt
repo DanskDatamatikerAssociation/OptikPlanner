@@ -17,6 +17,6 @@ C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\OptikPlanner
 C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\System.Windows.Forms.Calendar.dll
 C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\System.Windows.Forms.Calendar.pdb
 C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.csprojResolveAssemblyReference.cache
-C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.Form1.resources
 C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.Properties.Resources.resources
 C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.csproj.GenerateResource.Cache
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.CalendarView.resources

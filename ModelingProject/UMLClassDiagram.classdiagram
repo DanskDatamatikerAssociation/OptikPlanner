@@ -1,0 +1,382 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="d61fb547-f667-4378-b69b-286f38459601" name="UMLClassDiagram" linkedPackageId="a9bd59ed-1162-4d0d-9ee6-a2602f5abb5a" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <packagedElements>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="a4d14643-c704-4404-9645-01e524c398bc" name="CalendarView" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="ca5c1d1c-7ba5-4064-8215-d0da4206a2f7" />
+        <suppliersInternal>
+          <interfaceRealization Id="ae880c53-778a-4399-b43b-363ad799d522">
+            <interfaceMoniker Id="1e10275f-f39d-4104-a8bd-ddcc33b6d921" LastKnownName="ICalendarView" />
+            <elementDefinition Id="a3d1a5a3-71d9-4ee8-86d3-73068e50847b" />
+          </interfaceRealization>
+        </suppliersInternal>
+        <targetEnds>
+          <association Id="d4d0d691-0961-4c89-a4eb-0b28835fdb41" isDerived="false" sourceEndRoleName="CalendarView" targetEndRoleName="CalendarController" isLeaf="false" isAbstract="false">
+            <classMoniker Id="d1037512-ab65-4407-b493-89b943c871ed" LastKnownName="CalendarController" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="c71ff9c7-21e8-4ebb-8bdd-fe5ccbb1ec15" name="CalendarView" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="2bd00067-b519-44e6-ba99-b87546be6a10" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="6c90e411-2ae9-4651-853f-894c685919c1" name="CalendarController" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="ea0ca1ba-6eac-4e99-982f-b47b68f171f0" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="38d22abf-c8e8-4b30-84a4-4ca7accf7e01" />
+          </association>
+          <association Id="dbc23e02-1f5c-4eef-949c-659312564d2d" isDerived="false" sourceEndRoleName="CalendarView" targetEndRoleName="CreateAppointmentController" isLeaf="false" isAbstract="false">
+            <classMoniker Id="5181d804-4453-4a2a-9380-b2d2014d9030" LastKnownName="CreateAppointmentController" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="054196f9-54c8-495a-8884-4364abfc860c" name="CalendarView" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="11c7ff57-2b3d-4677-8e5c-a3e716212dcd" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="36bff1a9-73e7-42b6-8048-6f215c62a0c6" name="CreateAppointmentController" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="8bcd7e45-1f61-4d70-879f-088a9d8f482b" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="24d3aa9e-ada0-4111-8b02-3e74f0083918" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="1e10275f-f39d-4104-a8bd-ddcc33b6d921" name="ICalendarView" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="8aa47651-5459-41bb-86c6-15bd22445ecc" />
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="d1037512-ab65-4407-b493-89b943c871ed" name="CalendarController" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="911a8e7b-ce57-4f64-a485-1a103debdef4" />
+        <targetEnds>
+          <association Id="9b9a1e90-8d21-46e8-9692-4e7d0d44ab49" isDerived="false" sourceEndRoleName="CalendarController" targetEndRoleName="ICalendarView" isLeaf="false" isAbstract="false">
+            <interfaceMoniker Id="1e10275f-f39d-4104-a8bd-ddcc33b6d921" LastKnownName="ICalendarView" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="9d19cf7f-9656-43ad-b4cb-4f6a7f3e9deb" name="CalendarController" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="41957ef1-8d86-421c-aad3-77898bdce2ad" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="cb4374a3-5ea1-465e-8bf4-5034e6583f6f" name="ICalendarView" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="f983f888-cd5b-4e57-aef8-4e101bbb5594" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="03b43799-aacc-4762-a0c6-bc9361b9596f" />
+          </association>
+          <association Id="555c316c-fab1-420f-92c4-ff3e6c1525f3" isDerived="false" sourceEndRoleName="CalendarController" targetEndRoleName="Room" isLeaf="false" isAbstract="false">
+            <classMoniker Id="86e1599c-fb18-446e-93b7-4f3e53932bb9" LastKnownName="Room" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="660c1f59-84d5-4076-a0bf-232687da6596" name="CalendarController" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="daba158d-6e86-42e5-ab05-63285cf02741" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="902d6a03-45cf-4a4a-aba4-79aaf169fce6" name="Room" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <lowerValueInternal>
+                    <literalString Id="01dfad3d-3f21-44d9-ae0a-a9c0d205e98c" name="Lower" value="*">
+                      <elementDefinition Id="186cfe28-c636-4579-ad06-024631d763c7" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="130c2f34-b1f1-4fcd-8755-d5eedf2dacfc" name="Upper" value="*">
+                      <elementDefinition Id="192cc66f-00e0-4fa3-b3fd-63d90e2fde55" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="15669839-d9a6-433f-96ad-afd2ff18f854" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="1ac69821-ba50-41a0-b2c4-b79edc7c114b" />
+          </association>
+          <association Id="5557eac4-51d1-4262-9a8e-61a4c3f7b8da" isDerived="false" sourceEndRoleName="CalendarController" targetEndRoleName="Customer" isLeaf="false" isAbstract="false">
+            <classMoniker Id="5a7e3701-6411-44fc-8a46-21925dbb440c" LastKnownName="Customer" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="06920303-18a4-464a-8996-27f1833e67e8" name="CalendarController" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="c0ee3d93-d4e4-4110-b559-0c1bc9ab99df" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="7983e9ea-cbc1-4e26-a772-f3c7ba9e32cb" name="Customer" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <lowerValueInternal>
+                    <literalString Id="009f422e-2b10-4d20-8868-3379781fa919" name="Lower" value="*">
+                      <elementDefinition Id="ad43d048-ba24-4e9a-afe0-c5466f71edd1" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="9300bc06-37e1-4db3-9d7e-ab6c178f1824" name="Upper" value="*">
+                      <elementDefinition Id="5d382b28-838a-4bab-b2ef-b154a12923cb" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="1cc9f046-18ee-44b3-ab24-421c05aa4e77" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="06a91bab-8ec1-4ddb-98fe-f08fc900bb1e" />
+          </association>
+          <association Id="ee20d095-9279-4d6c-b556-b411cb1f6424" isDerived="false" sourceEndRoleName="CalendarController" targetEndRoleName="Appointment" isLeaf="false" isAbstract="false">
+            <classMoniker Id="bb3d604f-900a-445f-91dc-0197aee8e363" LastKnownName="Appointment" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="ff3551d9-2e89-496c-990f-c20a719896b4" name="CalendarController" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="0677a56f-54b4-4a9a-b022-f376e2aa4ec7" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="8236b555-98dd-4394-b091-4be4b2bbde88" name="Appointment" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <lowerValueInternal>
+                    <literalString Id="6659aef3-ef29-40d3-80b6-1007f993c6ec" name="Lower" value="*">
+                      <elementDefinition Id="cca95f63-5a37-4d20-a00b-a428ca9a94da" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="395f1902-c305-4cc7-a89a-e40ee0f05142" name="Upper" value="*">
+                      <elementDefinition Id="fcc6f84f-3919-41d9-af19-e9c5ff132e5c" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="838aec1d-a14f-4ec8-9ec5-4c086f04dd65" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="58615164-80a4-4ea6-a703-a0cbb256b9b2" />
+          </association>
+          <association Id="f0b8feba-c227-4590-bcd2-4d745ee43e24" isDerived="false" sourceEndRoleName="CalendarController" targetEndRoleName="User" isLeaf="false" isAbstract="false">
+            <classMoniker Id="3d0282e6-3f14-4a6d-ab72-d045f696f526" LastKnownName="User" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="252d1283-67e3-48a5-a279-c96f17e66871" name="CalendarController" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="4bd1be2e-84d7-4e8b-8b66-1525cf8958fd" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="893350d9-9813-408c-80d0-d24950136bc3" name="User" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <lowerValueInternal>
+                    <literalString Id="792d8f52-57b8-4d91-a5bc-1601e9a3e0f2" name="Lower" value="*">
+                      <elementDefinition Id="2ad92c44-9dd3-49a6-a273-d9cc2896a45a" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="7bea5055-360a-48a9-b28d-a02abfe4c575" name="Upper" value="*">
+                      <elementDefinition Id="3d53a5d8-205f-4e3a-99cb-2ec82ddf020e" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="f766af84-e13f-4897-af1a-91dca4603d83" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="f9b11ef0-6723-4add-834b-04f95fada919" />
+          </association>
+        </targetEnds>
+        <ownedOperationsInternal>
+          <operation Id="52407fa4-3830-4b09-b49d-a141f235a44b" name="CreateAppointment" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="2a37754c-2f83-4673-a839-ea962f8015ff" />
+          </operation>
+          <operation Id="df7e2b24-2eec-44b8-9bbe-9c4fdf491873" name="PostAppointment" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="cfd3b9f6-3f56-4a62-9ca8-b95f61ccaf3a" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="1b465417-7042-48e9-924d-612646d2d6e4" name="Appointment" direction="In" isUnique="false">
+                  <elementDefinition Id="59cc0496-9998-4ec5-8a1c-735160627289" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="4837863b-841d-4c4a-80ae-aa700de72fd6" name="PostAppointments" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="63d1b92f-7c5b-40fd-8793-2aca29221a7e" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="ac95a50b-e0c9-4862-a30f-049b3615ca08" name="List&lt;Appointment&gt;" direction="In" isUnique="false">
+                  <elementDefinition Id="772dda72-4283-4042-8d98-5d4b505979a8" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="e05d3df1-0120-4ba7-9c9b-2243438656d0" name="EditAppointment" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="1c53f641-ca7d-4a5d-854c-d1a50c64a609" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="8d247cd6-80d6-49fb-a0a5-f63d104bc928" name="Appointment" direction="In" isUnique="false">
+                  <elementDefinition Id="98de04e0-094d-4ec9-aa0c-7e82f59fcba2" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="5a7e3701-6411-44fc-8a46-21925dbb440c" name="Customer" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="4a653fa8-8f9a-48ef-8950-1f38a16c18a7" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="bb3d604f-900a-445f-91dc-0197aee8e363" name="Appointment" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="8c9974e0-ee7a-4984-baf1-f14eacded9a6" />
+        <targetEnds>
+          <association Id="c8de3b22-92a6-45af-94f7-456c4cb1488b" isDerived="false" sourceEndRoleName="Appointment" targetEndRoleName="Room" isLeaf="false" isAbstract="false">
+            <classMoniker Id="86e1599c-fb18-446e-93b7-4f3e53932bb9" LastKnownName="Room" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="24ccf621-6f1e-47b0-972b-e96188319c34" name="Appointment" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="afdaf067-6395-4fe4-80bf-a9f2c68d7f07" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="dc35ccd3-99d9-4bbc-9b66-42687daa8eb0" name="Room" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="83d74d68-d101-494d-99b3-8cef0e4d168e" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="4a04643b-e2ed-4dfd-b595-83628792773f" />
+          </association>
+          <association Id="5fd84650-3bf1-4ba2-a2e8-27e322d7df2a" isDerived="false" sourceEndRoleName="Appointment" targetEndRoleName="User" isLeaf="false" isAbstract="false">
+            <classMoniker Id="3d0282e6-3f14-4a6d-ab72-d045f696f526" LastKnownName="User" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="a6f8d8f1-0576-48a8-a579-b40fa1d8d574" name="Appointment" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="0149815e-7ea4-4997-b5de-d40635d42284" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="16c9a6ed-1619-4e96-ae33-e9b12345f5a7" name="User" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="be611cb4-f5ad-440e-94d8-6fdc243a20ef" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="56d98a16-e0a0-47ef-a022-0f1eb25e3d7e" />
+          </association>
+          <association Id="1a6a5050-7252-4bc9-b2b4-305d49b5cbde" isDerived="false" sourceEndRoleName="Appointment" targetEndRoleName="Customer" isLeaf="false" isAbstract="false">
+            <classMoniker Id="5a7e3701-6411-44fc-8a46-21925dbb440c" LastKnownName="Customer" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="313057fd-fdfe-44d3-89d4-d77dddf9e6aa" name="Appointment" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="fa562be0-e894-4f7a-b0a7-8cdc5ba31155" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="1fe2e90c-93e5-4719-b05c-bacd854f6412" name="Customer" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="dad274fa-bccc-42ff-b932-7d3922587d66" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="251cc857-00bb-4e88-af1d-2fe9d25e408c" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="3d0282e6-3f14-4a6d-ab72-d045f696f526" name="User" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="59e86174-96f1-45bd-b90a-080be3c69b52" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="86e1599c-fb18-446e-93b7-4f3e53932bb9" name="Room" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="bbc986b3-486b-4632-a6f7-7150b2501bfa" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="ea747aaa-3d72-45db-9409-cf7a10a0b175" name="CreateAppointmentView" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="09b056f8-c655-46a5-85c1-cb82ec9b1301" />
+        <suppliersInternal>
+          <interfaceRealization Id="96825786-d190-4bd1-8e7e-1a2ead52c7aa">
+            <interfaceMoniker Id="c3452302-ea62-4a14-a386-30ea72323351" LastKnownName="ICreateAppointmentView" />
+            <elementDefinition Id="86f6088e-3dac-41aa-b608-19aaec3d5186" />
+          </interfaceRealization>
+        </suppliersInternal>
+        <targetEnds>
+          <association Id="3f5bc074-950d-4fbe-9b8f-556cfd7315af" isDerived="false" sourceEndRoleName="CreateAppointmentView" targetEndRoleName="CreateAppointmentController" isLeaf="false" isAbstract="false">
+            <classMoniker Id="5181d804-4453-4a2a-9380-b2d2014d9030" LastKnownName="CreateAppointmentController" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="0c5ad192-8e41-4c34-979b-14669685d39d" name="CreateAppointmentView" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="8cfe7c82-45ea-4d9b-a0f8-0be6f65a6eb3" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="079c8549-0e25-4b53-ad2c-4e976a54992d" name="CreateAppointmentController" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="10263db4-53ba-489c-a47e-4f9bd6f2f971" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="423cdf16-0cda-4741-96e6-1efceb201854" />
+          </association>
+          <association Id="1f344a93-8f10-4ca9-8203-5329e1853ea8" isDerived="false" sourceEndRoleName="CreateAppointmentView" targetEndRoleName="Appointment" isLeaf="false" isAbstract="false">
+            <classMoniker Id="bb3d604f-900a-445f-91dc-0197aee8e363" LastKnownName="Appointment" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="5c303f35-26f0-474c-8152-bc307ff44872" name="CreateAppointmentView" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="63b08ea7-2ea3-45a4-97b7-7fecad850511" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="7f111aae-41e5-4327-a9a3-ff05da3db98e" name="Appointment" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="b4343fe4-aa09-491b-a9f6-f4a21438fc54" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="88abfd04-c9d2-4e2d-994b-c8a5661ffa6c" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="c3452302-ea62-4a14-a386-30ea72323351" name="ICreateAppointmentView" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="66859545-e79d-42d2-9e67-2d8696ac86f8" />
+        <ownedAttributes>
+          <property Id="fe249d2b-e612-42c8-9d67-7926ea97400a" name="APPOINTMENT PROPERTIES" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="dfc3ab5c-f2f3-4960-8945-9babe8cc697b" />
+          </property>
+        </ownedAttributes>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="5181d804-4453-4a2a-9380-b2d2014d9030" name="CreateAppointmentController" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="a705d976-ccd5-408a-a4e8-2d43727c0c74" />
+        <targetEnds>
+          <association Id="111da026-3bf4-403f-9d0d-60e4c9880199" isDerived="false" sourceEndRoleName="CreateAppointmentController" targetEndRoleName="ICreateAppointmentView" isLeaf="false" isAbstract="false">
+            <interfaceMoniker Id="c3452302-ea62-4a14-a386-30ea72323351" LastKnownName="ICreateAppointmentView" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="67533cd1-4fd1-4b88-88d6-d274aa5296d1" name="CreateAppointmentController" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="c556d61e-7d44-444f-92c9-24121d528ecc" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="442d324b-0307-418b-b391-4838eff0d277" name="ICreateAppointmentView" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="c65f5f3a-67c4-43b8-a0e7-3b9ca101793a" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="7a7f1be9-265a-4006-8256-39caa8c64e6b" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+  </packagedElements>
+  <package Id="a9bd59ed-1162-4d0d-9ee6-a2602f5abb5a" name="ModelingProject">
+    <elementDefinition Id="070a414e-c78e-420e-a3c7-c1e351568617" />
+    <profileInstances>
+      <packageHasProfileInstances Id="e8c7667c-0890-4ca9-9205-776f0cb5dd2f">
+        <profileInstance Id="2a17615f-eee6-4485-95c5-4d432f5fb823" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="1823914d-c4ea-42a0-b15f-c2ae5f4640e9">
+        <profileInstance Id="186391f2-7c02-46f7-bef1-25750f01cd30" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
+  </package>
+</logicalClassDesignerModel>
