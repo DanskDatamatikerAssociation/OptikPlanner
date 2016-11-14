@@ -64,33 +64,27 @@
     <Compile Include="CalendarView.Designer.cs">
       <DependentUpon>CalendarView.cs</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="Controller\CalendarViewController.cs" />
     <Compile Include="Controller\CreateAppointmentController.cs" />
-    <Compile Include="CUSTOMERS.cs" />
-    <Compile Include="EYEEXAMROOMS.cs" />
-<<<<<<< Updated upstream
-=======
+    <Compile Include="Model\CUSTOMERS.cs" />
+    <Compile Include="Model\EYEEXAMROOMS.cs" />
     <Compile Include="CustomControl1.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CustomControl1.Designer.cs">
       <DependentUpon>CustomControl1.cs</DependentUpon>
     </Compile>
->>>>>>> origin/design_calendar_view
-=======
     <Compile Include="Misc\CueBanner.cs">
       <SubType>Component</SubType>
     </Compile>
->>>>>>> Stashed changes
     <Compile Include="Model\Appointment.cs" />
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\Room.cs" />
     <Compile Include="Model\User.cs" />
-    <Compile Include="OptikItDbContext.cs" />
+    <Compile Include="Model\OptikItDbContext.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="USERS.cs" />
+    <Compile Include="Model\USERS.cs" />
     <Compile Include="View\CreateAppointment.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,10 +127,7 @@
       <Name>System.Windows.Forms.Calendar</Name>
     </ProjectReference>
   </ItemGroup>
-<<<<<<< Updated upstream
-  <ItemGroup>
-    <Folder Include="View\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\Calendar-Add-64x64.png" />
   </ItemGroup>
@@ -161,9 +152,7 @@
   <ItemGroup>
     <None Include="Resources\Plus-50.png" />
   </ItemGroup>
-=======
   <ItemGroup />
->>>>>>> Stashed changes
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

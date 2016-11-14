@@ -28,24 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange1 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
-            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange2 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
-            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange3 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
-            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange4 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
-            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange5 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
-            this.calendar1 = new System.Windows.Forms.Calendar.Calendar();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange11 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
+            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange12 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
+            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange13 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
+            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange14 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
+            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange15 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
+            this.calendar = new System.Windows.Forms.Calendar.Calendar();
             this.monthView2 = new System.Windows.Forms.Calendar.MonthView();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.todayButton = new System.Windows.Forms.Button();
+            this.twoWeeksButton = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.monthViewButton = new System.Windows.Forms.Button();
+            this.weekViewButton = new System.Windows.Forms.Button();
+            this.dayViewButton = new System.Windows.Forms.Button();
+            this.newAppointmentButton = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fIlerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,43 +54,44 @@
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.checkedListBox2 = new System.Windows.Forms.CheckedListBox();
             this.checkedListBox3 = new System.Windows.Forms.CheckedListBox();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
-            // calendar1
+            // calendar
             // 
-            this.calendar1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.calendar1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            calendarHighlightRange1.DayOfWeek = System.DayOfWeek.Monday;
-            calendarHighlightRange1.EndTime = System.TimeSpan.Parse("17:00:00");
-            calendarHighlightRange1.StartTime = System.TimeSpan.Parse("08:00:00");
-            calendarHighlightRange2.DayOfWeek = System.DayOfWeek.Tuesday;
-            calendarHighlightRange2.EndTime = System.TimeSpan.Parse("17:00:00");
-            calendarHighlightRange2.StartTime = System.TimeSpan.Parse("08:00:00");
-            calendarHighlightRange3.DayOfWeek = System.DayOfWeek.Wednesday;
-            calendarHighlightRange3.EndTime = System.TimeSpan.Parse("17:00:00");
-            calendarHighlightRange3.StartTime = System.TimeSpan.Parse("08:00:00");
-            calendarHighlightRange4.DayOfWeek = System.DayOfWeek.Thursday;
-            calendarHighlightRange4.EndTime = System.TimeSpan.Parse("17:00:00");
-            calendarHighlightRange4.StartTime = System.TimeSpan.Parse("08:00:00");
-            calendarHighlightRange5.DayOfWeek = System.DayOfWeek.Friday;
-            calendarHighlightRange5.EndTime = System.TimeSpan.Parse("17:00:00");
-            calendarHighlightRange5.StartTime = System.TimeSpan.Parse("08:00:00");
-            this.calendar1.HighlightRanges = new System.Windows.Forms.Calendar.CalendarHighlightRange[] {
-        calendarHighlightRange1,
-        calendarHighlightRange2,
-        calendarHighlightRange3,
-        calendarHighlightRange4,
-        calendarHighlightRange5};
-            this.calendar1.Location = new System.Drawing.Point(148, 97);
-            this.calendar1.Name = "calendar1";
-            this.calendar1.Size = new System.Drawing.Size(901, 462);
-            this.calendar1.TabIndex = 0;
-            this.calendar1.TabStop = false;
-            this.calendar1.Text = "Calendar";
-            this.calendar1.TimeScale = System.Windows.Forms.Calendar.CalendarTimeScale.FifteenMinutes;
-            this.calendar1.LoadItems += new System.Windows.Forms.Calendar.Calendar.CalendarLoadEventHandler(this.calendar1_LoadItems);
-            this.calendar1.ItemDoubleClick += new System.Windows.Forms.Calendar.Calendar.CalendarItemEventHandler(this.calendar1_ItemDoubleClick);
+            this.calendar.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.calendar.Font = new System.Drawing.Font("Segoe UI", 9F);
+            calendarHighlightRange11.DayOfWeek = System.DayOfWeek.Monday;
+            calendarHighlightRange11.EndTime = System.TimeSpan.Parse("17:00:00");
+            calendarHighlightRange11.StartTime = System.TimeSpan.Parse("08:00:00");
+            calendarHighlightRange12.DayOfWeek = System.DayOfWeek.Tuesday;
+            calendarHighlightRange12.EndTime = System.TimeSpan.Parse("17:00:00");
+            calendarHighlightRange12.StartTime = System.TimeSpan.Parse("08:00:00");
+            calendarHighlightRange13.DayOfWeek = System.DayOfWeek.Wednesday;
+            calendarHighlightRange13.EndTime = System.TimeSpan.Parse("17:00:00");
+            calendarHighlightRange13.StartTime = System.TimeSpan.Parse("08:00:00");
+            calendarHighlightRange14.DayOfWeek = System.DayOfWeek.Thursday;
+            calendarHighlightRange14.EndTime = System.TimeSpan.Parse("17:00:00");
+            calendarHighlightRange14.StartTime = System.TimeSpan.Parse("08:00:00");
+            calendarHighlightRange15.DayOfWeek = System.DayOfWeek.Friday;
+            calendarHighlightRange15.EndTime = System.TimeSpan.Parse("17:00:00");
+            calendarHighlightRange15.StartTime = System.TimeSpan.Parse("08:00:00");
+            this.calendar.HighlightRanges = new System.Windows.Forms.Calendar.CalendarHighlightRange[] {
+        calendarHighlightRange11,
+        calendarHighlightRange12,
+        calendarHighlightRange13,
+        calendarHighlightRange14,
+        calendarHighlightRange15};
+            this.calendar.Location = new System.Drawing.Point(148, 97);
+            this.calendar.Name = "calendar";
+            this.calendar.Size = new System.Drawing.Size(901, 462);
+            this.calendar.TabIndex = 0;
+            this.calendar.TabStop = false;
+            this.calendar.Text = "Calendar";
+            this.calendar.TimeScale = System.Windows.Forms.Calendar.CalendarTimeScale.FifteenMinutes;
+            this.calendar.ItemDoubleClick += new System.Windows.Forms.Calendar.Calendar.CalendarItemEventHandler(this.calendar1_ItemDoubleClick);
             // 
             // monthView2
             // 
@@ -111,30 +113,28 @@
             this.monthView2.TabIndex = 2;
             this.monthView2.Text = "monthView2";
             this.monthView2.TodayBorderColor = System.Drawing.Color.Maroon;
-            this.monthView2.SelectionChanged += new System.EventHandler(this.monthView2_SelectionChanged);
             // 
-            // button3
+            // todayButton
             // 
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(154, 25);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(90, 66);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "I dag";
-            this.button3.UseVisualStyleBackColor = true;
+            this.todayButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.todayButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.todayButton.Location = new System.Drawing.Point(154, 25);
+            this.todayButton.Name = "todayButton";
+            this.todayButton.Size = new System.Drawing.Size(90, 66);
+            this.todayButton.TabIndex = 4;
+            this.todayButton.Text = "I dag";
+            this.todayButton.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // twoWeeksButton
             // 
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(250, 25);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(90, 66);
-            this.button4.TabIndex = 5;
-            this.button4.Text = "14 Dage";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.twoWeeksButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.twoWeeksButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.twoWeeksButton.Location = new System.Drawing.Point(250, 25);
+            this.twoWeeksButton.Name = "twoWeeksButton";
+            this.twoWeeksButton.Size = new System.Drawing.Size(90, 66);
+            this.twoWeeksButton.TabIndex = 5;
+            this.twoWeeksButton.Text = "14 Dage";
+            this.twoWeeksButton.UseVisualStyleBackColor = true;
             // 
             // button8
             // 
@@ -194,57 +194,56 @@
             this.comboBox3.TabIndex = 16;
             this.comboBox3.Text = "Medarbejdere";
             // 
-            // button7
+            // monthViewButton
             // 
-            this.button7.BackColor = System.Drawing.SystemColors.Window;
-            this.button7.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button7.FlatAppearance.BorderSize = 0;
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Image = global::OptikPlanner.Properties.Resources.calendar_64x64;
-            this.button7.Location = new System.Drawing.Point(538, 25);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(90, 66);
-            this.button7.TabIndex = 8;
-            this.button7.UseVisualStyleBackColor = false;
+            this.monthViewButton.BackColor = System.Drawing.SystemColors.Window;
+            this.monthViewButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlText;
+            this.monthViewButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.monthViewButton.Location = new System.Drawing.Point(538, 25);
+            this.monthViewButton.Name = "monthViewButton";
+            this.monthViewButton.Size = new System.Drawing.Size(90, 66);
+            this.monthViewButton.TabIndex = 8;
+            this.monthViewButton.Text = "Månedsvisning";
+            this.monthViewButton.UseVisualStyleBackColor = false;
+            this.monthViewButton.Click += new System.EventHandler(this.monthViewButton_Click);
             // 
-            // button6
+            // weekViewButton
             // 
-            this.button6.BackColor = System.Drawing.SystemColors.Window;
-            this.button6.FlatAppearance.BorderSize = 0;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Image = global::OptikPlanner.Properties.Resources.Calendar_2_64x64;
-            this.button6.Location = new System.Drawing.Point(442, 25);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(90, 66);
-            this.button6.TabIndex = 7;
-            this.button6.UseVisualStyleBackColor = false;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.weekViewButton.BackColor = System.Drawing.SystemColors.Window;
+            this.weekViewButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlText;
+            this.weekViewButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.weekViewButton.Location = new System.Drawing.Point(442, 25);
+            this.weekViewButton.Name = "weekViewButton";
+            this.weekViewButton.Size = new System.Drawing.Size(90, 66);
+            this.weekViewButton.TabIndex = 7;
+            this.weekViewButton.Text = "Ugevisning";
+            this.weekViewButton.UseVisualStyleBackColor = false;
+            this.weekViewButton.Click += new System.EventHandler(this.weekViewButton_Click);
             // 
-            // button5
+            // dayViewButton
             // 
-            this.button5.BackColor = System.Drawing.SystemColors.Window;
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Image = global::OptikPlanner.Properties.Resources.calendar1_64x64;
-            this.button5.Location = new System.Drawing.Point(346, 25);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(90, 66);
-            this.button5.TabIndex = 6;
-            this.button5.UseVisualStyleBackColor = false;
+            this.dayViewButton.BackColor = System.Drawing.SystemColors.Window;
+            this.dayViewButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlText;
+            this.dayViewButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dayViewButton.Location = new System.Drawing.Point(346, 25);
+            this.dayViewButton.Name = "dayViewButton";
+            this.dayViewButton.Size = new System.Drawing.Size(90, 66);
+            this.dayViewButton.TabIndex = 6;
+            this.dayViewButton.Text = "Dagsvisning";
+            this.dayViewButton.UseVisualStyleBackColor = false;
+            this.dayViewButton.Click += new System.EventHandler(this.dayViewButton_Click);
             // 
-            // button2
+            // newAppointmentButton
             // 
-            this.button2.BackColor = System.Drawing.SystemColors.Window;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Image = global::OptikPlanner.Properties.Resources.Calendar_Add_64x64;
-            this.button2.Location = new System.Drawing.Point(2, 25);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(140, 67);
-            this.button2.TabIndex = 3;
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.newAppointmentButton.BackColor = System.Drawing.SystemColors.Window;
+            this.newAppointmentButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlText;
+            this.newAppointmentButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.newAppointmentButton.Location = new System.Drawing.Point(2, 25);
+            this.newAppointmentButton.Name = "newAppointmentButton";
+            this.newAppointmentButton.Size = new System.Drawing.Size(140, 67);
+            this.newAppointmentButton.TabIndex = 3;
+            this.newAppointmentButton.Text = "Ny aftale";
+            this.newAppointmentButton.UseVisualStyleBackColor = false;
             // 
             // textBox1
             // 
@@ -258,7 +257,6 @@
             this.textBox1.TabIndex = 17;
             this.textBox1.Text = "Uge - 45\r\n\r\nNovember - 2016";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
             // 
             // menuStrip1
             // 
@@ -330,7 +328,6 @@
             this.checkedListBox2.Name = "checkedListBox2";
             this.checkedListBox2.Size = new System.Drawing.Size(142, 19);
             this.checkedListBox2.TabIndex = 20;
-            this.checkedListBox2.SelectedIndexChanged += new System.EventHandler(this.checkedListBox2_SelectedIndexChanged);
             // 
             // checkedListBox3
             // 
@@ -371,21 +368,21 @@
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.calendar1);
+            this.Controls.Add(this.monthViewButton);
+            this.Controls.Add(this.weekViewButton);
+            this.Controls.Add(this.dayViewButton);
+            this.Controls.Add(this.twoWeeksButton);
+            this.Controls.Add(this.todayButton);
+            this.Controls.Add(this.newAppointmentButton);
+            this.Controls.Add(this.calendar);
             this.Controls.Add(this.monthView2);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "CalendarView";
             this.Text = "OptikPlanner";
-            this.Load += new System.EventHandler(this.CalendarView_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -393,14 +390,14 @@
 
         #endregion
 
-        private System.Windows.Forms.Calendar.Calendar calendar1;
+        private System.Windows.Forms.Calendar.Calendar calendar;
         private System.Windows.Forms.Calendar.MonthView monthView2;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button newAppointmentButton;
+        private System.Windows.Forms.Button todayButton;
+        private System.Windows.Forms.Button twoWeeksButton;
+        private System.Windows.Forms.Button dayViewButton;
+        private System.Windows.Forms.Button weekViewButton;
+        private System.Windows.Forms.Button monthViewButton;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.ComboBox comboBox1;
@@ -413,6 +410,7 @@
         private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.CheckedListBox checkedListBox2;
         private System.Windows.Forms.CheckedListBox checkedListBox3;
+        private System.Windows.Forms.BindingSource bindingSource1;
     }
 }
 

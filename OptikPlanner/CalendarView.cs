@@ -21,13 +21,6 @@ namespace OptikPlanner
             //calendar.MaximumViewDays = 21;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //ShowMonthView();
-            CreateAppointmentController controller = new CreateAppointmentController();
-            controller.PostAppointment();
-
-        }
 
         private void calendar1_ItemDoubleClick(object sender, CalendarItemEventArgs e)
         {
@@ -61,6 +54,21 @@ namespace OptikPlanner
             DateTime lastDayofMonth = new DateTime(today.Year, today.Month, daysInCurrentMonth);
 
             calendar.SetViewRange(firstDayOfMonth, lastDayofMonth);
+        }
+
+        private void weekViewButton_Click(object sender, EventArgs e)
+        {
+            ShowWeekView();
+        }
+
+        private void dayViewButton_Click(object sender, EventArgs e)
+        {
+            ShowDayView();
+        }
+
+        private void monthViewButton_Click(object sender, EventArgs e)
+        {
+            ShowMonthView();
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.Text;
+using OptikPlanner.Model;
 
 namespace OptikPlanner
 {

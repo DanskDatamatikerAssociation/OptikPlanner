@@ -13,3 +13,8 @@ C:\Users\Daniel\Documents\GitHub\OptikPlanner\System.Windows.Forms.Calendar\bin\
 C:\Users\Daniel\Documents\GitHub\OptikPlanner\System.Windows.Forms.Calendar\obj\Debug\System.Windows.Forms.Calendar.csprojResolveAssemblyReference.cache
 C:\Users\Daniel\Documents\GitHub\OptikPlanner\System.Windows.Forms.Calendar\obj\Debug\System.Windows.Forms.Calendar.dll
 C:\Users\Daniel\Documents\GitHub\OptikPlanner\System.Windows.Forms.Calendar\obj\Debug\System.Windows.Forms.Calendar.pdb
+C:\Users\Danny\Documents\GitHub\OptikPlanner\System.Windows.Forms.Calendar\bin\Debug\System.Windows.Forms.Calendar.dll
+C:\Users\Danny\Documents\GitHub\OptikPlanner\System.Windows.Forms.Calendar\bin\Debug\System.Windows.Forms.Calendar.pdb
+C:\Users\Danny\Documents\GitHub\OptikPlanner\System.Windows.Forms.Calendar\obj\Debug\System.Windows.Forms.Calendar.csprojResolveAssemblyReference.cache
+C:\Users\Danny\Documents\GitHub\OptikPlanner\System.Windows.Forms.Calendar\obj\Debug\System.Windows.Forms.Calendar.dll
+C:\Users\Danny\Documents\GitHub\OptikPlanner\System.Windows.Forms.Calendar\obj\Debug\System.Windows.Forms.Calendar.pdb
