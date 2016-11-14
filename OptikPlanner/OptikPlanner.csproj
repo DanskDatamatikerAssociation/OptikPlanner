@@ -52,6 +52,12 @@
     <Compile Include="CalendarView.Designer.cs">
       <DependentUpon>CalendarView.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomControl1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControl1.Designer.cs">
+      <DependentUpon>CustomControl1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\Appointment.cs" />
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\Room.cs" />
@@ -69,6 +75,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -92,6 +99,30 @@
   <ItemGroup>
     <Folder Include="Controller\" />
     <Folder Include="View\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Calendar-Add-64x64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calendar1-64x64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Calendar-2-64x64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calendar-64x64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Add Rule-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Add Rule-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Calendar Plus-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Plus-50.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

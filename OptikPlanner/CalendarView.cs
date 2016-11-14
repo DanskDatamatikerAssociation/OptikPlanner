@@ -37,5 +37,60 @@ namespace OptikPlanner
 
 
         }
+
+        private void CalendarView_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void calendar1_LoadItems(object sender, CalendarLoadEventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void monthView2_SelectionChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void monthView3_SelectionChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkedListBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
