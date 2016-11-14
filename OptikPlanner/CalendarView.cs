@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.Calendar;
+using OptikPlanner.Controller;
 
 namespace OptikPlanner
 {
@@ -17,15 +18,15 @@ namespace OptikPlanner
         public CalendarView()
         {
             InitializeComponent();
-           
+            //calendar.MaximumViewDays = 21;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            CalendarItem calendarItem = new CalendarItem(calendar1, DateTime.Now, DateTime.Now.AddMinutes(10.0),
-                "TestItem");
-            calendar1.Items.Add(calendarItem);
-            
+            //ShowMonthView();
+            CreateAppointmentController controller = new CreateAppointmentController();
+            controller.PostAppointment();
+
         }
 
         private void calendar1_ItemDoubleClick(object sender, CalendarItemEventArgs e)
@@ -36,6 +37,30 @@ namespace OptikPlanner
             
 
 
+        }
+
+        private void ShowDayView()
+        {
+            calendar.SetViewRange(DateTime.Today, DateTime.Today);
+        }
+
+        private void ShowWeekView()
+        {
+            DateTime today = DateTime.Today;
+            DateTime oneWeekAhead = today.AddDays(6);
+
+           calendar.SetViewRange(today, oneWeekAhead);
+        }
+
+        private void ShowMonthView()
+        { 
+            DateTime today = DateTime.Today;
+            int daysInCurrentMonth = DateTime.DaysInMonth(today.Year, today.Month);
+
+            DateTime firstDayOfMonth = new DateTime(today.Year, today.Month, 1);
+            DateTime lastDayofMonth = new DateTime(today.Year, today.Month, daysInCurrentMonth);
+
+            calendar.SetViewRange(firstDayOfMonth, lastDayofMonth);
         }
     }
 }
