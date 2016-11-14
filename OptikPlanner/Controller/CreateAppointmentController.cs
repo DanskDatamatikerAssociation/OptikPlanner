@@ -26,7 +26,7 @@ namespace OptikPlanner.Controller
             EYEEXAMROOMS room = new EYEEXAMROOMS() {ERO_STAMP = 1};
          
 
-            APTDETAILS appointment = new APTDETAILS(8, user, room, DateTime.Now, "12:15", "12:30", customer, "Test aftale");
+            APTDETAILS appointment = new APTDETAILS(10, user, room, DateTime.Now, "12:15", "12:30", customer, "Test aftale");
 
             db.APTDETAILS.Add(appointment);
 
