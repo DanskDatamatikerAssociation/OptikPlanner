@@ -55,5 +55,12 @@ namespace OptikPlanner.Model
         public int? US_STAMPCOPY { get; set; }
 
         public bool US_USEFORWEB { get; set; }
+
+        public override string ToString()
+        {
+            return $"{US_USERNAME}";
+        }
     }
+
+
 }

@@ -54,3 +54,7 @@ C:\Users\akse9\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner
 >>>>>>> origin/design_calendar_view
 C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.View.CreateAppointment.resources
 >>>>>>> Stashed changes
+C:\Users\Daniel\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\EntityFramework.dll
+C:\Users\Daniel\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Daniel\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\EntityFramework.xml
+C:\Users\Daniel\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\EntityFramework.SqlServer.xml
