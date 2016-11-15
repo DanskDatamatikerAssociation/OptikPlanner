@@ -178,7 +178,6 @@
             this.telefonBox.Name = "telefonBox";
             this.telefonBox.Size = new System.Drawing.Size(137, 20);
             this.telefonBox.TabIndex = 13;
-            this.telefonBox.TextChanged += new System.EventHandler(this.telefonBox_TextChanged);
             // 
             // beskrivelseBox
             // 
@@ -187,7 +186,6 @@
             this.beskrivelseBox.Size = new System.Drawing.Size(327, 57);
             this.beskrivelseBox.TabIndex = 14;
             this.beskrivelseBox.Text = "";
-            this.beskrivelseBox.TextChanged += new System.EventHandler(this.beskrivelseBox_TextChanged);
             // 
             // userSelectionCombo
             // 
@@ -198,7 +196,6 @@
             this.userSelectionCombo.TabIndex = 15;
             this.userSelectionCombo.Tag = "";
             this.userSelectionCombo.Text = "Vælg medarbejder";
-            this.userSelectionCombo.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // aftaleCombo
             // 
@@ -209,7 +206,6 @@
             this.aftaleCombo.TabIndex = 16;
             this.aftaleCombo.Tag = "";
             this.aftaleCombo.Text = "Vælg aftaletype";
-            this.aftaleCombo.SelectedIndexChanged += new System.EventHandler(this.aftaleCombo_SelectedIndexChanged);
             // 
             // lokaleCombo
             // 
@@ -219,7 +215,6 @@
             this.lokaleCombo.Size = new System.Drawing.Size(121, 21);
             this.lokaleCombo.TabIndex = 17;
             this.lokaleCombo.Text = "Vælg lokale";
-            this.lokaleCombo.SelectedIndexChanged += new System.EventHandler(this.lokaleCombo_SelectedIndexChanged);
             // 
             // userCombo
             // 
@@ -229,7 +224,6 @@
             this.userCombo.Size = new System.Drawing.Size(121, 21);
             this.userCombo.TabIndex = 18;
             this.userCombo.Text = "Vælg medarbejder";
-            this.userCombo.SelectedIndexChanged += new System.EventHandler(this.userCombo_SelectedIndexChanged);
             // 
             // customerBox
             // 
@@ -269,7 +263,6 @@
             this.smsCheck.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.smsCheck.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.smsCheck.UseVisualStyleBackColor = true;
-            this.smsCheck.CheckedChanged += new System.EventHandler(this.smsCheck_CheckedChanged);
             // 
             // emailCheck
             // 
@@ -280,7 +273,6 @@
             this.emailCheck.TabIndex = 26;
             this.emailCheck.Text = "Nyhedsbrev";
             this.emailCheck.UseVisualStyleBackColor = true;
-            this.emailCheck.CheckedChanged += new System.EventHandler(this.emailCheck_CheckedChanged);
             // 
             // emailBox
             // 
@@ -288,7 +280,6 @@
             this.emailBox.Name = "emailBox";
             this.emailBox.Size = new System.Drawing.Size(137, 20);
             this.emailBox.TabIndex = 27;
-            this.emailBox.TextChanged += new System.EventHandler(this.emailBox_TextChanged);
             // 
             // label10
             // 
@@ -324,6 +315,7 @@
             this.timeFromPicker.Name = "timeFromPicker";
             this.timeFromPicker.Size = new System.Drawing.Size(51, 20);
             this.timeFromPicker.TabIndex = 32;
+            this.timeFromPicker.ValueChanged += new System.EventHandler(this.timeFromPicker_ValueChanged);
             // 
             // timeToPicker
             // 
@@ -332,6 +324,7 @@
             this.timeToPicker.Name = "timeToPicker";
             this.timeToPicker.Size = new System.Drawing.Size(51, 20);
             this.timeToPicker.TabIndex = 33;
+            this.timeToPicker.ValueChanged += new System.EventHandler(this.timeToPicker_ValueChanged);
             // 
             // label12
             // 
@@ -372,16 +365,18 @@
             // cprBox
             // 
             this.cprBox.Cue = "Indtast CPR";
-            this.cprBox.Location = new System.Drawing.Point(24, 75);
+            this.cprBox.Location = new System.Drawing.Point(22, 75);
             this.cprBox.Name = "cprBox";
             this.cprBox.Size = new System.Drawing.Size(100, 20);
-            this.cprBox.TabIndex = 30;
+            this.cprBox.TabIndex = 38;
+            this.cprBox.TextChanged += new System.EventHandler(this.cueTextBox1_TextChanged);
             // 
             // CreateAppointment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(404, 492);
+            this.Controls.Add(this.cprBox);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
@@ -389,7 +384,6 @@
             this.Controls.Add(this.timeToPicker);
             this.Controls.Add(this.timeFromPicker);
             this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.cprBox);
             this.Controls.Add(this.cancelAppointmentButton);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.emailBox);
@@ -451,7 +445,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox emailBox;
         private System.Windows.Forms.Button cancelAppointmentButton;
-        private CueTextBox cprBox;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.DateTimePicker timeFromPicker;
         private System.Windows.Forms.DateTimePicker timeToPicker;
@@ -459,5 +452,6 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
+        private CueTextBox cprBox;
     }
 }

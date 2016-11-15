@@ -67,7 +67,6 @@ namespace OptikPlanner
         public APTDETAILS(int id, USERS user, EYEEXAMROOMS room, DateTime date, string timeFrom, string timeTo, CUSTOMERS customer, string description)
         {
             APD_CALENDAR = 1;
-
             APD_STAMP = id;
             APD_USER = user.US_STAMP;
             APD_FIRST = customer.CS_FIRSTNAME;

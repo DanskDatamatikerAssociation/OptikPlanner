@@ -47,5 +47,46 @@ namespace OptikPlanner.Controller
             }
 
         }
+
+
+        public EYEEXAMROOMS GetRooms()
+        {
+            EYEEXAMROOMS room = new EYEEXAMROOMS();
+            room.ERO_OPENFROM = "12:15";
+            room.ERO_OPENTO = "13:00";
+            room.ERO_NBR = 5;
+            room.ERO_TYPE = "Linse";
+            room.ERO_DESC = "linserum 5 første sal til venstre";
+            room.ERO_SHORTDESC = "kort";
+            
+
+            return room;
+
+        }
+
+        public USERS GetUser()
+        {
+            USERS user = new USERS();
+            user.US_CPRNO = "2001927891";
+            user.US_USERNAME = "MyUserName";
+            user.US_STAMP = 1;
+
+
+            return user;
+        }
+
+        public CUSTOMERS GetCustomer()
+        {
+            CUSTOMERS customer = new CUSTOMERS();
+            customer.CS_CPRNO = "2001926754";
+            customer.CS_FIRSTNAME = "Børge";
+            customer.CS_LASTNAME = "Jensen";
+
+
+            return customer;
+        }
+        
+        
+            
     }
 }
