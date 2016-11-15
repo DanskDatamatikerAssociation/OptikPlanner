@@ -1,14 +1,10 @@
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
-using OptikPlanner.Model;
 
-namespace OptikPlanner
+namespace OptikPlanner.Model
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
-
     public partial class APTDETAILS
     {
         [Key]
@@ -79,6 +75,11 @@ namespace OptikPlanner
             APD_TIMETO = timeTo;
             APD_CUSTOMER = customer.CS_STAMP;
             APD_DESCRIPTION = Encoding.ASCII.GetBytes(description);
+        }
+
+        public APTDETAILS()
+        {
+            
         }
     }
 }

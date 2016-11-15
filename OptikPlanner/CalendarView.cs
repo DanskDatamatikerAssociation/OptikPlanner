@@ -10,15 +10,32 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.Calendar;
 using OptikPlanner.Controller;
+using OptikPlanner.Model;
+using OptikPlanner.View;
 
 namespace OptikPlanner
 {
-    public partial class CalendarView : Form
+    public partial class CalendarView : Form, ICalendarView
     {
+        private CalendarViewController _calendarViewController;
+        public Calendar Calendar { get; }
+
         public CalendarView()
         {
             InitializeComponent();
-            //calendar.MaximumViewDays = 21;
+            Calendar = calendar;
+            _calendarViewController = new CalendarViewController(this);
+            calendar.MaximumViewDays = 140;
+            ShowWeekView();
+            monthView2.FirstDayOfWeek = DayOfWeek.Monday;
+
+        }
+
+
+
+        public void SetController(CalendarViewController controller)
+        {
+            _calendarViewController = controller;
         }
 
 
@@ -26,11 +43,20 @@ namespace OptikPlanner
         {
             CalendarItem calendarItem = e.Item;
             calendarItem.Text = "You just double clicked me!\nLocation";
-            
-            
+
+
 
 
         }
+
+        private void AddAppointmentsToCalendar()
+        {
+
+            calendar.Items.AddRange(_calendarViewController.GetAppointmentsAsCalendarItems());
+
+        }
+
+
 
         private void ShowDayView()
         {
@@ -39,14 +65,45 @@ namespace OptikPlanner
 
         private void ShowWeekView()
         {
-            DateTime today = DateTime.Today;
-            DateTime oneWeekAhead = today.AddDays(6);
+            DateTime today;
+            if (monthView2.SelectionStart.Equals(DateTime.MinValue)) { today = DateTime.Today; }
+            else today = monthView2.SelectionStart;
+            //DateTime today = DateTime.Today;   
 
-           calendar.SetViewRange(today, oneWeekAhead);
+
+            DateTime lastMonday;
+            int daysSinceLastMonday = 1;
+            while (true)
+            {
+
+                lastMonday = today.AddDays(-daysSinceLastMonday);
+                if (lastMonday.DayOfWeek == DayOfWeek.Monday)
+                {
+                    break;
+                }
+                daysSinceLastMonday++;
+
+
+            }
+
+            DateTime oneWeekAhead = lastMonday.AddDays(6);
+
+            calendar.SetViewRange(lastMonday, oneWeekAhead);
+
+            if (!monthView2.SelectionStart.Equals(DateTime.MinValue) ||
+                !monthView2.SelectionEnd.Equals(DateTime.MinValue))
+            {
+                monthView2.SelectionStart = lastMonday;
+                monthView2.SelectionEnd = oneWeekAhead;
+            }
+
+
+
+
         }
 
         private void ShowMonthView()
-        { 
+        {
             DateTime today = DateTime.Today;
             int daysInCurrentMonth = DateTime.DaysInMonth(today.Year, today.Month);
 
@@ -69,6 +126,22 @@ namespace OptikPlanner
         private void monthViewButton_Click(object sender, EventArgs e)
         {
             ShowMonthView();
+        }
+
+        private void newAppointmentButton_Click(object sender, EventArgs e)
+        {
+            AddAppointmentsToCalendar();
+
+        }
+
+        private void monthView2_SelectionChanged(object sender, EventArgs e)
+        {
+            calendar.SetViewRange(monthView2.SelectionStart, monthView2.SelectionEnd);
+        }
+
+        private void calendar_LoadItems(object sender, CalendarLoadEventArgs e)
+        {
+            AddAppointmentsToCalendar();
         }
     }
 }
