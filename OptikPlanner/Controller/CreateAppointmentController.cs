@@ -6,11 +6,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OptikPlanner.Model;
+using System.Windows.Forms.Calendar;
+
 
 namespace OptikPlanner.Controller
 {
     class CreateAppointmentController
     {
+        APTDETAILS app1 = new APTDETAILS();
+        APTDETAILS app2 = new APTDETAILS();
+
         OptikItDbContext db = new OptikItDbContext();
 
         public void PostAppointment()
@@ -62,6 +67,11 @@ namespace OptikPlanner.Controller
 
             return room;
 
+        }
+
+        public APTDETAILS RedigerAppointment(CalendarItem item)
+        {
+            return app1;
         }
 
         public USERS GetUser()
