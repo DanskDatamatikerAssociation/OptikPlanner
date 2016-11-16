@@ -13,12 +13,14 @@ using OptikPlanner.Controller;
 using OptikPlanner.Model;
 using OptikPlanner.View;
 using System.Globalization;
+using Calendar = System.Windows.Forms.Calendar.Calendar;
 
 namespace OptikPlanner
 {
     public partial class CalendarView : Form, ICalendarView
     {
         private CalendarViewController _calendarViewController;
+
         public Calendar Calendar { get; }
 
         public CalendarView()
@@ -30,13 +32,14 @@ namespace OptikPlanner
             calendar.MaximumViewDays = 140;
             ShowWeekView();
             monthView2.FirstDayOfWeek = DayOfWeek.Monday;
-            setWeekLabel();
-            setMonthLabel();
-            setYearLabel();
+            SetWeekLabel();
+            SetMonthLabel();
+            SetYearLabel();
 
         }
 
 
+        
 
         public void SetController(CalendarViewController controller)
         {
@@ -147,6 +150,7 @@ namespace OptikPlanner
         private void calendar_LoadItems(object sender, CalendarLoadEventArgs e)
         {
             AddAppointmentsToCalendar();
+        }
 
         private void button8_Click(object sender, EventArgs e)
         {
@@ -183,7 +187,7 @@ namespace OptikPlanner
             calendar.SetViewRange(lastMonday, oneWeekAhead);
         }
 
-        public void setWeekLabel()
+        public void SetWeekLabel()
         {
             DateTime currentDate;
             int currentWeek;
@@ -198,11 +202,11 @@ namespace OptikPlanner
 
             currentWeek = CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(currentDate, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
 
-            label3.Text = currentWeek.ToString();
+            weekLabel.Text = currentWeek.ToString();
 
         }
 
-        public void setMonthLabel()
+        public void SetMonthLabel()
         {
             DateTime currentDate;
             int currentMonth;
@@ -254,7 +258,7 @@ namespace OptikPlanner
             
         }
 
-        public void setYearLabel()
+        public void SetYearLabel()
         {
 
             DateTime currentDate;
@@ -265,30 +269,13 @@ namespace OptikPlanner
 
             currentYear = CultureInfo.InvariantCulture.Calendar.GetYear(currentDate);
 
-            label5.Text = currentYear.ToString();
+            yearLabel.Text = currentYear.ToString();
 
 
         }
 
-        //public static int GetWeekOfYear()
-        //{
-        // Seriously cheat.  If its Monday, Tuesday or Wednesday, then it'll 
-        // be the same week# as whatever Thursday, Friday or Saturday are,
-        // and we always get those right
-        //DayOfWeek day = CultureInfo.InvariantCulture.Calendar.GetDayOfWeek(time);
-        //if (day >= DayOfWeek.Monday && day <= DayOfWeek.Wednesday)
-        //{
-        //    time = time.AddDays(3);
-        //}
+        
 
-        // Return the week of our adjusted day
-        //return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(time, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
-        //}
 
-        private void label3_Click(object sender, EventArgs e)
-        {
-
->>>>>>> origin/kundekartotek
-        }
     }
 }
