@@ -58,7 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="APTDETAILS.cs" />
+    <Compile Include="Model\APTDETAILS.cs" />
     <Compile Include="CalendarView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,6 +92,7 @@
     <Compile Include="View\CreateAppointment.Designer.cs">
       <DependentUpon>CreateAppointment.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\ICalendarView.cs" />
     <EmbeddedResource Include="CalendarView.resx">
       <DependentUpon>CalendarView.cs</DependentUpon>
     </EmbeddedResource>
