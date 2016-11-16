@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
@@ -31,7 +32,7 @@ namespace OptikPlanner
             _calendarViewController = new CalendarViewController(this);
             calendar.MaximumViewDays = 140;
             ShowWeekView();
-            monthView2.FirstDayOfWeek = DayOfWeek.Monday;
+            monthView.FirstDayOfWeek = DayOfWeek.Monday;
             SetWeekLabel();
             SetMonthLabel();
             SetYearLabel();
@@ -46,8 +47,6 @@ namespace OptikPlanner
             _calendarViewController = controller;
 
             
-            //calendar.MaximumViewDays = 21;
-
         }
 
 
@@ -78,10 +77,8 @@ namespace OptikPlanner
         private void ShowWeekView()
         {
             DateTime today;
-            if (monthView2.SelectionStart.Equals(DateTime.MinValue)) { today = DateTime.Today; }
-            else today = monthView2.SelectionStart;
-            //DateTime today = DateTime.Today;   
-
+            if (monthView.SelectionStart.Equals(DateTime.MinValue)) { today = DateTime.Today; }
+            else today = monthView.SelectionStart;
 
             DateTime lastMonday;
             int daysSinceLastMonday = 1;
@@ -102,27 +99,25 @@ namespace OptikPlanner
 
             calendar.SetViewRange(lastMonday, oneWeekAhead);
 
-            if (!monthView2.SelectionStart.Equals(DateTime.MinValue) ||
-                !monthView2.SelectionEnd.Equals(DateTime.MinValue))
+            if (!monthView.SelectionStart.Equals(DateTime.MinValue) ||
+                !monthView.SelectionEnd.Equals(DateTime.MinValue))
             {
-                monthView2.SelectionStart = lastMonday;
-                monthView2.SelectionEnd = oneWeekAhead;
+                monthView.SelectionStart = lastMonday;
+                monthView.SelectionEnd = oneWeekAhead;
             }
-
-
 
 
         }
 
         private void ShowMonthView()
         {
-            DateTime today = DateTime.Today;
-            int daysInCurrentMonth = DateTime.DaysInMonth(today.Year, today.Month);
+            DateTime selectedDate = calendar.ViewStart;
+            int daysInCurrentMonth = DateTime.DaysInMonth(selectedDate.Year, selectedDate.Month);
+            DateTime firstDayOfMonth = new DateTime(selectedDate.Year, selectedDate.Month, 1);
+            DateTime lastDayOfMonth = new DateTime(selectedDate.Year, selectedDate.Month, daysInCurrentMonth);
 
-            DateTime firstDayOfMonth = new DateTime(today.Year, today.Month, 1);
-            DateTime lastDayofMonth = new DateTime(today.Year, today.Month, daysInCurrentMonth);
+            calendar.SetViewRange(firstDayOfMonth, lastDayOfMonth);
 
-            calendar.SetViewRange(firstDayOfMonth, lastDayofMonth);
         }
 
         private void weekViewButton_Click(object sender, EventArgs e)
@@ -144,18 +139,29 @@ namespace OptikPlanner
 
         private void monthView2_SelectionChanged(object sender, EventArgs e)
         {
-            calendar.SetViewRange(monthView2.SelectionStart, monthView2.SelectionEnd);
+            calendar.SetViewRange(monthView.SelectionStart, monthView.SelectionEnd);
         }
 
         private void calendar_LoadItems(object sender, CalendarLoadEventArgs e)
         {
             AddAppointmentsToCalendar();
+
+            //Color logic here
+            //var items = e.Calendar.Items;
+            //foreach (var i in items)
+            //{
+            //    var systemColors = new ColorConverter().GetStandardValues();
+        
+            //    APTDETAILS appointment = (APTDETAILS) i.Tag;
+               
+            //}
+
+            //foreach (Color color in new ColorConverter().GetStandardValues())
+            //{
+                
+            //}
         }
 
-        private void button8_Click(object sender, EventArgs e)
-        {
-           
-        }
 
         private void newAppointmentButton_Click(object sender, EventArgs e)
         {
@@ -218,40 +224,40 @@ namespace OptikPlanner
             switch (currentMonth)
             {
                 case 1:
-                    label4.Text = ("Januar -");
+                    monthLabel.Text = ("Januar");
                     break;
                 case 2:
-                    label4.Text = ("Februar -");
+                    monthLabel.Text = ("Februar");
                     break;
                 case 3:
-                    label4.Text = ("Marts -");
+                    monthLabel.Text = ("Marts");
                     break;
                 case 4:
-                    label4.Text = ("April -");
+                    monthLabel.Text = ("April");
                     break;
                 case 5:
-                    label4.Text = ("Maj -");
+                    monthLabel.Text = ("Maj");
                     break;
                 case 6:
-                    label4.Text = ("Juni -");
+                    monthLabel.Text = ("Juni");
                     break;
                 case 7:
-                    label4.Text = ("Juli -");
+                    monthLabel.Text = ("Juli");
                     break;
                 case 8:
-                    label4.Text = ("August -");
+                    monthLabel.Text = ("August");
                     break;
                 case 9:
-                    label4.Text = ("September -");
+                    monthLabel.Text = ("September");
                     break;
                 case 10:
-                    label4.Text = ("Oktober -");
+                    monthLabel.Text = ("Oktober");
                     break;
                 case 11:
-                    label4.Text = ("November -");
+                    monthLabel.Text = ("November");
                     break;
                 case 12:
-                    label4.Text = ("December -");
+                    monthLabel.Text = ("December");
                     break;
 
             }
@@ -274,8 +280,28 @@ namespace OptikPlanner
 
         }
 
-        
+        private void calendar_MouseMove(object sender, MouseEventArgs e)
+        {
+            CalendarItem i = calendar.ItemAt(calendar.PointToClient(Cursor.Position));
+            if (i == null)
+            {
+                toolTip.Active = false;
+                toolTip.Hide(this);
+            }
+            else if (toolTip.Active == false)
+            {
+                toolTip.Active = true;
+                Point tooltipPosition = PointToClient(Cursor.Position);
 
+                APTDETAILS a = (APTDETAILS) i.Tag;
 
+                string textToShow = $"{a.APD_TIMEFROM} - {a.APD_TIMETO}\n" +
+                                    "Linseoptimering\n" +
+                                    $"Room number {a.APD_ROOM}\n" +
+                                    "\n" +
+                                    $"'{Encoding.Default.GetString(a.APD_DESCRIPTION)}'";
+                toolTip.Show(textToShow, this, tooltipPosition);
+            }
+        }
     }
 }

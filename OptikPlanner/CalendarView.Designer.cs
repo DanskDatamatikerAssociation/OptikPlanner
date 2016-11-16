@@ -28,13 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange1 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
             System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange2 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
             System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange3 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
             System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange4 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
             System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange5 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
             this.calendar = new System.Windows.Forms.Calendar.Calendar();
-            this.monthView2 = new System.Windows.Forms.Calendar.MonthView();
+            this.monthView = new System.Windows.Forms.Calendar.MonthView();
             this.todayButton = new System.Windows.Forms.Button();
             this.twoWeeksButton = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
@@ -54,13 +55,14 @@
             this.checkedListBox3 = new System.Windows.Forms.CheckedListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.monthlabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.weekLabel = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.monthLabel = new System.Windows.Forms.Label();
             this.yearLabel = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -96,32 +98,32 @@
             this.calendar.TabIndex = 0;
             this.calendar.TabStop = false;
             this.calendar.Text = "Calendar";
-            this.calendar.TimeScale = System.Windows.Forms.Calendar.CalendarTimeScale.FifteenMinutes;
             this.calendar.LoadItems += new System.Windows.Forms.Calendar.Calendar.CalendarLoadEventHandler(this.calendar_LoadItems);
             this.calendar.ItemDoubleClick += new System.Windows.Forms.Calendar.Calendar.CalendarItemEventHandler(this.calendar1_ItemDoubleClick);
+            this.calendar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.calendar_MouseMove);
             // 
-            // monthView2
+            // monthView
             // 
-            this.monthView2.ArrowsColor = System.Drawing.SystemColors.Window;
-            this.monthView2.ArrowsSelectedColor = System.Drawing.Color.Gold;
-            this.monthView2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(247)))));
-            this.monthView2.DayBackgroundColor = System.Drawing.Color.Empty;
-            this.monthView2.DayGrayedText = System.Drawing.SystemColors.GrayText;
-            this.monthView2.DaySelectedBackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.monthView2.DaySelectedColor = System.Drawing.SystemColors.WindowText;
-            this.monthView2.DaySelectedTextColor = System.Drawing.SystemColors.HighlightText;
-            this.monthView2.ItemPadding = new System.Windows.Forms.Padding(2);
-            this.monthView2.Location = new System.Drawing.Point(2, 97);
-            this.monthView2.MonthTitleColor = System.Drawing.SystemColors.ActiveCaption;
-            this.monthView2.MonthTitleColorInactive = System.Drawing.SystemColors.InactiveCaption;
-            this.monthView2.MonthTitleTextColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.monthView2.MonthTitleTextColorInactive = System.Drawing.SystemColors.InactiveCaptionText;
-            this.monthView2.Name = "monthView2";
-            this.monthView2.Size = new System.Drawing.Size(200, 286);
-            this.monthView2.TabIndex = 2;
-            this.monthView2.Text = "monthView";
-            this.monthView2.TodayBorderColor = System.Drawing.Color.Maroon;
-            this.monthView2.SelectionChanged += new System.EventHandler(this.monthView2_SelectionChanged);
+            this.monthView.ArrowsColor = System.Drawing.SystemColors.Window;
+            this.monthView.ArrowsSelectedColor = System.Drawing.Color.Gold;
+            this.monthView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(247)))));
+            this.monthView.DayBackgroundColor = System.Drawing.Color.Empty;
+            this.monthView.DayGrayedText = System.Drawing.SystemColors.GrayText;
+            this.monthView.DaySelectedBackgroundColor = System.Drawing.SystemColors.Highlight;
+            this.monthView.DaySelectedColor = System.Drawing.SystemColors.WindowText;
+            this.monthView.DaySelectedTextColor = System.Drawing.SystemColors.HighlightText;
+            this.monthView.ItemPadding = new System.Windows.Forms.Padding(2);
+            this.monthView.Location = new System.Drawing.Point(2, 97);
+            this.monthView.MonthTitleColor = System.Drawing.SystemColors.ActiveCaption;
+            this.monthView.MonthTitleColorInactive = System.Drawing.SystemColors.InactiveCaption;
+            this.monthView.MonthTitleTextColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.monthView.MonthTitleTextColorInactive = System.Drawing.SystemColors.InactiveCaptionText;
+            this.monthView.Name = "monthView";
+            this.monthView.Size = new System.Drawing.Size(200, 286);
+            this.monthView.TabIndex = 2;
+            this.monthView.Text = "monthView";
+            this.monthView.TodayBorderColor = System.Drawing.Color.Maroon;
+            this.monthView.SelectionChanged += new System.EventHandler(this.monthView2_SelectionChanged);
             // 
             // todayButton
             // 
@@ -157,7 +159,6 @@
             this.button8.TabIndex = 11;
             this.button8.Text = "Kunder";
             this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button9
             // 
@@ -371,13 +372,6 @@
             this.label2.Size = new System.Drawing.Size(0, 13);
             this.label2.TabIndex = 23;
             // 
-            // monthlabel
-            // 
-            this.monthlabel.Location = new System.Drawing.Point(0, 0);
-            this.monthlabel.Name = "monthlabel";
-            this.monthlabel.Size = new System.Drawing.Size(100, 23);
-            this.monthlabel.TabIndex = 0;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -411,29 +405,42 @@
             // weekLabel
             // 
             this.weekLabel.AutoSize = true;
-            this.weekLabel.Location = new System.Drawing.Point(742, 34);
+            this.weekLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.weekLabel.Location = new System.Drawing.Point(733, 25);
             this.weekLabel.Name = "weekLabel";
-            this.weekLabel.Size = new System.Drawing.Size(35, 13);
+            this.weekLabel.Size = new System.Drawing.Size(36, 25);
             this.weekLabel.TabIndex = 22;
-            this.weekLabel.Text = "label6";
+            this.weekLabel.Text = "46";
             // 
-            // label7
+            // monthLabel
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(742, 52);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(35, 13);
-            this.label7.TabIndex = 23;
-            this.label7.Text = "label7";
+            this.monthLabel.AutoSize = true;
+            this.monthLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.monthLabel.Location = new System.Drawing.Point(697, 49);
+            this.monthLabel.Name = "monthLabel";
+            this.monthLabel.Size = new System.Drawing.Size(110, 25);
+            this.monthLabel.TabIndex = 23;
+            this.monthLabel.Text = "November";
             // 
             // yearLabel
             // 
             this.yearLabel.AutoSize = true;
-            this.yearLabel.Location = new System.Drawing.Point(742, 68);
+            this.yearLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.yearLabel.Location = new System.Drawing.Point(718, 69);
             this.yearLabel.Name = "yearLabel";
-            this.yearLabel.Size = new System.Drawing.Size(35, 13);
+            this.yearLabel.Size = new System.Drawing.Size(60, 25);
             this.yearLabel.TabIndex = 24;
-            this.yearLabel.Text = "label8";
+            this.yearLabel.Text = "2016";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(699, 30);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 18);
+            this.label6.TabIndex = 25;
+            this.label6.Text = "Uge";
             // 
             // CalendarView
             // 
@@ -441,8 +448,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(237)))), ((int)(((byte)(247)))));
             this.ClientSize = new System.Drawing.Size(1116, 588);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.yearLabel);
-            this.Controls.Add(this.label7);
+            this.Controls.Add(this.monthLabel);
             this.Controls.Add(this.weekLabel);
             this.Controls.Add(this.checkedListBox3);
             this.Controls.Add(this.checkedListBox2);
@@ -459,7 +467,7 @@
             this.Controls.Add(this.todayButton);
             this.Controls.Add(this.newAppointmentButton);
             this.Controls.Add(this.calendar);
-            this.Controls.Add(this.monthView2);
+            this.Controls.Add(this.monthView);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "CalendarView";
@@ -474,7 +482,7 @@
         #endregion
 
         private System.Windows.Forms.Calendar.Calendar calendar;
-        private System.Windows.Forms.Calendar.MonthView monthView2;
+        private System.Windows.Forms.Calendar.MonthView monthView;
         private System.Windows.Forms.Button newAppointmentButton;
         private System.Windows.Forms.Button todayButton;
         private System.Windows.Forms.Button twoWeeksButton;
@@ -494,13 +502,14 @@
         private System.Windows.Forms.CheckedListBox checkedListBox3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label monthlabel;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label weekLabel;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label monthLabel;
         private System.Windows.Forms.Label yearLabel;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }
 
