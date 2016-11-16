@@ -18,7 +18,7 @@ namespace OptikPlanner
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CreateAppointment());
+            Application.Run(new CalendarView());
 
             
         }

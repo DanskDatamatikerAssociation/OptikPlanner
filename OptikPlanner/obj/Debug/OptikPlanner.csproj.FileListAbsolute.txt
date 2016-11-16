@@ -1,60 +1,16 @@
-C:\Users\Danny\Documents\Visual Studio 2015\Projects\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.csprojResolveAssemblyReference.cache
-C:\Users\Danny\Documents\Visual Studio 2015\Projects\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.Form1.resources
-C:\Users\Danny\Documents\Visual Studio 2015\Projects\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.Properties.Resources.resources
-C:\Users\Danny\Documents\Visual Studio 2015\Projects\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.csproj.GenerateResource.Cache
-C:\Users\Danny\Documents\Visual Studio 2015\Projects\OptikPlanner\OptikPlanner\bin\Debug\OptikPlanner.exe.config
-C:\Users\Danny\Documents\Visual Studio 2015\Projects\OptikPlanner\OptikPlanner\bin\Debug\OptikPlanner.exe
-C:\Users\Danny\Documents\Visual Studio 2015\Projects\OptikPlanner\OptikPlanner\bin\Debug\OptikPlanner.pdb
-C:\Users\Danny\Documents\Visual Studio 2015\Projects\OptikPlanner\OptikPlanner\bin\Debug\System.Windows.Forms.Calendar.dll
-C:\Users\Danny\Documents\Visual Studio 2015\Projects\OptikPlanner\OptikPlanner\bin\Debug\System.Windows.Forms.Calendar.pdb
-C:\Users\Danny\Documents\Visual Studio 2015\Projects\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.exe
-C:\Users\Danny\Documents\Visual Studio 2015\Projects\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.pdb
 C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\OptikPlanner.exe.config
-C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.exe
-C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.pdb
 C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\OptikPlanner.exe
 C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\OptikPlanner.pdb
-C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\System.Windows.Forms.Calendar.dll
-C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\System.Windows.Forms.Calendar.pdb
-C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.csprojResolveAssemblyReference.cache
-C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.Properties.Resources.resources
-C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.csproj.GenerateResource.Cache
-C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.CalendarView.resources
-<<<<<<< HEAD
-C:\Users\Daniel\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\OptikPlanner.exe.config
-C:\Users\Daniel\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.exe
-C:\Users\Daniel\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.pdb
-C:\Users\Daniel\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\OptikPlanner.exe
-C:\Users\Daniel\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\OptikPlanner.pdb
-C:\Users\Daniel\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\System.Windows.Forms.Calendar.dll
-C:\Users\Daniel\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\System.Windows.Forms.Calendar.pdb
-C:\Users\Daniel\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.csprojResolveAssemblyReference.cache
-C:\Users\Daniel\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.CalendarView.resources
-C:\Users\Daniel\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.Properties.Resources.resources
-C:\Users\Daniel\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.View.CreateAppointment.resources
-C:\Users\Daniel\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.csproj.GenerateResource.Cache
-=======
 C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\EntityFramework.dll
 C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\System.Windows.Forms.Calendar.dll
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\System.Windows.Forms.Calendar.pdb
 C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\EntityFramework.xml
 C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\EntityFramework.SqlServer.xml
->>>>>>> 11b5473... Added day, week, month view.
-<<<<<<< Updated upstream
-C:\Users\akse9\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\OptikPlanner.exe.config
-C:\Users\akse9\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\OptikPlanner.exe
-C:\Users\akse9\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\OptikPlanner.pdb
-C:\Users\akse9\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\System.Windows.Forms.Calendar.dll
-C:\Users\akse9\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\System.Windows.Forms.Calendar.pdb
-C:\Users\akse9\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.csprojResolveAssemblyReference.cache
-C:\Users\akse9\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.CalendarView.resources
-C:\Users\akse9\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.Properties.Resources.resources
-C:\Users\akse9\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.csproj.GenerateResource.Cache
-C:\Users\akse9\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.exe
-C:\Users\akse9\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.pdb
->>>>>>> origin/design_calendar_view
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.csprojResolveAssemblyReference.cache
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.CalendarView.resources
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.Properties.Resources.resources
 C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.View.CreateAppointment.resources
->>>>>>> Stashed changes
-C:\Users\Daniel\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\EntityFramework.dll
-C:\Users\Daniel\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\EntityFramework.SqlServer.dll
-C:\Users\Daniel\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\EntityFramework.xml
-C:\Users\Daniel\Documents\GitHub\OptikPlanner\OptikPlanner\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.csproj.GenerateResource.Cache
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.exe
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\obj\Debug\OptikPlanner.pdb
