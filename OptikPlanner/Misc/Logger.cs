@@ -25,7 +25,7 @@ namespace OptikPlanner.Misc
         }
         public static void LogThisLine(string sLogLine)
         {
-            Logger.swLog.WriteLine(DateTime.Now.ToShortDateString() + " " +  + "\t:" + "\t" + sLogLine);
+            Logger.swLog.WriteLine(DateTime.Now.ToLongDateString() + " " + sLogLine);
             Logger.swLog.Flush();
         }
 

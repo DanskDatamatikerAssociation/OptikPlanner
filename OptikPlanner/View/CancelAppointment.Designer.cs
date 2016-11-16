@@ -57,6 +57,7 @@
             this.cuCancelElseRadio.TabStop = true;
             this.cuCancelElseRadio.Text = "Andet";
             this.cuCancelElseRadio.UseVisualStyleBackColor = true;
+            this.cuCancelElseRadio.CheckedChanged += new System.EventHandler(this.cuCancelElseRadio_CheckedChanged);
             // 
             // cuCancelShownRadio
             // 
@@ -136,6 +137,7 @@
             this.cancelButton.TabIndex = 17;
             this.cancelButton.Text = "Anuller";
             this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // CancelAppointment
             // 

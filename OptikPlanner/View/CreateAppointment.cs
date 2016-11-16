@@ -104,6 +104,8 @@ namespace OptikPlanner.View
         private void cancelAppointmentButton_Click(object sender, EventArgs e)
         {
             //lav if statement som enabler / disabler knap alt efter om det er aflys eller opret knap der bliver trykket på.
+            CancelAppointment window = new CancelAppointment();
+            window.ShowDialog();
         }
 
         private void timeFromPicker_ValueChanged(object sender, EventArgs e)
