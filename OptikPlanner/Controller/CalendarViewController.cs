@@ -14,13 +14,7 @@ namespace OptikPlanner.Controller
     {
         OptikItDbContext db = new OptikItDbContext();
 
-        private ICalendarView _view;
-
-        public CalendarViewController(ICalendarView view)
-        {
-            _view = view;
-            view.SetController(this);
-        }
+       
 
         public void PostAppointment()
         {

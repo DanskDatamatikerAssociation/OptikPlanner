@@ -17,7 +17,6 @@ namespace OptikPlanner.View
     {
         CreateAppointmentController controlz = new CreateAppointmentController();
         private DateTime mPrevDate;
-        private bool mBusy;
         Random rnd = new Random();
 
         public CreateAppointment()
