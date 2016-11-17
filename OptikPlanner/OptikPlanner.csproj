@@ -58,6 +58,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\CancelAppointmentController.cs" />
+    <Compile Include="Misc\Logger.cs" />
     <Compile Include="Model\APTDETAILS.cs" />
     <Compile Include="CalendarView.cs">
       <SubType>Form</SubType>
@@ -86,6 +88,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\USERS.cs" />
+    <Compile Include="View\CancelAppointment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CancelAppointment.Designer.cs">
+      <DependentUpon>CancelAppointment.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\CreateAppointment.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,6 +114,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="View\CancelAppointment.resx">
+      <DependentUpon>CancelAppointment.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\CreateAppointment.resx">
       <DependentUpon>CreateAppointment.cs</DependentUpon>
     </EmbeddedResource>
