@@ -40,13 +40,13 @@ namespace OptikPlanner
         }
 
 
-        
+
 
         public void SetController(CalendarViewController controller)
         {
             _calendarViewController = controller;
 
-            
+
         }
 
 
@@ -146,20 +146,28 @@ namespace OptikPlanner
         {
             AddAppointmentsToCalendar();
 
-            //Color logic here
-            //var items = e.Calendar.Items;
-            //foreach (var i in items)
-            //{
-            //    var systemColors = new ColorConverter().GetStandardValues();
-        
-            //    APTDETAILS appointment = (APTDETAILS) i.Tag;
-               
-            //}
 
-            //foreach (Color color in new ColorConverter().GetStandardValues())
-            //{
-                
-            //}
+            //Color logic here
+            var items = e.Calendar.Items;
+
+            var systemColors = new ColorConverter().GetStandardValues();
+            List<Color> colors = systemColors.Cast<Color>().ToList();
+
+            int colorJump = 50;
+
+            foreach (var i in items)
+            {
+                APTDETAILS appointment = (APTDETAILS)i.Tag;
+
+                int colorIndex = appointment.APD_USER+colorJump;
+                Color color = colors[colorIndex];
+
+
+                i.ApplyColor(color);
+
+            }
+
+
         }
 
 
@@ -261,7 +269,7 @@ namespace OptikPlanner
                     break;
 
             }
-            
+
         }
 
         public void SetYearLabel()
@@ -293,8 +301,9 @@ namespace OptikPlanner
                 toolTip.Active = true;
                 Point tooltipPosition = PointToClient(Cursor.Position);
 
-                APTDETAILS a = (APTDETAILS) i.Tag;
-
+                APTDETAILS a = (APTDETAILS)i.Tag;
+                if (a == null) return;
+                if (a.APD_DESCRIPTION == null) a.APD_DESCRIPTION = Encoding.Default.GetBytes("**Ingen beskrivelse**");
                 string textToShow = $"{a.APD_TIMEFROM} - {a.APD_TIMETO}\n" +
                                     "Linseoptimering\n" +
                                     $"Room number {a.APD_ROOM}\n" +
