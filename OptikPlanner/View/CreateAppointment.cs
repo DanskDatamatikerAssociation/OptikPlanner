@@ -8,21 +8,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.Calendar;
 using OptikPlanner.Controller;
 using OptikPlanner.Model;
 
 namespace OptikPlanner.View
 {
-    public partial class CreateAppointment : Form
+    public partial class CreateAppointment : Form, IAppointmentView
     {
-        CreateAppointmentController controlz = new CreateAppointmentController();
+        private CreateAppointmentController controller;
         private DateTime mPrevDate;
         private bool mBusy;
+        private APTDETAILS appointment1;
         Random rnd = new Random();
+
+        public System.Windows.Forms.Calendar.Calendar Calendar
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         public CreateAppointment()
         {
             InitializeComponent();
+            FillOutAppointment();
 
             //timepicking settings
             timeFromPicker.CustomFormat = "hh:mm";
@@ -36,32 +47,32 @@ namespace OptikPlanner.View
             userSelectionCombo.Text = "Vælg medarbejder...";
             
             //TEST DATA - COMBO´s
-            userSelectionCombo.Items.Add(controlz.GetUser());
-            aftaleCombo.Items.Add(controlz.GetRooms().ERO_TYPE);
-            lokaleCombo.Items.Add(controlz.GetRooms().ERO_NBR);
-            timeFromPicker.Text = controlz.GetRooms().ERO_OPENFROM;
-            timeToPicker.Text = controlz.GetRooms().ERO_OPENTO;
-            telefonBox.Text = controlz.GetCustomer().CS_PHONEMOBILE;
-            userCombo.Items.Add(controlz.GetUser());
+            userSelectionCombo.Items.Add(controller.GetUser());
+            aftaleCombo.Items.Add(controller.GetRooms().ERO_TYPE);
+            lokaleCombo.Items.Add(controller.GetRooms().ERO_NBR);
+            timeFromPicker.Text = controller.GetRooms().ERO_OPENFROM;
+            timeToPicker.Text = controller.GetRooms().ERO_OPENTO;
+            telefonBox.Text = controller.GetCustomer().CS_PHONEMOBILE;
+            userCombo.Items.Add(controller.GetUser());
             if (smsCheck.Checked)
             {
-                controlz.GetCustomer().CS_COMMERCIALS_SMS = 1;
+                controller.GetCustomer().CS_COMMERCIALS_SMS = 1;
             }
             if (emailCheck.Checked)
             {
-                controlz.GetCustomer().CS_COMMERCIALS_EMAIL = 1;
+                controller.GetCustomer().CS_COMMERCIALS_EMAIL = 1;
 
             }
-            emailBox.Text = controlz.GetCustomer().CS_EMAIL;
+            emailBox.Text = controller.GetCustomer().CS_EMAIL;
         }
         
         private void cueTextBox1_TextChanged(object sender, EventArgs e)
         {
 
-            if (cprBox.Text == controlz.GetCustomer().CS_CPRNO)
+            if (cprBox.Text == controller.GetCustomer().CS_CPRNO)
             {
-                firstNameBox.Text = controlz.GetCustomer().CS_FIRSTNAME;
-                lastNameBox.Text = controlz.GetCustomer().CS_LASTNAME;
+                firstNameBox.Text = controller.GetCustomer().CS_FIRSTNAME;
+                lastNameBox.Text = controller.GetCustomer().CS_LASTNAME;
             }
             #region til reel data
             //if (cprBox.Text.Length > 0)
@@ -94,6 +105,28 @@ namespace OptikPlanner.View
             //} 
             #endregion
 
+        }
+
+        private void FillOutAppointment()
+        {
+            appointment1 = controller.SetClickedAppointment();
+
+            userSelectionCombo.SelectedItem = appointment1.APD_USER;
+            cprBox.Cue = appointment1.APD_CPR;
+            firstNameBox.Text = appointment1.APD_FIRST;
+            lastNameBox.Text = appointment1.APD_LAST;
+            aftaleCombo.SelectedItem = appointment1.APD_TYPE;
+            lokaleCombo.SelectedItem = appointment1.APD_ROOM;
+            userCombo.SelectedItem = appointment1.APD_USER;
+            dateTimePicker1.Value =  (DateTime) appointment1.APD_DATE;
+            timeFromPicker.Text = appointment1.APD_TIMEFROM;
+            timeToPicker.Text = appointment1.APD_TIMETO;
+            beskrivelseBox.Text = Encoding.Default.GetString(appointment1.APD_DESCRIPTION);
+
+            var newForm = new View.CreateAppointment();
+
+            newForm.Show();
+            newForm.BringToFront();
         }
         
 
@@ -159,6 +192,21 @@ namespace OptikPlanner.View
 
             APTDETAILS test = new APTDETAILS(id, user1, used, date, used.ERO_OPENFROM, used.ERO_OPENTO, customer,
                 text);
+        }
+
+        public void SetController(CreateAppointmentController controller)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void userSelectionCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void beskrivelseBox_TextChanged(object sender, EventArgs e)
+        {
+                
         }
     }
 }

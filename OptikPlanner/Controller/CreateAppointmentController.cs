@@ -7,16 +7,26 @@ using System.Text;
 using System.Threading.Tasks;
 using OptikPlanner.Model;
 using System.Windows.Forms.Calendar;
+using OptikPlanner.View;
 
 
 namespace OptikPlanner.Controller
 {
-    class CreateAppointmentController
+   public class CreateAppointmentController
     {
         APTDETAILS app1 = new APTDETAILS();
         APTDETAILS app2 = new APTDETAILS();
 
         OptikItDbContext db = new OptikItDbContext();
+
+        private IAppointmentView _view;
+
+        public CreateAppointmentController(IAppointmentView view)
+        {
+            _view = view;
+            view.SetController(this);
+        }
+
 
         public void PostAppointment()
         {
@@ -69,10 +79,17 @@ namespace OptikPlanner.Controller
 
         }
 
-        public APTDETAILS RedigerAppointment(CalendarItem item)
+        public void GetCLickedAppointment(APTDETAILS item)
         {
-            return app1;
+            app1 = item;
+            SetClickedAppointment();
         }
+
+       public APTDETAILS SetClickedAppointment()
+       {
+           return app1;
+       }
+        
 
         public USERS GetUser()
         {

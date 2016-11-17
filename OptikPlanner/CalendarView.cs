@@ -21,7 +21,8 @@ namespace OptikPlanner
     {
         private CalendarViewController _calendarViewController;
         private CreateAppointmentController _createAppointmentController;
-        public Calendar Calendar { get; }
+        private USERS user = new USERS();
+            public Calendar Calendar { get; }
 
         public CalendarView()
         {
@@ -54,17 +55,10 @@ namespace OptikPlanner
         private void calendar1_ItemDoubleClick(object sender, CalendarItemEventArgs e)
         {
             CalendarItem calendarItem = e.Item;
-            
 
+            APTDETAILS appDetails = (APTDETAILS)calendarItem.Tag;
 
-            //calendarItem.Tag = _calendarViewController.RedigerAppointment();
-
-            var newForm = new View.CreateAppointment();
-            newForm.Show();
-            newForm.BringToFront();
-
-
-
+            _createAppointmentController.GetCLickedAppointment(appDetails);
 
         }
 
@@ -162,6 +156,23 @@ namespace OptikPlanner
                 i.StartDate = DateTime.Today;
                 i.EndDate = DateTime.Today.AddDays(1);
                 i.Text = "hej";
+
+                user.US_STAMP = 2;
+                EYEEXAMROOMS room = new EYEEXAMROOMS();    
+                DateTime date = new DateTime();
+                date = DateTime.Today;
+                string timeFrom;
+                timeFrom = "22";
+                string timeTo;
+                timeTo = "23";
+                CUSTOMERS customer = new CUSTOMERS();
+                string description;
+                description = "jiqji";
+            customer.CS_STAMP = 2;
+
+                APTDETAILS appointment = new APTDETAILS(1,user,room,date,timeFrom,timeTo,customer,description);
+
+            i.Tag = appointment;
 
                 calendar.Items.Add(i);
 

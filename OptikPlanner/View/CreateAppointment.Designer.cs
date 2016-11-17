@@ -186,6 +186,7 @@
             this.beskrivelseBox.Size = new System.Drawing.Size(327, 57);
             this.beskrivelseBox.TabIndex = 14;
             this.beskrivelseBox.Text = "";
+            this.beskrivelseBox.TextChanged += new System.EventHandler(this.beskrivelseBox_TextChanged);
             // 
             // userSelectionCombo
             // 
@@ -196,6 +197,7 @@
             this.userSelectionCombo.TabIndex = 15;
             this.userSelectionCombo.Tag = "";
             this.userSelectionCombo.Text = "Vælg medarbejder";
+            this.userSelectionCombo.SelectedIndexChanged += new System.EventHandler(this.userSelectionCombo_SelectedIndexChanged);
             // 
             // aftaleCombo
             // 
