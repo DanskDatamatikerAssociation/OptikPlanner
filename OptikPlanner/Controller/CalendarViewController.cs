@@ -31,6 +31,15 @@ namespace OptikPlanner.Controller
             return appointments.ToList();
         }
 
+        public List<CUSTOMERS> GetCustomers()
+        {
+            var customers = from c in db.CUSTOMERS select c;
+            return customers.ToList();
+        }
+
+
+
+
         public List<CalendarItem> GetAppointmentsAsCalendarItems()
         {
             List<CalendarItem> calendarItems = new List<CalendarItem>();

@@ -37,6 +37,8 @@ namespace OptikPlanner
             SetMonthLabel();
             SetYearLabel();
 
+            customersCheckedListBox.Items.AddRange(_calendarViewController.GetCustomers().ToArray());
+
         }
 
 
@@ -274,14 +276,9 @@ namespace OptikPlanner
 
         public void SetYearLabel()
         {
+            var currentDate = calendar.ViewStart;
 
-            DateTime currentDate;
-
-            int currentYear;
-
-            currentDate = calendar.ViewStart;
-
-            currentYear = CultureInfo.InvariantCulture.Calendar.GetYear(currentDate);
+            var currentYear = CultureInfo.InvariantCulture.Calendar.GetYear(currentDate);
 
             yearLabel.Text = currentYear.ToString();
 
@@ -311,6 +308,22 @@ namespace OptikPlanner
                                     $"'{Encoding.Default.GetString(a.APD_DESCRIPTION)}'";
                 toolTip.Show(textToShow, this, tooltipPosition);
             }
+        }
+
+        private void customersCheckedListBox_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            List<CUSTOMERS> checkedCustomers = new List<CUSTOMERS>();
+            foreach (var c in customersCheckedListBox.SelectedItems)
+            {
+                checkedCustomers.Add((CUSTOMERS) c);
+            }
+
+            if(e.NewValue == CheckState.Checked) checkedCustomers.Add((CUSTOMERS) customersCheckedListBox.Items[e.Index]);
+
+            
+
+
+
         }
     }
 }
