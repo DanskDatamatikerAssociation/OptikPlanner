@@ -29,7 +29,7 @@ namespace OptikPlanner.View
         private void editCustomerButton_Click(object sender, EventArgs e)
         {
             CreateCustomer window = new CreateCustomer();
-            createCustomer2Buttom.Text = "Rediger";
+            window.createCustomer2Button.Text = "Gem";
 
             var test = ListViewBox.SelectedItems;
 
@@ -55,9 +55,8 @@ namespace OptikPlanner.View
         {
             //opret ikke eksisterende kunde
             CreateCustomer window = new CreateCustomer();
-            createCustomer2Button.Text = "Opret";
+            window.createCustomer2Button.Text = "Opret";
             window.ShowDialog();
-
         }
 
         private void deleteCustomerButton_Click(object sender, EventArgs e)

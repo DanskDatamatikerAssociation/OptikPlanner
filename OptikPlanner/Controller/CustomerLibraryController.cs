@@ -27,6 +27,9 @@ namespace OptikPlanner.Controller
             customer.CS_CPRNO = "2001926754";
             customer.CS_FIRSTNAME = "Børge";
             customer.CS_LASTNAME = "Jensen";
+            customer.CS_ADRESS1 = "Børgevej 210";
+            customer.CS_PHONEMOBILE = "28706520";
+            customer.CS_EMAIL = "enemail@gmail.com";
             
             return customer;
         }

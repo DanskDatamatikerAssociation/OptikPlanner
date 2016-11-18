@@ -49,7 +49,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(49, 44);
+            this.label1.Location = new System.Drawing.Point(24, 21);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(45, 13);
             this.label1.TabIndex = 0;
@@ -58,14 +58,14 @@
             // cprBox
             // 
             this.cprBox.Cue = null;
-            this.cprBox.Location = new System.Drawing.Point(152, 86);
+            this.cprBox.Location = new System.Drawing.Point(127, 63);
             this.cprBox.Name = "cprBox";
             this.cprBox.Size = new System.Drawing.Size(121, 20);
             this.cprBox.TabIndex = 1;
             // 
             // createCustomer2Button
             // 
-            this.createCustomer2Button.Location = new System.Drawing.Point(52, 345);
+            this.createCustomer2Button.Location = new System.Drawing.Point(27, 322);
             this.createCustomer2Button.Name = "createCustomer2Button";
             this.createCustomer2Button.Size = new System.Drawing.Size(75, 23);
             this.createCustomer2Button.TabIndex = 2;
@@ -75,7 +75,7 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(198, 345);
+            this.cancelButton.Location = new System.Drawing.Point(173, 322);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 3;
@@ -86,7 +86,7 @@
             // firstNameBox
             // 
             this.firstNameBox.Cue = null;
-            this.firstNameBox.Location = new System.Drawing.Point(52, 140);
+            this.firstNameBox.Location = new System.Drawing.Point(27, 117);
             this.firstNameBox.Name = "firstNameBox";
             this.firstNameBox.Size = new System.Drawing.Size(100, 20);
             this.firstNameBox.TabIndex = 4;
@@ -94,7 +94,7 @@
             // LastNameBox
             // 
             this.LastNameBox.Cue = null;
-            this.LastNameBox.Location = new System.Drawing.Point(173, 140);
+            this.LastNameBox.Location = new System.Drawing.Point(148, 117);
             this.LastNameBox.Name = "LastNameBox";
             this.LastNameBox.Size = new System.Drawing.Size(100, 20);
             this.LastNameBox.TabIndex = 5;
@@ -102,7 +102,7 @@
             // adressBox
             // 
             this.adressBox.Cue = null;
-            this.adressBox.Location = new System.Drawing.Point(52, 194);
+            this.adressBox.Location = new System.Drawing.Point(27, 171);
             this.adressBox.Name = "adressBox";
             this.adressBox.Size = new System.Drawing.Size(221, 20);
             this.adressBox.TabIndex = 6;
@@ -110,7 +110,7 @@
             // emailBox
             // 
             this.emailBox.Cue = null;
-            this.emailBox.Location = new System.Drawing.Point(52, 245);
+            this.emailBox.Location = new System.Drawing.Point(27, 222);
             this.emailBox.Name = "emailBox";
             this.emailBox.Size = new System.Drawing.Size(221, 20);
             this.emailBox.TabIndex = 8;
@@ -118,7 +118,7 @@
             // phoneBox
             // 
             this.phoneBox.Cue = null;
-            this.phoneBox.Location = new System.Drawing.Point(52, 301);
+            this.phoneBox.Location = new System.Drawing.Point(27, 278);
             this.phoneBox.Name = "phoneBox";
             this.phoneBox.Size = new System.Drawing.Size(100, 20);
             this.phoneBox.TabIndex = 10;
@@ -126,7 +126,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(49, 124);
+            this.label2.Location = new System.Drawing.Point(24, 101);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 13);
             this.label2.TabIndex = 11;
@@ -135,7 +135,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(49, 93);
+            this.label3.Location = new System.Drawing.Point(24, 70);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(69, 13);
             this.label3.TabIndex = 12;
@@ -144,7 +144,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(220, 124);
+            this.label4.Location = new System.Drawing.Point(195, 101);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 13);
             this.label4.TabIndex = 13;
@@ -153,7 +153,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(49, 229);
+            this.label5.Location = new System.Drawing.Point(24, 206);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(32, 13);
             this.label5.TabIndex = 14;
@@ -162,7 +162,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(50, 178);
+            this.label6.Location = new System.Drawing.Point(25, 155);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(45, 13);
             this.label6.TabIndex = 15;
@@ -171,7 +171,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(50, 285);
+            this.label7.Location = new System.Drawing.Point(25, 262);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(80, 13);
             this.label7.TabIndex = 16;
@@ -180,7 +180,7 @@
             // userCombo
             // 
             this.userCombo.FormattingEnabled = true;
-            this.userCombo.Location = new System.Drawing.Point(152, 44);
+            this.userCombo.Location = new System.Drawing.Point(127, 21);
             this.userCombo.Name = "userCombo";
             this.userCombo.Size = new System.Drawing.Size(121, 21);
             this.userCombo.TabIndex = 17;
@@ -190,7 +190,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(310, 394);
+            this.ClientSize = new System.Drawing.Size(277, 375);
             this.Controls.Add(this.userCombo);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -230,7 +230,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox userCombo;
+        public System.Windows.Forms.ComboBox userCombo;
         public CueTextBox firstNameBox;
     }
 }

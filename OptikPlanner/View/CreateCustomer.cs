@@ -26,7 +26,6 @@ namespace OptikPlanner.View
         {
             USERS creater = (USERS)userCombo.SelectedItem;
             
-
             CUSTOMERS customer = new CUSTOMERS();
             customer.CS_CPRNO = cprBox.Text;
             customer.CS_FIRSTNAME = firstNameBox.Text;
@@ -34,8 +33,16 @@ namespace OptikPlanner.View
             customer.CS_ADRESS1 = adressBox.Text;
             customer.CS_EMAIL = emailBox.Text;
             customer.CS_PHONEMOBILE = phoneBox.Text;
-            
-            Logger.LogThisLine("ansatte: " + creater + " har oprettet en ny kunde ved navn: " + firstNameBox);
+
+            if (createCustomer2Button.Text == "Gem")
+            {
+                Logger.LogThisLine("ansatte: " + creater + " har ændret en kunde ved navn: " + firstNameBox.Text + " " + LastNameBox.Text);
+            }
+            else if (createCustomer2Button.Text == "Opret")
+            {
+                Logger.LogThisLine("ansatte: " + creater + " har oprettet en ny kunde ved navn: " + firstNameBox.Text + " " + LastNameBox.Text);
+            }
+
 
 
         }
