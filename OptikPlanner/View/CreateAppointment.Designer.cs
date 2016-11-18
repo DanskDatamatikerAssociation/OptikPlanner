@@ -46,7 +46,7 @@
             this.aftaleCombo = new System.Windows.Forms.ComboBox();
             this.lokaleCombo = new System.Windows.Forms.ComboBox();
             this.userCombo = new System.Windows.Forms.ComboBox();
-            this.customerBox = new System.Windows.Forms.Button();
+            this.customerLibraryButton = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.smsCheck = new System.Windows.Forms.CheckBox();
@@ -227,14 +227,14 @@
             this.userCombo.TabIndex = 18;
             this.userCombo.Text = "Vælg medarbejder";
             // 
-            // customerBox
+            // customerLibraryButton
             // 
-            this.customerBox.Location = new System.Drawing.Point(128, 75);
-            this.customerBox.Name = "customerBox";
-            this.customerBox.Size = new System.Drawing.Size(31, 23);
-            this.customerBox.TabIndex = 19;
-            this.customerBox.Text = "adr";
-            this.customerBox.UseVisualStyleBackColor = true;
+            this.customerLibraryButton.Location = new System.Drawing.Point(128, 75);
+            this.customerLibraryButton.Name = "customerLibraryButton";
+            this.customerLibraryButton.Size = new System.Drawing.Size(31, 23);
+            this.customerLibraryButton.TabIndex = 19;
+            this.customerLibraryButton.Text = "adr";
+            this.customerLibraryButton.UseVisualStyleBackColor = true;
             // 
             // label6
             // 
@@ -393,7 +393,7 @@
             this.Controls.Add(this.smsCheck);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.customerBox);
+            this.Controls.Add(this.customerLibraryButton);
             this.Controls.Add(this.userCombo);
             this.Controls.Add(this.lokaleCombo);
             this.Controls.Add(this.aftaleCombo);
@@ -438,7 +438,7 @@
         private System.Windows.Forms.ComboBox aftaleCombo;
         private System.Windows.Forms.ComboBox lokaleCombo;
         private System.Windows.Forms.ComboBox userCombo;
-        private System.Windows.Forms.Button customerBox;
+        private System.Windows.Forms.Button customerLibraryButton;
         private System.Windows.Forms.TextBox firstNameBox;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label11;

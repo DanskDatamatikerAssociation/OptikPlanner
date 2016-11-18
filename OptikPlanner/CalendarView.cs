@@ -54,11 +54,12 @@ namespace OptikPlanner
 
         private void calendar1_ItemDoubleClick(object sender, CalendarItemEventArgs e)
         {
-            CalendarItem calendarItem = e.Item;
 
-            APTDETAILS appDetails = (APTDETAILS)calendarItem.Tag;
-
-            _createAppointmentController.GetCLickedAppointment(appDetails);
+            //_calendarViewController.SetClickedAppointment(e.Item);
+            CreateAppointment.ClickedAppointment = (APTDETAILS) e.Item.Tag;
+     
+            var form = new CreateAppointment();
+            form.Show();
 
         }
 
@@ -150,31 +151,31 @@ namespace OptikPlanner
 
         private void calendar_LoadItems(object sender, CalendarLoadEventArgs e)
         {
-            //AddAppointmentsToCalendar();
+             AddAppointmentsToCalendar();
            
-                CalendarItem i = new CalendarItem(calendar);
-                i.StartDate = DateTime.Today;
-                i.EndDate = DateTime.Today.AddDays(1);
-                i.Text = "hej";
+            //    CalendarItem i = new CalendarItem(calendar);
+            //    i.StartDate = DateTime.Today;
+            //    i.EndDate = DateTime.Today.AddDays(1);
+            //    i.Text = "hej";
 
-                user.US_STAMP = 2;
-                EYEEXAMROOMS room = new EYEEXAMROOMS();    
-                DateTime date = new DateTime();
-                date = DateTime.Today;
-                string timeFrom;
-                timeFrom = "22";
-                string timeTo;
-                timeTo = "23";
-                CUSTOMERS customer = new CUSTOMERS();
-                string description;
-                description = "jiqji";
-            customer.CS_STAMP = 2;
+            //    user.US_STAMP = 2;
+            //    EYEEXAMROOMS room = new EYEEXAMROOMS();    
+            //    DateTime date = new DateTime();
+            //    date = DateTime.Today;
+            //    string timeFrom;
+            //    timeFrom = "22";
+            //    string timeTo;
+            //    timeTo = "23";
+            //    CUSTOMERS customer = new CUSTOMERS();
+            //    string description;
+            //    description = "jiqji";
+            //customer.CS_STAMP = 2;
 
-                APTDETAILS appointment = new APTDETAILS(1,user,room,date,timeFrom,timeTo,customer,description);
+            //    APTDETAILS appointment = new APTDETAILS(1,user,room,date,timeFrom,timeTo,customer,description);
 
-            i.Tag = appointment;
+            //i.Tag = appointment;
 
-                calendar.Items.Add(i);
+                //calendar.Items.Add(i);
 
             
         }

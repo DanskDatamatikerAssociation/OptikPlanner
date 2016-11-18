@@ -92,7 +92,7 @@
     <Compile Include="View\CreateAppointment.Designer.cs">
       <DependentUpon>CreateAppointment.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\IAppointmentController.cs" />
+    <Compile Include="View\ICreateAppointmentView.cs" />
     <Compile Include="View\ICalendarView.cs" />
     <EmbeddedResource Include="CalendarView.resx">
       <DependentUpon>CalendarView.cs</DependentUpon>

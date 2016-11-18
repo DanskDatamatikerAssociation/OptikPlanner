@@ -53,12 +53,19 @@ namespace OptikPlanner.Controller
                 string timeToHour = a.APD_TIMETO.Split(':').First();
                 string timeToMinute = a.APD_TIMETO.Split(':').Last();
 
-                CalendarItem c = new CalendarItem(_view.Calendar, new DateTime(appointMentDateValue.Year, appointMentDateValue.Month, appointMentDateValue.Day, int.Parse(timeFromHour), int.Parse(timeFromMinute), 0), new DateTime(appointMentDateValue.Year, appointMentDateValue.Month, appointMentDateValue.Day, int.Parse(timeToHour), int.Parse(timeToMinute), 0), Encoding.Default.GetString(a.APD_DESCRIPTION));
+                string description;
+                if (a.APD_DESCRIPTION == null) description = "*No description*";
+                else description = Encoding.Default.GetString(a.APD_DESCRIPTION);
+                
+
+                CalendarItem c = new CalendarItem(_view.Calendar, new DateTime(appointMentDateValue.Year, appointMentDateValue.Month, appointMentDateValue.Day, int.Parse(timeFromHour), int.Parse(timeFromMinute), 0), new DateTime(appointMentDateValue.Year, appointMentDateValue.Month, appointMentDateValue.Day, int.Parse(timeToHour), int.Parse(timeToMinute), 0), description);
+                c.Tag = a;
                 calendarItems.Add(c);
             }
 
             return calendarItems;
         }
+
 
 
 

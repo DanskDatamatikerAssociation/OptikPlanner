@@ -13,15 +13,13 @@ using OptikPlanner.View;
 namespace OptikPlanner.Controller
 {
    public class CreateAppointmentController
-    {
-        APTDETAILS app1 = new APTDETAILS();
-        APTDETAILS app2 = new APTDETAILS();
+   {
 
         OptikItDbContext db = new OptikItDbContext();
 
-        private IAppointmentView _view;
+        private static ICreateAppointmentView _view;
 
-        public CreateAppointmentController(IAppointmentView view)
+        public CreateAppointmentController(ICreateAppointmentView view)
         {
             _view = view;
             view.SetController(this);
@@ -79,16 +77,8 @@ namespace OptikPlanner.Controller
 
         }
 
-        public void GetCLickedAppointment(APTDETAILS item)
-        {
-            app1 = item;
-            SetClickedAppointment();
-        }
+       
 
-       public APTDETAILS SetClickedAppointment()
-       {
-           return app1;
-       }
         
 
         public USERS GetUser()
