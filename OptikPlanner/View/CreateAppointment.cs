@@ -9,15 +9,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OptikPlanner.Controller;
+using OptikPlanner.Misc;
 using OptikPlanner.Model;
 
 namespace OptikPlanner.View
 {
     public partial class CreateAppointment : Form
     {
-        CreateAppointmentController controlz = new CreateAppointmentController();
-        private DateTime mPrevDate;
-        Random rnd = new Random();
+        CreateAppointmentController _controller = new CreateAppointmentController();
+        private DateTime _mPrevDate;
+        Random _rnd = new Random();
 
         public CreateAppointment()
         {
@@ -29,38 +30,38 @@ namespace OptikPlanner.View
             
             timeFromPicker.ShowUpDown = true;
             timeToPicker.ShowUpDown = true;
-            mPrevDate = dateTimePicker1.Value;
+            _mPrevDate = dateTimePicker1.Value;
 
             //initiate text statements
             userSelectionCombo.Text = "Vælg medarbejder...";
             
             //TEST DATA - COMBO´s
-            userSelectionCombo.Items.Add(controlz.GetUser());
-            aftaleCombo.Items.Add(controlz.GetRooms().ERO_TYPE);
-            lokaleCombo.Items.Add(controlz.GetRooms().ERO_NBR);
-            timeFromPicker.Text = controlz.GetRooms().ERO_OPENFROM;
-            timeToPicker.Text = controlz.GetRooms().ERO_OPENTO;
-            telefonBox.Text = controlz.GetCustomer().CS_PHONEMOBILE;
-            userCombo.Items.Add(controlz.GetUser());
+            userSelectionCombo.Items.Add(_controller.GetUser());
+            aftaleCombo.Items.Add(_controller.GetRooms().ERO_TYPE);
+            lokaleCombo.Items.Add(_controller.GetRooms().ERO_NBR);
+            timeFromPicker.Text = _controller.GetRooms().ERO_OPENFROM;
+            timeToPicker.Text = _controller.GetRooms().ERO_OPENTO;
+            telefonBox.Text = _controller.GetCustomer().CS_PHONEMOBILE;
+            userCombo.Items.Add(_controller.GetUser());
             if (smsCheck.Checked)
             {
-                controlz.GetCustomer().CS_COMMERCIALS_SMS = 1;
+                _controller.GetCustomer().CS_COMMERCIALS_SMS = 1;
             }
             if (emailCheck.Checked)
             {
-                controlz.GetCustomer().CS_COMMERCIALS_EMAIL = 1;
+                _controller.GetCustomer().CS_COMMERCIALS_EMAIL = 1;
 
             }
-            emailBox.Text = controlz.GetCustomer().CS_EMAIL;
+            emailBox.Text = _controller.GetCustomer().CS_EMAIL;
         }
         
         private void cueTextBox1_TextChanged(object sender, EventArgs e)
         {
 
-            if (cprBox.Text == controlz.GetCustomer().CS_CPRNO)
+            if (cprBox.Text == _controller.GetCustomer().CS_CPRNO)
             {
-                firstNameBox.Text = controlz.GetCustomer().CS_FIRSTNAME;
-                lastNameBox.Text = controlz.GetCustomer().CS_LASTNAME;
+                firstNameBox.Text = _controller.GetCustomer().CS_FIRSTNAME;
+                lastNameBox.Text = _controller.GetCustomer().CS_LASTNAME;
             }
             #region til reel data
             //if (cprBox.Text.Length > 0)
@@ -113,11 +114,11 @@ namespace OptikPlanner.View
                 DateTime dt = timeFromPicker.Value;
                 if ((dt.Minute * 60 + dt.Second) % 300 != 0)
                 {
-                    TimeSpan diff = dt - mPrevDate;
-                    if (diff.Ticks < 0) timeFromPicker.Value = mPrevDate.AddMinutes(-15);
-                    else timeFromPicker.Value = mPrevDate.AddMinutes(15);
+                    TimeSpan diff = dt - _mPrevDate;
+                    if (diff.Ticks < 0) timeFromPicker.Value = _mPrevDate.AddMinutes(-15);
+                    else timeFromPicker.Value = _mPrevDate.AddMinutes(15);
                 }
-            mPrevDate = timeFromPicker.Value;
+            _mPrevDate = timeFromPicker.Value;
         }
         
         
@@ -128,18 +129,20 @@ namespace OptikPlanner.View
                 DateTime dt = timeToPicker.Value;
                 if ((dt.Minute * 60 + dt.Second) % 300 != 0)
                 {
-                    TimeSpan diff = dt - mPrevDate;
-                    if (diff.Ticks < 0) timeToPicker.Value = mPrevDate.AddMinutes(-15);
-                    else timeToPicker.Value = mPrevDate.AddMinutes(15);
+                    TimeSpan diff = dt - _mPrevDate;
+                    if (diff.Ticks < 0) timeToPicker.Value = _mPrevDate.AddMinutes(-15);
+                    else timeToPicker.Value = _mPrevDate.AddMinutes(15);
                 }
                 
             
-            mPrevDate = timeToPicker.Value;
+            _mPrevDate = timeToPicker.Value;
         }
         
 
         private void okButton_Click(object sender, EventArgs e)
         {
+            USERS deleter = (USERS)userSelectionCombo.SelectedItem;
+
             EYEEXAMROOMS used = new EYEEXAMROOMS();
             used.ERO_TYPE = aftaleCombo.Text;
             used.ERO_DESC = beskrivelseBox.Text;
@@ -152,7 +155,7 @@ namespace OptikPlanner.View
             customer.CS_FIRSTNAME = firstNameBox.Text;
             customer.CS_LASTNAME = lastNameBox.Text;
 
-            int id = rnd.Next(1, 9999);
+            int id = _rnd.Next(1, 9999);
             DateTime date = dateTimePicker1.Value;
             var text = beskrivelseBox.Text;
             USERS user1 = (USERS) userCombo.SelectedItem;
@@ -160,6 +163,16 @@ namespace OptikPlanner.View
 
             APTDETAILS test = new APTDETAILS(id, user1, used, date, used.ERO_OPENFROM, used.ERO_OPENTO, customer,
                 text);
+            Logger.LogThisLine("ansatte: " + deleter + " har oprettet denne aftale med kunde: " + firstNameBox + " beskrivelse: " + beskrivelseBox);
+
+        }
+
+        private void customerBox_Click(object sender, EventArgs e)
+        {
+            CustomerLibrary window = new CustomerLibrary();
+            window.Show();
+
+            
         }
     }
 }

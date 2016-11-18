@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
-class CueTextBox : TextBox
+public class CueTextBox : TextBox
 {
     [Localizable(true)]
     public string Cue

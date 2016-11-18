@@ -233,6 +233,7 @@
             this.customerBox.TabIndex = 19;
             this.customerBox.Text = "adr";
             this.customerBox.UseVisualStyleBackColor = true;
+            this.customerBox.Click += new System.EventHandler(this.customerBox_Click);
             // 
             // label6
             // 
