@@ -25,8 +25,8 @@ namespace OptikPlanner.Model
         public AppointmentType AppointmentType { get; set; }
         public string Description { get; set; }
 
-        
 
 
     }
+    
 }

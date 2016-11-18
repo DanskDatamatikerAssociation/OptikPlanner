@@ -8,20 +8,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.Calendar;
 using OptikPlanner.Controller;
 using OptikPlanner.Model;
 
 namespace OptikPlanner.View
 {
-    public partial class CreateAppointment : Form
+    public partial class CreateAppointment : Form, ICreateAppointmentView
     {
-        CreateAppointmentController controlz = new CreateAppointmentController();
+        private CreateAppointmentController _controller;
         private DateTime mPrevDate;
         Random rnd = new Random();
+
+       
+
+        public static APTDETAILS ClickedAppointment { get; set; }
+
+
+        public void SetController(CreateAppointmentController controller)
+        {
+            this._controller = controller;
+        }
+
 
         public CreateAppointment()
         {
             InitializeComponent();
+
+            //ClickedAppointment = _controller.GetClickedAppointment();
 
             //timepicking settings
             timeFromPicker.CustomFormat = "hh:mm";
@@ -33,34 +47,36 @@ namespace OptikPlanner.View
 
             //initiate text statements
             userSelectionCombo.Text = "Vælg medarbejder...";
-            
-            //TEST DATA - COMBO´s
-            userSelectionCombo.Items.Add(controlz.GetUser());
-            aftaleCombo.Items.Add(controlz.GetRooms().ERO_TYPE);
-            lokaleCombo.Items.Add(controlz.GetRooms().ERO_NBR);
-            timeFromPicker.Text = controlz.GetRooms().ERO_OPENFROM;
-            timeToPicker.Text = controlz.GetRooms().ERO_OPENTO;
-            telefonBox.Text = controlz.GetCustomer().CS_PHONEMOBILE;
-            userCombo.Items.Add(controlz.GetUser());
-            if (smsCheck.Checked)
-            {
-                controlz.GetCustomer().CS_COMMERCIALS_SMS = 1;
-            }
-            if (emailCheck.Checked)
-            {
-                controlz.GetCustomer().CS_COMMERCIALS_EMAIL = 1;
 
-            }
-            emailBox.Text = controlz.GetCustomer().CS_EMAIL;
+            //TEST DATA - COMBO´s
+            //userSelectionCombo.Items.Add(_controller.GetUser());
+            //aftaleCombo.Items.Add(_controller.GetRooms().ERO_TYPE);
+            //lokaleCombo.Items.Add(_controller.GetRooms().ERO_NBR);
+            //timeFromPicker.Text = _controller.GetRooms().ERO_OPENFROM;
+            //timeToPicker.Text = _controller.GetRooms().ERO_OPENTO;
+            //telefonBox.Text = _controller.GetCustomer().CS_PHONEMOBILE;
+            //userCombo.Items.Add(_controller.GetUser());
+            //if (smsCheck.Checked)
+            //{
+            //    _controller.GetCustomer().CS_COMMERCIALS_SMS = 1;
+            //}
+            //if (emailCheck.Checked)
+            //{
+            //    _controller.GetCustomer().CS_COMMERCIALS_EMAIL = 1;
+
+            //}
+            //emailBox.Text = _controller.GetCustomer().CS_EMAIL;
+
+            if (ClickedAppointment != null) FillOutAppointment();
         }
         
         private void cueTextBox1_TextChanged(object sender, EventArgs e)
         {
 
-            if (cprBox.Text == controlz.GetCustomer().CS_CPRNO)
+            if (cprBox.Text == _controller.GetCustomer().CS_CPRNO)
             {
-                firstNameBox.Text = controlz.GetCustomer().CS_FIRSTNAME;
-                lastNameBox.Text = controlz.GetCustomer().CS_LASTNAME;
+                firstNameBox.Text = _controller.GetCustomer().CS_FIRSTNAME;
+                lastNameBox.Text = _controller.GetCustomer().CS_LASTNAME;
             }
             #region til reel data
             //if (cprBox.Text.Length > 0)
@@ -92,6 +108,61 @@ namespace OptikPlanner.View
             // }
             //} 
             #endregion
+
+        }
+
+        private void FillOutAppointment()
+        {
+
+            userSelectionCombo.SelectedItem = ClickedAppointment.APD_USER;
+            userSelectionCombo.Enabled = false;
+
+            cprBox.Cue = ClickedAppointment.APD_CPR;
+            cprBox.Enabled = false;
+
+            customerLibraryButton.Enabled = false;
+
+            firstNameBox.Text = ClickedAppointment.APD_FIRST;
+
+            lastNameBox.Text = ClickedAppointment.APD_LAST;
+
+            aftaleCombo.SelectedItem = ClickedAppointment.APD_TYPE;
+           // aftaleCombo.Enabled = false;
+
+            lokaleCombo.Text = ClickedAppointment.APD_ROOM.ToString();
+            //lokaleCombo.Enabled = false;
+
+            userCombo.SelectedItem = ClickedAppointment.APD_USER;
+            //userCombo.Enabled = false;
+
+            dateTimePicker1.Value =  ClickedAppointment.APD_DATE.GetValueOrDefault();
+            //dateTimePicker1.Enabled = false;
+
+            timeFromPicker.Text = ClickedAppointment.APD_TIMEFROM;
+           // timeFromPicker.Enabled = false;
+
+            timeToPicker.Text = ClickedAppointment.APD_TIMETO;
+            //timeToPicker.Enabled = false;
+
+            telefonBox.Text = ClickedAppointment.APD_MOBILE;
+            //telefonBox.Enabled = false;
+
+            //smsCheck.Enabled = false;
+
+            emailBox.Text = ClickedAppointment.APD_EMAIL;
+            //emailBox.Enabled = false;
+
+            //emailCheck.Enabled = false;
+
+            string description;
+            if (ClickedAppointment.APD_DESCRIPTION == null) description = "**No description**";
+            else description = Encoding.Default.GetString(ClickedAppointment.APD_DESCRIPTION);
+            beskrivelseBox.Text = description;
+            //beskrivelseBox.Enabled = false;
+
+            cancelAppointmentButton.Enabled = true;
+
+
 
         }
         
@@ -160,6 +231,19 @@ namespace OptikPlanner.View
 
             APTDETAILS test = new APTDETAILS(id, user1, used, date, used.ERO_OPENFROM, used.ERO_OPENTO, customer,
                 text);
+        }
+
+
+       
+
+        private void userSelectionCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void beskrivelseBox_TextChanged(object sender, EventArgs e)
+        {
+                
         }
     }
 }

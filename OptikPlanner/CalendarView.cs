@@ -21,8 +21,9 @@ namespace OptikPlanner
     public partial class CalendarView : Form, ICalendarView
     {
         private CalendarViewController _calendarViewController;
-
-        public Calendar Calendar { get; }
+        private CreateAppointmentController _createAppointmentController;
+        private USERS user = new USERS();
+            public Calendar Calendar { get; }
 
         public CalendarView()
         {
@@ -52,11 +53,12 @@ namespace OptikPlanner
 
         private void calendar1_ItemDoubleClick(object sender, CalendarItemEventArgs e)
         {
-            CalendarItem calendarItem = e.Item;
-            calendarItem.Text = "You just double clicked me!\nLocation";
 
-
-
+            //_calendarViewController.SetClickedAppointment(e.Item);
+            CreateAppointment.ClickedAppointment = (APTDETAILS) e.Item.Tag;
+     
+            var form = new CreateAppointment();
+            form.Show();
 
         }
 
