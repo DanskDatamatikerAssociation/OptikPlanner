@@ -21,6 +21,9 @@ namespace OptikPlanner
     public partial class CalendarView : Form, ICalendarView
     {
         private CalendarViewController _calendarViewController;
+        View.RIghtClick_View newForm = new View.RIghtClick_View();
+        View.RIghtClick_View itemForm = new View.RIghtClick_View();
+
 
         public Calendar Calendar { get; }
 
@@ -60,12 +63,12 @@ namespace OptikPlanner
 
         }
 
-        private void AddAppointmentsToCalendar()
-        {
+        //private void AddAppointmentsToCalendar()
+        //{
 
-            calendar.Items.AddRange(_calendarViewController.GetAppointmentsAsCalendarItems());
+        //    calendar.Items.AddRange(_calendarViewController.GetAppointmentsAsCalendarItems());
 
-        }
+        //}
 
 
 
@@ -134,7 +137,7 @@ namespace OptikPlanner
         {
             ShowMonthView();
         }
-
+                
 
 
         private void monthView2_SelectionChanged(object sender, EventArgs e)
@@ -144,7 +147,7 @@ namespace OptikPlanner
 
         private void calendar_LoadItems(object sender, CalendarLoadEventArgs e)
         {
-            AddAppointmentsToCalendar();
+            //AddAppointmentsToCalendar();
 
 
             //Color logic here
@@ -166,7 +169,6 @@ namespace OptikPlanner
                 i.ApplyColor(color);
 
             }
-
 
         }
 
@@ -311,6 +313,40 @@ namespace OptikPlanner
                                     $"'{Encoding.Default.GetString(a.APD_DESCRIPTION)}'";
                 toolTip.Show(textToShow, this, tooltipPosition);
             }
+        }
+
+        private void calendar_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right) {
+                newForm.RedigerButton.Enabled = false;
+                newForm.AflysButton.Enabled = false;
+                newForm.FlytButton.Enabled = false;
+                newForm.Hide();
+                itemForm.Hide();
+                newForm.Show();
+            }
+        }
+
+        private void calendar_ItemClick(object sender, CalendarItemEventArgs e)
+        {
+            MouseEventArgs me = (MouseEventArgs) e;
+            if (m.Button == System.Windows.Forms.MouseButtons.Left)
+            {
+                itemForm.Hide();
+            }
+            if (  m.Button == System.Windows.Forms.MouseButtons.Right) {
+                newForm.Hide();
+                itemForm.Hide();
+                itemForm.OpretButton.Enabled = false;
+                var calendarForm = new CalendarView();
+                calendarForm.SendToBack();
+                itemForm.Show();
+            }
+        }
+
+        private void calendar_ItemMouseHover(object sender, CalendarItemEventArgs e)
+        {
+
         }
     }
 }

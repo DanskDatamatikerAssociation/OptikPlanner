@@ -101,6 +101,12 @@
       <DependentUpon>CreateAppointment.cs</DependentUpon>
     </Compile>
     <Compile Include="View\ICalendarView.cs" />
+    <Compile Include="View\RIghtClick_View.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\RIghtClick_View.Designer.cs">
+      <DependentUpon>RIghtClick_View.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="CalendarView.resx">
       <DependentUpon>CalendarView.cs</DependentUpon>
     </EmbeddedResource>
@@ -119,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\CreateAppointment.resx">
       <DependentUpon>CreateAppointment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\RIghtClick_View.resx">
+      <DependentUpon>RIghtClick_View.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

@@ -99,7 +99,10 @@
             this.calendar.TabStop = false;
             this.calendar.Text = "Calendar";
             this.calendar.LoadItems += new System.Windows.Forms.Calendar.Calendar.CalendarLoadEventHandler(this.calendar_LoadItems);
+            this.calendar.ItemClick += new System.Windows.Forms.Calendar.Calendar.CalendarItemEventHandler(this.calendar_ItemClick);
             this.calendar.ItemDoubleClick += new System.Windows.Forms.Calendar.Calendar.CalendarItemEventHandler(this.calendar1_ItemDoubleClick);
+            this.calendar.ItemMouseHover += new System.Windows.Forms.Calendar.Calendar.CalendarItemEventHandler(this.calendar_ItemMouseHover);
+            this.calendar.MouseClick += new System.Windows.Forms.MouseEventHandler(this.calendar_MouseClick);
             this.calendar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.calendar_MouseMove);
             // 
             // monthView

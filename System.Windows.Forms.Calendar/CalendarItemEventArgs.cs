@@ -5,8 +5,7 @@ using System.ComponentModel;
 
 namespace System.Windows.Forms.Calendar
 {
-    public class CalendarItemEventArgs
-        : EventArgs
+    public class CalendarItemEventArgs :EventArgs
     {
         #region Ctor
 
