@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\CancelAppointmentController.cs" />
+    <Compile Include="Controller\CustomerLibraryController.cs" />
     <Compile Include="Misc\Logger.cs" />
     <Compile Include="Model\APTDETAILS.cs" />
     <Compile Include="CalendarView.cs">
@@ -101,6 +102,18 @@
       <DependentUpon>CreateAppointment.cs</DependentUpon>
     </Compile>
     <Compile Include="View\ICreateAppointmentView.cs" />
+    <Compile Include="View\CreateCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CreateCustomer.Designer.cs">
+      <DependentUpon>CreateCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomerLibrary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CustomerLibrary.Designer.cs">
+      <DependentUpon>CustomerLibrary.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\ICalendarView.cs" />
     <EmbeddedResource Include="CalendarView.resx">
       <DependentUpon>CalendarView.cs</DependentUpon>
@@ -120,6 +133,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\CreateAppointment.resx">
       <DependentUpon>CreateAppointment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CreateCustomer.resx">
+      <DependentUpon>CreateCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CustomerLibrary.resx">
+      <DependentUpon>CustomerLibrary.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

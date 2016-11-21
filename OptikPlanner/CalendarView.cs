@@ -180,7 +180,7 @@ namespace OptikPlanner
 
         private void calendar_LoadItems(object sender, CalendarLoadEventArgs e)
         {
-            AddAppointmentsToCalendar();
+           // AddAppointmentsToCalendar();
 
 
             //Color logic here
