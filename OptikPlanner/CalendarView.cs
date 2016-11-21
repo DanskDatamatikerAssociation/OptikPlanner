@@ -54,7 +54,6 @@ namespace OptikPlanner
         private void calendar1_ItemDoubleClick(object sender, CalendarItemEventArgs e)
         {
 
-            //_calendarViewController.SetClickedAppointment(e.Item);
             CreateAppointment.ClickedAppointment = (APTDETAILS) e.Item.Tag;
      
             var form = new CreateAppointment();
@@ -180,7 +179,7 @@ namespace OptikPlanner
 
         private void calendar_LoadItems(object sender, CalendarLoadEventArgs e)
         {
-           // AddAppointmentsToCalendar();
+            AddAppointmentsToCalendar();
 
 
             //Color logic here

@@ -48,25 +48,6 @@ namespace OptikPlanner.View
             //initiate text statements
             userSelectionCombo.Text = "Vælg medarbejder...";
 
-            //TEST DATA - COMBO´s
-            //userSelectionCombo.Items.Add(_controller.GetUser());
-            //aftaleCombo.Items.Add(_controller.GetRooms().ERO_TYPE);
-            //lokaleCombo.Items.Add(_controller.GetRooms().ERO_NBR);
-            //timeFromPicker.Text = _controller.GetRooms().ERO_OPENFROM;
-            //timeToPicker.Text = _controller.GetRooms().ERO_OPENTO;
-            //telefonBox.Text = _controller.GetCustomer().CS_PHONEMOBILE;
-            //userCombo.Items.Add(_controller.GetUser());
-            //if (smsCheck.Checked)
-            //{
-            //    _controller.GetCustomer().CS_COMMERCIALS_SMS = 1;
-            //}
-            //if (emailCheck.Checked)
-            //{
-            //    _controller.GetCustomer().CS_COMMERCIALS_EMAIL = 1;
-
-            //}
-            //emailBox.Text = _controller.GetCustomer().CS_EMAIL;
-
             if (ClickedAppointment != null) FillOutAppointment();
         }
         
@@ -244,6 +225,12 @@ namespace OptikPlanner.View
         private void beskrivelseBox_TextChanged(object sender, EventArgs e)
         {
                 
+        }
+
+        private void customerLibraryButton_Click(object sender, EventArgs e)
+        {
+            var form = new CustomerLibrary();
+            form.Show();
         }
     }
 }

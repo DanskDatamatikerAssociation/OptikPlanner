@@ -46,7 +46,6 @@
             this.aftaleCombo = new System.Windows.Forms.ComboBox();
             this.lokaleCombo = new System.Windows.Forms.ComboBox();
             this.userCombo = new System.Windows.Forms.ComboBox();
-            this.customerBox = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.smsCheck = new System.Windows.Forms.CheckBox();
@@ -61,6 +60,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
+            this.customerLibraryButton = new System.Windows.Forms.Button();
             this.cprBox = new CueTextBox();
             this.SuspendLayout();
             // 
@@ -227,16 +227,6 @@
             this.userCombo.TabIndex = 18;
             this.userCombo.Text = "Vælg medarbejder";
             // 
-            // customerBox
-            // 
-            this.customerBox.Location = new System.Drawing.Point(128, 75);
-            this.customerBox.Name = "customerBox";
-            this.customerBox.Size = new System.Drawing.Size(31, 23);
-            this.customerBox.TabIndex = 19;
-            this.customerBox.Text = "adr";
-            this.customerBox.UseVisualStyleBackColor = true;
-            this.customerBox.Click += new System.EventHandler(this.customerBox_Click);
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -364,6 +354,16 @@
             this.label15.TabIndex = 37;
             this.label15.Text = "til";
             // 
+            // customerLibraryButton
+            // 
+            this.customerLibraryButton.Location = new System.Drawing.Point(128, 73);
+            this.customerLibraryButton.Name = "customerLibraryButton";
+            this.customerLibraryButton.Size = new System.Drawing.Size(28, 23);
+            this.customerLibraryButton.TabIndex = 39;
+            this.customerLibraryButton.Text = "CL";
+            this.customerLibraryButton.UseVisualStyleBackColor = true;
+            this.customerLibraryButton.Click += new System.EventHandler(this.customerLibraryButton_Click);
+            // 
             // cprBox
             // 
             this.cprBox.Cue = "Indtast CPR";
@@ -378,6 +378,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(404, 492);
+            this.Controls.Add(this.customerLibraryButton);
             this.Controls.Add(this.cprBox);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.label14);
@@ -393,7 +394,6 @@
             this.Controls.Add(this.smsCheck);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.customerLibraryButton);
             this.Controls.Add(this.userCombo);
             this.Controls.Add(this.lokaleCombo);
             this.Controls.Add(this.aftaleCombo);
@@ -438,7 +438,6 @@
         private System.Windows.Forms.ComboBox aftaleCombo;
         private System.Windows.Forms.ComboBox lokaleCombo;
         private System.Windows.Forms.ComboBox userCombo;
-        private System.Windows.Forms.Button customerLibraryButton;
         private System.Windows.Forms.TextBox firstNameBox;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label11;
@@ -455,5 +454,6 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
         private CueTextBox cprBox;
+        private System.Windows.Forms.Button customerLibraryButton;
     }
 }
