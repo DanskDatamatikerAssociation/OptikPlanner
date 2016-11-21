@@ -84,18 +84,22 @@ namespace OptikPlanner
 
             DateTime lastMonday;
             int daysSinceLastMonday = 1;
-            while (true)
+            if (today.DayOfWeek != DayOfWeek.Monday)
             {
-
-                lastMonday = today.AddDays(-daysSinceLastMonday);
-                if (lastMonday.DayOfWeek == DayOfWeek.Monday)
+                while (true)
                 {
-                    break;
+
+                    lastMonday = today.AddDays(-daysSinceLastMonday);
+                    if (lastMonday.DayOfWeek == DayOfWeek.Monday)
+                    {
+                        break;
+                    }
+                    daysSinceLastMonday++;
+
+
                 }
-                daysSinceLastMonday++;
-
-
             }
+            else lastMonday = today;
 
             DateTime oneWeekAhead = lastMonday.AddDays(6);
 
