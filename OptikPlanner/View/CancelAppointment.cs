@@ -17,14 +17,12 @@ namespace OptikPlanner.View
 {
     public partial class CancelAppointment : Form
     {
-        CreateAppointmentController controlz = new CreateAppointmentController();
         OptikItDbContext db = new OptikItDbContext();
 
 
         public CancelAppointment()
         {
             InitializeComponent();
-            cancelUserBox.Items.Add(controlz.GetUser());
             cuCancelReasonBox.Enabled = false;
 
         }

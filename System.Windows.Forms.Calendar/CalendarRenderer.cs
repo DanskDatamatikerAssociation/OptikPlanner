@@ -987,10 +987,18 @@ namespace System.Windows.Forms.Calendar
                     CalendarDay dayEnd = item.DayEnd;
                     item.ClearBounds();
 
-                    for (int i = dayStart.Index; i <= dayEnd.Index; i++)
+                    //DELTE THIS CODE IF ITEMS IN CALENDAR STOPS WORKING ~Danny
+                    //CHECK ALSO VIEWSTART AND VIEWEND PROPERTIES IN calendar.cs CLASS!
+                    //if (dayStart == null || dayEnd == null) return;
+
+                    //edited by Danny - added exception control
+                    if (dayStart != null && dayEnd != null)
                     {
-                        Calendar.Days[i].AddContainedItem(item);
-                        maxItems = Math.Max(maxItems, Calendar.Days[i].ContainedItems.Count);
+                        for (int i = dayStart.Index; i <= dayEnd.Index; i++)
+                        {
+                            Calendar.Days[i].AddContainedItem(item);
+                            maxItems = Math.Max(maxItems, Calendar.Days[i].ContainedItems.Count);
+                        }
                     }
                 }
 
@@ -1001,8 +1009,12 @@ namespace System.Windows.Forms.Calendar
                     CalendarDay dayStart = item.DayStart;
                     CalendarDay dayEnd = item.DayEnd;
 
-                    PlaceInMatrix(ref matix, curIndex + 1, dayStart.Index, dayEnd.Index);
-                    curIndex++;
+                    //edited by Danny - added exception control
+                    if (dayStart != null && dayEnd != null)
+                    {
+                        PlaceInMatrix(ref matix, curIndex + 1, dayStart.Index, dayEnd.Index);
+                        curIndex++;
+                    }
                 }
 
 

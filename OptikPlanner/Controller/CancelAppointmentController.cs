@@ -11,8 +11,6 @@ namespace OptikPlanner.Controller
 {
     public class CancelAppointmentController
     {
-        CreateAppointmentController controlz = new CreateAppointmentController();
-
         
 
         public void DeleteAppointment()

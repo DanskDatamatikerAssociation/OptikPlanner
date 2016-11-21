@@ -1,22 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.Entity;
-using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.Calendar;
 using OptikPlanner.Controller;
 using OptikPlanner.Model;
-using OptikPlanner.View;
-using System.Globalization;
 using Calendar = System.Windows.Forms.Calendar.Calendar;
 
-namespace OptikPlanner
+namespace OptikPlanner.View
 {
     public partial class CalendarView : Form, ICalendarView
     {
@@ -100,6 +94,7 @@ namespace OptikPlanner
             DateTime oneWeekAhead = lastMonday.AddDays(6);
 
             calendar.SetViewRange(lastMonday, oneWeekAhead);
+         
 
             if (!monthView.SelectionStart.Equals(DateTime.MinValue) ||
                 !monthView.SelectionEnd.Equals(DateTime.MinValue))
@@ -113,32 +108,35 @@ namespace OptikPlanner
 
         private void ShowTwoWeeksView()
         {
-            //CHECK THE CALENDARRENDERER-CLASS - PerformItemLayout FOR DEBUGGING ~Danny
+            DateTime today;
+            if (monthView.SelectionStart.Equals(DateTime.MinValue)) { today = DateTime.Today; }
+            else today = monthView.SelectionStart;
 
-            DateTime today = DateTime.Today;
             DateTime lastMonday;
             int daysSinceLastMonday = 1;
-
-            if (today.DayOfWeek != DayOfWeek.Monday)
+            while (true)
             {
-                while (true)
+
+                lastMonday = today.AddDays(-daysSinceLastMonday);
+                if (lastMonday.DayOfWeek == DayOfWeek.Monday)
                 {
-                    lastMonday = new DateTime(today.Year, today.Month, today.Day - daysSinceLastMonday);
-                    if (lastMonday.DayOfWeek == DayOfWeek.Monday)
-                    {
-                        break;
-                    }
-                    daysSinceLastMonday++;
+                    break;
                 }
+                daysSinceLastMonday++;
+
+
             }
-            else lastMonday = today;
-            
 
-            DateTime twoWeeksAhead = lastMonday.AddDays(13);
+            DateTime oneWeekAhead = lastMonday.AddDays(6);
 
-            calendar.SetViewRange(lastMonday, twoWeeksAhead);
+            calendar.SetViewRange(lastMonday, oneWeekAhead);
 
-
+            if (!monthView.SelectionStart.Equals(DateTime.MinValue) ||
+                !monthView.SelectionEnd.Equals(DateTime.MinValue))
+            {
+                monthView.SelectionStart = lastMonday;
+                monthView.SelectionEnd = oneWeekAhead;
+            }
         }
 
         private void ShowMonthView()
@@ -177,7 +175,7 @@ namespace OptikPlanner
         private void calendar_LoadItems(object sender, CalendarLoadEventArgs e)
         {
             AddAppointmentsToCalendar();
-
+            
 
             //Color logic here
             var items = e.Calendar.Items;
@@ -217,8 +215,7 @@ namespace OptikPlanner
 
         private void twoWeeksButton_Click(object sender, EventArgs e)
         {
-
-            ShowTwoWeeksView();
+            //ShowTwoWeeksView();
         }
 
         public void SetWeekLabel()

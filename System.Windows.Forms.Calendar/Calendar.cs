@@ -567,7 +567,7 @@ namespace System.Windows.Forms.Calendar
             set 
             {
                 _viewEnd = value.Date.Add(new TimeSpan(23, 59, 59));
-                ClearItems();
+                ClearItems(); //- OUTCOMMENTED BY DANNY. REMOVE IF BUGS SHOW
                 UpdateDaysAndWeeks();
                 Renderer.PerformLayout();
                 Invalidate();
@@ -584,7 +584,7 @@ namespace System.Windows.Forms.Calendar
             get { return _viewStart; }
             set { 
                 _viewStart = value.Date;
-                ClearItems();
+                ClearItems(); //OUTCOMMENTED BY DANNY. REMOVE IF BUGS SHOW
                 UpdateDaysAndWeeks();
                 Renderer.PerformLayout();
                 Invalidate();
