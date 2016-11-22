@@ -202,6 +202,9 @@
             // aftaleCombo
             // 
             this.aftaleCombo.FormattingEnabled = true;
+            this.aftaleCombo.Items.AddRange(new object[] {
+            "Linseopsætning",
+            "Steljustering"});
             this.aftaleCombo.Location = new System.Drawing.Point(16, 132);
             this.aftaleCombo.Name = "aftaleCombo";
             this.aftaleCombo.Size = new System.Drawing.Size(121, 21);
@@ -372,6 +375,7 @@
             this.cprBox.Size = new System.Drawing.Size(100, 20);
             this.cprBox.TabIndex = 38;
             this.cprBox.TextChanged += new System.EventHandler(this.cueTextBox1_TextChanged);
+            this.cprBox.Leave += new System.EventHandler(this.cprBox_Leave);
             // 
             // CreateAppointment
             // 

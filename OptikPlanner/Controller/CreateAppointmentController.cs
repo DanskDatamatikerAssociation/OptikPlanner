@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using OptikPlanner.Model;
 using System.Windows.Forms.Calendar;
 using OptikPlanner.View;
@@ -12,8 +13,8 @@ using OptikPlanner.View;
 
 namespace OptikPlanner.Controller
 {
-   public class CreateAppointmentController
-   {
+    public class CreateAppointmentController
+    {
 
         OptikItDbContext db = new OptikItDbContext();
 
@@ -26,26 +27,26 @@ namespace OptikPlanner.Controller
         }
 
 
-        public void PostAppointment()
+        public void PostAppointment(APTDETAILS appointment)
         {
-            CUSTOMERS customer = new CUSTOMERS
-            {
-                CS_STAMP = 1,
-                CS_FIRSTNAME = "Test",
-                CS_LASTNAME = "Upload"
-            };
+            //CUSTOMERS customer = new CUSTOMERS
+            //{
+            //    CS_STAMP = 1,
+            //    CS_FIRSTNAME = "Test",
+            //    CS_LASTNAME = "Upload"
+            //};
 
-            USERS user = new USERS {US_STAMP = 1};
+            //USERS user = new USERS {US_STAMP = 1};
 
-            EYEEXAMROOMS room = new EYEEXAMROOMS() {ERO_STAMP = 1};
-         
+            //EYEEXAMROOMS room = new EYEEXAMROOMS() {ERO_STAMP = 1};
 
-            APTDETAILS appointment = new APTDETAILS(10, user, room, DateTime.Now, "12:15", "12:30", customer, "Test aftale");
 
-            db.APTDETAILS.Add(appointment);
+            //APTDETAILS appointment = new APTDETAILS(10, user, room, DateTime.Now, "11:15", "14:30", customer, "Test aftale");
+
 
             try
             {
+                db.APTDETAILS.Add(appointment);
                 db.SaveChanges();
             }
             catch (DbEntityValidationException dbEx)
@@ -57,53 +58,124 @@ namespace OptikPlanner.Controller
                         Trace.TraceInformation("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
                     }
                 }
+
+                
             }
 
         }
 
-
-        public EYEEXAMROOMS GetRooms()
+        public int GetNextAppointmentId()
         {
-            EYEEXAMROOMS room = new EYEEXAMROOMS();
-            room.ERO_OPENFROM = "12:15";
-            room.ERO_OPENTO = "13:00";
-            room.ERO_NBR = 5;
-            room.ERO_TYPE = "Linse";
-            room.ERO_DESC = "linserum 5 første sal til venstre";
-            room.ERO_SHORTDESC = "kort";
+            var appointment = GetAppointments().Last();
+            return appointment.APD_STAMP + 1;
+
+
+        }
+
+        public List<APTDETAILS> GetAppointments()
+        {
+
+            var appointments = from a in db.APTDETAILS select a;
+            return appointments.ToList();
+
+
+        }
+
+
+        public List<EYEEXAMROOMS> GetRooms()
+        {
+            //TESTDATA
+
+            //EYEEXAMROOMS room = new EYEEXAMROOMS();
+            //room.ERO_OPENFROM = "12:15";
+            //room.ERO_OPENTO = "13:00";
+            //room.ERO_NBR = 5;
+            //room.ERO_TYPE = "Linse";
+            //room.ERO_DESC = "linserum 5 første sal til venstre";
+            //room.ERO_SHORTDESC = "kort";
+
+
+            //return room;
+
+            var rooms = from r in db.EYEEXAMROOMS select r;
+            return rooms.ToList();
+
+        }
+
+
+
+
+
+        public List<USERS> GetUsers()
+        {
+            //USERS user = new USERS();
+            //user.US_CPRNO = "2001927891";
+            //user.US_USERNAME = "MyUserName";
+            //user.US_STAMP = 1;
+
+
+            //return user;
+
+            var users = from u in db.USERS select u;
+            return users.ToList();
+
+        }
+
+        public List<CUSTOMERS> GetCustomers()
+        {
+            //    CUSTOMERS customer = new CUSTOMERS();
+            //    customer.CS_CPRNO = "2001926754";
+            //    customer.CS_FIRSTNAME = "Børge";
+            //    customer.CS_LASTNAME = "Jensen";
+
+
+            //    return customer;
+
+            var customers = from c in db.CUSTOMERS select c;
+            return customers.ToList();
+        }
+
+        public List<string> GetClickedAppointmentDetails()
+        {
+            List<string> clickedAppointmentDetails = new List<string>();
+
+            var clickedAppointment = CreateAppointment.ClickedAppointment;
+
+            if (clickedAppointment.APD_TYPE.Equals(1)) clickedAppointmentDetails.Add("Linseopsætning");
+            else if (clickedAppointment.APD_TYPE.Equals(0)) clickedAppointmentDetails.Add("Steljustering");
+
+            var rooms = GetRooms();
+            clickedAppointmentDetails.Add(rooms.Find(r => r.ERO_NBR.Equals(clickedAppointment.APD_ROOM)).ERO_SHORTDESC);
+
+            var users = GetUsers();
+            clickedAppointmentDetails.Add(users.Find(u => u.US_STAMP.Equals(clickedAppointment.APD_USER)).US_USERNAME);
+
             
 
-            return room;
+            return clickedAppointmentDetails;
+
 
         }
 
-       
-
-        
-
-        public USERS GetUser()
+        public void PutAppointment(APTDETAILS appointment)
         {
-            USERS user = new USERS();
-            user.US_CPRNO = "2001927891";
-            user.US_USERNAME = "MyUserName";
-            user.US_STAMP = 1;
+            var appointments = GetAppointments();
+            var appointmentToPut = appointments.Find(a => a.APD_STAMP == appointment.APD_STAMP);
 
+            appointmentToPut = appointment;
+            db.APTDETAILS.Add(appointmentToPut);
 
-            return user;
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                
+            }
         }
 
-        public CUSTOMERS GetCustomer()
-        {
-            CUSTOMERS customer = new CUSTOMERS();
-            customer.CS_CPRNO = "2001926754";
-            customer.CS_FIRSTNAME = "Børge";
-            customer.CS_LASTNAME = "Jensen";
 
 
-            return customer;
-        }
-        
-        
-            
     }
 }

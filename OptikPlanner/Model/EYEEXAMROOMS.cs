@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -25,22 +26,23 @@ namespace OptikPlanner.Model
 
         public bool ERO_USEFORWEB { get; set; }
 
-        //TIL TEST DATA
-        [StringLength(20)]
-        public string ERO_TYPE { get; set; }
 
-        public EYEEXAMROOMS(int? eroNbr, string eroOpento, string eroDesc, string eroOpenfrom, string eroType)
+        public EYEEXAMROOMS(int? eroNbr, string eroOpento, string eroDesc, string eroOpenfrom)
         {
             ERO_NBR = eroNbr;
             ERO_OPENTO = eroOpento;
             ERO_DESC = eroDesc;
             ERO_OPENFROM = eroOpenfrom;
-            ERO_TYPE = eroType;
         }
 
         public EYEEXAMROOMS()
         {
             
+        }
+
+        public override string ToString()
+        {
+            return String.Format(ERO_SHORTDESC);
         }
     }
 }
