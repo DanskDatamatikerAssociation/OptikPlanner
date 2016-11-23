@@ -116,6 +116,8 @@
             this.Controls.Add(this.deleteCustomerButton);
             this.Controls.Add(this.createCustomerButton);
             this.Controls.Add(this.editCustomerButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "CustomerLibrary";
             this.Text = "Kundekartotek";
             this.ResumeLayout(false);

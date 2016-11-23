@@ -417,6 +417,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cancelBox);
             this.Controls.Add(this.okButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "CreateAppointment";
             this.Text = "CreateAppointment";
             this.ResumeLayout(false);

@@ -154,6 +154,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.AflyserLabel);
             this.Controls.Add(this.cancelUserBox);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "CancelAppointment";
             this.Text = "Er du sikker på du vil aflyse valgte aftale?";
             this.ResumeLayout(false);
