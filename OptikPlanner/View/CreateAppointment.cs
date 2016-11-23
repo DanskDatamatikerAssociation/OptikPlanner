@@ -75,47 +75,6 @@ namespace OptikPlanner.View
         
         private void cueTextBox1_TextChanged(object sender, EventArgs e)
         {
-            //foreach (var c in _customers)
-            //{
-            //    string fourFirstLetters = c.CS_CPRNO.Substring(0, 4);
-            //    if (cprBox.Text.StartsWith(fourFirstLetters))
-            //    {
-            //        cprBox.Text = c.CS_CPRNO;
-            //        cprBox.SelectionStart = fourFirstLetters.Length;
-            //        cprBox.SelectionLength = cprBox.Text.Length;
-
-            //    }
-            //}
-
-
-            //if (cprBox.Text.Length > 0)
-            //{
-            //    if (cprBox.Text.(c => c.))
-
-
-            //int cpr;
-            //if (int.TryParse(cprBox.Text, out cpr))
-            //{
-
-            //firstNameBox.DataBindings.Add(customer1.CS_FIRSTNAME, customer1, customer1.CS_LASTNAME);
-
-            //using (var ctx = new OptikItDbContext())
-            //{
-            //    // get customer name by Id, for example:
-            //    var name = ctx.CUSTOMERS.Where(c => c.CS_CPRNO == cpr.ToString())
-            //             .Select(c => c.CS_FIRSTNAME)
-            //             .FirstOrDefault();
-
-            //    if (name != null) firstNameBox.Text = name;
-
-            //    var lastname = ctx.CUSTOMERS.Where(c => c.CS_CPRNO == cpr.ToString())
-            //             .Select(c => c.CS_LASTNAME)
-            //             .FirstOrDefault();
-
-            //    if (lastname != null) lastNameBox.Text = lastname;
-            //}
-            // }
-            //} 
 
            
 
@@ -188,7 +147,7 @@ namespace OptikPlanner.View
 
         private void cancelAppointmentButton_Click(object sender, EventArgs e)
         {
-            //lav if statement som enabler / disabler knap alt efter om det er aflys eller opret knap der bliver trykket på.
+            CancelAppointment.AppointmentToDelete = ClickedAppointment;
             CancelAppointment window = new CancelAppointment();
             window.ShowDialog();
         }

@@ -21,7 +21,6 @@ namespace OptikPlanner
     public partial class CalendarView : Form, ICalendarView
     {
         private CalendarViewController _calendarViewController;
-        private CreateAppointmentController _createAppointmentController;
         private USERS user = new USERS();
             public Calendar Calendar { get; }
 
@@ -56,7 +55,7 @@ namespace OptikPlanner
             CreateAppointment.ClickedAppointment = (APTDETAILS) e.Item.Tag;
      
             var form = new CreateAppointment();
-            form.Show();
+            form.ShowDialog();
 
         }
 
@@ -210,7 +209,7 @@ namespace OptikPlanner
         {
             CreateAppointment.ClickedAppointment = null;
             var newForm = new View.CreateAppointment();
-            newForm.Show();
+            newForm.ShowDialog();
         }
 
         private void todayButton_Click(object sender, EventArgs e)

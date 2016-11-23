@@ -288,6 +288,7 @@
             // 
             // cancelAppointmentButton
             // 
+            this.cancelAppointmentButton.Enabled = false;
             this.cancelAppointmentButton.Location = new System.Drawing.Point(243, 448);
             this.cancelAppointmentButton.Name = "cancelAppointmentButton";
             this.cancelAppointmentButton.Size = new System.Drawing.Size(75, 23);
