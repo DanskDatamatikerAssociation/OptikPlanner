@@ -37,6 +37,7 @@ namespace OptikPlanner
             SetMonthLabel();
             SetYearLabel();
 
+
         }
 
 
@@ -70,7 +71,7 @@ namespace OptikPlanner
 
         private void ShowDayView()
         {
-            calendar.SetViewRange(DateTime.Today, DateTime.Today);
+            calendar.SetViewRange(DateTime.Today, DateTime.Now);
         }
 
         private void ShowWeekView()
