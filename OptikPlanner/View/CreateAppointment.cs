@@ -124,11 +124,13 @@ namespace OptikPlanner.View
 
         private void FillOutAppointment()
         {
-            
-            userSelectionCombo.SelectedItem = ClickedAppointment.APD_USER;
+            var extraDetails = _controller.GetClickedAppointmentDetails();
+
+
+            userSelectionCombo.Text = extraDetails[2];
             userSelectionCombo.Enabled = false;
 
-            cprBox.Cue = ClickedAppointment.APD_CPR;
+            cprBox.Text = ClickedAppointment.APD_CPR;
             cprBox.Enabled = false;
 
             customerLibraryButton.Enabled = false;
@@ -137,7 +139,6 @@ namespace OptikPlanner.View
 
             lastNameBox.Text = ClickedAppointment.APD_LAST;
 
-            var extraDetails = _controller.GetClickedAppointmentDetails();
 
             aftaleCombo.Text = extraDetails[0];
            // aftaleCombo.Enabled = false;
@@ -175,7 +176,7 @@ namespace OptikPlanner.View
 
             cancelAppointmentButton.Enabled = true;
 
-            ClickedAppointment = null;
+            //ClickedAppointment = null;
 
         }
         
@@ -224,20 +225,15 @@ namespace OptikPlanner.View
 
         private void okButton_Click(object sender, EventArgs e)
         {
-            //EYEEXAMROOMS used = new EYEEXAMROOMS();
-            //used.ERO_TYPE = aftaleCombo.Text;
-            //used.ERO_DESC = beskrivelseBox.Text;
-            //used.ERO_NBR = int.Parse(lokaleCombo.Text);
-            //used.ERO_OPENFROM = timeFromPicker.Text;
-            //used.ERO_OPENTO = timeToPicker.Text;
-
-            //CUSTOMERS customer = new CUSTOMERS();
-            //customer.CS_CPRNO = cprBox.Text;
-            //customer.CS_FIRSTNAME = firstNameBox.Text;
-            //customer.CS_LASTNAME = lastNameBox.Text;
 
             int id = _controller.GetNextAppointmentId();
-            DateTime date = dateTimePicker1.Value;
+            DateTime date = new DateTime(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, dateTimePicker1.Value.Day, timeFromPicker.Value.Hour, timeFromPicker.Value.Minute, 0);
+            if (date < DateTime.Now)
+            {
+                MessageBox.Show("Du skal vælge et tidspunkt i fremtiden", "Fejl", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
             string timeFrom = timeFromPicker.Value.ToString("HH:mm");
             string timeTo = timeToPicker.Value.ToString("HH:mm");
             USERS user = (USERS)userCombo.SelectedItem;
@@ -262,31 +258,46 @@ namespace OptikPlanner.View
             APTDETAILS appointment = new APTDETAILS();
 
             //That means to create a new appointment.
-            
+            if (ClickedAppointment == null)
+            {
                 try
                 {
                     appointment = new APTDETAILS(id, user, room, date, timeFrom, timeTo, customer, type, description);
+                    appointment.APD_MOBILE = telefonBox.Text;
+                    appointment.APD_EMAIL = emailBox.Text;
                     _controller.PostAppointment(appointment);
-                    MessageBox.Show("Success! Aftalen er oprettet.", "Success!", MessageBoxButtons.OK,
+                    MessageBox.Show("Success! Aftalen er oprettet.", "Succes!", MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
                     this.Close();
 
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Some of the data you entered is incorrect. Try again.",
-                        "Error creating appointment", MessageBoxButtons.OK,
+                    MessageBox.Show("Der er fejl i den indtastede data. Prøv igen.",
+                        "Fejl i oprettelse", MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                 }
-            
+            }
             //To put an appointment
-     
+            else
+            {
+                appointment = new APTDETAILS(ClickedAppointment.APD_STAMP, user, room, date, timeFrom, timeTo, customer, type, description);
+                appointment.APD_MOBILE = telefonBox.Text;
+                appointment.APD_EMAIL = emailBox.Text;
+                _controller.PutAppointment(appointment);
+                MessageBox.Show("Success! Aftalen er redigeret.", "Succes!", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                this.Close();
+            }
+
+
+
 
 
         }
 
 
-       
+
 
         private void userSelectionCombo_SelectedIndexChanged(object sender, EventArgs e)
         {

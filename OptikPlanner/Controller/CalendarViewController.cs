@@ -12,7 +12,7 @@ namespace OptikPlanner.Controller
     //Skal kun håndtere logik der indebærer models. 
     public class CalendarViewController
     {
-        OptikItDbContext db = new OptikItDbContext();
+        private OptikItDbContext db;
         private ICalendarView _view;
 
         public CalendarViewController(ICalendarView view)
@@ -20,15 +20,15 @@ namespace OptikPlanner.Controller
             _view = view;
             view.SetController(this);
         }
-        public void PostAppointment()
-        {
-            
-        }
 
         private List<APTDETAILS> GetAppointments()
         {
-            var appointments = from a in db.APTDETAILS select a;
-            return appointments.ToList();
+            using (db = new OptikItDbContext())
+            {
+                var appointments = from a in db.APTDETAILS select a;
+                return appointments.ToList();
+            }
+            
         }
 
         public List<CalendarItem> GetAppointmentsAsCalendarItems()

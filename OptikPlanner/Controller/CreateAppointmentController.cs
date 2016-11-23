@@ -15,8 +15,7 @@ namespace OptikPlanner.Controller
 {
     public class CreateAppointmentController
     {
-
-        OptikItDbContext db = new OptikItDbContext();
+        private OptikItDbContext db;
 
         private static ICreateAppointmentView _view;
 
@@ -43,23 +42,26 @@ namespace OptikPlanner.Controller
 
             //APTDETAILS appointment = new APTDETAILS(10, user, room, DateTime.Now, "11:15", "14:30", customer, "Test aftale");
 
-
-            try
+            using (db = new OptikItDbContext())
             {
-                db.APTDETAILS.Add(appointment);
-                db.SaveChanges();
-            }
-            catch (DbEntityValidationException dbEx)
-            {
-                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                try
                 {
-                    foreach (var validationError in validationErrors.ValidationErrors)
-                    {
-                        Trace.TraceInformation("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
-                    }
+                    db.APTDETAILS.Add(appointment);
+                    db.SaveChanges();
                 }
+                catch (DbEntityValidationException dbEx)
+                {
+                    foreach (var validationErrors in dbEx.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            Trace.TraceInformation("Property: {0} Error: {1}", validationError.PropertyName,
+                                validationError.ErrorMessage);
+                        }
+                    }
 
-                
+
+                }
             }
 
         }
@@ -74,10 +76,11 @@ namespace OptikPlanner.Controller
 
         public List<APTDETAILS> GetAppointments()
         {
-
-            var appointments = from a in db.APTDETAILS select a;
-            return appointments.ToList();
-
+            using (db = new OptikItDbContext())
+            {
+                var appointments = from a in db.APTDETAILS select a;
+                return appointments.ToList();
+            }
 
         }
 
@@ -97,9 +100,11 @@ namespace OptikPlanner.Controller
 
             //return room;
 
-            var rooms = from r in db.EYEEXAMROOMS select r;
-            return rooms.ToList();
-
+            using (db = new OptikItDbContext())
+            {
+                var rooms = from r in db.EYEEXAMROOMS select r;
+                return rooms.ToList();
+            }
         }
 
 
@@ -116,9 +121,11 @@ namespace OptikPlanner.Controller
 
             //return user;
 
-            var users = from u in db.USERS select u;
-            return users.ToList();
-
+            using (db = new OptikItDbContext())
+            {
+                var users = from u in db.USERS select u;
+                return users.ToList();
+            }
         }
 
         public List<CUSTOMERS> GetCustomers()
@@ -131,8 +138,11 @@ namespace OptikPlanner.Controller
 
             //    return customer;
 
-            var customers = from c in db.CUSTOMERS select c;
-            return customers.ToList();
+            using (db = new OptikItDbContext())
+            {
+                var customers = from c in db.CUSTOMERS select c;
+                return customers.ToList();
+            }
         }
 
         public List<string> GetClickedAppointmentDetails()
@@ -159,19 +169,33 @@ namespace OptikPlanner.Controller
 
         public void PutAppointment(APTDETAILS appointment)
         {
-            var appointments = GetAppointments();
-            var appointmentToPut = appointments.Find(a => a.APD_STAMP == appointment.APD_STAMP);
-
-            appointmentToPut = appointment;
-            db.APTDETAILS.Add(appointmentToPut);
-
-            try
+            using (db = new OptikItDbContext())
             {
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                
+                var appointmentToEditQuery = from a in db.APTDETAILS where a.APD_STAMP == appointment.APD_STAMP select a;
+                foreach (var a in appointmentToEditQuery)
+                {
+                    a.APD_DATE = appointment.APD_DATE;
+                    a.APD_TIMEFROM = appointment.APD_TIMEFROM;
+                    a.APD_TIMETO = appointment.APD_TIMETO;
+                    a.APD_USER = appointment.APD_USER;
+                    a.APD_DESCRIPTION = appointment.APD_DESCRIPTION;
+                    a.APD_TYPE = appointment.APD_TYPE;
+                    a.APD_ROOM = appointment.APD_ROOM;
+                    a.APD_MOBILE = appointment.APD_MOBILE;
+                    a.APD_EMAIL = appointment.APD_EMAIL;
+
+
+                }
+
+
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+
+                }
             }
         }
 

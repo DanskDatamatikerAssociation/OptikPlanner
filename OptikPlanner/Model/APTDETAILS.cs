@@ -79,6 +79,7 @@ namespace OptikPlanner.Model
             APD_TIMEFROM = timeFrom;
             APD_TIMETO = timeTo;
             APD_CUSTOMER = customer.CS_STAMP;
+            APD_CPR = customer.CS_CPRNO;
             APD_TYPE = (int) type;
             APD_DESCRIPTION = Encoding.ASCII.GetBytes(description);
         }

@@ -53,7 +53,6 @@ namespace OptikPlanner
 
         private void calendar1_ItemDoubleClick(object sender, CalendarItemEventArgs e)
         {
-            CreateAppointment.EditMode = true;
             CreateAppointment.ClickedAppointment = (APTDETAILS) e.Item.Tag;
      
             var form = new CreateAppointment();
@@ -63,7 +62,7 @@ namespace OptikPlanner
 
         private void AddAppointmentsToCalendar()
         {
-
+            calendar.Items.Clear();
             calendar.Items.AddRange(_calendarViewController.GetAppointmentsAsCalendarItems());
 
         }
@@ -209,7 +208,7 @@ namespace OptikPlanner
 
         private void newAppointmentButton_Click(object sender, EventArgs e)
         {
-            CreateAppointment.EditMode = false;
+            CreateAppointment.ClickedAppointment = null;
             var newForm = new View.CreateAppointment();
             newForm.Show();
         }
