@@ -30,6 +30,13 @@ namespace OptikPlanner
 
             Calendar = calendar;
             _calendarViewController = new CalendarViewController(this);
+            
+            SetupCalendar();
+
+        }
+
+        private void SetupCalendar()
+        {
             calendar.MaximumViewDays = 140;
             ShowWeekView();
             monthView.FirstDayOfWeek = DayOfWeek.Monday;
@@ -37,9 +44,9 @@ namespace OptikPlanner
             SetMonthLabel();
             SetYearLabel();
 
-
+            //Changes the current visible timerange on the calendar. 
+            calendar.TimeUnitsOffset = -DateTime.Now.Hour * 2;
         }
-
 
 
 
