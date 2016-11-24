@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OptikPlanner.View;
 using System.Diagnostics;
+using OptikPlanner.Controller;
 
 namespace OptikPlanner.Misc
 {
@@ -14,6 +15,8 @@ namespace OptikPlanner.Misc
         //private static StreamWriter swLog;
         //private const string LOG_FILE_PATH = @"C:\Users\Daniel\Desktop\";
         private const string Source = "OptikPlannerLog";
+        EventLog elog = new EventLog();
+        CancelAppointmentController controller = new CancelAppointmentController();
 
         static Logger()
         {
@@ -22,16 +25,31 @@ namespace OptikPlanner.Misc
             //optikPlannerEvent.Source = source;
         }
 
-        //public static void OpenLogger()
-        //{
-        //    Logger.swLog = new StreamWriter(LOG_FILE_PATH, false);
-        //    Logger.swLog.AutoaFlush = true;
-        //}
-        public static void LogThisLine(string sLogLine)
+        public void GetAllLogs()
+        {
+            var allentries = elog.Entries;
+
+            foreach (var s in allentries)
+            {
+                if (s.ToString().Contains("Kunden har aflyst telefonisk"))
+                {
+                    controller.cancelPhoneList.Add(s.ToString());    
+                }
+                if (s.ToString().Contains("Kunden ikke mødte op."))
+                {
+                    controller.noShowList.Add(s.ToString());
+                }
+                if (s.ToString().Contains("der har været Andet i vejen."))
+                {
+                    controller.cancelElseList.Add(s.ToString());
+                }
+            }
+        }
+        public void LogThisLine(string sLogLine)
         {
             //  Logger.swLog.WriteLine("\n" + DateTime.Now.ToLongDateString() + " " + sLogLine);
             string cs = "OptikPlanner";
-            EventLog elog = new EventLog();
+            
             if (!EventLog.SourceExists(cs))
             {
                 EventLog.CreateEventSource(cs, Source);

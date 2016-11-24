@@ -19,18 +19,45 @@ namespace OptikPlanner.Controller
 
         public int TotalCancelStatistics()
         {
-            var dic = controller.noShowDic.Count;
-            var dic1 = controller.cancelPhoneDic.Count;
-            var dic2 = controller.cancelElseDic.Count;
+            var list = controller.noShowList.Count;
+            var list1 = controller.cancelPhoneList.Count;
+            var list2 = controller.cancelElseList.Count;
 
-            return dic + dic1 + dic2;
+            return list + list1 + list2;
+        }
+        public List<string> TotalAmountUsers()
+        {
+            //få alle medarbejdere
+            var dic = controller.noShowDic.Keys;
+            var dic1 = controller.cancelPhoneDic.Keys;
+            var dic2 = controller.cancelElseDic.Keys;
+
+            List<string> list = new List<string>();
+
+            foreach (var s in dic)
+            {
+                list.Add(s.US_USERNAME);
+            }
+            foreach (var s in dic1)
+            {
+                list.Add(s.US_USERNAME);
+            }
+            foreach (var s in dic2)
+            {
+                list.Add(s.US_USERNAME);
+            }
+
+            return list;
+
+
         }
 
         public void NoShowStatistics()
         {
             foreach (var s in controller.noShowDic)
             {
-                test[0].SubItems[0].Text = s.Value;
+                
+               // [0].SubItems[0].Text = s.Value;
             }
         }
 
@@ -92,10 +119,12 @@ namespace OptikPlanner.Controller
 
         public USERS GetUser()
         {
+            
             USERS user = new USERS();
             user.US_CPRNO = "2001927891";
             user.US_USERNAME = "MyUserName";
             user.US_STAMP = 1;
+            
 
 
             return user;

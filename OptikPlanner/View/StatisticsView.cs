@@ -7,22 +7,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using OptikPlanner.Controller;
+using OptikPlanner.Misc;
 
 namespace OptikPlanner.View
 {
     public partial class StatisticsView : Form
     {
+        StatisticsViewController statisticController = new StatisticsViewController();
+        CancelAppointmentController cancelController = new CancelAppointmentController();
+       
+
+
         public StatisticsView()
         {
             InitializeComponent();
 
             
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.CustomFormat = "MM/yyyy";
+            dateTimePicker1.CustomFormat = "MMM/yyyy";
             dateTimePicker1.ShowUpDown = true;
+            dateTimePicker1.Value = DateTime.Today;
 
-
-
+            
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -30,10 +37,16 @@ namespace OptikPlanner.View
             if (comboBox1.SelectedIndex == 0)
             {
                 listView1.Columns.Clear();
-                listView1.Columns.Add("Aflysninger", 155);
-                listView1.Columns.Add("Mødte ikke op", 100);
-                listView1.Columns.Add("Telefon", 100);
+                listView1.Columns.Add("Grund", 150);
+                listView1.Columns.Add("Antal aflysninger", 100);
+                listView1.Items.Add("Kunden ikke mødte op.");
+                listView1.Items.Add("Kunden har aflyst telefonisk");
+                listView1.Items.Add("der har været Andet i vejen.");
+                listView1.Items[0].SubItems.Add(cancelController.noShowList.Count.ToString());
+                listView1.Items[1].SubItems.Add(cancelController.cancelPhoneList.Count.ToString());
+                listView1.Items[2].SubItems.Add(cancelController.cancelElseList.Count.ToString());
             }
+
             if (comboBox1.SelectedIndex == 1)
             {
                 listView1.Columns.Clear();
