@@ -19,35 +19,41 @@ namespace OptikPlanner.View
     {
         OptikItDbContext db = new OptikItDbContext();
 
+        CancelAppointmentController controller = new CancelAppointmentController();
+        int d = 1;
+
 
         public CancelAppointment()
         {
             InitializeComponent();
-            cuCancelReasonBox.Enabled = false;
 
         }
 
         private void CancelAppointButton_Click(object sender, EventArgs e)
         {
             USERS deleter = (USERS) cancelUserBox.SelectedItem;
+            string reasonCancel = " Kunden ikke mødte op.";
+            string phoneCancel = " Kunden har aflyst telefonisk";
+            string elseCancel = " der har været Andet i vejen.";
 
-            if(cuCancelRadio.Checked)
+            
+            if (cuCancelRadio.Checked)
             {
-                Logger.LogThisLine("ansatte: " + deleter + " har aflyst denne aftale fordi" + " Kunden ikke mødte op.");
+                Logger.LogThisLine("ansatte: " + deleter + " har aflyst denne aftale fordi" + reasonCancel);
+                controller.noShowDic.Add(d++, deleter);
             }
             if(cuCancelPhoneRadio.Checked)
             {
-                Logger.LogThisLine("ansatte: " + deleter + " har aflyst denne aftale fordi" + " Kunden har aflyst telefonisk");
+                Logger.LogThisLine("ansatte: " + deleter + " har aflyst denne aftale fordi" + phoneCancel);
+                controller.cancelPhoneDic.Add(d++, deleter);
             }
-            if(cuCancelShownRadio.Checked)
+          
+            if (cuCancelElseRadio.Checked)
             {
-                Logger.LogThisLine("ansatte: " + deleter + " har aflyst denne aftale fordi" + " Kunden har aflyst ved personligt fremmøde");
+                Logger.LogThisLine("ansatte: " + deleter + " har aflyst denne aftale fordi" + elseCancel);
+                controller.cancelElseDic.Add(d++, deleter);
             }
-            if (cuCancelElseRadio.Checked && cuCancelReasonBox.Text != null)
-            {
-                Logger.LogThisLine("ansatte: " + deleter + " har aflyst denne aftale fordi " + cuCancelReasonBox.Text);
-            }
-            else if(!cuCancelRadio.Checked || cuCancelPhoneRadio.Checked || cuCancelShownRadio.Checked || cuCancelElseRadio.Checked)
+            else if(!cuCancelRadio.Checked || cuCancelPhoneRadio.Checked || cuCancelElseRadio.Checked)
             {
                 throw new ArgumentException("Du skal vælge en af de angivede muligheder!");
             }
@@ -66,10 +72,7 @@ namespace OptikPlanner.View
         {
             this.Close();
         }
-
-        private void cuCancelElseRadio_CheckedChanged(object sender, EventArgs e)
-        {
-            cuCancelReasonBox.Enabled = true;
-        }
+        
+        
     }
 }

@@ -11,8 +11,11 @@ namespace OptikPlanner.Controller
 {
     public class CancelAppointmentController
     {
-        
 
+        public Dictionary<int, USERS> noShowDic = new Dictionary<int, USERS>();
+        public Dictionary<int, USERS> cancelPhoneDic = new Dictionary<int, USERS>();
+        public Dictionary<int, USERS> cancelElseDic = new Dictionary<int, USERS>();
+        
         public void DeleteAppointment()
         {
             

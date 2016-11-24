@@ -58,10 +58,7 @@ namespace OptikPlanner.Controller
                     }
                 }
             }
-
         }
-
-
         public EYEEXAMROOMS GetRooms()
         {
             EYEEXAMROOMS room = new EYEEXAMROOMS();
@@ -74,12 +71,7 @@ namespace OptikPlanner.Controller
             
 
             return room;
-
         }
-
-       
-
-        
 
         public USERS GetUser()
         {
@@ -102,8 +94,5 @@ namespace OptikPlanner.Controller
 
             return customer;
         }
-        
-        
-            
     }
 }

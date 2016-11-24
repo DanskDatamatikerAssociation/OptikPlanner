@@ -28,9 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cuCancelReasonBox = new System.Windows.Forms.TextBox();
             this.cuCancelElseRadio = new System.Windows.Forms.RadioButton();
-            this.cuCancelShownRadio = new System.Windows.Forms.RadioButton();
             this.cuCancelPhoneRadio = new System.Windows.Forms.RadioButton();
             this.cuCancelRadio = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
@@ -40,35 +38,16 @@
             this.cancelButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // cuCancelReasonBox
-            // 
-            this.cuCancelReasonBox.Location = new System.Drawing.Point(103, 195);
-            this.cuCancelReasonBox.Name = "cuCancelReasonBox";
-            this.cuCancelReasonBox.Size = new System.Drawing.Size(163, 20);
-            this.cuCancelReasonBox.TabIndex = 15;
-            // 
             // cuCancelElseRadio
             // 
             this.cuCancelElseRadio.AutoSize = true;
-            this.cuCancelElseRadio.Location = new System.Drawing.Point(103, 171);
+            this.cuCancelElseRadio.Location = new System.Drawing.Point(103, 143);
             this.cuCancelElseRadio.Name = "cuCancelElseRadio";
             this.cuCancelElseRadio.Size = new System.Drawing.Size(53, 17);
             this.cuCancelElseRadio.TabIndex = 14;
             this.cuCancelElseRadio.TabStop = true;
             this.cuCancelElseRadio.Text = "Andet";
             this.cuCancelElseRadio.UseVisualStyleBackColor = true;
-            this.cuCancelElseRadio.CheckedChanged += new System.EventHandler(this.cuCancelElseRadio_CheckedChanged);
-            // 
-            // cuCancelShownRadio
-            // 
-            this.cuCancelShownRadio.AutoSize = true;
-            this.cuCancelShownRadio.Location = new System.Drawing.Point(103, 134);
-            this.cuCancelShownRadio.Name = "cuCancelShownRadio";
-            this.cuCancelShownRadio.Size = new System.Drawing.Size(163, 17);
-            this.cuCancelShownRadio.TabIndex = 13;
-            this.cuCancelShownRadio.TabStop = true;
-            this.cuCancelShownRadio.Text = "Kunde har aflyst ved opmøde";
-            this.cuCancelShownRadio.UseVisualStyleBackColor = true;
             // 
             // cuCancelPhoneRadio
             // 
@@ -121,7 +100,7 @@
             // 
             // CancelAppointButton
             // 
-            this.CancelAppointButton.Location = new System.Drawing.Point(81, 247);
+            this.CancelAppointButton.Location = new System.Drawing.Point(67, 200);
             this.CancelAppointButton.Name = "CancelAppointButton";
             this.CancelAppointButton.Size = new System.Drawing.Size(75, 23);
             this.CancelAppointButton.TabIndex = 16;
@@ -131,7 +110,7 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(191, 247);
+            this.cancelButton.Location = new System.Drawing.Point(177, 200);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 17;
@@ -143,12 +122,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(354, 300);
+            this.ClientSize = new System.Drawing.Size(297, 259);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.CancelAppointButton);
-            this.Controls.Add(this.cuCancelReasonBox);
             this.Controls.Add(this.cuCancelElseRadio);
-            this.Controls.Add(this.cuCancelShownRadio);
             this.Controls.Add(this.cuCancelPhoneRadio);
             this.Controls.Add(this.cuCancelRadio);
             this.Controls.Add(this.label1);
@@ -162,10 +139,7 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox cuCancelReasonBox;
         private System.Windows.Forms.RadioButton cuCancelElseRadio;
-        private System.Windows.Forms.RadioButton cuCancelShownRadio;
         private System.Windows.Forms.RadioButton cuCancelPhoneRadio;
         private System.Windows.Forms.RadioButton cuCancelRadio;
         private System.Windows.Forms.Label label1;
