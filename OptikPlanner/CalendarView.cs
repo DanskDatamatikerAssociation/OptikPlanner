@@ -61,12 +61,12 @@ namespace OptikPlanner
 
         }
 
-        private void AddAppointmentsToCalendar()
-        {
+        //private void AddAppointmentsToCalendar()
+        //{
 
-            calendar.Items.AddRange(_calendarViewController.GetAppointmentsAsCalendarItems());
+        //    calendar.Items.AddRange(_calendarViewController.GetAppointmentsAsCalendarItems());
 
-        }
+        //}
 
 
 
@@ -177,33 +177,33 @@ namespace OptikPlanner
             calendar.SetViewRange(monthView.SelectionStart, monthView.SelectionEnd);
         }
 
-        private void calendar_LoadItems(object sender, CalendarLoadEventArgs e)
-        {
-            AddAppointmentsToCalendar();
+        //private void calendar_LoadItems(object sender, CalendarLoadEventArgs e)
+        //{
+        //    AddAppointmentsToCalendar();
 
 
-            //Color logic here
-            var items = e.Calendar.Items;
+        //    //Color logic here
+        //    var items = e.Calendar.Items;
 
-            var systemColors = new ColorConverter().GetStandardValues();
-            List<Color> colors = systemColors.Cast<Color>().ToList();
+        //    var systemColors = new ColorConverter().GetStandardValues();
+        //    List<Color> colors = systemColors.Cast<Color>().ToList();
 
-            int colorJump = 50;
+        //    int colorJump = 50;
 
-            foreach (var i in items)
-            {
-                APTDETAILS appointment = (APTDETAILS)i.Tag;
+        //    foreach (var i in items)
+        //    {
+        //        APTDETAILS appointment = (APTDETAILS)i.Tag;
 
-                int colorIndex = appointment.APD_USER+colorJump;
-                Color color = colors[colorIndex];
-
-
-                i.ApplyColor(color);
-
-            }
+        //        int colorIndex = appointment.APD_USER+colorJump;
+        //        Color color = colors[colorIndex];
 
 
-        }
+        //        i.ApplyColor(color);
+
+        //    }
+
+
+        //}
 
 
         private void newAppointmentButton_Click(object sender, EventArgs e)
@@ -334,6 +334,13 @@ namespace OptikPlanner
                                     $"'{Encoding.Default.GetString(a.APD_DESCRIPTION)}'";
                 toolTip.Show(textToShow, this, tooltipPosition);
             }
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            var newForm = new StatisticsView();
+
+            newForm.Show();
         }
     }
 }
