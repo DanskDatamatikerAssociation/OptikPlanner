@@ -4,3 +4,4 @@
 /System.Windows.Forms.Calendar.pdb
 /DesignTimeResolveAssemblyReferencesInput.cache
 *.cache
+*.Windows.Forms.Calendar.csprojResolveAssemblyReference.cache
