@@ -16,7 +16,6 @@ namespace OptikPlanner.View
     public partial class CreateCustomer : Form
     {
         CustomerLibraryController controller = new CustomerLibraryController();
-        Logger logger = new Logger();
         public CreateCustomer()
         {
             InitializeComponent();
@@ -37,11 +36,11 @@ namespace OptikPlanner.View
 
             if (createCustomer2Button.Text == "Gem")
             {
-                logger.LogThisLine("ansatte: " + creater + " har ændret en kunde ved navn: " + firstNameBox.Text + " " + LastNameBox.Text);
+                Logger.LogThisLine("ansatte: " + creater + " har ændret en kunde ved navn: " + firstNameBox.Text + " " + LastNameBox.Text);
             }
             else if (createCustomer2Button.Text == "Opret")
             {
-                logger.LogThisLine("ansatte: " + creater + " har oprettet en ny kunde ved navn: " + firstNameBox.Text + " " + LastNameBox.Text);
+                Logger.LogThisLine("ansatte: " + creater + " har oprettet en ny kunde ved navn: " + firstNameBox.Text + " " + LastNameBox.Text);
             }
 
 

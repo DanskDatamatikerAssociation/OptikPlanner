@@ -15,28 +15,29 @@ namespace OptikPlanner.View
     public partial class StatisticsView : Form
     {
         StatisticsViewController statisticController = new StatisticsViewController();
-        CancelAppointmentController cancelController = new CancelAppointmentController();
        
 
 
         public StatisticsView()
         {
             InitializeComponent();
-
-            
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
             dateTimePicker1.CustomFormat = "MMM/yyyy";
             dateTimePicker1.ShowUpDown = true;
             dateTimePicker1.Value = DateTime.Today;
+            Logger.GetAllLogs();
 
             
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            CancelAppointmentController cancelController = new CancelAppointmentController();
+
             if (comboBox1.SelectedIndex == 0)
             {
                 listView1.Columns.Clear();
+                listView1.Items.Clear();
                 listView1.Columns.Add("Grund", 150);
                 listView1.Columns.Add("Antal aflysninger", 100);
                 listView1.Items.Add("Kunden ikke mødte op.");

@@ -20,7 +20,6 @@ namespace OptikPlanner.View
         OptikItDbContext db = new OptikItDbContext();
 
         CancelAppointmentController controller = new CancelAppointmentController();
-        Logger logger = new Logger();
         int d = 1;
 
 
@@ -40,19 +39,19 @@ namespace OptikPlanner.View
             
             if (cuCancelRadio.Checked)
             {
-                logger.LogThisLine("ansatte: " + deleter + " har aflyst denne aftale fordi" + reasonCancel);
+                Logger.LogThisLine("ansatte: " + deleter + " har aflyst denne aftale fordi" + reasonCancel);
                 controller.noShowDic.Add(deleter, reasonCancel);
                 controller.noShowList.Add(reasonCancel);            }
             if(cuCancelPhoneRadio.Checked)
             {
-                logger.LogThisLine("ansatte: " + deleter + " har aflyst denne aftale fordi" + phoneCancel);
+                Logger.LogThisLine("ansatte: " + deleter + " har aflyst denne aftale fordi" + phoneCancel);
                 controller.cancelPhoneDic.Add(deleter, phoneCancel);
                 controller.cancelPhoneList.Add(phoneCancel);
             }
 
             if (cuCancelElseRadio.Checked)
             {
-                logger.LogThisLine("ansatte: " + deleter + " har aflyst denne aftale fordi" + elseCancel);
+                Logger.LogThisLine("ansatte: " + deleter + " har aflyst denne aftale fordi" + elseCancel);
                 controller.cancelElseDic.Add(deleter, elseCancel);
                 controller.cancelElseList.Add(elseCancel);
             }

@@ -15,8 +15,6 @@ namespace OptikPlanner.Misc
         //private static StreamWriter swLog;
         //private const string LOG_FILE_PATH = @"C:\Users\Daniel\Desktop\";
         private const string Source = "OptikPlannerLog";
-        EventLog elog = new EventLog();
-        CancelAppointmentController controller = new CancelAppointmentController();
 
         static Logger()
         {
@@ -25,27 +23,31 @@ namespace OptikPlanner.Misc
             //optikPlannerEvent.Source = source;
         }
 
-        public void GetAllLogs()
+        public static void GetAllLogs()
         {
+            CancelAppointmentController controller = new CancelAppointmentController();
+            EventLog elog = new EventLog();
+            elog.Source = Source;
             var allentries = elog.Entries;
 
-            foreach (var s in allentries)
+            
+            foreach (EventLogEntry s in allentries)
             {
-                if (s.ToString().Contains("Kunden har aflyst telefonisk"))
+                if (s.Message.Contains("Kunden har aflyst telefonisk"))
                 {
                     controller.cancelPhoneList.Add(s.ToString());    
                 }
-                if (s.ToString().Contains("Kunden ikke mødte op."))
+                if (s.Message.Contains("Kunden ikke mødte op."))
                 {
                     controller.noShowList.Add(s.ToString());
                 }
-                if (s.ToString().Contains("der har været Andet i vejen."))
+                if (s.Message.Contains("der har været Andet i vejen."))
                 {
                     controller.cancelElseList.Add(s.ToString());
                 }
             }
         }
-        public void LogThisLine(string sLogLine)
+        public static void LogThisLine(string sLogLine)
         {
             //  Logger.swLog.WriteLine("\n" + DateTime.Now.ToLongDateString() + " " + sLogLine);
             string cs = "OptikPlanner";
@@ -54,6 +56,7 @@ namespace OptikPlanner.Misc
             {
                 EventLog.CreateEventSource(cs, Source);
             }
+            EventLog elog = new EventLog();
             elog.Source = Source;
             elog.EnableRaisingEvents = true;
             if (!EventLog.SourceExists(Source))
