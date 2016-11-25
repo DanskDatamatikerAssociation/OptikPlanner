@@ -41,19 +41,17 @@ namespace OptikPlanner.View
             {
                 Logger.LogThisLine("ansatte: " + deleter + " har aflyst denne aftale fordi" + reasonCancel);
                 controller.noShowDic.Add(deleter, reasonCancel);
-                controller.noShowList.Add(reasonCancel);            }
+            }
             if(cuCancelPhoneRadio.Checked)
             {
                 Logger.LogThisLine("ansatte: " + deleter + " har aflyst denne aftale fordi" + phoneCancel);
                 controller.cancelPhoneDic.Add(deleter, phoneCancel);
-                controller.cancelPhoneList.Add(phoneCancel);
             }
 
             if (cuCancelElseRadio.Checked)
             {
                 Logger.LogThisLine("ansatte: " + deleter + " har aflyst denne aftale fordi" + elseCancel);
                 controller.cancelElseDic.Add(deleter, elseCancel);
-                controller.cancelElseList.Add(elseCancel);
             }
             else if(!cuCancelRadio.Checked || cuCancelPhoneRadio.Checked || cuCancelElseRadio.Checked)
             {

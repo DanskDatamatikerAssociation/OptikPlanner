@@ -25,7 +25,7 @@ namespace OptikPlanner.View
             dateTimePicker1.CustomFormat = "MMM/yyyy";
             dateTimePicker1.ShowUpDown = true;
             dateTimePicker1.Value = DateTime.Today;
-            Logger.GetAllLogs();
+            
 
             
         }
@@ -36,6 +36,7 @@ namespace OptikPlanner.View
 
             if (comboBox1.SelectedIndex == 0)
             {
+                Logger.GetAllLogs();
                 listView1.Columns.Clear();
                 listView1.Items.Clear();
                 listView1.Columns.Add("Grund", 150);

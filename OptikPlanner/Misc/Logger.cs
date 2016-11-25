@@ -15,6 +15,7 @@ namespace OptikPlanner.Misc
         //private static StreamWriter swLog;
         //private const string LOG_FILE_PATH = @"C:\Users\Daniel\Desktop\";
         private const string Source = "OptikPlannerLog";
+        static EventLog elog = new EventLog();
 
         static Logger()
         {
@@ -26,7 +27,6 @@ namespace OptikPlanner.Misc
         public static void GetAllLogs()
         {
             CancelAppointmentController controller = new CancelAppointmentController();
-            EventLog elog = new EventLog();
             elog.Source = Source;
             var allentries = elog.Entries;
 
@@ -35,15 +35,15 @@ namespace OptikPlanner.Misc
             {
                 if (s.Message.Contains("Kunden har aflyst telefonisk"))
                 {
-                    controller.cancelPhoneList.Add(s.ToString());    
+                    controller.cancelPhoneList.Add(s.Message);    
                 }
                 if (s.Message.Contains("Kunden ikke mødte op."))
                 {
-                    controller.noShowList.Add(s.ToString());
+                    controller.noShowList.Add(s.Message);
                 }
                 if (s.Message.Contains("der har været Andet i vejen."))
                 {
-                    controller.cancelElseList.Add(s.ToString());
+                    controller.cancelElseList.Add(s.Message);
                 }
             }
         }
@@ -56,7 +56,7 @@ namespace OptikPlanner.Misc
             {
                 EventLog.CreateEventSource(cs, Source);
             }
-            EventLog elog = new EventLog();
+            
             elog.Source = Source;
             elog.EnableRaisingEvents = true;
             if (!EventLog.SourceExists(Source))
@@ -64,13 +64,5 @@ namespace OptikPlanner.Misc
 
             EventLog.WriteEntry(Source, " " + sLogLine);
         }
-        // Logger.swLog.Flush();
     }
-
-        //public static void CloseLogger()
-        //{
-        //    Logger.swLog.Flush();
-        //    Logger.swLog.Close();
-        //}
-    //}
 }
