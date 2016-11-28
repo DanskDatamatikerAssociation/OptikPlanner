@@ -14,10 +14,6 @@ namespace OptikPlanner.View
 {
     public partial class StatisticsView : Form
     {
-        StatisticsViewController statisticController = new StatisticsViewController();
-       
-
-
         public StatisticsView()
         {
             InitializeComponent();
@@ -27,16 +23,14 @@ namespace OptikPlanner.View
             dateTimePicker1.Value = DateTime.Today;
             
 
-            
+
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CancelAppointmentController cancelController = new CancelAppointmentController();
 
             if (comboBox1.SelectedIndex == 0)
             {
-                Logger.GetAllLogs();
                 listView1.Columns.Clear();
                 listView1.Items.Clear();
                 listView1.Columns.Add("Grund", 150);
@@ -44,9 +38,9 @@ namespace OptikPlanner.View
                 listView1.Items.Add("Kunden ikke mødte op.");
                 listView1.Items.Add("Kunden har aflyst telefonisk");
                 listView1.Items.Add("der har været Andet i vejen.");
-                listView1.Items[0].SubItems.Add(cancelController.noShowList.Count.ToString());
-                listView1.Items[1].SubItems.Add(cancelController.cancelPhoneList.Count.ToString());
-                listView1.Items[2].SubItems.Add(cancelController.cancelElseList.Count.ToString());
+                listView1.Items[0].SubItems.Add(CancelAppointmentController.noShowList.Count.ToString());
+                listView1.Items[1].SubItems.Add(CancelAppointmentController.cancelPhoneList.Count.ToString());
+                listView1.Items[2].SubItems.Add(CancelAppointmentController.cancelElseList.Count.ToString());
             }
 
             if (comboBox1.SelectedIndex == 1)

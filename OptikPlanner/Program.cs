@@ -4,6 +4,8 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using OptikPlanner.Controller;
+using OptikPlanner.Misc;
 using OptikPlanner.View;
 
 namespace OptikPlanner
@@ -16,12 +18,18 @@ namespace OptikPlanner
         [STAThread]
         static void Main()
         {
+            
+            
+            CancelAppointmentController.GetNoShows();
+            CancelAppointmentController.GetPhoneCancels();
+            CancelAppointmentController.GetElseCancels();
+            Logger.SetupTracing();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             // Application.Run(new CalendarView());
            Application.Run(new StatisticsView());
-           //Application.Run(new CancelAppointment());
-
+            //Application.Run(new CancelAppointment());
+           
 
 
         }

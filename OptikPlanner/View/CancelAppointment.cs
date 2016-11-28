@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -18,10 +19,7 @@ namespace OptikPlanner.View
     public partial class CancelAppointment : Form
     {
         OptikItDbContext db = new OptikItDbContext();
-
         CancelAppointmentController controller = new CancelAppointmentController();
-        int d = 1;
-
 
         public CancelAppointment()
         {
@@ -35,32 +33,38 @@ namespace OptikPlanner.View
             string reasonCancel = " Kunden ikke mødte op.";
             string phoneCancel = " Kunden har aflyst telefonisk";
             string elseCancel = " der har været Andet i vejen.";
-
             
             if (cuCancelRadio.Checked)
             {
-                Logger.LogThisLine("ansatte: " + deleter + " har aflyst denne aftale fordi" + reasonCancel);
-                controller.noShowDic.Add(deleter, reasonCancel);
+                Trace.WriteLine($"\n{DateTime.Now}: ansatte: " + deleter + " har aflyst denne aftale fordi" + reasonCancel);
+                
+
+                Cancellation name = new Cancellation(Reason.IkkeMødtOp, deleter);
+                CancelAppointmentController.CancellationUsersList.Add(name);
             }
             if(cuCancelPhoneRadio.Checked)
             {
-                Logger.LogThisLine("ansatte: " + deleter + " har aflyst denne aftale fordi" + phoneCancel);
-                controller.cancelPhoneDic.Add(deleter, phoneCancel);
-            }
+                Trace.WriteLine($"\n{DateTime.Now}: ansatte: " + deleter + " har aflyst denne aftale fordi" + phoneCancel);
 
+                Cancellation name = new Cancellation(Reason.AflystTelefonisk, deleter);
+                CancelAppointmentController.CancellationUsersList.Add(name);
+            }
             if (cuCancelElseRadio.Checked)
             {
-                Logger.LogThisLine("ansatte: " + deleter + " har aflyst denne aftale fordi" + elseCancel);
-                controller.cancelElseDic.Add(deleter, elseCancel);
+                Trace.WriteLine($"\n{DateTime.Now}: ansatte: " + deleter + " har aflyst denne aftale fordi" + elseCancel);
+                
+                Cancellation name = new Cancellation(Reason.Aflyst, deleter);
+                CancelAppointmentController.CancellationUsersList.Add(name);
             }
-            else if(!cuCancelRadio.Checked || cuCancelPhoneRadio.Checked || cuCancelElseRadio.Checked)
+
+            if(!cuCancelRadio.Checked && !cuCancelPhoneRadio.Checked && !cuCancelElseRadio.Checked)
             {
                 throw new ArgumentException("Du skal vælge en af de angivede muligheder!");
             }
-            if (deleter == null)
-            {
-                throw new ArgumentException("Du skal vælge medarbejderen som aflyser aftalen");
-            }
+            //if (deleter == null)
+            //{
+            //    throw new ArgumentException("Du skal vælge medarbejderen som aflyser aftalen");
+            //}
             CalendarItem i = new CalendarItem(new Calendar());
 
             APTDETAILS appointment = (APTDETAILS) i.Tag;
@@ -72,7 +76,5 @@ namespace OptikPlanner.View
         {
             this.Close();
         }
-        
-        
     }
 }

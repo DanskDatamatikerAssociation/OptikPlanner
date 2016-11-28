@@ -61,6 +61,7 @@
     <Compile Include="Controller\CancelAppointmentController.cs" />
     <Compile Include="Controller\CustomerLibraryController.cs" />
     <Compile Include="Controller\StatisticsViewController.cs" />
+    <Compile Include="Misc\Cancellation.cs" />
     <Compile Include="Misc\Logger.cs" />
     <Compile Include="Model\APTDETAILS.cs" />
     <Compile Include="CalendarView.cs">

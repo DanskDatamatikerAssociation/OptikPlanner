@@ -11,7 +11,7 @@ namespace OptikPlanner.Controller
     {
         OptikItDbContext db = new OptikItDbContext();
         
-        public USERS GetUser()
+        public static USERS GetUser()
         {
             USERS user = new USERS();
             user.US_CPRNO = "2001927891";
@@ -21,7 +21,7 @@ namespace OptikPlanner.Controller
             return user;
         }
 
-        public CUSTOMERS GetCustomer()
+        public static CUSTOMERS GetCustomer()
         {
             CUSTOMERS customer = new CUSTOMERS();
             customer.CS_CPRNO = "2001926754";

@@ -13,52 +13,47 @@ namespace OptikPlanner.Controller
     {
 
         OptikItDbContext db = new OptikItDbContext();
-        CancelAppointmentController controller = new CancelAppointmentController();
         
-       
-
         public int TotalCancelStatistics()
         {
-            var list = controller.noShowList.Count;
-            var list1 = controller.cancelPhoneList.Count;
-            var list2 = controller.cancelElseList.Count;
+            var list = CancelAppointmentController.noShowList.Count;
+            var list1 = CancelAppointmentController.cancelPhoneList.Count;
+            var list2 = CancelAppointmentController.cancelElseList.Count;
 
             return list + list1 + list2;
         }
-        public List<string> TotalAmountUsers()
+        public void TotalAmountUsers()
         {
+         
+
             //få alle medarbejdere
-            var dic = controller.noShowDic.Keys;
-            var dic1 = controller.cancelPhoneDic.Keys;
-            var dic2 = controller.cancelElseDic.Keys;
+            //var dic = controller.noShowDic.Keys;
+            //var dic1 = controller.cancelPhoneDic.Keys;
+            //var dic2 = controller.cancelElseDic.Keys;
 
-            List<string> list = new List<string>();
+            //List<string> list = new List<string>();
 
-            foreach (var s in dic)
-            {
-                list.Add(s.US_USERNAME);
-            }
-            foreach (var s in dic1)
-            {
-                list.Add(s.US_USERNAME);
-            }
-            foreach (var s in dic2)
-            {
-                list.Add(s.US_USERNAME);
-            }
+            //foreach (var s in dic)
+            //{
+            //    list.Add(s.US_USERNAME);
+            //}
+            //foreach (var s in dic1)
+            //{
+            //    list.Add(s.US_USERNAME);
+            //}
+            //foreach (var s in dic2)
+            //{
+            //    list.Add(s.US_USERNAME);
+            //}
 
-            return list;
+            //return list;
 
 
         }
 
         public void NoShowStatistics()
         {
-            foreach (var s in controller.noShowDic)
-            {
-                
-               // [0].SubItems[0].Text = s.Value;
-            }
+           
         }
 
         public void PhoneCancelStatistics()
@@ -70,20 +65,7 @@ namespace OptikPlanner.Controller
         {
             
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
 
 
 
