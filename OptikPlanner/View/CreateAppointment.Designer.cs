@@ -202,6 +202,9 @@
             // aftaleCombo
             // 
             this.aftaleCombo.FormattingEnabled = true;
+            this.aftaleCombo.Items.AddRange(new object[] {
+            "Linseopsætning",
+            "Steljustering"});
             this.aftaleCombo.Location = new System.Drawing.Point(16, 132);
             this.aftaleCombo.Name = "aftaleCombo";
             this.aftaleCombo.Size = new System.Drawing.Size(121, 21);
@@ -285,6 +288,7 @@
             // 
             // cancelAppointmentButton
             // 
+            this.cancelAppointmentButton.Enabled = false;
             this.cancelAppointmentButton.Location = new System.Drawing.Point(243, 448);
             this.cancelAppointmentButton.Name = "cancelAppointmentButton";
             this.cancelAppointmentButton.Size = new System.Drawing.Size(75, 23);
@@ -372,6 +376,7 @@
             this.cprBox.Size = new System.Drawing.Size(100, 20);
             this.cprBox.TabIndex = 38;
             this.cprBox.TextChanged += new System.EventHandler(this.cueTextBox1_TextChanged);
+            this.cprBox.Leave += new System.EventHandler(this.cprBox_Leave);
             // 
             // CreateAppointment
             // 
@@ -412,6 +417,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cancelBox);
             this.Controls.Add(this.okButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "CreateAppointment";
             this.Text = "CreateAppointment";
             this.ResumeLayout(false);

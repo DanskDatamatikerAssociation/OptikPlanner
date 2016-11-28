@@ -21,7 +21,6 @@ namespace OptikPlanner
     public partial class CalendarView : Form, ICalendarView
     {
         private CalendarViewController _calendarViewController;
-        private CreateAppointmentController _createAppointmentController;
         private USERS user = new USERS();
             public Calendar Calendar { get; }
 
@@ -31,6 +30,13 @@ namespace OptikPlanner
 
             Calendar = calendar;
             _calendarViewController = new CalendarViewController(this);
+            
+            SetupCalendar();
+
+        }
+
+        private void SetupCalendar()
+        {
             calendar.MaximumViewDays = 140;
             ShowWeekView();
             monthView.FirstDayOfWeek = DayOfWeek.Monday;
@@ -38,8 +44,9 @@ namespace OptikPlanner
             SetMonthLabel();
             SetYearLabel();
 
+            //Changes the current visible timerange on the calendar. 
+            calendar.TimeUnitsOffset = -DateTime.Now.Hour * 2;
         }
-
 
 
 
@@ -53,18 +60,17 @@ namespace OptikPlanner
 
         private void calendar1_ItemDoubleClick(object sender, CalendarItemEventArgs e)
         {
-
             CreateAppointment.ClickedAppointment = (APTDETAILS) e.Item.Tag;
      
             var form = new CreateAppointment();
-            form.Show();
+            form.ShowDialog();
 
         }
 
-        //private void AddAppointmentsToCalendar()
-        //{
-
-        //    calendar.Items.AddRange(_calendarViewController.GetAppointmentsAsCalendarItems());
+        private void AddAppointmentsToCalendar()
+        {
+            calendar.Items.Clear();
+            calendar.Items.AddRange(_calendarViewController.GetAppointmentsAsCalendarItems());
 
         //}
 
@@ -72,7 +78,7 @@ namespace OptikPlanner
 
         private void ShowDayView()
         {
-            calendar.SetViewRange(DateTime.Today, DateTime.Today);
+            calendar.SetViewRange(DateTime.Today, DateTime.Now);
         }
 
         private void ShowWeekView()
@@ -177,9 +183,14 @@ namespace OptikPlanner
             calendar.SetViewRange(monthView.SelectionStart, monthView.SelectionEnd);
         }
 
-        //private void calendar_LoadItems(object sender, CalendarLoadEventArgs e)
-        //{
-        //    AddAppointmentsToCalendar();
+        private void calendar_LoadItems(object sender, CalendarLoadEventArgs e)
+        {
+            AddAppointmentsToCalendar();
+            
+
+
+            //Color logic here
+            var items = e.Calendar.Items;
 
 
         //    //Color logic here
@@ -208,8 +219,9 @@ namespace OptikPlanner
 
         private void newAppointmentButton_Click(object sender, EventArgs e)
         {
+            CreateAppointment.ClickedAppointment = null;
             var newForm = new View.CreateAppointment();
-            newForm.Show();
+            newForm.ShowDialog();
         }
 
         private void todayButton_Click(object sender, EventArgs e)
@@ -336,11 +348,11 @@ namespace OptikPlanner
             }
         }
 
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        private void CalendarView_Activated(object sender, EventArgs e)
         {
-            var newForm = new StatisticsView();
-
-            newForm.Show();
+            //Refreshes the appointment on to view.
+            calendar.ViewStart = calendar.ViewStart;
+            calendar.ViewEnd = calendar.ViewEnd;
         }
     }
 }

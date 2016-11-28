@@ -19,6 +19,7 @@ namespace OptikPlanner.View
         private CreateAppointmentController _controller;
         private DateTime mPrevDate;
         Random rnd = new Random();
+        private List<CUSTOMERS> _customers;
 
        
 
@@ -35,11 +36,19 @@ namespace OptikPlanner.View
         {
             InitializeComponent();
 
+            _controller = new CreateAppointmentController(this);
+
+            _customers = _controller.GetCustomers();
+
+            GetDbData();
+
+            InitializeCprBox();
+
             //ClickedAppointment = _controller.GetClickedAppointment();
 
             //timepicking settings
-            timeFromPicker.CustomFormat = "hh:mm";
-            timeToPicker.CustomFormat = "hh:mm";
+            timeFromPicker.CustomFormat = "HH:mm";
+            timeToPicker.CustomFormat = "HH:mm";
             
             timeFromPicker.ShowUpDown = true;
             timeToPicker.ShowUpDown = true;
@@ -50,55 +59,37 @@ namespace OptikPlanner.View
 
             if (ClickedAppointment != null) FillOutAppointment();
         }
+
+        private void GetDbData()
+        {
+            var rooms = _controller.GetRooms();
+            lokaleCombo.Items.AddRange(rooms.ToArray());
+
+            var users = _controller.GetUsers();
+            userSelectionCombo.Items.AddRange(users.ToArray());
+            userCombo.Items.AddRange(users.ToArray());       
+            
+                 
+
+        }
         
         private void cueTextBox1_TextChanged(object sender, EventArgs e)
         {
 
-            if (cprBox.Text == _controller.GetCustomer().CS_CPRNO)
-            {
-                firstNameBox.Text = _controller.GetCustomer().CS_FIRSTNAME;
-                lastNameBox.Text = _controller.GetCustomer().CS_LASTNAME;
-            }
-            #region til reel data
-            //if (cprBox.Text.Length > 0)
-            //{
-            //    if (cprBox.Text.(c => c.))
+           
 
-
-            //int cpr;
-            //if (int.TryParse(cprBox.Text, out cpr))
-            //{
-
-            //firstNameBox.DataBindings.Add(customer1.CS_FIRSTNAME, customer1, customer1.CS_LASTNAME);
-
-            //using (var ctx = new OptikItDbContext())
-            //{
-            //    // get customer name by Id, for example:
-            //    var name = ctx.CUSTOMERS.Where(c => c.CS_CPRNO == cpr.ToString())
-            //             .Select(c => c.CS_FIRSTNAME)
-            //             .FirstOrDefault();
-
-            //    if (name != null) firstNameBox.Text = name;
-
-            //    var lastname = ctx.CUSTOMERS.Where(c => c.CS_CPRNO == cpr.ToString())
-            //             .Select(c => c.CS_LASTNAME)
-            //             .FirstOrDefault();
-
-            //    if (lastname != null) lastNameBox.Text = lastname;
-            //}
-            // }
-            //} 
-            #endregion
 
         }
 
         private void FillOutAppointment()
         {
+            var extraDetails = _controller.GetClickedAppointmentDetails();
 
-            userSelectionCombo.SelectedItem = ClickedAppointment.APD_USER;
+
+            userSelectionCombo.Text = extraDetails[2];
             userSelectionCombo.Enabled = false;
 
-            cprBox.Cue = ClickedAppointment.APD_CPR;
+            cprBox.Text = ClickedAppointment.APD_CPR;
             cprBox.Enabled = false;
 
             customerLibraryButton.Enabled = false;
@@ -107,13 +98,14 @@ namespace OptikPlanner.View
 
             lastNameBox.Text = ClickedAppointment.APD_LAST;
 
-            aftaleCombo.SelectedItem = ClickedAppointment.APD_TYPE;
+
+            aftaleCombo.Text = extraDetails[0];
            // aftaleCombo.Enabled = false;
 
-            lokaleCombo.Text = ClickedAppointment.APD_ROOM.ToString();
+            lokaleCombo.Text = extraDetails[1];
             //lokaleCombo.Enabled = false;
 
-            userCombo.SelectedItem = ClickedAppointment.APD_USER;
+            userCombo.Text = extraDetails[2];
             //userCombo.Enabled = false;
 
             dateTimePicker1.Value =  ClickedAppointment.APD_DATE.GetValueOrDefault();
@@ -143,7 +135,7 @@ namespace OptikPlanner.View
 
             cancelAppointmentButton.Enabled = true;
 
-
+            //ClickedAppointment = null;
 
         }
         
@@ -155,7 +147,7 @@ namespace OptikPlanner.View
 
         private void cancelAppointmentButton_Click(object sender, EventArgs e)
         {
-            //lav if statement som enabler / disabler knap alt efter om det er aflys eller opret knap der bliver trykket på.
+            CancelAppointment.AppointmentToDelete = ClickedAppointment;
             CancelAppointment window = new CancelAppointment();
             window.ShowDialog();
         }
@@ -192,30 +184,79 @@ namespace OptikPlanner.View
 
         private void okButton_Click(object sender, EventArgs e)
         {
-            EYEEXAMROOMS used = new EYEEXAMROOMS();
-            used.ERO_TYPE = aftaleCombo.Text;
-            used.ERO_DESC = beskrivelseBox.Text;
-            used.ERO_NBR = int.Parse(lokaleCombo.Text);
-            used.ERO_OPENFROM = timeFromPicker.Text;
-            used.ERO_OPENTO = timeToPicker.Text;
 
-            CUSTOMERS customer = new CUSTOMERS();
-            customer.CS_CPRNO = cprBox.Text;
-            customer.CS_FIRSTNAME = firstNameBox.Text;
-            customer.CS_LASTNAME = lastNameBox.Text;
+            int id = _controller.GetNextAppointmentId();
+            DateTime date = new DateTime(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, dateTimePicker1.Value.Day, timeFromPicker.Value.Hour, timeFromPicker.Value.Minute, 0);
+            if (date < DateTime.Now)
+            {
+                MessageBox.Show("Du skal vælge et tidspunkt i fremtiden", "Fejl", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
+            string timeFrom = timeFromPicker.Value.ToString("HH:mm");
+            string timeTo = timeToPicker.Value.ToString("HH:mm");
+            USERS user = (USERS)userCombo.SelectedItem;
+            EYEEXAMROOMS room = (EYEEXAMROOMS) lokaleCombo.SelectedItem;
+            CUSTOMERS customer = _customers.Find(c => c.CS_CPRNO.Equals(cprBox.Text));
+            AppointmentType type;
+            switch (aftaleCombo.Text)
+            {
+                case "Steljustering":
+                    type = AppointmentType.Steloptimering;
+                    break;
+                case "Linseopsætning":
+                    type = AppointmentType.Linsejustering;
+                    break;
+                default:
+                    type = AppointmentType.Linsejustering;
+                    break;
 
-            int id = rnd.Next(1, 9999);
-            DateTime date = dateTimePicker1.Value;
-            var text = beskrivelseBox.Text;
-            USERS user1 = (USERS) userCombo.SelectedItem;
+            }
+            var description = beskrivelseBox.Text;
+
+            APTDETAILS appointment = new APTDETAILS();
+
+            //That means to create a new appointment.
+            if (ClickedAppointment == null)
+            {
+                try
+                {
+                    appointment = new APTDETAILS(id, user, room, date, timeFrom, timeTo, customer, type, description);
+                    appointment.APD_MOBILE = telefonBox.Text;
+                    appointment.APD_EMAIL = emailBox.Text;
+                    _controller.PostAppointment(appointment);
+                    MessageBox.Show("Success! Aftalen er oprettet.", "Succes!", MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                    this.Close();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Der er fejl i den indtastede data. Prøv igen.",
+                        "Fejl i oprettelse", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            }
+            //To put an appointment
+            else
+            {
+                appointment = new APTDETAILS(ClickedAppointment.APD_STAMP, user, room, date, timeFrom, timeTo, customer, type, description);
+                appointment.APD_MOBILE = telefonBox.Text;
+                appointment.APD_EMAIL = emailBox.Text;
+                _controller.PutAppointment(appointment);
+                MessageBox.Show("Success! Aftalen er redigeret.", "Succes!", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                this.Close();
+            }
 
 
-            APTDETAILS test = new APTDETAILS(id, user1, used, date, used.ERO_OPENFROM, used.ERO_OPENTO, customer,
-                text);
+
+
+
         }
 
 
-       
+
 
         private void userSelectionCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -231,6 +272,32 @@ namespace OptikPlanner.View
         {
             var form = new CustomerLibrary();
             form.Show();
+        }
+
+        private void cprBox_Leave(object sender, EventArgs e)
+        {
+            foreach (var c in _customers)
+            {
+                if (cprBox.Text.Equals(c.CS_CPRNO))
+                {
+                    firstNameBox.Text = c.CS_FIRSTNAME;
+                    lastNameBox.Text = c.CS_LASTNAME;
+                }
+            }
+        }
+
+        private void InitializeCprBox()
+        {
+            AutoCompleteStringCollection allowedTypes = new AutoCompleteStringCollection();
+
+            List<string> cprNumbers = new List<string>();
+            foreach (var c in _customers) cprNumbers.Add(c.CS_CPRNO);
+
+            allowedTypes.AddRange(cprNumbers.ToArray());
+
+            cprBox.AutoCompleteCustomSource = allowedTypes;
+            cprBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cprBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
         }
     }
 }

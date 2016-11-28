@@ -11,24 +11,34 @@ namespace OptikPlanner.Controller
 {
     public class CancelAppointmentController
     {
+        private OptikItDbContext _db;
+        private ICancelAppointmentView _view;
 
-        public Dictionary<int, USERS> noShowDic = new Dictionary<int, USERS>();
-        public Dictionary<int, USERS> cancelPhoneDic = new Dictionary<int, USERS>();
-        public Dictionary<int, USERS> cancelElseDic = new Dictionary<int, USERS>();
-        
-        public void DeleteAppointment()
+        public CancelAppointmentController(ICancelAppointmentView view)
         {
-            
+            _view = view;
+            _view.SetController(this);
         }
 
 
-        //Denne metode skal pege på GetAppointmentsAsCalendarItems under CalendarViewController
-        public CalendarItem Appointments()
+        public void DeleteAppointment(APTDETAILS appointment)
         {
-            CalendarItem CI = new CalendarItem(null, new DateTime(2016, 10, 22, 14, 30, 22), new DateTime(2016, 10, 22, 14, 45, 22), "Jeg er en aftale");
+            using (_db = new OptikItDbContext())
+            {
+                var removeQuery = from a in _db.APTDETAILS where a.APD_STAMP == appointment.APD_STAMP select a;
+                foreach (var a in removeQuery) _db.APTDETAILS.Remove(a);
 
-            return CI;
-        } 
+                try
+                {
+                    _db.SaveChanges();
+
+                }
+                catch (Exception ex)
+                {
+                    
+                }
+            }
+        }
 
 
 

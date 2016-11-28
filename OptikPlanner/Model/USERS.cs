@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -58,7 +59,7 @@ namespace OptikPlanner.Model
 
         public override string ToString()
         {
-            return $"{US_USERNAME}";
+            return String.Format(US_USERNAME);
         }
     }
 

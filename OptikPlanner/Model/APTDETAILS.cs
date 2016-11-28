@@ -5,6 +5,12 @@ using System.Text;
 
 namespace OptikPlanner.Model
 {
+    public enum AppointmentType
+    {
+        Steloptimering = 0,
+        Linsejustering = 1
+    }
+
     public partial class APTDETAILS
     {
         [Key]
@@ -60,7 +66,7 @@ namespace OptikPlanner.Model
         [StringLength(50)]
         public string APD_EMAIL { get; set; }
 
-        public APTDETAILS(int id, USERS user, EYEEXAMROOMS room, DateTime date, string timeFrom, string timeTo, CUSTOMERS customer, string description)
+        public APTDETAILS(int id, USERS user, EYEEXAMROOMS room, DateTime date, string timeFrom, string timeTo, CUSTOMERS customer, AppointmentType type, string description)
         {
             APD_CALENDAR = 1;
             APD_STAMP = id;
@@ -68,11 +74,13 @@ namespace OptikPlanner.Model
             APD_FIRST = customer.CS_FIRSTNAME;
             APD_LAST = customer.CS_LASTNAME;
             APD_CPR = customer.CS_CPRNO;
-            APD_ROOM = room.ERO_STAMP;
+            APD_ROOM = room.ERO_NBR.GetValueOrDefault();
             APD_DATE = date;
             APD_TIMEFROM = timeFrom;
             APD_TIMETO = timeTo;
             APD_CUSTOMER = customer.CS_STAMP;
+            APD_CPR = customer.CS_CPRNO;
+            APD_TYPE = (int) type;
             APD_DESCRIPTION = Encoding.ASCII.GetBytes(description);
         }
 
@@ -80,5 +88,7 @@ namespace OptikPlanner.Model
         {
             
         }
+
+        
     }
 }
