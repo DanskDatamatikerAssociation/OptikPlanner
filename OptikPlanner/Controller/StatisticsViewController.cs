@@ -16,10 +16,50 @@ namespace OptikPlanner.Controller
         private OptikItDbContext _db;
         private IStatisticsView _view;
 
+
         public StatisticsViewController(IStatisticsView view)
         {
             _view = view;
             _view.SetController(this);
+
+        OptikItDbContext db = new OptikItDbContext();
+        
+        public int TotalCancelStatistics()
+        {
+            var list = CancelAppointmentController.noShowList.Count;
+            var list1 = CancelAppointmentController.cancelPhoneList.Count;
+            var list2 = CancelAppointmentController.cancelElseList.Count;
+
+            return list + list1 + list2;
+        }
+        public void TotalAmountUsers()
+        {
+         
+
+            //få alle medarbejdere
+            //var dic = controller.noShowDic.Keys;
+            //var dic1 = controller.cancelPhoneDic.Keys;
+            //var dic2 = controller.cancelElseDic.Keys;
+
+            //List<string> list = new List<string>();
+
+            //foreach (var s in dic)
+            //{
+            //    list.Add(s.US_USERNAME);
+            //}
+            //foreach (var s in dic1)
+            //{
+            //    list.Add(s.US_USERNAME);
+            //}
+            //foreach (var s in dic2)
+            //{
+            //    list.Add(s.US_USERNAME);
+            //}
+
+            //return list;
+
+
+
         }
 
         private List<APTDETAILS> GetAppointments()

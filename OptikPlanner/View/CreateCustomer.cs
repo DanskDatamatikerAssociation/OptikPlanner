@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,18 +16,16 @@ namespace OptikPlanner.View
 {
     public partial class CreateCustomer : Form
     {
-        CustomerLibraryController controller = new CustomerLibraryController();
         public CreateCustomer()
         {
             InitializeComponent();
-
-            userCombo.Items.Add(controller.GetUser());
+            userCombo.Items.Add(CustomerLibraryController.GetUser());
         }
         private void createCustomerButton_Click(object sender, EventArgs e)
         {
             USERS creater = (USERS)userCombo.SelectedItem;
-            
             CUSTOMERS customer = new CUSTOMERS();
+
             customer.CS_CPRNO = cprBox.Text;
             customer.CS_FIRSTNAME = firstNameBox.Text;
             customer.CS_LASTNAME = LastNameBox.Text;
@@ -36,11 +35,11 @@ namespace OptikPlanner.View
 
             if (createCustomer2Button.Text == "Gem")
             {
-                Logger.LogThisLine("ansatte: " + creater + " har ændret en kunde ved navn: " + firstNameBox.Text + " " + LastNameBox.Text);
+                Trace.WriteLine($"\n{DateTime.Now}: ansatte: " + creater + " har ændret en kunde ved navn: " + firstNameBox.Text + " " + LastNameBox.Text);
             }
             else if (createCustomer2Button.Text == "Opret")
             {
-                Logger.LogThisLine("ansatte: " + creater + " har oprettet en ny kunde ved navn: " + firstNameBox.Text + " " + LastNameBox.Text);
+                Trace.WriteLine($"\n{DateTime.Now}: ansatte: " + creater + " har oprettet en ny kunde ved navn: " + firstNameBox.Text + " " + LastNameBox.Text);
             }
 
 
