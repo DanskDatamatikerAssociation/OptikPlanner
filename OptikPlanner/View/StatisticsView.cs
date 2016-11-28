@@ -40,6 +40,7 @@ namespace OptikPlanner.View
 
             if (comboBox1.SelectedIndex == 0)
             {
+                chooseDataLabel.Text = "Vælg aflysninger";
                 listView1.Columns.Clear();
                 listView1.Items.Clear();
                 listView1.Columns.Add("Grund", 150);
@@ -54,7 +55,7 @@ namespace OptikPlanner.View
 
             if (comboBox1.SelectedIndex == 1)
             {
-                
+                chooseDataLabel.Text = "";
                 FillInRoomData();
 
             }

@@ -41,7 +41,7 @@ namespace OptikPlanner.View
             this.DatoLabel = new System.Windows.Forms.Label();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.checkedListBox2 = new System.Windows.Forms.CheckedListBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.chooseDataLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.listView1 = new System.Windows.Forms.ListView();
@@ -100,14 +100,14 @@ namespace OptikPlanner.View
             this.checkedListBox2.Size = new System.Drawing.Size(120, 49);
             this.checkedListBox2.TabIndex = 10;
             // 
-            // label1
+            // chooseDataLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 127);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(93, 13);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "Vælg medarbejder";
+            this.chooseDataLabel.AutoSize = true;
+            this.chooseDataLabel.Location = new System.Drawing.Point(17, 127);
+            this.chooseDataLabel.Name = "chooseDataLabel";
+            this.chooseDataLabel.Size = new System.Drawing.Size(93, 13);
+            this.chooseDataLabel.TabIndex = 11;
+            this.chooseDataLabel.Text = "Vælg medarbejder";
             // 
             // label2
             // 
@@ -144,7 +144,7 @@ namespace OptikPlanner.View
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.chooseDataLabel);
             this.Controls.Add(this.checkedListBox2);
             this.Controls.Add(this.checkedListBox1);
             this.Controls.Add(this.DatoLabel);
@@ -168,7 +168,7 @@ namespace OptikPlanner.View
         private Label DatoLabel;
         private CheckedListBox checkedListBox1;
         private CheckedListBox checkedListBox2;
-        private Label label1;
+        private Label chooseDataLabel;
         private Label label2;
         private Label label3;
         private ListView listView1;

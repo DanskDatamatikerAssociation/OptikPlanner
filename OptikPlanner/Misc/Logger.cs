@@ -19,7 +19,7 @@ namespace OptikPlanner.Misc
             var filename = Path.Combine(Environment.GetFolderPath(
                 Environment.SpecialFolder.ApplicationData), "CancelAppointmentLog.txt");
             Directory.CreateDirectory(Path.GetDirectoryName(filename));
-            FileStream fs = new FileStream(filename, FileMode.Append);
+            FileStream fs = new FileStream(filename, FileMode.OpenOrCreate);
             Trace.Listeners.Add(new TextWriterTraceListener(fs));
             
         }

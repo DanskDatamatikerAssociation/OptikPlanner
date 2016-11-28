@@ -35,31 +35,6 @@ namespace OptikPlanner.Controller
         }
         public void TotalAmountUsers()
         {
-         
-
-            //få alle medarbejdere
-            //var dic = controller.noShowDic.Keys;
-            //var dic1 = controller.cancelPhoneDic.Keys;
-            //var dic2 = controller.cancelElseDic.Keys;
-
-            //List<string> list = new List<string>();
-
-            //foreach (var s in dic)
-            //{
-            //    list.Add(s.US_USERNAME);
-            //}
-            //foreach (var s in dic1)
-            //{
-            //    list.Add(s.US_USERNAME);
-            //}
-            //foreach (var s in dic2)
-            //{
-            //    list.Add(s.US_USERNAME);
-            //}
-
-            //return list;
-
-
 
         }
 
