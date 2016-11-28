@@ -215,7 +215,7 @@ namespace OptikPlanner.View
             {
                 try
                 {
-                    if (date < DateTime.Now)
+                    if (date <= DateTime.Now.AddMinutes(-1))
                     {
                         MessageBox.Show("Du skal vælge et tidspunkt i fremtiden", "Fejl", MessageBoxButtons.OK,
                             MessageBoxIcon.Error);

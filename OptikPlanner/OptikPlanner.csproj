@@ -121,6 +121,7 @@
       <DependentUpon>CustomerLibrary.cs</DependentUpon>
     </Compile>
     <Compile Include="View\ICalendarView.cs" />
+    <Compile Include="View\IStatisticsView.cs" />
     <Compile Include="View\StatisticsView.cs">
       <SubType>Form</SubType>
     </Compile>
