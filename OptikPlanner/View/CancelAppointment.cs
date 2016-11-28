@@ -61,10 +61,10 @@ namespace OptikPlanner.View
             {
                 throw new ArgumentException("Du skal vælge en af de angivede muligheder!");
             }
-            //if (deleter == null)
-            //{
-            //    throw new ArgumentException("Du skal vælge medarbejderen som aflyser aftalen");
-            //}
+            if (deleter == null)
+            {
+                throw new ArgumentException("Du skal vælge medarbejderen som aflyser aftalen");
+            }
             CalendarItem i = new CalendarItem(new Calendar());
 
             APTDETAILS appointment = (APTDETAILS) i.Tag;
