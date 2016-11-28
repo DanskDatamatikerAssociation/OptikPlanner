@@ -110,7 +110,7 @@ namespace OptikPlanner.Controller
         public string GetValueAsPercentage(double value, double outOf)
         {
             double percentage = value/outOf*100;
-            return percentage.ToString("#.##") + "%";
+            return percentage.ToString("F") + "%";
         }
 
     }

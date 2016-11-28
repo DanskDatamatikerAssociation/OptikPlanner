@@ -190,17 +190,18 @@
             // 
             // userSelectionCombo
             // 
+            this.userSelectionCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.userSelectionCombo.FormattingEnabled = true;
             this.userSelectionCombo.Location = new System.Drawing.Point(93, 21);
             this.userSelectionCombo.Name = "userSelectionCombo";
             this.userSelectionCombo.Size = new System.Drawing.Size(136, 21);
             this.userSelectionCombo.TabIndex = 15;
             this.userSelectionCombo.Tag = "";
-            this.userSelectionCombo.Text = "Vælg medarbejder";
             this.userSelectionCombo.SelectedIndexChanged += new System.EventHandler(this.userSelectionCombo_SelectedIndexChanged);
             // 
             // aftaleCombo
             // 
+            this.aftaleCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.aftaleCombo.FormattingEnabled = true;
             this.aftaleCombo.Items.AddRange(new object[] {
             "Linseopsætning",
@@ -210,25 +211,24 @@
             this.aftaleCombo.Size = new System.Drawing.Size(121, 21);
             this.aftaleCombo.TabIndex = 16;
             this.aftaleCombo.Tag = "";
-            this.aftaleCombo.Text = "Vælg aftaletype";
             // 
             // lokaleCombo
             // 
+            this.lokaleCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.lokaleCombo.FormattingEnabled = true;
             this.lokaleCombo.Location = new System.Drawing.Point(143, 132);
             this.lokaleCombo.Name = "lokaleCombo";
             this.lokaleCombo.Size = new System.Drawing.Size(121, 21);
             this.lokaleCombo.TabIndex = 17;
-            this.lokaleCombo.Text = "Vælg lokale";
             // 
             // userCombo
             // 
+            this.userCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.userCombo.FormattingEnabled = true;
             this.userCombo.Location = new System.Drawing.Point(270, 132);
             this.userCombo.Name = "userCombo";
             this.userCombo.Size = new System.Drawing.Size(121, 21);
             this.userCombo.TabIndex = 18;
-            this.userCombo.Text = "Vælg medarbejder";
             // 
             // label6
             // 
