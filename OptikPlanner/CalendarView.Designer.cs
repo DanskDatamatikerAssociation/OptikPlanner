@@ -39,7 +39,7 @@
             this.todayButton = new System.Windows.Forms.Button();
             this.twoWeeksButton = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
+            this.logButton = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
@@ -164,16 +164,17 @@
             this.button8.Text = "Kunder";
             this.button8.UseVisualStyleBackColor = true;
             // 
-            // button9
+            // logButton
             // 
-            this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button9.Location = new System.Drawing.Point(963, 25);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(87, 66);
-            this.button9.TabIndex = 12;
-            this.button9.Text = "Log";
-            this.button9.UseVisualStyleBackColor = true;
+            this.logButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.logButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.logButton.Location = new System.Drawing.Point(963, 25);
+            this.logButton.Name = "logButton";
+            this.logButton.Size = new System.Drawing.Size(87, 66);
+            this.logButton.TabIndex = 12;
+            this.logButton.Text = "Log";
+            this.logButton.UseVisualStyleBackColor = true;
+            this.logButton.Click += new System.EventHandler(this.logButton_Click);
             // 
             // comboBox1
             // 
@@ -462,7 +463,7 @@
             this.Controls.Add(this.comboBox3);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.button9);
+            this.Controls.Add(this.logButton);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.monthViewButton);
             this.Controls.Add(this.weekViewButton);
@@ -497,7 +498,7 @@
         private System.Windows.Forms.Button weekViewButton;
         private System.Windows.Forms.Button monthViewButton;
         private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button logButton;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.ComboBox comboBox3;

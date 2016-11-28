@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,14 +16,15 @@ namespace OptikPlanner.Controller
         private OptikItDbContext _db;
         private ICancelAppointmentView _view;
 
-        public CancelAppointmentController(ICancelAppointmentView view)
         public static List<Cancellation> CancellationUsersList = new List<Cancellation>();
         public static List<string> noShowList = new List<string>();
         public static List<string> cancelPhoneList = new List<string>();
         public static List<string> cancelElseList = new List<string>();
-        public static string[] Lines = System.IO.File.ReadAllLines(@"C:\Users\Daniel\Desktop\CancelAppointmentLog.txt");
+        public static string[] Lines = System.IO.File.ReadAllLines(Path.Combine(Environment.GetFolderPath(
+                Environment.SpecialFolder.ApplicationData), "CancelAppointmentLog.txt"));
 
-        public void DeleteAppointment()
+
+        public CancelAppointmentController(ICancelAppointmentView view)
         {
             _view = view;
             _view.SetController(this);
@@ -82,13 +84,14 @@ namespace OptikPlanner.Controller
             }
         }
 
-
-
-        public CalendarItem Appointments()
+        public List<USERS> GetEmployees()
         {
-            CalendarItem CI = new CalendarItem(null, new DateTime(2016, 10, 22, 14, 30, 22), new DateTime(2016, 10, 22, 14, 45, 22), "Jeg er en aftale");
+            using (_db = new OptikItDbContext())
+            {
+                return _db.USERS.ToList();
+            }
+        }
 
-            return CI;
-        } 
+
     }
 }

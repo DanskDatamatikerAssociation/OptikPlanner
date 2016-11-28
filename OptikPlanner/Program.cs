@@ -18,16 +18,18 @@ namespace OptikPlanner
         [STAThread]
         static void Main()
         {
-            
-            
+
             CancelAppointmentController.GetNoShows();
             CancelAppointmentController.GetPhoneCancels();
             CancelAppointmentController.GetElseCancels();
+
             Logger.SetupTracing();
+
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             // Application.Run(new CalendarView());
-           Application.Run(new StatisticsView());
+           Application.Run(new CalendarView());
             //Application.Run(new CancelAppointment());
            
 

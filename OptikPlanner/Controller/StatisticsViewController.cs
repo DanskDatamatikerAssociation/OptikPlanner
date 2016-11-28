@@ -22,8 +22,9 @@ namespace OptikPlanner.Controller
             _view = view;
             _view.SetController(this);
 
-        OptikItDbContext db = new OptikItDbContext();
-        
+            OptikItDbContext db = new OptikItDbContext();
+        }
+
         public int TotalCancelStatistics()
         {
             var list = CancelAppointmentController.noShowList.Count;

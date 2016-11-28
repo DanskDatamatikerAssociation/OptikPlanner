@@ -14,6 +14,7 @@ using OptikPlanner.Controller;
 using OptikPlanner.Model;
 using OptikPlanner.View;
 using System.Globalization;
+using System.IO;
 using Calendar = System.Windows.Forms.Calendar.Calendar;
 
 namespace OptikPlanner
@@ -348,6 +349,12 @@ namespace OptikPlanner
             //Refreshes the appointment on to view.
             calendar.ViewStart = calendar.ViewStart;
             calendar.ViewEnd = calendar.ViewEnd;
+        }
+
+        private void logButton_Click(object sender, EventArgs e)
+        {
+            Process.Start(Path.Combine(Environment.GetFolderPath(
+                Environment.SpecialFolder.ApplicationData), "CancelAppointmentLog.txt"));
         }
     }
 }

@@ -16,7 +16,8 @@ namespace OptikPlanner.Misc
         {
             
             Trace.AutoFlush = true;
-            var filename = @"C:\Users\Daniel\Desktop\CancelAppointmentLog.txt";
+            var filename = Path.Combine(Environment.GetFolderPath(
+                Environment.SpecialFolder.ApplicationData), "CancelAppointmentLog.txt");
             Directory.CreateDirectory(Path.GetDirectoryName(filename));
             FileStream fs = new FileStream(filename, FileMode.Append);
             Trace.Listeners.Add(new TextWriterTraceListener(fs));
