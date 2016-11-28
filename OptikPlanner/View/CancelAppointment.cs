@@ -24,7 +24,6 @@ namespace OptikPlanner.View
         {
             InitializeComponent();
             _controller = new CancelAppointmentController(this);
-            cuCancelReasonBox.Enabled = false;
 
 
         }
@@ -61,44 +60,44 @@ namespace OptikPlanner.View
 
         }
 
-        private void Log()
-        {
-            USERS deleter = (USERS)cancelUserBox.SelectedItem;
+        //private void Log()
+        //{
+        //    USERS deleter = (USERS)cancelUserBox.SelectedItem;
 
-            if (cuCancelRadio.Checked)
-            {
-                Logger.LogThisLine("ansatte: " + deleter + " har aflyst denne aftale fordi" + reasonCancel);
-                controller.noShowDic.Add(d++, deleter);
-            }
-            if (cuCancelPhoneRadio.Checked)
-            {
-                Logger.LogThisLine("ansatte: " + deleter + " har aflyst denne aftale fordi" + " Kunden har aflyst telefonisk.");
-            }
-            if (cuCancelShownRadio.Checked)
-            {
-                Logger.LogThisLine("ansatte: " + deleter + " har aflyst denne aftale fordi" + " Kunden har aflyst ved personligt fremmøde.");
-            }
-            if (cuCancelElseRadio.Checked && cuCancelReasonBox.Text != null)
-            {
-                Logger.LogThisLine("ansatte: " + deleter + " har aflyst denne aftale fordi " + cuCancelReasonBox.Text);
-            }
+        //    if (cuCancelRadio.Checked)
+        //    {
+        //        Logger.LogThisLine("ansatte: " + deleter + " har aflyst denne aftale fordi" + reasonCancel);
+        //        controller.noShowDic.Add(d++, deleter);
+        //    }
+        //    if (cuCancelPhoneRadio.Checked)
+        //    {
+        //        Logger.LogThisLine("ansatte: " + deleter + " har aflyst denne aftale fordi" + " Kunden har aflyst telefonisk.");
+        //    }
+        //    if (cuCancelShownRadio.Checked)
+        //    {
+        //        Logger.LogThisLine("ansatte: " + deleter + " har aflyst denne aftale fordi" + " Kunden har aflyst ved personligt fremmøde.");
+        //    }
+        //    if (cuCancelElseRadio.Checked && cuCancelReasonBox.Text != null)
+        //    {
+        //        Logger.LogThisLine("ansatte: " + deleter + " har aflyst denne aftale fordi " + cuCancelReasonBox.Text);
+        //    }
           
-            if (cuCancelElseRadio.Checked)
-            {
-                Logger.LogThisLine("ansatte: " + deleter + " har aflyst denne aftale fordi" + elseCancel);
-                controller.cancelElseDic.Add(d++, deleter);
-            }
-            else if (!cuCancelRadio.Checked || cuCancelPhoneRadio.Checked || cuCancelShownRadio.Checked || cuCancelElseRadio.Checked)
-            {
-                throw new ArgumentException("Du skal vælge en af de angivede muligheder!");
-            }
-            if (deleter == null)
-            {
-                throw new ArgumentException("Du skal vælge medarbejderen som aflyser aftalen");
-            }
+        //    if (cuCancelElseRadio.Checked)
+        //    {
+        //        Logger.LogThisLine("ansatte: " + deleter + " har aflyst denne aftale fordi" + elseCancel);
+        //        controller.cancelElseDic.Add(d++, deleter);
+        //    }
+        //    else if (!cuCancelRadio.Checked || cuCancelPhoneRadio.Checked || cuCancelShownRadio.Checked || cuCancelElseRadio.Checked)
+        //    {
+        //        throw new ArgumentException("Du skal vælge en af de angivede muligheder!");
+        //    }
+        //    if (deleter == null)
+        //    {
+        //        throw new ArgumentException("Du skal vælge medarbejderen som aflyser aftalen");
+        //    }
 
 
-        }
+        //}
 
 
 
@@ -107,10 +106,10 @@ namespace OptikPlanner.View
             this.Close();
         }
 
-        private void cuCancelElseRadio_CheckedChanged(object sender, EventArgs e)
-        {
-            cuCancelReasonBox.Enabled = true;
-        }
+        //private void cuCancelElseRadio_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    cuCancelReasonBox.Enabled = true;
+        //}
 
 
     }

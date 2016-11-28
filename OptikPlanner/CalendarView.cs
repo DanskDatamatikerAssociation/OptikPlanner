@@ -72,7 +72,7 @@ namespace OptikPlanner
             calendar.Items.Clear();
             calendar.Items.AddRange(_calendarViewController.GetAppointmentsAsCalendarItems());
 
-        //}
+        }
 
 
 
@@ -188,33 +188,28 @@ namespace OptikPlanner
             AddAppointmentsToCalendar();
             
 
-
             //Color logic here
             var items = e.Calendar.Items;
 
+            var systemColors = new ColorConverter().GetStandardValues();
+            List<Color> colors = systemColors.Cast<Color>().ToList();
 
-        //    //Color logic here
-        //    var items = e.Calendar.Items;
+            int colorJump = 50;
 
-        //    var systemColors = new ColorConverter().GetStandardValues();
-        //    List<Color> colors = systemColors.Cast<Color>().ToList();
+            foreach (var i in items)
+            {
+                APTDETAILS appointment = (APTDETAILS)i.Tag;
 
-        //    int colorJump = 50;
-
-        //    foreach (var i in items)
-        //    {
-        //        APTDETAILS appointment = (APTDETAILS)i.Tag;
-
-        //        int colorIndex = appointment.APD_USER+colorJump;
-        //        Color color = colors[colorIndex];
+                int colorIndex = appointment.APD_USER + colorJump;
+                Color color = colors[colorIndex];
 
 
-        //        i.ApplyColor(color);
+                i.ApplyColor(color);
 
-        //    }
+            }
 
 
-        //}
+        }
 
 
         private void newAppointmentButton_Click(object sender, EventArgs e)

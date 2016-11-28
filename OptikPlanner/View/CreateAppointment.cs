@@ -187,12 +187,6 @@ namespace OptikPlanner.View
 
             int id = _controller.GetNextAppointmentId();
             DateTime date = new DateTime(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, dateTimePicker1.Value.Day, timeFromPicker.Value.Hour, timeFromPicker.Value.Minute, 0);
-            if (date < DateTime.Now)
-            {
-                MessageBox.Show("Du skal vælge et tidspunkt i fremtiden", "Fejl", MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-                return;
-            }
             string timeFrom = timeFromPicker.Value.ToString("HH:mm");
             string timeTo = timeToPicker.Value.ToString("HH:mm");
             USERS user = (USERS)userCombo.SelectedItem;
@@ -221,6 +215,13 @@ namespace OptikPlanner.View
             {
                 try
                 {
+                    if (date < DateTime.Now)
+                    {
+                        MessageBox.Show("Du skal vælge et tidspunkt i fremtiden", "Fejl", MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                        return;
+                    }
+
                     appointment = new APTDETAILS(id, user, room, date, timeFrom, timeTo, customer, type, description);
                     appointment.APD_MOBILE = telefonBox.Text;
                     appointment.APD_EMAIL = emailBox.Text;
@@ -240,6 +241,7 @@ namespace OptikPlanner.View
             //To put an appointment
             else
             {
+
                 appointment = new APTDETAILS(ClickedAppointment.APD_STAMP, user, room, date, timeFrom, timeTo, customer, type, description);
                 appointment.APD_MOBILE = telefonBox.Text;
                 appointment.APD_EMAIL = emailBox.Text;
