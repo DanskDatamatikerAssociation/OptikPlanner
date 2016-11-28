@@ -33,35 +33,6 @@ namespace OptikPlanner.Controller
 
             return list + list1 + list2;
         }
-        public void TotalAmountUsers()
-        {
-         
-
-            //få alle medarbejdere
-            //var dic = controller.noShowDic.Keys;
-            //var dic1 = controller.cancelPhoneDic.Keys;
-            //var dic2 = controller.cancelElseDic.Keys;
-
-            //List<string> list = new List<string>();
-
-            //foreach (var s in dic)
-            //{
-            //    list.Add(s.US_USERNAME);
-            //}
-            //foreach (var s in dic1)
-            //{
-            //    list.Add(s.US_USERNAME);
-            //}
-            //foreach (var s in dic2)
-            //{
-            //    list.Add(s.US_USERNAME);
-            //}
-
-            //return list;
-
-
-
-        }
 
         private List<APTDETAILS> GetAppointments()
         {
@@ -134,6 +105,12 @@ namespace OptikPlanner.Controller
 
             return totalRoomHoursPerMonth - usageInHours;
             
+        }
+
+        public string GetValueAsPercentage(double value, double outOf)
+        {
+            double percentage = value/outOf*100;
+            return percentage.ToString("#.##") + "%";
         }
 
     }

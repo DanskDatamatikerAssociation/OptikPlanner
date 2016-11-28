@@ -86,11 +86,13 @@ namespace OptikPlanner.View
                 listView1.Items.Add(room.ERO_SHORTDESC);
                 listView1.Items[i].SubItems.Add(room.ERO_SHORTDESC);
                 listView1.Items[i].SubItems.Add(_controller.GetRoomUsageInHours(room).ToString());
-                listView1.Items[i].SubItems.Add(_controller.GetRoomAvailabilityInHours(room, 148).ToString());
+                //listView1.Items[i].SubItems.Add(_controller.GetRoomAvailabilityInHours(room, 148).ToString());
+                listView1.Items[i].SubItems.Add(_controller.GetValueAsPercentage(_controller.GetRoomAvailabilityInHours(room, 148), 148));
+
 
             }
-            
-            
+
+
         }
 
 

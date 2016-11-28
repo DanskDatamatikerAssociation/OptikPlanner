@@ -68,8 +68,10 @@ namespace OptikPlanner.Controller
 
         public int GetNextAppointmentId()
         {
-            var appointment = GetAppointments().Last();
-            return appointment.APD_STAMP + 1;
+            var appointments = GetAppointments();
+            if (appointments.Count == 0) return 0;
+
+            return appointments.Last().APD_STAMP + 1;
 
 
         }

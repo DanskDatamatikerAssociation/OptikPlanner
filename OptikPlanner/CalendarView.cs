@@ -22,8 +22,7 @@ namespace OptikPlanner
     public partial class CalendarView : Form, ICalendarView
     {
         private CalendarViewController _calendarViewController;
-        private USERS user = new USERS();
-            public Calendar Calendar { get; }
+        public Calendar Calendar { get; }
 
         public CalendarView()
         {
