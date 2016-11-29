@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms.Calendar;
@@ -20,8 +21,7 @@ namespace OptikPlanner.Controller
         public static List<string> noShowList = new List<string>();
         public static List<string> cancelPhoneList = new List<string>();
         public static List<string> cancelElseList = new List<string>();
-        public static string[] Lines = System.IO.File.ReadAllLines(Path.Combine(Environment.GetFolderPath(
-                Environment.SpecialFolder.ApplicationData), "CancelAppointmentLog.txt"));
+        public static string[] Lines;
 
 
         public CancelAppointmentController(ICancelAppointmentView view)
@@ -32,9 +32,23 @@ namespace OptikPlanner.Controller
 
         public static void GetNoShows()
         {
+            
+            if (!File.Exists(Path.Combine(Environment.GetFolderPath(
+                Environment.SpecialFolder.ApplicationData), "CancelAppointmentLog.txt")))
+            {
+                return;
+            }
+
+            Lines = System.IO.File.ReadAllLines(Path.Combine(Environment.GetFolderPath(
+                Environment.SpecialFolder.ApplicationData), "CancelAppointmentLog.txt"));
+
+            if (Lines == null)
+            {
+                cancelPhoneList.Add("Log oprettet succesfuldt");
+            }
             foreach (string s in Lines)
             {
-                if (s.Contains("Kunden ikke mødte op"))
+                if (s.Contains("Kunden ikke"))
                 { 
                     noShowList.Add(s);
                 }
@@ -43,9 +57,18 @@ namespace OptikPlanner.Controller
 
         public static void GetPhoneCancels()
         {
+            if (!File.Exists(Path.Combine(Environment.GetFolderPath(
+                   Environment.SpecialFolder.ApplicationData), "CancelAppointmentLog.txt")))
+            {
+                return;
+            }
+            Lines = System.IO.File.ReadAllLines(Path.Combine(Environment.GetFolderPath(
+                Environment.SpecialFolder.ApplicationData), "CancelAppointmentLog.txt"));
+
             foreach (string s in Lines)
             {
-                if (s.Contains("Kunden har aflyst telefonisk"))
+               
+                if (s.Contains("aflyst telefonisk"))
                 {
                     cancelPhoneList.Add(s);
                 }
@@ -55,9 +78,17 @@ namespace OptikPlanner.Controller
 
         public static void GetElseCancels()
         {
+            if (!File.Exists(Path.Combine(Environment.GetFolderPath(
+                   Environment.SpecialFolder.ApplicationData), "CancelAppointmentLog.txt")))
+            {
+                return;
+            }
+            Lines = System.IO.File.ReadAllLines(Path.Combine(Environment.GetFolderPath(
+                Environment.SpecialFolder.ApplicationData), "CancelAppointmentLog.txt"));
+
             foreach (string s in Lines)
             {
-                if (s.Contains("der har været Andet i vejen"))
+                if (s.Contains("Andet i vejen"))
                 {
                     cancelElseList.Add(s);
                 }
@@ -77,7 +108,7 @@ namespace OptikPlanner.Controller
                     _db.SaveChanges();
 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     
                 }

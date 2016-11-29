@@ -231,7 +231,7 @@ namespace OptikPlanner.View
                     this.Close();
 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     MessageBox.Show("Der er fejl i den indtastede data. Prøv igen.",
                         "Fejl i oprettelse", MessageBoxButtons.OK,

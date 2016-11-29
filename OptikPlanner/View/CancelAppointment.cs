@@ -89,7 +89,7 @@ namespace OptikPlanner.View
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }

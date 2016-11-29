@@ -194,7 +194,7 @@ namespace OptikPlanner.Controller
                 {
                     db.SaveChanges();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
 
                 }
