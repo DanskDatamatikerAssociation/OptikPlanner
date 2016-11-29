@@ -36,6 +36,9 @@ namespace OptikPlanner.View
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chooseTypeCombo = new System.Windows.Forms.ComboBox();
             this.DatoLabel = new System.Windows.Forms.Label();
             this.chooseAmountListBox = new System.Windows.Forms.CheckedListBox();
@@ -54,10 +57,13 @@ namespace OptikPlanner.View
             this.compareMonthCombo = new System.Windows.Forms.ComboBox();
             this.compareYearCombo = new System.Windows.Forms.ComboBox();
             this.chooseWeekButton = new System.Windows.Forms.Button();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // chooseTypeCombo
             // 
+            this.chooseTypeCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.chooseTypeCombo.FormattingEnabled = true;
             this.chooseTypeCombo.Items.AddRange(new object[] {
             "Aflysninger",
@@ -67,7 +73,6 @@ namespace OptikPlanner.View
             this.chooseTypeCombo.Name = "chooseTypeCombo";
             this.chooseTypeCombo.Size = new System.Drawing.Size(129, 21);
             this.chooseTypeCombo.TabIndex = 0;
-            this.chooseTypeCombo.Text = "Vælg type statistik";
             this.chooseTypeCombo.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // DatoLabel
@@ -222,11 +227,31 @@ namespace OptikPlanner.View
             this.chooseWeekButton.UseVisualStyleBackColor = true;
             this.chooseWeekButton.Click += new System.EventHandler(this.chooseWeekButton_Click);
             // 
+            // chart1
+            // 
+            this.chart1.BorderlineColor = System.Drawing.Color.Gray;
+            this.chart1.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart1.Legends.Add(legend2);
+            this.chart1.Location = new System.Drawing.Point(192, 37);
+            this.chart1.Name = "chart1";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series2.CustomProperties = "PieLineColor=Black, PieLabelStyle=Outside";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chart1.Series.Add(series2);
+            this.chart1.Size = new System.Drawing.Size(416, 273);
+            this.chart1.TabIndex = 28;
+            this.chart1.Text = "chart1";
+            // 
             // StatisticsView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(710, 449);
+            this.ClientSize = new System.Drawing.Size(656, 351);
             this.Controls.Add(this.chooseWeekButton);
             this.Controls.Add(this.compareYearCombo);
             this.Controls.Add(this.compareMonthCombo);
@@ -245,9 +270,11 @@ namespace OptikPlanner.View
             this.Controls.Add(this.chooseAmountListBox);
             this.Controls.Add(this.DatoLabel);
             this.Controls.Add(this.chooseTypeCombo);
+            this.Controls.Add(this.chart1);
             this.Name = "StatisticsView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Statistik visning";
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -276,5 +303,6 @@ namespace OptikPlanner.View
         private ComboBox compareMonthCombo;
         private ComboBox compareYearCombo;
         private Button chooseWeekButton;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }

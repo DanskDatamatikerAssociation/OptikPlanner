@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.Calendar;
+using System.Windows.Forms.DataVisualization.Charting;
 using OptikPlanner.Controller;
 using OptikPlanner.Misc;
 using Calendar = System.Globalization.Calendar;
@@ -32,13 +33,15 @@ namespace OptikPlanner.View
             Populate();
             _controller = new StatisticsViewController(this);
 
+
+
             //monthPicker1.Format = DateTimePickerFormat.Custom;
 
             //monthPicker1.CustomFormat = "MMM/yyyy";
             //monthPicker1.ShowUpDown = false;
             //monthPicker1.Value = DateTime.Today;
             //monthPicker1.MaxDate = DateTime.Today;
-            
+
 
             //monthPicker2.Format = DateTimePickerFormat.Custom;
             //monthPicker2.CustomFormat = "MMM/yyyy";
@@ -67,12 +70,17 @@ namespace OptikPlanner.View
                 listView1.Items[0].SubItems.Add(CancelAppointmentController.noShowList.Count.ToString());
                 listView1.Items[1].SubItems.Add(CancelAppointmentController.cancelPhoneList.Count.ToString());
                 listView1.Items[2].SubItems.Add(CancelAppointmentController.cancelElseList.Count.ToString());
+
+                SetupLoggingBarChart();
+
             }
 
             if (chooseTypeCombo.SelectedIndex == 1)
             {
                 chooseDataLabel.Text = "Vælg lokaler";
                 FillInRoomData();
+                SetupRoomPieChart();
+
 
             }
             if (chooseTypeCombo.SelectedIndex == 2)
@@ -84,6 +92,7 @@ namespace OptikPlanner.View
                 listView1.Columns.Add("Navn", 155);
                 listView1.Columns.Add("Mødte ikke op", 100);
                 listView1.Columns.Add("Opkald", 100);
+
 
             }
 
@@ -101,7 +110,7 @@ namespace OptikPlanner.View
             //var roomColumnItems = listView1.Items[0];
 
             var rooms = _controller.GetRooms();
-            for(int i=0; i<rooms.Count; i++)
+            for (int i = 0; i < rooms.Count; i++)
             {
                 var room = rooms[i];
                 listView1.Items.Add(room.ERO_SHORTDESC);
@@ -194,29 +203,137 @@ namespace OptikPlanner.View
 
         private void GraficalButtonClick()
         {
-            chooseViewButton.Text = "Tal baseret";
+            chooseViewButton.Text = "Talbaseret";
             listView1.Hide();
-           // indsæt fremvisning af Danny's diagrammer
-            
+
+            if (clickedGraf)
+            {
+                switch (chooseTypeCombo.Text)
+                {
+                    case "Lokaler":
+                        SetupRoomPieChart();
+                        break;
+                    case "Aflysninger":
+                        SetupLoggingBarChart();
+                        break;
+                    default:
+                        ClearChart();
+                        break;
+                }
+            }
+
+            chart1.Show();
+
+            // indsæt fremvisning af Danny's diagrammer
+
         }
 
         private void NumericButtonClick()
         {
             chooseViewButton.Text = "Grafisk";
-            // hide fremvisning af danny's diagrammer her
+            // hide fremvisning af danny's diagrammer her        
 
+            chart1.Hide();
             listView1.Show();
-            
+
         }
 
         private void chooseWeekButton_Click(object sender, EventArgs e)
         {
-            if(clickedWeek)
+            if (clickedWeek)
                 Populate();
             else
                 PopulateWeek();
 
             clickedWeek = !clickedWeek;
+        }
+
+        private void SetupRoomPieChart()
+        {
+            chart1.Series.Clear();
+            chart1.Titles.Clear();
+            chart1.ResetAutoValues();
+
+            Series series1 = new Series
+            {
+                Name = "series1",
+                IsVisibleInLegend = true,
+                Color = System.Drawing.Color.Blue,
+                ChartType = SeriesChartType.Pie
+            };
+
+            chart1.ChartAreas[0].BackColor = Color.Transparent;
+            chart1.Titles.Add("Lokaletilgængelighed i timer og %");
+
+            series1.SetCustomProperty("PieLabelStyle", "Outside");
+            chart1.ChartAreas[0].Area3DStyle.Enable3D = true;
+
+            chart1.ChartAreas[0].Position = new ElementPosition(-10, 10, 90, 90);
+
+
+            chart1.Series.Add(series1);
+
+            //Generel tilgængelighed
+            var p1 = series1.Points.Add(148);
+            p1.LegendText = "Tilgængelighed";
+            var p1Value = p1.YValues[0];
+
+
+            //Lokaler
+            var rooms = _controller.GetRooms();
+            foreach (var r in rooms)
+            {
+                var roomPiece = series1.Points.Add(_controller.GetRoomUsageInHours(r));
+                roomPiece.LegendText = r.ERO_SHORTDESC;
+                var value = roomPiece.YValues[0];
+                var valuePercentage = _controller.GetValueAsPercentage(value, p1.YValues[0]);
+                roomPiece.Label = $"{value} ({valuePercentage})";
+            }
+
+            chart1.Invalidate();
+        }
+
+        private void SetupLoggingBarChart()
+        {
+            chart1.Series.Clear();
+            chart1.Titles.Clear();
+            chart1.ResetAutoValues();
+
+            Series series2 = new Series
+            {
+                Name = "series2",
+                IsVisibleInLegend = false,
+                Color = System.Drawing.Color.Blue,
+                ChartType = SeriesChartType.Column
+            };
+
+            chart1.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
+            chart1.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
+
+            chart1.ChartAreas[0].Position.Auto = true;
+
+            chart1.ChartAreas[0].Area3DStyle.Enable3D = false;
+            chart1.Titles.Add("Aflysninger");
+
+            chart1.Series.Add(series2);
+
+            //var noShowBar = series2.Points.Add(CancelAppointmentController.noShowList.Count);
+            var noShowBar = series2.Points.Add(CancelAppointmentController.noShowList.Count);
+            noShowBar.AxisLabel = "Ikke mødt op";
+
+            var phoneCancelBar = series2.Points.Add(CancelAppointmentController.cancelPhoneList.Count);
+            phoneCancelBar.AxisLabel = "Afylste telefonisk";
+
+            var otherReasonBar = series2.Points.Add(CancelAppointmentController.cancelElseList.Count);
+            otherReasonBar.AxisLabel = "Anden årsag";
+
+            chart1.Invalidate();
+        }
+
+        private void ClearChart()
+        {
+            chart1.Series.Clear();
+            chart1.Titles.Clear();
         }
     }
 }
