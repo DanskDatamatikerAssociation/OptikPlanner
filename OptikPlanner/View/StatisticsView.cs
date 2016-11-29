@@ -134,6 +134,18 @@ namespace OptikPlanner.View
             clickedGraf = !clickedGraf;
         }
 
+        //smid i controller
+        public void GetCancellations()
+        {
+            //var test == hent log
+
+            //foreach linebreak in test smid i liste
+
+
+            //smid i view
+            //foreach liste item som indeholder dato 10-12-2016 12 fremvis i listview hvis monthpicker1 == december
+        }
+
         public void VisningAflysninger()
         {
             chooseDataLabel.Text = "Vælg aflysninger";
