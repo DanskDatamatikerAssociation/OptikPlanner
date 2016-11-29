@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using OptikPlanner.Controller;
 using OptikPlanner.Misc;
 
@@ -31,7 +32,16 @@ namespace OptikPlanner.View
             dateTimePicker1.CustomFormat = "MMM/yyyy";
             dateTimePicker1.ShowUpDown = true;
             dateTimePicker1.Value = DateTime.Today;
+
             
+
+
+            SetupRoomPieChart();
+
+
+
+
+
 
         }
 
@@ -89,6 +99,50 @@ namespace OptikPlanner.View
 
 
             }
+
+
+        }
+
+        private void SetupRoomPieChart()
+        {
+            Series series1 = new Series
+            {
+                Name = "series1",
+                IsVisibleInLegend = true,
+                Color = System.Drawing.Color.Blue,
+                ChartType = SeriesChartType.Pie
+            };
+
+            chart1.ChartAreas[0].BackColor = Color.Transparent;
+            chart1.Titles.Add("Lokaletilgængelighed i timer og %");
+
+            series1.SetCustomProperty("PieLabelStyle", "Outside");
+            chart1.ChartAreas[0].Area3DStyle.Enable3D = true;
+
+            chart1.ChartAreas[0].Position = new ElementPosition(-10, 10, 110, 110);
+
+
+            chart1.Series.Add(series1);
+  
+            //Generel tilgængelighed
+            var p1 = series1.Points.Add(148);
+            p1.LegendText = "Tilgængelighed";
+            var p1Value = p1.YValues[0];
+            var p1valuePercentage = _controller.GetValueAsPercentage(p1Value, p1.YValues[0]);
+   
+            
+
+            var rooms = _controller.GetRooms();
+            foreach (var r in rooms)
+            {
+               var roomPiece = series1.Points.Add(_controller.GetRoomUsageInHours(r));
+                roomPiece.LegendText = r.ERO_SHORTDESC;
+                var value = roomPiece.YValues[0];
+                var valuePercentage = _controller.GetValueAsPercentage(value, p1.YValues[0]);
+                roomPiece.Label = $"{value} ({valuePercentage})";
+            }
+
+
 
 
         }
