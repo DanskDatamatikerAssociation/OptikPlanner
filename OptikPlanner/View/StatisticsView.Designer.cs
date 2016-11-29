@@ -36,87 +36,67 @@ namespace OptikPlanner.View
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.chooseTypeCombo = new System.Windows.Forms.ComboBox();
             this.DatoLabel = new System.Windows.Forms.Label();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
-            this.checkedListBox2 = new System.Windows.Forms.CheckedListBox();
+            this.chooseAmountListBox = new System.Windows.Forms.CheckedListBox();
             this.chooseDataLabel = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.listView1 = new System.Windows.Forms.ListView();
+            this.compareLabel = new System.Windows.Forms.Label();
+            this.chooseViewLabel = new System.Windows.Forms.Label();
+            this.chooseViewButton = new System.Windows.Forms.Button();
+            this.chooseperiodLabel = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.compareMonthLabel = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.showMonthCombo = new System.Windows.Forms.ComboBox();
+            this.showYearCombo = new System.Windows.Forms.ComboBox();
+            this.compareMonthCombo = new System.Windows.Forms.ComboBox();
+            this.compareYearCombo = new System.Windows.Forms.ComboBox();
+            this.chooseWeekButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // comboBox1
+            // chooseTypeCombo
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.chooseTypeCombo.FormattingEnabled = true;
+            this.chooseTypeCombo.Items.AddRange(new object[] {
             "Aflysninger",
             "Lokaler",
             "Medarbejdere"});
-            this.comboBox1.Location = new System.Drawing.Point(12, 37);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(119, 21);
-            this.comboBox1.TabIndex = 0;
-            this.comboBox1.Text = "Vælg type statistik";
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(12, 94);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(119, 20);
-            this.dateTimePicker1.TabIndex = 4;
+            this.chooseTypeCombo.Location = new System.Drawing.Point(12, 37);
+            this.chooseTypeCombo.Name = "chooseTypeCombo";
+            this.chooseTypeCombo.Size = new System.Drawing.Size(129, 21);
+            this.chooseTypeCombo.TabIndex = 0;
+            this.chooseTypeCombo.Text = "Vælg type statistik";
+            this.chooseTypeCombo.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // DatoLabel
             // 
             this.DatoLabel.AutoSize = true;
             this.DatoLabel.Location = new System.Drawing.Point(14, 71);
             this.DatoLabel.Name = "DatoLabel";
-            this.DatoLabel.Size = new System.Drawing.Size(30, 13);
+            this.DatoLabel.Size = new System.Drawing.Size(128, 13);
             this.DatoLabel.TabIndex = 8;
-            this.DatoLabel.Text = "Dato";
+            this.DatoLabel.Text = "Vælg fremvisningsperiode";
             // 
-            // checkedListBox1
+            // chooseAmountListBox
             // 
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Items.AddRange(new object[] {
+            this.chooseAmountListBox.FormattingEnabled = true;
+            this.chooseAmountListBox.Items.AddRange(new object[] {
             "Alle"});
-            this.checkedListBox1.Location = new System.Drawing.Point(13, 146);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(120, 49);
-            this.checkedListBox1.TabIndex = 9;
-            // 
-            // checkedListBox2
-            // 
-            this.checkedListBox2.FormattingEnabled = true;
-            this.checkedListBox2.Items.AddRange(new object[] {
-            "Alle",
-            "Uge 1",
-            "Uge 2",
-            "Uge 3"});
-            this.checkedListBox2.Location = new System.Drawing.Point(13, 219);
-            this.checkedListBox2.Name = "checkedListBox2";
-            this.checkedListBox2.Size = new System.Drawing.Size(120, 49);
-            this.checkedListBox2.TabIndex = 10;
+            this.chooseAmountListBox.Location = new System.Drawing.Point(16, 261);
+            this.chooseAmountListBox.Name = "chooseAmountListBox";
+            this.chooseAmountListBox.Size = new System.Drawing.Size(130, 49);
+            this.chooseAmountListBox.TabIndex = 9;
             // 
             // chooseDataLabel
             // 
             this.chooseDataLabel.AutoSize = true;
-            this.chooseDataLabel.Location = new System.Drawing.Point(17, 127);
+            this.chooseDataLabel.Location = new System.Drawing.Point(13, 245);
             this.chooseDataLabel.Name = "chooseDataLabel";
-            this.chooseDataLabel.Size = new System.Drawing.Size(93, 13);
+            this.chooseDataLabel.Size = new System.Drawing.Size(58, 13);
             this.chooseDataLabel.TabIndex = 11;
-            this.chooseDataLabel.Text = "Vælg medarbejder";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 203);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 13);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "Vælg uge";
+            this.chooseDataLabel.Text = "Vælg antal";
             // 
             // label3
             // 
@@ -129,30 +109,145 @@ namespace OptikPlanner.View
             // 
             // listView1
             // 
-            this.listView1.Location = new System.Drawing.Point(208, 37);
+            this.listView1.Location = new System.Drawing.Point(192, 37);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(416, 231);
+            this.listView1.Size = new System.Drawing.Size(416, 273);
             this.listView1.TabIndex = 14;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // compareLabel
+            // 
+            this.compareLabel.AutoSize = true;
+            this.compareLabel.Location = new System.Drawing.Point(13, 180);
+            this.compareLabel.Name = "compareLabel";
+            this.compareLabel.Size = new System.Drawing.Size(128, 13);
+            this.compareLabel.TabIndex = 16;
+            this.compareLabel.Text = "Sammenlign periode med:";
+            // 
+            // chooseViewLabel
+            // 
+            this.chooseViewLabel.AutoSize = true;
+            this.chooseViewLabel.Location = new System.Drawing.Point(436, 9);
+            this.chooseViewLabel.Name = "chooseViewLabel";
+            this.chooseViewLabel.Size = new System.Drawing.Size(88, 13);
+            this.chooseViewLabel.TabIndex = 17;
+            this.chooseViewLabel.Text = "Vælg fremvisning";
+            // 
+            // chooseViewButton
+            // 
+            this.chooseViewButton.Location = new System.Drawing.Point(530, 4);
+            this.chooseViewButton.Name = "chooseViewButton";
+            this.chooseViewButton.Size = new System.Drawing.Size(75, 23);
+            this.chooseViewButton.TabIndex = 18;
+            this.chooseViewButton.Text = "Grafisk";
+            this.chooseViewButton.UseVisualStyleBackColor = true;
+            this.chooseViewButton.Click += new System.EventHandler(this.chooseViewButton_Click);
+            // 
+            // chooseperiodLabel
+            // 
+            this.chooseperiodLabel.AutoSize = true;
+            this.chooseperiodLabel.Location = new System.Drawing.Point(13, 127);
+            this.chooseperiodLabel.Name = "chooseperiodLabel";
+            this.chooseperiodLabel.Size = new System.Drawing.Size(39, 13);
+            this.chooseperiodLabel.TabIndex = 19;
+            this.chooseperiodLabel.Text = "måned";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(73, 127);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(16, 13);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "år";
+            // 
+            // compareMonthLabel
+            // 
+            this.compareMonthLabel.AutoSize = true;
+            this.compareMonthLabel.Location = new System.Drawing.Point(13, 193);
+            this.compareMonthLabel.Name = "compareMonthLabel";
+            this.compareMonthLabel.Size = new System.Drawing.Size(39, 13);
+            this.compareMonthLabel.TabIndex = 21;
+            this.compareMonthLabel.Text = "måned";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(78, 193);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(16, 13);
+            this.label6.TabIndex = 22;
+            this.label6.Text = "år";
+            // 
+            // showMonthCombo
+            // 
+            this.showMonthCombo.FormattingEnabled = true;
+            this.showMonthCombo.Location = new System.Drawing.Point(16, 143);
+            this.showMonthCombo.Name = "showMonthCombo";
+            this.showMonthCombo.Size = new System.Drawing.Size(54, 21);
+            this.showMonthCombo.TabIndex = 23;
+            // 
+            // showYearCombo
+            // 
+            this.showYearCombo.FormattingEnabled = true;
+            this.showYearCombo.Location = new System.Drawing.Point(76, 143);
+            this.showYearCombo.Name = "showYearCombo";
+            this.showYearCombo.Size = new System.Drawing.Size(72, 21);
+            this.showYearCombo.TabIndex = 24;
+            // 
+            // compareMonthCombo
+            // 
+            this.compareMonthCombo.FormattingEnabled = true;
+            this.compareMonthCombo.Location = new System.Drawing.Point(15, 209);
+            this.compareMonthCombo.Name = "compareMonthCombo";
+            this.compareMonthCombo.Size = new System.Drawing.Size(55, 21);
+            this.compareMonthCombo.TabIndex = 25;
+            // 
+            // compareYearCombo
+            // 
+            this.compareYearCombo.FormattingEnabled = true;
+            this.compareYearCombo.Location = new System.Drawing.Point(76, 209);
+            this.compareYearCombo.Name = "compareYearCombo";
+            this.compareYearCombo.Size = new System.Drawing.Size(72, 21);
+            this.compareYearCombo.TabIndex = 26;
+            // 
+            // chooseWeekButton
+            // 
+            this.chooseWeekButton.Location = new System.Drawing.Point(17, 87);
+            this.chooseWeekButton.Name = "chooseWeekButton";
+            this.chooseWeekButton.Size = new System.Drawing.Size(124, 23);
+            this.chooseWeekButton.TabIndex = 27;
+            this.chooseWeekButton.Text = "Vis i uger";
+            this.chooseWeekButton.UseVisualStyleBackColor = true;
+            this.chooseWeekButton.Click += new System.EventHandler(this.chooseWeekButton_Click);
             // 
             // StatisticsView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(636, 322);
+            this.ClientSize = new System.Drawing.Size(710, 449);
+            this.Controls.Add(this.chooseWeekButton);
+            this.Controls.Add(this.compareYearCombo);
+            this.Controls.Add(this.compareMonthCombo);
+            this.Controls.Add(this.showYearCombo);
+            this.Controls.Add(this.showMonthCombo);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.compareMonthLabel);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.chooseperiodLabel);
+            this.Controls.Add(this.chooseViewButton);
+            this.Controls.Add(this.chooseViewLabel);
+            this.Controls.Add(this.compareLabel);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.chooseDataLabel);
-            this.Controls.Add(this.checkedListBox2);
-            this.Controls.Add(this.checkedListBox1);
+            this.Controls.Add(this.chooseAmountListBox);
             this.Controls.Add(this.DatoLabel);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.chooseTypeCombo);
             this.Name = "StatisticsView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "StatisticsView";
+            this.Text = "Statistik visning";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -163,14 +258,23 @@ namespace OptikPlanner.View
 
         #endregion
 
-        private System.Windows.Forms.ComboBox comboBox1;
-        private DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.ComboBox chooseTypeCombo;
         private Label DatoLabel;
-        private CheckedListBox checkedListBox1;
-        private CheckedListBox checkedListBox2;
+        private CheckedListBox chooseAmountListBox;
         private Label chooseDataLabel;
-        private Label label2;
         private Label label3;
         private ListView listView1;
+        private Label compareLabel;
+        private Label chooseViewLabel;
+        private Button chooseViewButton;
+        private Label chooseperiodLabel;
+        private Label label4;
+        private Label compareMonthLabel;
+        private Label label6;
+        private ComboBox showMonthCombo;
+        private ComboBox showYearCombo;
+        private ComboBox compareMonthCombo;
+        private ComboBox compareYearCombo;
+        private Button chooseWeekButton;
     }
 }
