@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.Calendar;
 using OptikPlanner.Model;
 using OptikPlanner.View;
 
@@ -15,6 +16,8 @@ namespace OptikPlanner.Controller
     {
         private OptikItDbContext _db;
         private IStatisticsView _view;
+        public List<Object> Months = new List<Object>();
+        public Calendar calendar { get; }
 
 
         public StatisticsViewController(IStatisticsView view)
@@ -24,6 +27,7 @@ namespace OptikPlanner.Controller
 
             OptikItDbContext db = new OptikItDbContext();
         }
+
         public int TotalCancelStatistics()
         {
             var list = CancelAppointmentController.noShowList.Count;
@@ -33,7 +37,7 @@ namespace OptikPlanner.Controller
             return list + list1 + list2;
         }
 
-        private List<APTDETAILS> GetAppointments()
+        public List<APTDETAILS> GetAppointments()
         {
             try
             {
@@ -85,7 +89,7 @@ namespace OptikPlanner.Controller
                 TimeSpan timeElapsed = timeTo - timeFrom;
 
                 timeSpans.Add(timeElapsed);
-                
+
 
             }
 
@@ -103,7 +107,7 @@ namespace OptikPlanner.Controller
             double usageInHours = GetRoomUsageInHours(room);
 
             return totalRoomHoursPerMonth - usageInHours;
-            
+
         }
 
         public string GetValueAsPercentage(double value, double outOf)
@@ -112,5 +116,15 @@ namespace OptikPlanner.Controller
             return percentage.ToString("F") + "%";
         }
 
+        public List<APTDETAILS> ShowMonth()
+        {
+            return new List<APTDETAILS>();
+        }
+
+
+
+
+
     }
 }
+

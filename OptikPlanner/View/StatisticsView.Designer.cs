@@ -53,7 +53,6 @@ namespace OptikPlanner.View
             this.showYearCombo = new System.Windows.Forms.ComboBox();
             this.compareMonthCombo = new System.Windows.Forms.ComboBox();
             this.compareYearCombo = new System.Windows.Forms.ComboBox();
-            this.chooseWeekButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // chooseTypeCombo
@@ -84,7 +83,7 @@ namespace OptikPlanner.View
             this.chooseAmountListBox.FormattingEnabled = true;
             this.chooseAmountListBox.Items.AddRange(new object[] {
             "Alle"});
-            this.chooseAmountListBox.Location = new System.Drawing.Point(16, 261);
+            this.chooseAmountListBox.Location = new System.Drawing.Point(16, 218);
             this.chooseAmountListBox.Name = "chooseAmountListBox";
             this.chooseAmountListBox.Size = new System.Drawing.Size(130, 49);
             this.chooseAmountListBox.TabIndex = 9;
@@ -92,7 +91,7 @@ namespace OptikPlanner.View
             // chooseDataLabel
             // 
             this.chooseDataLabel.AutoSize = true;
-            this.chooseDataLabel.Location = new System.Drawing.Point(13, 245);
+            this.chooseDataLabel.Location = new System.Drawing.Point(13, 202);
             this.chooseDataLabel.Name = "chooseDataLabel";
             this.chooseDataLabel.Size = new System.Drawing.Size(58, 13);
             this.chooseDataLabel.TabIndex = 11;
@@ -111,7 +110,7 @@ namespace OptikPlanner.View
             // 
             this.listView1.Location = new System.Drawing.Point(192, 37);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(416, 273);
+            this.listView1.Size = new System.Drawing.Size(416, 230);
             this.listView1.TabIndex = 14;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -119,7 +118,7 @@ namespace OptikPlanner.View
             // compareLabel
             // 
             this.compareLabel.AutoSize = true;
-            this.compareLabel.Location = new System.Drawing.Point(13, 180);
+            this.compareLabel.Location = new System.Drawing.Point(13, 137);
             this.compareLabel.Name = "compareLabel";
             this.compareLabel.Size = new System.Drawing.Size(128, 13);
             this.compareLabel.TabIndex = 16;
@@ -147,7 +146,7 @@ namespace OptikPlanner.View
             // chooseperiodLabel
             // 
             this.chooseperiodLabel.AutoSize = true;
-            this.chooseperiodLabel.Location = new System.Drawing.Point(13, 127);
+            this.chooseperiodLabel.Location = new System.Drawing.Point(13, 84);
             this.chooseperiodLabel.Name = "chooseperiodLabel";
             this.chooseperiodLabel.Size = new System.Drawing.Size(39, 13);
             this.chooseperiodLabel.TabIndex = 19;
@@ -156,7 +155,7 @@ namespace OptikPlanner.View
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(73, 127);
+            this.label4.Location = new System.Drawing.Point(73, 84);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(16, 13);
             this.label4.TabIndex = 20;
@@ -165,7 +164,7 @@ namespace OptikPlanner.View
             // compareMonthLabel
             // 
             this.compareMonthLabel.AutoSize = true;
-            this.compareMonthLabel.Location = new System.Drawing.Point(13, 193);
+            this.compareMonthLabel.Location = new System.Drawing.Point(13, 150);
             this.compareMonthLabel.Name = "compareMonthLabel";
             this.compareMonthLabel.Size = new System.Drawing.Size(39, 13);
             this.compareMonthLabel.TabIndex = 21;
@@ -174,7 +173,7 @@ namespace OptikPlanner.View
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(78, 193);
+            this.label6.Location = new System.Drawing.Point(78, 150);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(16, 13);
             this.label6.TabIndex = 22;
@@ -183,7 +182,7 @@ namespace OptikPlanner.View
             // showMonthCombo
             // 
             this.showMonthCombo.FormattingEnabled = true;
-            this.showMonthCombo.Location = new System.Drawing.Point(16, 143);
+            this.showMonthCombo.Location = new System.Drawing.Point(16, 100);
             this.showMonthCombo.Name = "showMonthCombo";
             this.showMonthCombo.Size = new System.Drawing.Size(54, 21);
             this.showMonthCombo.TabIndex = 23;
@@ -191,7 +190,7 @@ namespace OptikPlanner.View
             // showYearCombo
             // 
             this.showYearCombo.FormattingEnabled = true;
-            this.showYearCombo.Location = new System.Drawing.Point(76, 143);
+            this.showYearCombo.Location = new System.Drawing.Point(76, 100);
             this.showYearCombo.Name = "showYearCombo";
             this.showYearCombo.Size = new System.Drawing.Size(72, 21);
             this.showYearCombo.TabIndex = 24;
@@ -199,7 +198,7 @@ namespace OptikPlanner.View
             // compareMonthCombo
             // 
             this.compareMonthCombo.FormattingEnabled = true;
-            this.compareMonthCombo.Location = new System.Drawing.Point(15, 209);
+            this.compareMonthCombo.Location = new System.Drawing.Point(15, 166);
             this.compareMonthCombo.Name = "compareMonthCombo";
             this.compareMonthCombo.Size = new System.Drawing.Size(55, 21);
             this.compareMonthCombo.TabIndex = 25;
@@ -207,27 +206,16 @@ namespace OptikPlanner.View
             // compareYearCombo
             // 
             this.compareYearCombo.FormattingEnabled = true;
-            this.compareYearCombo.Location = new System.Drawing.Point(76, 209);
+            this.compareYearCombo.Location = new System.Drawing.Point(76, 166);
             this.compareYearCombo.Name = "compareYearCombo";
             this.compareYearCombo.Size = new System.Drawing.Size(72, 21);
             this.compareYearCombo.TabIndex = 26;
-            // 
-            // chooseWeekButton
-            // 
-            this.chooseWeekButton.Location = new System.Drawing.Point(17, 87);
-            this.chooseWeekButton.Name = "chooseWeekButton";
-            this.chooseWeekButton.Size = new System.Drawing.Size(124, 23);
-            this.chooseWeekButton.TabIndex = 27;
-            this.chooseWeekButton.Text = "Vis i uger";
-            this.chooseWeekButton.UseVisualStyleBackColor = true;
-            this.chooseWeekButton.Click += new System.EventHandler(this.chooseWeekButton_Click);
             // 
             // StatisticsView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(710, 449);
-            this.Controls.Add(this.chooseWeekButton);
+            this.ClientSize = new System.Drawing.Size(632, 293);
             this.Controls.Add(this.compareYearCombo);
             this.Controls.Add(this.compareMonthCombo);
             this.Controls.Add(this.showYearCombo);
@@ -275,6 +263,5 @@ namespace OptikPlanner.View
         private ComboBox showYearCombo;
         private ComboBox compareMonthCombo;
         private ComboBox compareYearCombo;
-        private Button chooseWeekButton;
     }
 }
