@@ -11,6 +11,7 @@ using System.Windows.Forms.Calendar;
 using OptikPlanner.Controller;
 using OptikPlanner.Misc;
 using Calendar = System.Globalization.Calendar;
+using System.IO;
 
 namespace OptikPlanner.View
 {
@@ -18,7 +19,6 @@ namespace OptikPlanner.View
     {
         private  StatisticsViewController _controller;
         private bool clickedGraf = true;
-        private bool clickedWeek = true;
         List<int> years = new List<int>();
 
         public void SetController(StatisticsViewController controller)
@@ -50,7 +50,6 @@ namespace OptikPlanner.View
             {
                 VisningMedarbejder();
             }
-
         }
 
         private void FillInRoomData()
@@ -133,35 +132,21 @@ namespace OptikPlanner.View
 
             clickedGraf = !clickedGraf;
         }
-
-        //smid i controller
-        public void GetCancellations()
-        {
-            //var test == hent log
-
-            //foreach linebreak in test smid i liste
-
-
-            //smid i view
-            //foreach liste item som indeholder dato 10-12-2016 12 fremvis i listview hvis monthpicker1 == december
-        }
-
         public void VisningAflysninger()
         {
+            
             chooseDataLabel.Text = "Vælg aflysninger";
             listView1.Columns.Clear();
             listView1.Items.Clear();
             listView1.Columns.Add("Grund", 150);
-            listView1.Columns.Add("Antal aflysninger", 100);
+            listView1.Columns.Add("aflysninger i ", 100);
+            listView1.Columns.Add("aflysninger i ", 120);
             listView1.Items.Add("Kunden ikke mødte op.");
             listView1.Items.Add("Kunden har aflyst telefonisk");
             listView1.Items.Add("der har været Andet i vejen.");
             listView1.Items[0].SubItems.Add(CancelAppointmentController.noShowList.Count.ToString());
             listView1.Items[1].SubItems.Add(CancelAppointmentController.cancelPhoneList.Count.ToString());
             listView1.Items[2].SubItems.Add(CancelAppointmentController.cancelElseList.Count.ToString());
-
-
-
         }
         public void VisningLokaler()
         {
@@ -204,6 +189,52 @@ namespace OptikPlanner.View
 
             listView1.Show();
             
+        }
+
+        private void showMonthCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            IEnumerable<string> noShowList;
+            IEnumerable<string> cancelPhoneList;
+            IEnumerable<string> cancelElseList;
+            int monthsNumber = showMonthCombo.SelectedIndex;
+            string monthsName = showMonthCombo.SelectedItem.ToString();
+            listView1.Columns[1].Text = "aflysninger i " + monthsName;
+
+            ClearList();
+            noShowList = from s in CancelAppointmentController.noShowList where (s.Substring(3, 2).Equals(monthsNumber.ToString())) select s;
+            listView1.Items[0].SubItems.Add(noShowList.Count().ToString());
+            cancelPhoneList = from s in CancelAppointmentController.cancelPhoneList where (s.Substring(3, 2).Equals(monthsNumber.ToString())) select s;
+            listView1.Items[1].SubItems.Add(cancelPhoneList.Count().ToString());
+            cancelElseList = from s in CancelAppointmentController.cancelElseList where (s.Substring(3, 2).Equals(monthsNumber.ToString())) select s;
+            listView1.Items[2].SubItems.Add(cancelElseList.Count().ToString());
+        }
+
+        private void compareMonthCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string compareName = compareMonthCombo.SelectedItem.ToString();
+            listView1.Columns[2].Text = "aflysninger i " + compareName;
+
+            IEnumerable<string> noShowList;
+            IEnumerable<string> cancelPhoneList;
+            IEnumerable<string> cancelElseList;
+            int monthsNumber = compareMonthCombo.SelectedIndex;
+            
+            noShowList = from s in CancelAppointmentController.noShowList where (s.Substring(3, 2).Equals(monthsNumber.ToString())) select s;
+            listView1.Items[0].SubItems.Add(noShowList.Count().ToString());
+            cancelPhoneList = from s in CancelAppointmentController.cancelPhoneList where (s.Substring(3, 2).Equals(monthsNumber.ToString())) select s;
+            listView1.Items[1].SubItems.Add(cancelPhoneList.Count().ToString());
+            cancelElseList = from s in CancelAppointmentController.cancelElseList where (s.Substring(3, 2).Equals(monthsNumber.ToString())) select s;
+            listView1.Items[2].SubItems.Add(cancelElseList.Count().ToString());
+        }
+
+        public void ClearList()
+        {
+            while (listView1.Items[0].SubItems.Count > 1 && listView1.Items[1].SubItems.Count > 1 && listView1.Items[2].SubItems.Count > 1)
+            {
+                listView1.Items[0].SubItems.RemoveAt(1);
+                listView1.Items[1].SubItems.RemoveAt(1);
+                listView1.Items[2].SubItems.RemoveAt(1);
+            }
         }
     }
 }

@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Windows.Forms.Calendar;
 using OptikPlanner.Model;
 using OptikPlanner.View;
+using System.IO;
 
 namespace OptikPlanner.Controller
 {
@@ -36,6 +37,20 @@ namespace OptikPlanner.Controller
 
             return list + list1 + list2;
         }
+
+        //public List<string> GetCancellations()
+        //{
+        //    List<string> LogStrings = new List<string>();
+        //    string[] Lines = System.IO.File.ReadAllLines(Path.Combine(Environment.GetFolderPath(
+        //        Environment.SpecialFolder.ApplicationData), "CancelAppointmentLog.txt"));
+        //    foreach (var s in Lines)
+        //    {
+        //        LogStrings.Add(s);
+        //    }
+        //    return LogStrings;
+        //}
+
+
 
         public List<APTDETAILS> GetAppointments()
         {
@@ -97,9 +112,6 @@ namespace OptikPlanner.Controller
             foreach (var t in timeSpans) totalUsageInHours += t.TotalHours;
 
             return totalUsageInHours;
-
-
-
         }
 
         public double GetRoomAvailabilityInHours(EYEEXAMROOMS room, int totalRoomHoursPerMonth)

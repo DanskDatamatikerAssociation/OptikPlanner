@@ -186,6 +186,7 @@ namespace OptikPlanner.View
             this.showMonthCombo.Name = "showMonthCombo";
             this.showMonthCombo.Size = new System.Drawing.Size(54, 21);
             this.showMonthCombo.TabIndex = 23;
+            this.showMonthCombo.SelectedIndexChanged += new System.EventHandler(this.showMonthCombo_SelectedIndexChanged);
             // 
             // showYearCombo
             // 
@@ -202,6 +203,7 @@ namespace OptikPlanner.View
             this.compareMonthCombo.Name = "compareMonthCombo";
             this.compareMonthCombo.Size = new System.Drawing.Size(55, 21);
             this.compareMonthCombo.TabIndex = 25;
+            this.compareMonthCombo.SelectedIndexChanged += new System.EventHandler(this.compareMonthCombo_SelectedIndexChanged);
             // 
             // compareYearCombo
             // 
