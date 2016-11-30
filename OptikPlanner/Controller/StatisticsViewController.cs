@@ -6,8 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.Calendar;
 using OptikPlanner.Model;
 using OptikPlanner.View;
+using System.IO;
 
 namespace OptikPlanner.Controller
 {
@@ -15,6 +17,8 @@ namespace OptikPlanner.Controller
     {
         private OptikItDbContext _db;
         private IStatisticsView _view;
+        public List<Object> Months = new List<Object>();
+        public Calendar calendar { get; }
 
 
         public StatisticsViewController(IStatisticsView view)
@@ -24,6 +28,7 @@ namespace OptikPlanner.Controller
 
             OptikItDbContext db = new OptikItDbContext();
         }
+
         public int TotalCancelStatistics()
         {
             var list = CancelAppointmentController.noShowList.Count;
@@ -33,7 +38,21 @@ namespace OptikPlanner.Controller
             return list + list1 + list2;
         }
 
-        private List<APTDETAILS> GetAppointments()
+        //public List<string> GetCancellations()
+        //{
+        //    List<string> LogStrings = new List<string>();
+        //    string[] Lines = System.IO.File.ReadAllLines(Path.Combine(Environment.GetFolderPath(
+        //        Environment.SpecialFolder.ApplicationData), "CancelAppointmentLog.txt"));
+        //    foreach (var s in Lines)
+        //    {
+        //        LogStrings.Add(s);
+        //    }
+        //    return LogStrings;
+        //}
+
+
+
+        public List<APTDETAILS> GetAppointments()
         {
             try
             {
@@ -85,7 +104,7 @@ namespace OptikPlanner.Controller
                 TimeSpan timeElapsed = timeTo - timeFrom;
 
                 timeSpans.Add(timeElapsed);
-                
+
 
             }
 
@@ -93,9 +112,6 @@ namespace OptikPlanner.Controller
             foreach (var t in timeSpans) totalUsageInHours += t.TotalHours;
 
             return totalUsageInHours;
-
-
-
         }
 
         public double GetRoomAvailabilityInHours(EYEEXAMROOMS room, int totalRoomHoursPerMonth)
@@ -103,7 +119,7 @@ namespace OptikPlanner.Controller
             double usageInHours = GetRoomUsageInHours(room);
 
             return totalRoomHoursPerMonth - usageInHours;
-            
+
         }
 
         public string GetValueAsPercentage(double value, double outOf)
@@ -112,5 +128,15 @@ namespace OptikPlanner.Controller
             return percentage.ToString("F") + "%";
         }
 
+        public List<APTDETAILS> ShowMonth()
+        {
+            return new List<APTDETAILS>();
+        }
+
+
+
+
+
     }
 }
+
