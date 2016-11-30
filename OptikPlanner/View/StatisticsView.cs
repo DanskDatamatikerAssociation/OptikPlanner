@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,7 @@ namespace OptikPlanner.View
 {
     public partial class StatisticsView : Form, IStatisticsView
     {
-        private  StatisticsViewController _controller;
+        private StatisticsViewController _controller;
         private bool clickedGraf = true;
         List<int> years = new List<int>();
 
@@ -40,16 +41,16 @@ namespace OptikPlanner.View
 
             if (chooseTypeCombo.SelectedIndex == 0)
             {
-                VisningAflysninger();
+                FillInCancellationData();
             }
 
             if (chooseTypeCombo.SelectedIndex == 1)
             {
-                VisningLokaler();
+                FillInRoomData();
             }
             if (chooseTypeCombo.SelectedIndex == 2)
             {
-                VisningMedarbejder();
+                FillInEmployeeData();
             }
         }
 
@@ -133,9 +134,9 @@ namespace OptikPlanner.View
 
             clickedGraf = !clickedGraf;
         }
-        public void VisningAflysninger()
+        public void FillInCancellationData()
         {
-            
+
             chooseDataLabel.Text = "Vælg aflysninger";
             listView1.Columns.Clear();
             listView1.Items.Clear();
@@ -149,23 +150,9 @@ namespace OptikPlanner.View
             listView1.Items[1].SubItems.Add(CancelAppointmentController.cancelPhoneList.Count.ToString());
             listView1.Items[2].SubItems.Add(CancelAppointmentController.cancelElseList.Count.ToString());
         }
-        public void VisningLokaler()
-        {
-            FillInRoomData();
+      
 
-            //if (showMonthCombo.SelectedItem.ToString() == "Jan")
-            //{
-            //    foreach (var s in _controller.GetAppointments())
-            //    {
-            //        if (s.APD_DATE.Value.Month == 1)
-            //        {
-            //            listView1.Items[0].SubItems.Add(s.APD_DESCRIPTION.ToString());
-            //        }
-            //    }
-
-            //}
-        }
-        public void VisningMedarbejder()
+        public void FillInEmployeeData()
         {
             chooseDataLabel.Text = "Vælg medarbejdere";
             listView1.Columns.Clear();
@@ -214,6 +201,85 @@ namespace OptikPlanner.View
 
         private void showMonthCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+
+            switch (chooseTypeCombo.Text)
+            {
+                case "Aflysninger":
+                    FilterCancellations();
+                    break;
+                case "Lokaler":
+                    FilterRoomData();
+                    break;
+                case "Medarbejdere":
+
+                    break;
+
+            }
+
+
+
+
+
+        }
+
+        private void compareMonthCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (chooseTypeCombo.Text)
+            {
+                case "Aflysninger":
+                    CompareCancellations();
+                    break;
+                case "Lokaler":
+
+                    break;
+
+            }
+
+        }
+
+        private void FilterRoomData()
+        {
+            int chosenMonth = showMonthCombo.SelectedIndex;
+
+            listView1.Columns.Clear();
+            listView1.Items.Clear();
+            listView1.Columns.Add("Lokale", 80);
+            listView1.Columns.Add("Type", 100);
+            listView1.Columns.Add("Timer brugt", 100);
+            listView1.Columns.Add("Tilgængelighed i timer", 120);
+            var rooms = _controller.GetRooms();
+            for (int i = 0; i < rooms.Count; i++)
+            {
+                var room = rooms[i];
+                listView1.Items.Add(room.ERO_SHORTDESC);
+                listView1.Items[i].SubItems.Add(room.ERO_SHORTDESC);
+                listView1.Items[i].SubItems.Add(_controller.GetRoomUsageInHours(room, chosenMonth).ToString());
+                listView1.Items[i].SubItems.Add(_controller.GetRoomAvailabilityInHours(room, 148, chosenMonth).ToString());
+
+            }
+        }
+
+        private void CompareCancellations()
+        {
+            string compareName = compareMonthCombo.SelectedItem.ToString();
+            listView1.Columns[2].Text = "aflysninger i " + compareName;
+
+            IEnumerable<string> noShowList;
+            IEnumerable<string> cancelPhoneList;
+            IEnumerable<string> cancelElseList;
+            int monthsNumber = compareMonthCombo.SelectedIndex;
+
+            noShowList = from s in CancelAppointmentController.noShowList where (s.Substring(3, 2).Equals(monthsNumber.ToString())) select s;
+            listView1.Items[0].SubItems.Add(noShowList.Count().ToString());
+            cancelPhoneList = from s in CancelAppointmentController.cancelPhoneList where (s.Substring(3, 2).Equals(monthsNumber.ToString())) select s;
+            listView1.Items[1].SubItems.Add(cancelPhoneList.Count().ToString());
+            cancelElseList = from s in CancelAppointmentController.cancelElseList where (s.Substring(3, 2).Equals(monthsNumber.ToString())) select s;
+            listView1.Items[2].SubItems.Add(cancelElseList.Count().ToString());
+        }
+
+        private void FilterCancellations()
+        {
             IEnumerable<string> noShowList;
             IEnumerable<string> cancelPhoneList;
             IEnumerable<string> cancelElseList;
@@ -230,24 +296,6 @@ namespace OptikPlanner.View
             listView1.Items[2].SubItems.Add(cancelElseList.Count().ToString());
         }
 
-        private void compareMonthCombo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string compareName = compareMonthCombo.SelectedItem.ToString();
-            listView1.Columns[2].Text = "aflysninger i " + compareName;
-
-            IEnumerable<string> noShowList;
-            IEnumerable<string> cancelPhoneList;
-            IEnumerable<string> cancelElseList;
-            int monthsNumber = compareMonthCombo.SelectedIndex;
-            
-            noShowList = from s in CancelAppointmentController.noShowList where (s.Substring(3, 2).Equals(monthsNumber.ToString())) select s;
-            listView1.Items[0].SubItems.Add(noShowList.Count().ToString());
-            cancelPhoneList = from s in CancelAppointmentController.cancelPhoneList where (s.Substring(3, 2).Equals(monthsNumber.ToString())) select s;
-            listView1.Items[1].SubItems.Add(cancelPhoneList.Count().ToString());
-            cancelElseList = from s in CancelAppointmentController.cancelElseList where (s.Substring(3, 2).Equals(monthsNumber.ToString())) select s;
-            listView1.Items[2].SubItems.Add(cancelElseList.Count().ToString());
-        }
-
         public void ClearList()
         {
             while (listView1.Items[0].SubItems.Count > 1 && listView1.Items[1].SubItems.Count > 1 && listView1.Items[2].SubItems.Count > 1)
@@ -256,6 +304,7 @@ namespace OptikPlanner.View
                 listView1.Items[1].SubItems.RemoveAt(1);
                 listView1.Items[2].SubItems.RemoveAt(1);
             }
+
         }
 
         private void SetupRoomPieChart()
