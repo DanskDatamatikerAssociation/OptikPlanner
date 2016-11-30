@@ -335,5 +335,10 @@ namespace OptikPlanner.View
             chart1.Series.Clear();
             chart1.Titles.Clear();
         }
+
+        private void showMonthCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
