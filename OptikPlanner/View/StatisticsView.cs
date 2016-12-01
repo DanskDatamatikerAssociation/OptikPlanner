@@ -404,5 +404,19 @@ namespace OptikPlanner.View
             chart1.Series.Clear();
             chart1.Titles.Clear();
         }
+
+        private void exportButton_Click(object sender, EventArgs e)
+        {
+            
+
+            DialogResult dialogResult = MessageBox.Show("Er du sikker på at du ønsker at exportere nuværende data til CSV?", "Exportér til CSV", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                ExportToCSV.ExportToCsv(listView1, @"C:\Users\Daniel\Desktop\test.csv", true);
+            }
+            //else if (dialogResult == DialogResult.No)
+            //{
+            //}
+        }
     }
 }

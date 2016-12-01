@@ -58,6 +58,7 @@ namespace OptikPlanner.View
             this.compareYearCombo = new System.Windows.Forms.ComboBox();
             this.chooseWeekButton = new System.Windows.Forms.Button();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.exportButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -133,7 +134,7 @@ namespace OptikPlanner.View
             // chooseViewLabel
             // 
             this.chooseViewLabel.AutoSize = true;
-            this.chooseViewLabel.Location = new System.Drawing.Point(436, 9);
+            this.chooseViewLabel.Location = new System.Drawing.Point(358, 9);
             this.chooseViewLabel.Name = "chooseViewLabel";
             this.chooseViewLabel.Size = new System.Drawing.Size(88, 13);
             this.chooseViewLabel.TabIndex = 17;
@@ -141,7 +142,7 @@ namespace OptikPlanner.View
             // 
             // chooseViewButton
             // 
-            this.chooseViewButton.Location = new System.Drawing.Point(530, 4);
+            this.chooseViewButton.Location = new System.Drawing.Point(452, 4);
             this.chooseViewButton.Name = "chooseViewButton";
             this.chooseViewButton.Size = new System.Drawing.Size(75, 23);
             this.chooseViewButton.TabIndex = 18;
@@ -248,11 +249,22 @@ namespace OptikPlanner.View
             this.chart1.TabIndex = 28;
             this.chart1.Text = "chart1";
             // 
+            // exportButton
+            // 
+            this.exportButton.Location = new System.Drawing.Point(533, 4);
+            this.exportButton.Name = "exportButton";
+            this.exportButton.Size = new System.Drawing.Size(75, 23);
+            this.exportButton.TabIndex = 29;
+            this.exportButton.Text = "Exportér";
+            this.exportButton.UseVisualStyleBackColor = true;
+            this.exportButton.Click += new System.EventHandler(this.exportButton_Click);
+            // 
             // StatisticsView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(656, 351);
+            this.Controls.Add(this.exportButton);
             this.Controls.Add(this.chooseWeekButton);
             this.Controls.Add(this.compareYearCombo);
             this.Controls.Add(this.compareMonthCombo);
@@ -307,5 +319,6 @@ namespace OptikPlanner.View
         private ComboBox compareYearCombo;
         private Button chooseWeekButton;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private Button exportButton;
     }
 }
