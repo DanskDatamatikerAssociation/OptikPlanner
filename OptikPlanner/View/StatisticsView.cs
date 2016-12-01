@@ -41,17 +41,18 @@ namespace OptikPlanner.View
 
             if (chooseTypeCombo.SelectedIndex == 0)
             {
-                if(!clickedGraf) SetupLoggingBarChart();
+                if (!clickedGraf) SetupLoggingBarChart();
                 FillInCancellationData();
             }
 
             if (chooseTypeCombo.SelectedIndex == 1)
             {
-                if(!clickedGraf) SetupRoomPieChart();
+                if (!clickedGraf) SetupRoomPieChart();
                 FillInRoomData();
             }
             if (chooseTypeCombo.SelectedIndex == 2)
             {
+                if(!clickedGraf) SetUpEmployeePieChart();
                 FillInEmployeeData();
             }
         }
@@ -86,7 +87,7 @@ namespace OptikPlanner.View
             listView1.Columns.Add("Timer brugt", 80);
             listView1.Columns.Add("Tilgængelighed i timer", 120);
 
-           var users = _controller.GetUsers();
+            var users = _controller.GetUsers();
 
             for (int i = 0; i < users.Count; i++)
             {
@@ -173,7 +174,7 @@ namespace OptikPlanner.View
             listView1.Items[1].SubItems.Add(CancelAppointmentController.cancelPhoneList.Count.ToString());
             listView1.Items[2].SubItems.Add(CancelAppointmentController.cancelElseList.Count.ToString());
         }
-      
+
 
 
         private void GraficalButtonClick()
@@ -190,6 +191,9 @@ namespace OptikPlanner.View
                         break;
                     case "Aflysninger":
                         SetupLoggingBarChart();
+                        break;
+                    case "Medarbejdere":
+                        SetUpEmployeePieChart();
                         break;
                     default:
                         ClearChart();
@@ -358,6 +362,8 @@ namespace OptikPlanner.View
             chart1.Series.Clear();
             chart1.Titles.Clear();
             chart1.ResetAutoValues();
+            chart1.Palette = ChartColorPalette.None;
+
 
             Series series1 = new Series
             {
@@ -400,7 +406,51 @@ namespace OptikPlanner.View
 
         private void SetUpEmployeePieChart()
         {
-            
+            chart1.Series.Clear();
+            chart1.Titles.Clear();
+            chart1.ResetAutoValues();
+            chart1.Palette = ChartColorPalette.None;
+
+
+            Series series1 = new Series
+            {
+                Name = "series1",
+                IsVisibleInLegend = true,
+                Color = System.Drawing.Color.Green,
+                ChartType = SeriesChartType.Pie
+            };
+
+            chart1.Palette = ChartColorPalette.Bright;
+
+            chart1.ChartAreas[0].BackColor = Color.Transparent;
+            chart1.Titles.Add("Lokaletilgængelighed i timer og %");
+
+            series1.SetCustomProperty("PieLabelStyle", "Outside");
+            chart1.ChartAreas[0].Area3DStyle.Enable3D = true;
+
+            chart1.ChartAreas[0].Position = new ElementPosition(-10, 10, 90, 90);
+
+
+            chart1.Series.Add(series1);
+
+            //Generel tilgængelighed
+            var p1 = series1.Points.Add(148);
+            p1.LegendText = "Tilgængelighed";
+            var p1Value = p1.YValues[0];
+
+
+            //Medarbejdere
+            var employees = _controller.GetUsers();
+            foreach (var e in employees)
+            {
+                var userPiece = series1.Points.Add(_controller.GetEmployeeUsageInHours(e));
+                userPiece.LegendText = e.US_USERNAME;
+                var value = userPiece.YValues[0];
+                var valuePercentage = _controller.GetValueAsPercentage(value, p1.YValues[0]);
+                userPiece.Label = $"{value} ({valuePercentage})";
+            }
+
+            chart1.Invalidate();
         }
 
         private void SetupLoggingBarChart()
