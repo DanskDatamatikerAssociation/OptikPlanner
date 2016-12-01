@@ -10,6 +10,12 @@ namespace OptikPlanner.Model
             base.Configuration.ProxyCreationEnabled = false;
         }
 
+        public OptikItDbContext(string connectionString)
+            :base(connectionString)
+        {
+            
+        }
+
         public virtual DbSet<APTDETAILS> APTDETAILS { get; set; }
         public virtual DbSet<CUSTOMERS> CUSTOMERS { get; set; }
         public virtual DbSet<EYEEXAMROOMS> EYEEXAMROOMS { get; set; }

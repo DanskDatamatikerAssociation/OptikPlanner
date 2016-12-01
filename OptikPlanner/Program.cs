@@ -25,8 +25,8 @@ namespace OptikPlanner
 
             using (db = new OptikItDbContext())
             {
-                //Debug.WriteLine(db.Database.Connection.ConnectionString);
-                db.Database.Connection.ConnectionString = db.Database.Connection.ConnectionString.Replace("DANNY-MSI", "");
+                Debug.WriteLine(db.Database.Connection.ConnectionString);
+                //db.Database.Connection.ConnectionString = db.Database.Connection.ConnectionString.Replace("DANNY-MSI", "");
 
             }
 
