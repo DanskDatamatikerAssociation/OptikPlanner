@@ -262,14 +262,14 @@ namespace OptikPlanner.View
 
         private void CompareCancellations()
         {
-            string compareName = compareMonthCombo.SelectedItem.ToString();
-            listView1.Columns[2].Text = "aflysninger i " + compareName;
-
             IEnumerable<string> noShowList;
             IEnumerable<string> cancelPhoneList;
             IEnumerable<string> cancelElseList;
             int monthsNumber = compareMonthCombo.SelectedIndex;
+            string compareName = compareMonthCombo.SelectedItem.ToString();
+            listView1.Columns[2].Text = "aflysninger i " + compareName;
 
+            CompareClearList();
             noShowList = from s in CancelAppointmentController.noShowList where (s.Substring(3, 2).Equals(monthsNumber.ToString())) select s;
             listView1.Items[0].SubItems.Add(noShowList.Count().ToString());
             cancelPhoneList = from s in CancelAppointmentController.cancelPhoneList where (s.Substring(3, 2).Equals(monthsNumber.ToString())) select s;
@@ -287,7 +287,7 @@ namespace OptikPlanner.View
             string monthsName = showMonthCombo.SelectedItem.ToString();
             listView1.Columns[1].Text = "aflysninger i " + monthsName;
 
-            ClearList();
+            MonthClearList();
             noShowList = from s in CancelAppointmentController.noShowList where (s.Substring(3, 2).Equals(monthsNumber.ToString())) select s;
             listView1.Items[0].SubItems.Add(noShowList.Count().ToString());
             cancelPhoneList = from s in CancelAppointmentController.cancelPhoneList where (s.Substring(3, 2).Equals(monthsNumber.ToString())) select s;
@@ -296,13 +296,23 @@ namespace OptikPlanner.View
             listView1.Items[2].SubItems.Add(cancelElseList.Count().ToString());
         }
 
-        public void ClearList()
+        public void MonthClearList()
         {
             while (listView1.Items[0].SubItems.Count > 1 && listView1.Items[1].SubItems.Count > 1 && listView1.Items[2].SubItems.Count > 1)
             {
                 listView1.Items[0].SubItems.RemoveAt(1);
                 listView1.Items[1].SubItems.RemoveAt(1);
                 listView1.Items[2].SubItems.RemoveAt(1);
+            }
+
+        }
+        public void CompareClearList()
+        {
+            while (listView1.Items[0].SubItems.Count > 2 && listView1.Items[1].SubItems.Count > 2 && listView1.Items[2].SubItems.Count > 2)
+            {
+                listView1.Items[0].SubItems.RemoveAt(2);
+                listView1.Items[1].SubItems.RemoveAt(2);
+                listView1.Items[2].SubItems.RemoveAt(2);
             }
 
         }
