@@ -71,10 +71,6 @@
     </Compile>
     <Compile Include="Controller\CalendarViewController.cs" />
     <Compile Include="Controller\CreateAppointmentController.cs" />
-    <Compile Include="Model\CheckComboBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Model\CheckComboBoxItem.cs" />
     <Compile Include="Model\CUSTOMERS.cs" />
     <Compile Include="Model\EYEEXAMROOMS.cs" />
     <Compile Include="CustomControl1.cs">
