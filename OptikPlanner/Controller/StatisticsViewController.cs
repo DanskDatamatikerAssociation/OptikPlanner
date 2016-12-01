@@ -85,6 +85,23 @@ namespace OptikPlanner.Controller
             }
         }
 
+        public List<USERS> GetUsers()
+        {
+            try
+            {
+                using (_db = new OptikItDbContext())
+                {
+                    return _db.USERS.ToList();
+                }
+            }
+            catch (DbException ex)
+            {
+                Debug.WriteLine("Problem retrieving appointments from the database: '" + ex.Message + "'");
+                return new List<USERS>();
+
+            }
+        }
+
         public double GetRoomUsageInHours(EYEEXAMROOMS room)
         {
             var allAppointments = GetAppointments();
@@ -167,6 +184,77 @@ namespace OptikPlanner.Controller
         public List<APTDETAILS> ShowMonth()
         {
             return new List<APTDETAILS>();
+        }
+
+        public double GetEmployeeUsageInHours(USERS employee)
+        {
+            var allAppointments = GetAppointments();
+            List<APTDETAILS> appointmentsByEmployee = new List<APTDETAILS>();
+
+            foreach(var a in allAppointments) if (a.APD_USER == employee.US_STAMP) appointmentsByEmployee.Add(a);
+
+            List<TimeSpan> timeSpans = new List<TimeSpan>();
+
+            foreach (var a in appointmentsByEmployee)
+            {
+                TimeSpan timeFrom = TimeSpan.Parse(a.APD_TIMEFROM);
+                TimeSpan timeTo = TimeSpan.Parse(a.APD_TIMETO);
+                TimeSpan timeElapsed = timeTo - timeFrom;
+
+                timeSpans.Add(timeElapsed);
+
+
+            }
+
+            double totalUsageInHours = 0;
+            foreach (var t in timeSpans) totalUsageInHours += t.TotalHours;
+
+            return totalUsageInHours;
+
+
+        }
+
+        public double GetEmployeeUsageInHours(USERS employee, int monthNr)
+        {
+            var allAppointments = GetAppointments();
+            List<APTDETAILS> appointmentsByEmployee = new List<APTDETAILS>();
+
+            foreach (var a in allAppointments)
+            {
+                if (a.APD_USER == employee.US_STAMP && a.APD_DATE.Value.Month == monthNr) appointmentsByEmployee.Add(a);
+            }
+
+            List<TimeSpan> timeSpans = new List<TimeSpan>();
+
+            foreach (var a in appointmentsByEmployee)
+            {
+                TimeSpan timeFrom = TimeSpan.Parse(a.APD_TIMEFROM);
+                TimeSpan timeTo = TimeSpan.Parse(a.APD_TIMETO);
+                TimeSpan timeElapsed = timeTo - timeFrom;
+
+                timeSpans.Add(timeElapsed);
+
+
+            }
+
+            double totalUsageInHours = 0;
+            foreach (var t in timeSpans) totalUsageInHours += t.TotalHours;
+
+            return totalUsageInHours;
+        }
+
+        public double GetEmployeeAvailabilityInHours(USERS employee, int totalHoursPerMonth)
+        {
+            double usageInHours = GetEmployeeUsageInHours(employee);
+
+            return totalHoursPerMonth - usageInHours;
+        }
+
+        public double GetEmployeeAvailabilityInHours(USERS employee, int totalHoursPerMonth, int monthNr)
+        {
+            double usageInHours = GetEmployeeUsageInHours(employee, monthNr);
+
+            return totalHoursPerMonth - usageInHours;
         }
 
 

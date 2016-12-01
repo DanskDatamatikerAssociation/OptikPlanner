@@ -41,11 +41,13 @@ namespace OptikPlanner.View
 
             if (chooseTypeCombo.SelectedIndex == 0)
             {
+                if(!clickedGraf) SetupLoggingBarChart();
                 FillInCancellationData();
             }
 
             if (chooseTypeCombo.SelectedIndex == 1)
             {
+                if(!clickedGraf) SetupRoomPieChart();
                 FillInRoomData();
             }
             if (chooseTypeCombo.SelectedIndex == 2)
@@ -71,6 +73,27 @@ namespace OptikPlanner.View
                 listView1.Items[i].SubItems.Add(room.ERO_SHORTDESC);
                 listView1.Items[i].SubItems.Add(_controller.GetRoomUsageInHours(room).ToString());
                 listView1.Items[i].SubItems.Add(_controller.GetRoomAvailabilityInHours(room, 148).ToString());
+
+            }
+        }
+
+        private void FillInEmployeeData()
+        {
+            chooseDataLabel.Text = "Vælg medarbejder";
+            listView1.Columns.Clear();
+            listView1.Items.Clear();
+            listView1.Columns.Add("Navn", 200);
+            listView1.Columns.Add("Timer brugt", 80);
+            listView1.Columns.Add("Tilgængelighed i timer", 120);
+
+           var users = _controller.GetUsers();
+
+            for (int i = 0; i < users.Count; i++)
+            {
+                var user = users[i];
+                listView1.Items.Add(user.US_USERNAME);
+                listView1.Items[i].SubItems.Add(_controller.GetEmployeeUsageInHours(user).ToString());
+                listView1.Items[i].SubItems.Add(_controller.GetEmployeeAvailabilityInHours(user, 148).ToString());
 
             }
         }
@@ -152,15 +175,6 @@ namespace OptikPlanner.View
         }
       
 
-        public void FillInEmployeeData()
-        {
-            chooseDataLabel.Text = "Vælg medarbejdere";
-            listView1.Columns.Clear();
-            listView1.Items.Clear();
-            listView1.Columns.Add("Navn", 155);
-            listView1.Columns.Add("Mødte ikke op", 100);
-            listView1.Columns.Add("Opkald", 100);
-        }
 
         private void GraficalButtonClick()
         {
