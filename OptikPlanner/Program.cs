@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using OptikPlanner.Controller;
 using OptikPlanner.Misc;
+using OptikPlanner.Model;
 using OptikPlanner.View;
 
 namespace OptikPlanner
@@ -19,6 +21,17 @@ namespace OptikPlanner
         [STAThread]
         static void Main()
         {
+            OptikItDbContext db;
+
+            using (db = new OptikItDbContext())
+            {
+                //Debug.WriteLine(db.Database.Connection.ConnectionString);
+                db.Database.Connection.ConnectionString = db.Database.Connection.ConnectionString.Replace("DANNY-MSI", "");
+
+            }
+
+
+
             CancelAppointmentController.GetNoShows();
             CancelAppointmentController.GetPhoneCancels();
             CancelAppointmentController.GetElseCancels();
