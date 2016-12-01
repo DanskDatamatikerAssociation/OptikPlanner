@@ -226,7 +226,7 @@ namespace OptikPlanner.View
                     FilterRoomData();
                     break;
                 case "Medarbejdere":
-
+                    FilterEmployeeData();
                     break;
 
             }
@@ -270,6 +270,28 @@ namespace OptikPlanner.View
                 listView1.Items[i].SubItems.Add(room.ERO_SHORTDESC);
                 listView1.Items[i].SubItems.Add(_controller.GetRoomUsageInHours(room, chosenMonth).ToString());
                 listView1.Items[i].SubItems.Add(_controller.GetRoomAvailabilityInHours(room, 148, chosenMonth).ToString());
+
+            }
+        }
+
+        private void FilterEmployeeData()
+        {
+            int chosenMonth = showMonthCombo.SelectedIndex;
+
+            listView1.Columns.Clear();
+            listView1.Items.Clear();
+            listView1.Columns.Add("Navn", 200);
+            listView1.Columns.Add("Timer brugt", 80);
+            listView1.Columns.Add("Tilgængelighed i timer", 120);
+
+            var users = _controller.GetUsers();
+
+            for (int i = 0; i < users.Count; i++)
+            {
+                var user = users[i];
+                listView1.Items.Add(user.US_USERNAME);
+                listView1.Items[i].SubItems.Add(_controller.GetEmployeeUsageInHours(user, chosenMonth).ToString());
+                listView1.Items[i].SubItems.Add(_controller.GetEmployeeAvailabilityInHours(user, 148, chosenMonth).ToString());
 
             }
         }
@@ -374,6 +396,11 @@ namespace OptikPlanner.View
             }
 
             chart1.Invalidate();
+        }
+
+        private void SetUpEmployeePieChart()
+        {
+            
         }
 
         private void SetupLoggingBarChart()
