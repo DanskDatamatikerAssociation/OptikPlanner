@@ -14,6 +14,7 @@ using OptikPlanner.Controller;
 using OptikPlanner.Misc;
 using Calendar = System.Globalization.Calendar;
 using System.IO;
+using OptikPlanner.Model;
 
 namespace OptikPlanner.View
 {
@@ -134,6 +135,7 @@ namespace OptikPlanner.View
 
             clickedGraf = !clickedGraf;
         }
+
         public void FillInCancellationData()
         {
 
@@ -150,7 +152,7 @@ namespace OptikPlanner.View
             listView1.Items[1].SubItems.Add(CancelAppointmentController.cancelPhoneList.Count.ToString());
             listView1.Items[2].SubItems.Add(CancelAppointmentController.cancelElseList.Count.ToString());
         }
-      
+
 
         public void FillInEmployeeData()
         {
@@ -255,7 +257,8 @@ namespace OptikPlanner.View
                 listView1.Items.Add(room.ERO_SHORTDESC);
                 listView1.Items[i].SubItems.Add(room.ERO_SHORTDESC);
                 listView1.Items[i].SubItems.Add(_controller.GetRoomUsageInHours(room, chosenMonth).ToString());
-                listView1.Items[i].SubItems.Add(_controller.GetRoomAvailabilityInHours(room, 148, chosenMonth).ToString());
+                listView1.Items[i].SubItems.Add(
+                    _controller.GetRoomAvailabilityInHours(room, 148, chosenMonth).ToString());
 
             }
         }
@@ -270,11 +273,17 @@ namespace OptikPlanner.View
             listView1.Columns[2].Text = "aflysninger i " + compareName;
 
             CompareClearList();
-            noShowList = from s in CancelAppointmentController.noShowList where (s.Substring(3, 2).Equals(monthsNumber.ToString())) select s;
+            noShowList = from s in CancelAppointmentController.noShowList
+                where (s.Substring(3, 2).Equals(monthsNumber.ToString()))
+                select s;
             listView1.Items[0].SubItems.Add(noShowList.Count().ToString());
-            cancelPhoneList = from s in CancelAppointmentController.cancelPhoneList where (s.Substring(3, 2).Equals(monthsNumber.ToString())) select s;
+            cancelPhoneList = from s in CancelAppointmentController.cancelPhoneList
+                where (s.Substring(3, 2).Equals(monthsNumber.ToString()))
+                select s;
             listView1.Items[1].SubItems.Add(cancelPhoneList.Count().ToString());
-            cancelElseList = from s in CancelAppointmentController.cancelElseList where (s.Substring(3, 2).Equals(monthsNumber.ToString())) select s;
+            cancelElseList = from s in CancelAppointmentController.cancelElseList
+                where (s.Substring(3, 2).Equals(monthsNumber.ToString()))
+                select s;
             listView1.Items[2].SubItems.Add(cancelElseList.Count().ToString());
         }
 
@@ -288,17 +297,24 @@ namespace OptikPlanner.View
             listView1.Columns[1].Text = "aflysninger i " + monthsName;
 
             MonthClearList();
-            noShowList = from s in CancelAppointmentController.noShowList where (s.Substring(3, 2).Equals(monthsNumber.ToString())) select s;
+            noShowList = from s in CancelAppointmentController.noShowList
+                where (s.Substring(3, 2).Equals(monthsNumber.ToString()))
+                select s;
             listView1.Items[0].SubItems.Add(noShowList.Count().ToString());
-            cancelPhoneList = from s in CancelAppointmentController.cancelPhoneList where (s.Substring(3, 2).Equals(monthsNumber.ToString())) select s;
+            cancelPhoneList = from s in CancelAppointmentController.cancelPhoneList
+                where (s.Substring(3, 2).Equals(monthsNumber.ToString()))
+                select s;
             listView1.Items[1].SubItems.Add(cancelPhoneList.Count().ToString());
-            cancelElseList = from s in CancelAppointmentController.cancelElseList where (s.Substring(3, 2).Equals(monthsNumber.ToString())) select s;
+            cancelElseList = from s in CancelAppointmentController.cancelElseList
+                where (s.Substring(3, 2).Equals(monthsNumber.ToString()))
+                select s;
             listView1.Items[2].SubItems.Add(cancelElseList.Count().ToString());
         }
 
         public void MonthClearList()
         {
-            while (listView1.Items[0].SubItems.Count > 1 && listView1.Items[1].SubItems.Count > 1 && listView1.Items[2].SubItems.Count > 1)
+            while (listView1.Items[0].SubItems.Count > 1 && listView1.Items[1].SubItems.Count > 1 &&
+                   listView1.Items[2].SubItems.Count > 1)
             {
                 listView1.Items[0].SubItems.RemoveAt(1);
                 listView1.Items[1].SubItems.RemoveAt(1);
@@ -306,9 +322,11 @@ namespace OptikPlanner.View
             }
 
         }
+
         public void CompareClearList()
         {
-            while (listView1.Items[0].SubItems.Count > 2 && listView1.Items[1].SubItems.Count > 2 && listView1.Items[2].SubItems.Count > 2)
+            while (listView1.Items[0].SubItems.Count > 2 && listView1.Items[1].SubItems.Count > 2 &&
+                   listView1.Items[2].SubItems.Count > 2)
             {
                 listView1.Items[0].SubItems.RemoveAt(2);
                 listView1.Items[1].SubItems.RemoveAt(2);
@@ -405,9 +423,8 @@ namespace OptikPlanner.View
             chart1.Titles.Clear();
         }
 
-        private void exportButton_Click(object sender, EventArgs e)
+        private void ExportToCsv()
         {
-
             using (SaveFileDialog dialog = new SaveFileDialog())
             {
                 dialog.Filter = "csv files (*.csv)|*.csv|Csv files (*.csv)|*.csv";
@@ -416,36 +433,23 @@ namespace OptikPlanner.View
                 dialog.FileName = "statistics " + DateTime.Now.ToShortDateString() + ".csv";
                 dialog.RestoreDirectory = true;
                 string logPath = Path.GetFullPath(dialog.FileName);
-                string logPath2 = @"C:\Users\Daniel\Desktop\statistics 02-12-2016.csv";
+                string logPath2 = @"C:\Users\Danny\Desktop\statistics 02-12-2016.csv";
 
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     //ExportToCsv.ExportToCSV(listView1, logPath, true);
 
-                    using (StreamWriter sw = new StreamWriter(new FileStream(logPath2, FileMode.OpenOrCreate, FileAccess.ReadWrite), Encoding.UTF8))
-                    {
-                        StringBuilder result = new StringBuilder();
-                        result.Append("Grund" + "Valgt måned" + "sammenligning måned");
-                        foreach (ListViewItem s in listView1.Items)
-                        {
-                            result.AppendLine(string.Format("{0}, {1}, {2}", s.SubItems[0].Text, s.SubItems[1].Text,
-                                s.SubItems[2].Text));
-                        }
-                        sw.WriteLine(result);
-                        sw.Flush();
-                        sw.Close();
-                    }
+
                 }
             }
-
-            //DialogResult dialogResult = MessageBox.Show("Er du sikker på at du ønsker at exportere nuværende data til CSV?", "Exportér til CSV", MessageBoxButtons.YesNo);
-            //if (dialogResult == DialogResult.Yes)
-            //{
-
-            //}
-            //else if (dialogResult == DialogResult.No)
-            //{
-            //}
         }
+
+        private void exportButton_Click(object sender, EventArgs e)
+        {
+
+            Misc.ExportToCsv.ExportToCSV(listView1);
+
+
         }
+    }
 }

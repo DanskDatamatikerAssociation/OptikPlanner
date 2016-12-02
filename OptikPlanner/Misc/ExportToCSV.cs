@@ -11,6 +11,41 @@ namespace OptikPlanner.Misc
 {
     public class ExportToCsv
     {
+        public static void ExportToCSV(ListView listView)
+        {
+            string logPath2 = @"C:\Users\Danny\Desktop\statistics 02-12-2016.csv";
+
+            using (StreamWriter sw = new StreamWriter(new FileStream(logPath2, FileMode.Create, FileAccess.ReadWrite), Encoding.UTF8))
+            {
+                StringBuilder result = new StringBuilder();
+
+                foreach (ColumnHeader column in listView.Columns)
+                {
+                    result.Append(column.Text + ",");
+                }
+                result.AppendLine();
+                
+
+
+                result.AppendLine();
+
+                
+
+                sw.WriteLine(result);
+                sw.Flush();
+                sw.Close();
+            }
+
+                //DialogResult dialogResult = MessageBox.Show("Er du sikker på at du ønsker at exportere nuværende data til CSV?", "Exportér til CSV", MessageBoxButtons.YesNo);
+                //if (dialogResult == DialogResult.Yes)
+                //{
+
+                //}
+                //else if (dialogResult == DialogResult.No)
+                //{
+                //}
+        }
+
         public static void ExportToCSV(ListView listView, string filePath, bool includeHidden)
         {
             //using (StreamWriter sw = new StreamWriter(new FileStream(filePath, FileMode.Create, FileAccess.ReadWrite), Encoding.UTF8))
