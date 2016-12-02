@@ -10,6 +10,7 @@ using System.Windows.Forms.Calendar;
 using OptikPlanner.Model;
 using OptikPlanner.View;
 using System.IO;
+using OptikPlanner.Misc;
 
 namespace OptikPlanner.Controller
 {
@@ -255,6 +256,24 @@ namespace OptikPlanner.Controller
             double usageInHours = GetEmployeeUsageInHours(employee, monthNr);
 
             return totalHoursPerMonth - usageInHours;
+        }
+
+        public List<string> GetNoShowCancellations(int monthNr)
+        {
+            var noShowList = from s in CancelAppointmentController.noShowList where (s.Substring(3, 2).Equals(monthNr.ToString())) select s;
+            return noShowList.ToList();
+        }
+
+        public List<string> GetPhoneCancellations(int monthNr)
+        {
+            var noShowList = from s in CancelAppointmentController.cancelPhoneList where (s.Substring(3, 2).Equals(monthNr.ToString())) select s;
+            return noShowList.ToList();
+        }
+
+        public List<string> GetOtherReasonCancellations(int monthNr)
+        {
+            var noShowList = from s in CancelAppointmentController.cancelElseList where (s.Substring(3, 2).Equals(monthNr.ToString())) select s;
+            return noShowList.ToList();
         }
 
 

@@ -14,6 +14,7 @@ using OptikPlanner.Controller;
 using OptikPlanner.Misc;
 using Calendar = System.Globalization.Calendar;
 using System.IO;
+using System.Net.Sockets;
 
 namespace OptikPlanner.View
 {
@@ -33,6 +34,9 @@ namespace OptikPlanner.View
             InitializeComponent();
             Populate();
             _controller = new StatisticsViewController(this);
+
+            
+
 
         }
 
@@ -196,7 +200,8 @@ namespace OptikPlanner.View
                         SetUpEmployeePieChart();
                         break;
                     default:
-                        ClearChart();
+                        SetupLoggingComparisonChart();
+                        //ClearChart();
                         break;
                 }
             }
@@ -224,12 +229,15 @@ namespace OptikPlanner.View
             switch (chooseTypeCombo.Text)
             {
                 case "Aflysninger":
+                    if(!clickedGraf) SetupLoggingBarChart();
                     FilterCancellations();
                     break;
                 case "Lokaler":
+                    if(!clickedGraf) SetupRoomPieChart();
                     FilterRoomData();
                     break;
                 case "Medarbejdere":
+                    if(!clickedGraf) SetUpEmployeePieChart();
                     FilterEmployeeData();
                     break;
 
@@ -246,10 +254,11 @@ namespace OptikPlanner.View
             switch (chooseTypeCombo.Text)
             {
                 case "Aflysninger":
-                    CompareCancellations();
+                    //CompareCancellations();
                     break;
                 case "Lokaler":
-
+                    listView1.Hide();
+                    SetupRoomComparisonChart();
                     break;
 
             }
@@ -300,39 +309,37 @@ namespace OptikPlanner.View
             }
         }
 
-        private void CompareCancellations()
-        {
-            IEnumerable<string> noShowList;
-            IEnumerable<string> cancelPhoneList;
-            IEnumerable<string> cancelElseList;
-            int monthsNumber = compareMonthCombo.SelectedIndex;
-            string compareName = compareMonthCombo.SelectedItem.ToString();
-            listView1.Columns[2].Text = "aflysninger i " + compareName;
+        //private void CompareCancellations()
+        //{
+  
+        //    int monthsNumber = compareMonthCombo.SelectedIndex;
+        //    string compareName = compareMonthCombo.SelectedItem.ToString();
+        //    listView1.Columns[2].Text = "Aflysninger i " + compareName;
 
-            CompareClearList();
-            noShowList = from s in CancelAppointmentController.noShowList where (s.Substring(3, 2).Equals(monthsNumber.ToString())) select s;
-            listView1.Items[0].SubItems.Add(noShowList.Count().ToString());
-            cancelPhoneList = from s in CancelAppointmentController.cancelPhoneList where (s.Substring(3, 2).Equals(monthsNumber.ToString())) select s;
-            listView1.Items[1].SubItems.Add(cancelPhoneList.Count().ToString());
-            cancelElseList = from s in CancelAppointmentController.cancelElseList where (s.Substring(3, 2).Equals(monthsNumber.ToString())) select s;
-            listView1.Items[2].SubItems.Add(cancelElseList.Count().ToString());
-        }
+        //    CompareClearList();
+        //    var noShowList = _controller.GetNoShowCancellations(monthsNumber);
+        //    listView1.Items[0].SubItems.Add(noShowList.Count().ToString());
+        //    var cancelPhoneList = _controller.GetPhoneCancellations(monthsNumber);
+        //    listView1.Items[1].SubItems.Add(cancelPhoneList.Count().ToString());
+        //    var cancelElseList = _controller.GetOtherReasonCancellations(monthsNumber);
+        //    listView1.Items[2].SubItems.Add(cancelElseList.Count().ToString());
+        //}
 
         private void FilterCancellations()
         {
-            IEnumerable<string> noShowList;
-            IEnumerable<string> cancelPhoneList;
-            IEnumerable<string> cancelElseList;
+            
             int monthsNumber = showMonthCombo.SelectedIndex;
             string monthsName = showMonthCombo.SelectedItem.ToString();
-            listView1.Columns[1].Text = "aflysninger i " + monthsName;
+            listView1.Columns[1].Text = "Aflysninger i " + monthsName;
 
             MonthClearList();
-            noShowList = from s in CancelAppointmentController.noShowList where (s.Substring(3, 2).Equals(monthsNumber.ToString())) select s;
+            var noShowList = _controller.GetNoShowCancellations(monthsNumber);
             listView1.Items[0].SubItems.Add(noShowList.Count().ToString());
-            cancelPhoneList = from s in CancelAppointmentController.cancelPhoneList where (s.Substring(3, 2).Equals(monthsNumber.ToString())) select s;
+
+            var cancelPhoneList = _controller.GetPhoneCancellations(monthsNumber);
             listView1.Items[1].SubItems.Add(cancelPhoneList.Count().ToString());
-            cancelElseList = from s in CancelAppointmentController.cancelElseList where (s.Substring(3, 2).Equals(monthsNumber.ToString())) select s;
+
+            var cancelElseList = _controller.GetOtherReasonCancellations(monthsNumber);
             listView1.Items[2].SubItems.Add(cancelElseList.Count().ToString());
         }
 
@@ -359,11 +366,7 @@ namespace OptikPlanner.View
 
         private void SetupRoomPieChart()
         {
-            chart1.Series.Clear();
-            chart1.Titles.Clear();
-            chart1.ResetAutoValues();
-            chart1.Palette = ChartColorPalette.None;
-
+            SetDefaultPieChartSettings();
 
             Series series1 = new Series
             {
@@ -377,10 +380,6 @@ namespace OptikPlanner.View
             chart1.Titles.Add("Lokaletilgængelighed i timer og %");
 
             series1.SetCustomProperty("PieLabelStyle", "Outside");
-            chart1.ChartAreas[0].Area3DStyle.Enable3D = true;
-
-            chart1.ChartAreas[0].Position = new ElementPosition(-10, 10, 90, 90);
-
 
             chart1.Series.Add(series1);
 
@@ -394,7 +393,7 @@ namespace OptikPlanner.View
             var rooms = _controller.GetRooms();
             foreach (var r in rooms)
             {
-                var roomPiece = series1.Points.Add(_controller.GetRoomUsageInHours(r));
+                var roomPiece = series1.Points.Add(_controller.GetRoomUsageInHours(r, showMonthCombo.SelectedIndex));
                 roomPiece.LegendText = r.ERO_SHORTDESC;
                 var value = roomPiece.YValues[0];
                 var valuePercentage = _controller.GetValueAsPercentage(value, p1.YValues[0]);
@@ -406,11 +405,7 @@ namespace OptikPlanner.View
 
         private void SetUpEmployeePieChart()
         {
-            chart1.Series.Clear();
-            chart1.Titles.Clear();
-            chart1.ResetAutoValues();
-            chart1.Palette = ChartColorPalette.None;
-
+            SetDefaultPieChartSettings();
 
             Series series1 = new Series
             {
@@ -420,15 +415,12 @@ namespace OptikPlanner.View
                 ChartType = SeriesChartType.Pie
             };
 
+            series1.SetCustomProperty("PieLabelStyle", "Outside");
             chart1.Palette = ChartColorPalette.Bright;
 
-            chart1.ChartAreas[0].BackColor = Color.Transparent;
             chart1.Titles.Add("Lokaletilgængelighed i timer og %");
 
-            series1.SetCustomProperty("PieLabelStyle", "Outside");
-            chart1.ChartAreas[0].Area3DStyle.Enable3D = true;
 
-            chart1.ChartAreas[0].Position = new ElementPosition(-10, 10, 90, 90);
 
 
             chart1.Series.Add(series1);
@@ -443,7 +435,7 @@ namespace OptikPlanner.View
             var employees = _controller.GetUsers();
             foreach (var e in employees)
             {
-                var userPiece = series1.Points.Add(_controller.GetEmployeeUsageInHours(e));
+                var userPiece = series1.Points.Add(_controller.GetEmployeeUsageInHours(e, showMonthCombo.SelectedIndex));
                 userPiece.LegendText = e.US_USERNAME;
                 var value = userPiece.YValues[0];
                 var valuePercentage = _controller.GetValueAsPercentage(value, p1.YValues[0]);
@@ -455,9 +447,7 @@ namespace OptikPlanner.View
 
         private void SetupLoggingBarChart()
         {
-            chart1.Series.Clear();
-            chart1.Titles.Clear();
-            chart1.ResetAutoValues();
+            SetDefaultBarCharSettings();
 
             Series series2 = new Series
             {
@@ -467,33 +457,201 @@ namespace OptikPlanner.View
                 ChartType = SeriesChartType.Column
             };
 
-            chart1.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
-            chart1.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
 
-            chart1.ChartAreas[0].Position.Auto = true;
-
-            chart1.ChartAreas[0].Area3DStyle.Enable3D = false;
             chart1.Titles.Add("Aflysninger");
-
             chart1.Series.Add(series2);
 
-            //var noShowBar = series2.Points.Add(CancelAppointmentController.noShowList.Count);
-            var noShowBar = series2.Points.Add(CancelAppointmentController.noShowList.Count);
+            var noShowBar = series2.Points.Add(_controller.GetNoShowCancellations(showMonthCombo.SelectedIndex).Count);
             noShowBar.AxisLabel = "Ikke mødt op";
+            noShowBar.Label = noShowBar.YValues[0].ToString();
 
-            var phoneCancelBar = series2.Points.Add(CancelAppointmentController.cancelPhoneList.Count);
+            var phoneCancelBar = series2.Points.Add(_controller.GetPhoneCancellations(showMonthCombo.SelectedIndex).Count);
             phoneCancelBar.AxisLabel = "Afylste telefonisk";
+            phoneCancelBar.Label = phoneCancelBar.YValues[0].ToString();
 
-            var otherReasonBar = series2.Points.Add(CancelAppointmentController.cancelElseList.Count);
+            var otherReasonBar = series2.Points.Add(_controller.GetOtherReasonCancellations(showMonthCombo.SelectedIndex).Count);
             otherReasonBar.AxisLabel = "Anden årsag";
+            otherReasonBar.Label = otherReasonBar.YValues[0].ToString();
 
             chart1.Invalidate();
         }
 
-        private void ClearChart()
+        private void SetupLoggingComparisonChart()
+        {
+            SetDefaultBarCharSettings();
+
+            Series series = new Series
+            {
+                Name = "series",
+                IsVisibleInLegend = true,
+                Color = System.Drawing.Color.Blue,
+                
+                ChartType = SeriesChartType.Column
+            };
+
+            Series comparisonSeries = new Series
+            {
+                Name = "comparsionSeries",
+                IsVisibleInLegend = true,
+                Color = System.Drawing.Color.Crimson,
+                ChartType = SeriesChartType.Column
+            };
+
+
+            chart1.Titles.Add($"Sammenligning mellem {showMonthCombo.Text} og {compareMonthCombo.Text} måned.");
+            chart1.ChartAreas[0].AxisY.Title = "Antal";
+
+            series.LegendText = showMonthCombo.Text;
+            comparisonSeries.LegendText = compareMonthCombo.Text;
+
+            chart1.Series.Add(series);
+            chart1.Series.Add(comparisonSeries);
+
+            var noShowBar = series.Points.Add(_controller.GetNoShowCancellations(showMonthCombo.SelectedIndex).Count);
+            noShowBar.AxisLabel = "Ikke mødt op";
+            noShowBar.Label = noShowBar.YValues[0].ToString();
+            var noShowComparisonBar =
+                comparisonSeries.Points.Add(_controller.GetNoShowCancellations(compareMonthCombo.SelectedIndex).Count);
+            noShowComparisonBar.Label = noShowComparisonBar.YValues[0].ToString();
+
+            var phoneCancelBar = series.Points.Add(_controller.GetPhoneCancellations(showMonthCombo.SelectedIndex).Count);
+            phoneCancelBar.AxisLabel = "Afylste telefonisk";
+            phoneCancelBar.Label = phoneCancelBar.YValues[0].ToString();
+            var phoneCancelComparisonBar =
+                comparisonSeries.Points.Add(_controller.GetPhoneCancellations(compareMonthCombo.SelectedIndex).Count);
+            phoneCancelComparisonBar.Label = phoneCancelComparisonBar.YValues[0].ToString();
+
+            var otherReasonBar = series.Points.Add(_controller.GetOtherReasonCancellations(showMonthCombo.SelectedIndex).Count);
+            otherReasonBar.AxisLabel = "Anden årsag";
+            otherReasonBar.Label = otherReasonBar.YValues[0].ToString();
+            var otherReasonComparisonBar =
+                comparisonSeries.Points.Add(
+                    _controller.GetOtherReasonCancellations(compareMonthCombo.SelectedIndex).Count);
+            otherReasonComparisonBar.Label = otherReasonComparisonBar.YValues[0].ToString();
+
+            chart1.Invalidate();
+        }
+
+        private void SetupRoomComparisonChart()
+        {
+            SetDefaultBarCharSettings();
+
+            Series series = new Series
+            {
+                Name = "series",
+                IsVisibleInLegend = true,
+                Color = System.Drawing.Color.Blue,
+                ChartType = SeriesChartType.Column
+            };
+
+            Series comparisonSeries = new Series
+            {
+                Name = "comparisonSeries",
+                IsVisibleInLegend =  true,
+                Color = Color.OrangeRed,
+                ChartType = SeriesChartType.Column
+            
+            };
+
+            
+            chart1.Titles.Add($"Sammenligning mellem {showMonthCombo.Text} og {compareMonthCombo.Text} måned.");
+            chart1.ChartAreas[0].AxisY.Title = "Timer brugt";
+
+            series.LegendText = showMonthCombo.Text;
+            comparisonSeries.LegendText = compareMonthCombo.Text;
+
+            chart1.Series.Add(series);
+            chart1.Series.Add(comparisonSeries);
+
+         
+            var rooms = _controller.GetRooms();
+
+            for (int i = 0; i < rooms.Count; i++)
+            {
+                var room = rooms[i];
+                var timeUsedBar =
+                    series.Points.Add(_controller.GetRoomUsageInHours(room, showMonthCombo.SelectedIndex));
+                timeUsedBar.AxisLabel = room.ERO_SHORTDESC;
+                timeUsedBar.Label = timeUsedBar.YValues[0].ToString();
+                var timeUsedCompareBar =
+                    comparisonSeries.Points.Add(_controller.GetRoomUsageInHours(room, compareMonthCombo.SelectedIndex));
+                timeUsedCompareBar.Label = timeUsedCompareBar.YValues[0].ToString();
+            }
+
+            chart1.Invalidate();
+        }
+
+        private void SetupEmployeeComparisonChart()
+        {
+            SetDefaultBarCharSettings();
+
+            Series series = new Series
+            {
+                Name = "series",
+                IsVisibleInLegend = true,
+                Color = System.Drawing.Color.Blue,
+                ChartType = SeriesChartType.Column
+            };
+
+            Series comparisonSeries = new Series
+            {
+                Name = "comparisonSeries",
+                IsVisibleInLegend = true,
+                Color = Color.Green,
+                ChartType = SeriesChartType.Column
+
+            };
+
+            chart1.Titles.Add($"Sammenligning mellem {showMonthCombo.Text} og {compareMonthCombo.Text} måned.");
+            chart1.ChartAreas[0].AxisY.Title = "Timer brugt";
+
+            series.LegendText = showMonthCombo.Text;
+            comparisonSeries.LegendText = compareMonthCombo.Text;
+
+            chart1.Series.Add(series);
+            chart1.Series.Add(comparisonSeries);
+
+            var users = _controller.GetUsers();
+
+            for (int i = 0; i < users.Count; i++)
+            {
+                var user = users[i];
+                var timeUsedBar =
+                    series.Points.Add(_controller.GetEmployeeUsageInHours(user, showMonthCombo.SelectedIndex));
+                timeUsedBar.AxisLabel = user.US_USERNAME;
+                timeUsedBar.Label = timeUsedBar.YValues[0].ToString();
+                var timeUsedCompareBar =
+                    comparisonSeries.Points.Add(_controller.GetEmployeeUsageInHours(user,
+                        compareMonthCombo.SelectedIndex));
+                timeUsedCompareBar.Label = timeUsedCompareBar.YValues[0].ToString();
+            }
+        }
+
+        private void SetDefaultBarCharSettings()
         {
             chart1.Series.Clear();
             chart1.Titles.Clear();
+            chart1.ResetAutoValues();
+
+            chart1.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
+            chart1.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
+            chart1.ChartAreas[0].Position.Auto = true;
+            chart1.ChartAreas[0].Area3DStyle.Enable3D = false;
+        }
+
+        private void SetDefaultPieChartSettings()
+        {
+            chart1.ChartAreas[0].BackColor = Color.Transparent;
+
+
+            chart1.Series.Clear();
+            chart1.Titles.Clear();
+            chart1.ResetAutoValues();
+            chart1.Palette = ChartColorPalette.None;
+
+            chart1.ChartAreas[0].Area3DStyle.Enable3D = true;
+
+            chart1.ChartAreas[0].Position = new ElementPosition(-10, 10, 90, 90);
         }
     }
 }
