@@ -407,16 +407,45 @@ namespace OptikPlanner.View
 
         private void exportButton_Click(object sender, EventArgs e)
         {
-            
 
-            DialogResult dialogResult = MessageBox.Show("Er du sikker på at du ønsker at exportere nuværende data til CSV?", "Exportér til CSV", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
+            using (SaveFileDialog dialog = new SaveFileDialog())
             {
-                ExportToCSV.ExportToCsv(listView1, @"C:\Users\Daniel\Desktop\test.csv", true);
+                dialog.Filter = "csv files (*.csv)|*.csv|Csv files (*.csv)|*.csv";
+                dialog.FilterIndex = 2;
+                dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                dialog.FileName = "statistics " + DateTime.Now.ToShortDateString() + ".csv";
+                dialog.RestoreDirectory = true;
+                string logPath = Path.GetFullPath(dialog.FileName);
+                string logPath2 = @"C:\Users\Daniel\Desktop\statistics 02-12-2016.csv";
+
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    //ExportToCsv.ExportToCSV(listView1, logPath, true);
+
+                    using (StreamWriter sw = new StreamWriter(new FileStream(logPath2, FileMode.OpenOrCreate, FileAccess.ReadWrite), Encoding.UTF8))
+                    {
+                        StringBuilder result = new StringBuilder();
+                        result.Append("Grund" + "Valgt måned" + "sammenligning måned");
+                        foreach (ListViewItem s in listView1.Items)
+                        {
+                            result.AppendLine(string.Format("{0}, {1}, {2}", s.SubItems[0].Text, s.SubItems[1].Text,
+                                s.SubItems[2].Text));
+                        }
+                        sw.WriteLine(result);
+                        sw.Flush();
+                        sw.Close();
+                    }
+                }
             }
+
+            //DialogResult dialogResult = MessageBox.Show("Er du sikker på at du ønsker at exportere nuværende data til CSV?", "Exportér til CSV", MessageBoxButtons.YesNo);
+            //if (dialogResult == DialogResult.Yes)
+            //{
+
+            //}
             //else if (dialogResult == DialogResult.No)
             //{
             //}
         }
-    }
+        }
 }

@@ -188,6 +188,7 @@ namespace OptikPlanner.View
             // 
             // showMonthCombo
             // 
+            this.showMonthCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.showMonthCombo.FormattingEnabled = true;
             this.showMonthCombo.Location = new System.Drawing.Point(16, 100);
             this.showMonthCombo.Name = "showMonthCombo";
@@ -197,6 +198,7 @@ namespace OptikPlanner.View
             // 
             // showYearCombo
             // 
+            this.showYearCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.showYearCombo.FormattingEnabled = true;
             this.showYearCombo.Location = new System.Drawing.Point(76, 100);
             this.showYearCombo.Name = "showYearCombo";
@@ -205,6 +207,7 @@ namespace OptikPlanner.View
             // 
             // compareMonthCombo
             // 
+            this.compareMonthCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.compareMonthCombo.FormattingEnabled = true;
             this.compareMonthCombo.Location = new System.Drawing.Point(15, 166);
             this.compareMonthCombo.Name = "compareMonthCombo";
@@ -214,6 +217,7 @@ namespace OptikPlanner.View
             // 
             // compareYearCombo
             // 
+            this.compareYearCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.compareYearCombo.FormattingEnabled = true;
             this.compareYearCombo.Location = new System.Drawing.Point(76, 166);
             this.compareYearCombo.Name = "compareYearCombo";
