@@ -23,6 +23,10 @@ namespace OptikPlanner
     {
         private CalendarViewController _calendarViewController;
         public Calendar Calendar { get; }
+        private const string DayViewMode = "day";
+        private const string MonthViewMode = "month";
+        private const string WeekViewMode = "week";
+        private string viewMode = WeekViewMode;
 
         public CalendarView()
         {
@@ -60,10 +64,10 @@ namespace OptikPlanner
 
         private void calendar1_ItemDoubleClick(object sender, CalendarItemEventArgs e)
         {
-            CreateAppointment.ClickedAppointment = (APTDETAILS) e.Item.Tag;
-     
-            var form = new CreateAppointment();
-            form.ShowDialog();
+            //CreateAppointment.ClickedAppointment = (APTDETAILS)e.Item.Tag;
+
+            //var form = new CreateAppointment();
+            //form.ShowDialog();
 
         }
 
@@ -78,11 +82,15 @@ namespace OptikPlanner
 
         private void ShowDayView()
         {
-            calendar.SetViewRange(DateTime.Today, DateTime.Now);
+            viewMode = DayViewMode;
+
+            calendar.SetViewRange(monthView.SelectionStart, monthView.SelectionStart);
         }
 
         private void ShowWeekView()
         {
+            viewMode = WeekViewMode;
+
             DateTime today;
             if (monthView.SelectionStart.Equals(DateTime.MinValue)) { today = DateTime.Today; }
             else today = monthView.SelectionStart;
@@ -110,12 +118,12 @@ namespace OptikPlanner
 
             calendar.SetViewRange(lastMonday, oneWeekAhead);
 
-            if (!monthView.SelectionStart.Equals(DateTime.MinValue) ||
-                !monthView.SelectionEnd.Equals(DateTime.MinValue))
-            {
-                monthView.SelectionStart = lastMonday;
-                monthView.SelectionEnd = oneWeekAhead;
-            }
+            //if (!monthView.SelectionStart.Equals(DateTime.MinValue) ||
+            //    !monthView.SelectionEnd.Equals(DateTime.MinValue))
+            //{
+            //    monthView.SelectionStart = lastMonday;
+            //    monthView.SelectionEnd = oneWeekAhead;
+            //}
 
 
         }
@@ -152,6 +160,8 @@ namespace OptikPlanner
 
         private void ShowMonthView()
         {
+            viewMode = MonthViewMode;
+
             DateTime selectedDate = calendar.ViewStart;
             int daysInCurrentMonth = DateTime.DaysInMonth(selectedDate.Year, selectedDate.Month);
             DateTime firstDayOfMonth = new DateTime(selectedDate.Year, selectedDate.Month, 1);
@@ -354,6 +364,80 @@ namespace OptikPlanner
         {
             Process.Start(Path.Combine(Environment.GetFolderPath(
                 Environment.SpecialFolder.ApplicationData), "CancelAppointmentLog.txt"));
+        }
+
+        private void calendarButtonRight_Click(object sender, EventArgs e)
+        {
+            switch (viewMode)
+            {
+                case DayViewMode:
+                    OneDayAhead();
+                    break;
+                case WeekViewMode:
+                    OneWeekAhead();
+                    break;
+                case MonthViewMode:
+                    OneMonthAhead();
+                    break;
+            }
+        }
+
+        private void OneWeekAhead()
+        {
+            var currentViewStart = calendar.ViewStart;
+            var currentViewEnd = calendar.ViewEnd;
+            calendar.SetViewRange(currentViewStart.AddDays(7), currentViewEnd.AddDays(7));
+        }
+
+        private void OneWeekBack()
+        {
+            var currentViewStart = calendar.ViewStart;
+            var currentViewEnd = calendar.ViewEnd;
+            calendar.SetViewRange(currentViewStart.AddDays(-7), currentViewEnd.AddDays(-7));
+        }
+
+        private void OneMonthAhead()
+        {
+            var currentViewStart = calendar.ViewStart;
+            var currentViewEnd = calendar.ViewEnd;
+            calendar.SetViewRange(currentViewStart.AddMonths(1), currentViewEnd.AddMonths(1));
+        }
+
+        private void OneMonthBack()
+        {
+            var currentViewStart = calendar.ViewStart;
+            var currentViewEnd = calendar.ViewEnd;
+            calendar.SetViewRange(currentViewStart.AddMonths(-1), currentViewEnd.AddMonths(-1));
+        }
+
+        private void OneDayAhead()
+        {
+            var currentViewStart = calendar.ViewStart;
+            var currentViewEnd = calendar.ViewEnd;
+            calendar.SetViewRange(currentViewStart.AddDays(1), currentViewEnd.AddDays(1));
+        }
+
+        private void OneDayBack()
+        {
+            var currentViewStart = calendar.ViewStart;
+            var currentViewEnd = calendar.ViewEnd;
+            calendar.SetViewRange(currentViewStart.AddDays(-1), currentViewEnd.AddDays(-1));
+        }
+
+        private void calendarButtonLeft_Click(object sender, EventArgs e)
+        {
+            switch (viewMode)
+            {
+                case DayViewMode:
+                    OneDayBack();
+                    break;
+                case WeekViewMode:
+                    OneWeekBack();
+                    break;
+                case MonthViewMode:
+                    OneMonthBack();
+                    break;
+            }
         }
     }
 }

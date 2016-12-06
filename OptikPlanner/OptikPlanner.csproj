@@ -178,7 +178,9 @@
       <Name>System.Windows.Forms.Calendar</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\arrow_left.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Calendar-Add-64x64.png" />
   </ItemGroup>
@@ -203,7 +205,15 @@
   <ItemGroup>
     <None Include="Resources\Plus-50.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\arrow_right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_left_small.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_right_small.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
