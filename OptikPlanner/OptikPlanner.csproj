@@ -178,7 +178,17 @@
       <Name>System.Windows.Forms.Calendar</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\Calendar 14-50.png" />
+    <Content Include="Resources\Calendar Plus-50.png" />
+    <Content Include="Resources\Calendar-50.png" />
+    <Content Include="Resources\Month View-50.png" />
+    <Content Include="Resources\newCalendar Plus-48.png" />
+    <Content Include="Resources\newDay View-48.png" />
+    <Content Include="Resources\newMonth View-48.png" />
+    <Content Include="Resources\newWeek View-48.png" />
+    <Content Include="Resources\Today-50.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Calendar-Add-64x64.png" />
   </ItemGroup>

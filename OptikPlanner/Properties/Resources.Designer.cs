@@ -113,16 +113,6 @@ namespace OptikPlanner.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Calendar_Plus_48 {
-            get {
-                object obj = ResourceManager.GetObject("Calendar Plus-48", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap calendar1_64x64 {
             get {
                 object obj = ResourceManager.GetObject("calendar1-64x64", resourceCulture);

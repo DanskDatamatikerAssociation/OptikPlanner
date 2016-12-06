@@ -355,5 +355,11 @@ namespace OptikPlanner
             Process.Start(Path.Combine(Environment.GetFolderPath(
                 Environment.SpecialFolder.ApplicationData), "CancelAppointmentLog.txt"));
         }
+
+        private void statisticShowButton_Click(object sender, EventArgs e)
+        {
+            StatisticsView window = new StatisticsView();
+            window.Show();
+        }
     }
 }
