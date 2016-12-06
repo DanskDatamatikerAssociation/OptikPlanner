@@ -39,6 +39,7 @@
             // 
             // editCustomerButton
             // 
+            this.editCustomerButton.Enabled = false;
             this.editCustomerButton.Location = new System.Drawing.Point(48, 63);
             this.editCustomerButton.Name = "editCustomerButton";
             this.editCustomerButton.Size = new System.Drawing.Size(123, 23);
@@ -84,6 +85,8 @@
             this.ListViewBox.Size = new System.Drawing.Size(305, 274);
             this.ListViewBox.TabIndex = 10;
             this.ListViewBox.UseCompatibleStateImageBehavior = false;
+            this.ListViewBox.SelectedIndexChanged += new System.EventHandler(this.ListViewBox_SelectedIndexChanged);
+            this.ListViewBox.DoubleClick += new System.EventHandler(this.ListViewBox_DoubleClick);
             // 
             // closeWindowButton
             // 
@@ -102,7 +105,7 @@
             this.cprBox.Name = "cprBox";
             this.cprBox.Size = new System.Drawing.Size(252, 20);
             this.cprBox.TabIndex = 9;
-            this.cprBox.TextChanged += new System.EventHandler(this.cprBox_OnTextChanged);
+            this.cprBox.TextChanged += new System.EventHandler(this.cprBox_TextChanged);
             // 
             // CustomerLibrary
             // 
