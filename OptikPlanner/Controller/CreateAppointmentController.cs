@@ -157,10 +157,13 @@ namespace OptikPlanner.Controller
             else if (clickedAppointment.APD_TYPE.Equals(0)) clickedAppointmentDetails.Add("Steljustering");
 
             var rooms = GetRooms();
-            clickedAppointmentDetails.Add(rooms.Find(r => r.ERO_NBR.Equals(clickedAppointment.APD_ROOM)).ERO_SHORTDESC);
+            var matchingRoom = rooms.Find(r => r.ERO_NBR.Equals(clickedAppointment.APD_ROOM));
+            if(matchingRoom != null) clickedAppointmentDetails.Add(matchingRoom.ERO_SHORTDESC);
+
 
             var users = GetUsers();
-            clickedAppointmentDetails.Add(users.Find(u => u.US_STAMP.Equals(clickedAppointment.APD_USER)).US_USERNAME);
+            var matchingUser = users.Find(u => u.US_STAMP.Equals(clickedAppointment.APD_USER));
+            if (matchingUser != null) clickedAppointmentDetails.Add(matchingUser.US_USERNAME);
 
             
 

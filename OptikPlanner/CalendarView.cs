@@ -26,7 +26,8 @@ namespace OptikPlanner
         private const string DayViewMode = "day";
         private const string MonthViewMode = "month";
         private const string WeekViewMode = "week";
-        private string viewMode = WeekViewMode;
+        private string _viewMode = WeekViewMode;
+        private bool _justCreated = false;
 
         public CalendarView()
         {
@@ -34,7 +35,7 @@ namespace OptikPlanner
 
             Calendar = calendar;
             _calendarViewController = new CalendarViewController(this);
-            
+
             SetupCalendar();
 
         }
@@ -47,6 +48,8 @@ namespace OptikPlanner
             SetWeekLabel();
             SetMonthLabel();
             SetYearLabel();
+
+            calendar.AllowNew = false;
 
             //Changes the current visible timerange on the calendar. 
             calendar.TimeUnitsOffset = -DateTime.Now.Hour * 2;
@@ -64,10 +67,16 @@ namespace OptikPlanner
 
         private void calendar1_ItemDoubleClick(object sender, CalendarItemEventArgs e)
         {
-            //CreateAppointment.ClickedAppointment = (APTDETAILS)e.Item.Tag;
+            if (e.Item.Selected)
+            {
+                CreateAppointment.ClickedAppointment = (APTDETAILS)e.Item.Tag;
 
-            //var form = new CreateAppointment();
-            //form.ShowDialog();
+                var form = new CreateAppointment();
+                form.ShowDialog();
+            }
+            
+
+
 
         }
 
@@ -82,14 +91,14 @@ namespace OptikPlanner
 
         private void ShowDayView()
         {
-            viewMode = DayViewMode;
+            _viewMode = DayViewMode;
 
             calendar.SetViewRange(monthView.SelectionStart, monthView.SelectionStart);
         }
 
         private void ShowWeekView()
         {
-            viewMode = WeekViewMode;
+            _viewMode = WeekViewMode;
 
             DateTime today;
             if (monthView.SelectionStart.Equals(DateTime.MinValue)) { today = DateTime.Today; }
@@ -149,7 +158,7 @@ namespace OptikPlanner
                 }
             }
             else lastMonday = today;
-            
+
 
             DateTime twoWeeksAhead = lastMonday.AddDays(13);
 
@@ -160,7 +169,7 @@ namespace OptikPlanner
 
         private void ShowMonthView()
         {
-            viewMode = MonthViewMode;
+            _viewMode = MonthViewMode;
 
             DateTime selectedDate = calendar.ViewStart;
             int daysInCurrentMonth = DateTime.DaysInMonth(selectedDate.Year, selectedDate.Month);
@@ -196,7 +205,7 @@ namespace OptikPlanner
         private void calendar_LoadItems(object sender, CalendarLoadEventArgs e)
         {
             AddAppointmentsToCalendar();
-            
+
 
             //Color logic here
             var items = e.Calendar.Items;
@@ -368,7 +377,7 @@ namespace OptikPlanner
 
         private void calendarButtonRight_Click(object sender, EventArgs e)
         {
-            switch (viewMode)
+            switch (_viewMode)
             {
                 case DayViewMode:
                     OneDayAhead();
@@ -426,7 +435,7 @@ namespace OptikPlanner
 
         private void calendarButtonLeft_Click(object sender, EventArgs e)
         {
-            switch (viewMode)
+            switch (_viewMode)
             {
                 case DayViewMode:
                     OneDayBack();
@@ -438,6 +447,16 @@ namespace OptikPlanner
                     OneMonthBack();
                     break;
             }
+        }
+
+        private void calendar_DoubleClick(object sender, EventArgs e)
+        {
+            
+            CreateAppointment.ClickedAppointment = null;
+            if (calendar.SelectedElementStart == null) return;
+            var form = new CreateAppointment(calendar.SelectedElementStart.Date);
+            form.ShowDialog();
+
         }
     }
 }

@@ -32,7 +32,7 @@ namespace OptikPlanner.View
         }
 
 
-        public CreateAppointment()
+        public CreateAppointment(DateTime selectedElement = default(DateTime))
         {
             InitializeComponent();
 
@@ -58,7 +58,47 @@ namespace OptikPlanner.View
             userSelectionCombo.Text = "Vælg medarbejder...";
 
             if (ClickedAppointment != null) FillOutAppointment();
+
+            if (!selectedElement.Equals(DateTime.MinValue))
+            {
+                dateTimePicker1.Value = selectedElement.Date;
+
+                var timeFrom = selectedElement;
+                timeFromPicker.Text = timeFrom.TimeOfDay.ToString();
+                timeToPicker.Text = timeFrom.AddMinutes(15).TimeOfDay.ToString();
+
+            }
         }
+
+        //public CreateAppointment(DateTime selectedElement)
+        //{
+        //    InitializeComponent();
+
+        //    _controller = new CreateAppointmentController(this);
+
+        //    _customers = _controller.GetCustomers();
+
+        //    GetDbData();
+
+        //    InitializeCprBox();
+
+        //    //ClickedAppointment = _controller.GetClickedAppointment();
+
+        //    //timepicking settings
+        //    timeFromPicker.CustomFormat = "HH:mm";
+        //    timeToPicker.CustomFormat = "HH:mm";
+
+        //    timeFromPicker.ShowUpDown = true;
+        //    timeToPicker.ShowUpDown = true;
+        //    mPrevDate = dateTimePicker1.Value;
+
+        //    //initiate text statements
+        //    userSelectionCombo.Text = "Vælg medarbejder...";
+
+        //    dateTimePicker1.Value = selectedElement.Date;
+        //    timeFromPicker.Text = selectedElement.TimeOfDay.ToString();
+            
+        //}
 
         private void GetDbData()
         {
@@ -84,7 +124,7 @@ namespace OptikPlanner.View
         private void FillOutAppointment()
         {
             var extraDetails = _controller.GetClickedAppointmentDetails();
-
+            
 
             userSelectionCombo.Text = extraDetails[2];
             userSelectionCombo.Enabled = false;

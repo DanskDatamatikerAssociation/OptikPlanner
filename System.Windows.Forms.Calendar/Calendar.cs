@@ -1415,6 +1415,7 @@ namespace System.Windows.Forms.Calendar
         {
             base.OnDoubleClick(e);
 
+            if(AllowNew)
             CreateItemOnSelection(string.Empty, true);
         }
 
