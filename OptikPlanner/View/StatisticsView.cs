@@ -34,10 +34,7 @@ namespace OptikPlanner.View
             InitializeComponent();
             Populate();
             _controller = new StatisticsViewController(this);
-
             
-
-
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -80,6 +77,12 @@ namespace OptikPlanner.View
                 listView1.Items[i].SubItems.Add(_controller.GetRoomAvailabilityInHours(room, 148).ToString());
 
             }
+
+            foreach (var s in _controller.GetRooms())
+            {
+                chooseAmountListBox.Items.Add(s);
+            }
+            
         }
 
         private void FillInEmployeeData()
@@ -101,6 +104,30 @@ namespace OptikPlanner.View
                 listView1.Items[i].SubItems.Add(_controller.GetEmployeeAvailabilityInHours(user, 148).ToString());
 
             }
+            foreach (var s in _controller.GetUsers())
+            {
+                chooseAmountListBox.Items.Add(s);
+            }
+        }
+
+        public void FillInCancellationData()
+        {
+
+            chooseDataLabel.Text = "Vælg aflysninger";
+            listView1.Columns.Clear();
+            listView1.Items.Clear();
+            listView1.Columns.Add("Grund", 150);
+            listView1.Columns.Add("aflysninger i ", 100);
+            listView1.Items.Add("Kunden ikke mødte op.");
+            listView1.Items.Add("Kunden har aflyst telefonisk");
+            listView1.Items.Add("der har været Andet i vejen.");
+            listView1.Items[0].SubItems.Add(CancelAppointmentController.noShowList.Count.ToString());
+            listView1.Items[1].SubItems.Add(CancelAppointmentController.cancelPhoneList.Count.ToString());
+            listView1.Items[2].SubItems.Add(CancelAppointmentController.cancelElseList.Count.ToString());
+
+            chooseDataLabel.Enabled = false;
+            chooseAmountListBox.Enabled = false;
+            chooseAmountListBox.Items.Clear();
         }
 
         public void Populate()
@@ -162,22 +189,7 @@ namespace OptikPlanner.View
 
             clickedGraf = !clickedGraf;
         }
-        public void FillInCancellationData()
-        {
-
-            chooseDataLabel.Text = "Vælg aflysninger";
-            listView1.Columns.Clear();
-            listView1.Items.Clear();
-            listView1.Columns.Add("Grund", 150);
-            listView1.Columns.Add("aflysninger i ", 100);
-            listView1.Columns.Add("aflysninger i ", 120);
-            listView1.Items.Add("Kunden ikke mødte op.");
-            listView1.Items.Add("Kunden har aflyst telefonisk");
-            listView1.Items.Add("der har været Andet i vejen.");
-            listView1.Items[0].SubItems.Add(CancelAppointmentController.noShowList.Count.ToString());
-            listView1.Items[1].SubItems.Add(CancelAppointmentController.cancelPhoneList.Count.ToString());
-            listView1.Items[2].SubItems.Add(CancelAppointmentController.cancelElseList.Count.ToString());
-        }
+        
 
 
 
@@ -224,8 +236,6 @@ namespace OptikPlanner.View
 
         private void showMonthCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-
             switch (chooseTypeCombo.Text)
             {
                 case "Aflysninger":
@@ -242,26 +252,22 @@ namespace OptikPlanner.View
                     break;
 
             }
-
-
-
-
-
         }
 
         private void compareMonthCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (chooseTypeCombo.Text)
-            {
-                case "Aflysninger":
-                    //CompareCancellations();
-                    break;
-                case "Lokaler":
-                    listView1.Hide();
-                    SetupRoomComparisonChart();
-                    break;
+            SearchButton.Enabled = true;
+            //switch (chooseTypeCombo.Text)
+            //{
+            //    case "Aflysninger":
+            //        //CompareCancellations();
+            //        break;
+            //    case "Lokaler":
+            //        listView1.Hide();
+            //        SetupRoomComparisonChart();
+            //        break;
 
-            }
+            //}
 
         }
 
@@ -308,26 +314,9 @@ namespace OptikPlanner.View
 
             }
         }
-
-        //private void CompareCancellations()
-        //{
-  
-        //    int monthsNumber = compareMonthCombo.SelectedIndex;
-        //    string compareName = compareMonthCombo.SelectedItem.ToString();
-        //    listView1.Columns[2].Text = "Aflysninger i " + compareName;
-
-        //    CompareClearList();
-        //    var noShowList = _controller.GetNoShowCancellations(monthsNumber);
-        //    listView1.Items[0].SubItems.Add(noShowList.Count().ToString());
-        //    var cancelPhoneList = _controller.GetPhoneCancellations(monthsNumber);
-        //    listView1.Items[1].SubItems.Add(cancelPhoneList.Count().ToString());
-        //    var cancelElseList = _controller.GetOtherReasonCancellations(monthsNumber);
-        //    listView1.Items[2].SubItems.Add(cancelElseList.Count().ToString());
-        //}
-
         private void FilterCancellations()
         {
-            
+
             int monthsNumber = showMonthCombo.SelectedIndex;
             string monthsName = showMonthCombo.SelectedItem.ToString();
             listView1.Columns[1].Text = "Aflysninger i " + monthsName;
@@ -342,6 +331,24 @@ namespace OptikPlanner.View
             var cancelElseList = _controller.GetOtherReasonCancellations(monthsNumber);
             listView1.Items[2].SubItems.Add(cancelElseList.Count().ToString());
         }
+
+        //private void CompareCancellations()
+        //{
+
+        //    int monthsNumber = compareMonthCombo.SelectedIndex;
+        //    string compareName = compareMonthCombo.SelectedItem.ToString();
+        //    listView1.Columns[2].Text = "Aflysninger i " + compareName;
+
+        //    CompareClearList();
+        //    var noShowList = _controller.GetNoShowCancellations(monthsNumber);
+        //    listView1.Items[0].SubItems.Add(noShowList.Count().ToString());
+        //    var cancelPhoneList = _controller.GetPhoneCancellations(monthsNumber);
+        //    listView1.Items[1].SubItems.Add(cancelPhoneList.Count().ToString());
+        //    var cancelElseList = _controller.GetOtherReasonCancellations(monthsNumber);
+        //    listView1.Items[2].SubItems.Add(cancelElseList.Count().ToString());
+        //}
+
+
 
         public void MonthClearList()
         {
@@ -363,6 +370,7 @@ namespace OptikPlanner.View
             }
 
         }
+
 
         private void SetupRoomPieChart()
         {
@@ -653,5 +661,30 @@ namespace OptikPlanner.View
 
             chart1.ChartAreas[0].Position = new ElementPosition(-10, 10, 90, 90);
         }
+
+        private void SearchButton_Click(object sender, EventArgs e)
+        {
+            listView1.Hide();
+            clickedGraf = false;
+            chooseViewButton.Text = "Talbaseret";
+
+            switch (chooseTypeCombo.Text)
+            {
+
+                case "Aflysninger":
+                    SetupLoggingComparisonChart();
+                    break;
+                case "Lokaler":
+                    SetupRoomComparisonChart();
+                    break;
+                case "Medarbejdere":
+                    SetupEmployeeComparisonChart();
+                    break;
+
+            }
+
+            compareMonthCombo.SelectedItem = null;
+        }
+        
     }
 }
