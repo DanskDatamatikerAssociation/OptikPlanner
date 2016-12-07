@@ -709,7 +709,7 @@ namespace OptikPlanner.View
 
             };
 
-            chart1.Titles.Add($"Sammenligning mellem {showMonthCombo.Text} og {compareMonthCombo.Text}.");
+            chart1.Titles.Add($"Sammenligning mellem {showMonthCombo.Text} {chosenYear} og {compareMonthCombo.Text} {compareYear}.");
             chart1.ChartAreas[0].AxisY.Title = "Timer brugt";
 
             series.LegendText = showMonthCombo.Text;
