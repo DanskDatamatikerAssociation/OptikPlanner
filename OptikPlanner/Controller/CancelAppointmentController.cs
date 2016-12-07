@@ -40,7 +40,7 @@ namespace OptikPlanner.Controller
             }
 
             Lines = System.IO.File.ReadAllLines(Path.Combine(Environment.GetFolderPath(
-                Environment.SpecialFolder.ApplicationData), "CancelAppointmentLog.txt"));
+                Environment.SpecialFolder.ApplicationData), "CancelAppointmentLog.txt"), Encoding.UTF8);
 
             if (Lines == null)
             {
@@ -53,6 +53,7 @@ namespace OptikPlanner.Controller
                     noShowList.Add(s);
                 }
             }
+            
         }
 
         public static void GetPhoneCancels()
@@ -63,7 +64,7 @@ namespace OptikPlanner.Controller
                 return;
             }
             Lines = System.IO.File.ReadAllLines(Path.Combine(Environment.GetFolderPath(
-                Environment.SpecialFolder.ApplicationData), "CancelAppointmentLog.txt"));
+                Environment.SpecialFolder.ApplicationData), "CancelAppointmentLog.txt"), Encoding.UTF8);
 
             foreach (string s in Lines)
             {
@@ -84,7 +85,7 @@ namespace OptikPlanner.Controller
                 return;
             }
             Lines = System.IO.File.ReadAllLines(Path.Combine(Environment.GetFolderPath(
-                Environment.SpecialFolder.ApplicationData), "CancelAppointmentLog.txt"));
+                Environment.SpecialFolder.ApplicationData), "CancelAppointmentLog.txt"), Encoding.UTF8);
 
             foreach (string s in Lines)
             {
