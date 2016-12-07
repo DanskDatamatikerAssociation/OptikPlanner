@@ -21,7 +21,7 @@ namespace OptikPlanner.Misc
             Directory.CreateDirectory(Path.GetDirectoryName(filename));
             FileStream fs = new FileStream(filename, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
             Trace.Listeners.Add(new TextWriterTraceListener(fs));
-            fs.Close();
+            //fs.Close();
         }
     }
 }
