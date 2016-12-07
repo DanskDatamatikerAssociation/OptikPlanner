@@ -206,6 +206,7 @@ namespace OptikPlanner
         private void monthView2_SelectionChanged(object sender, EventArgs e)
         {
             calendar.SetViewRange(monthView.SelectionStart, monthView.SelectionEnd);
+
             SetAllLabels();
         }
 
@@ -248,9 +249,27 @@ namespace OptikPlanner
 
         private void todayButton_Click(object sender, EventArgs e)
         {
-            _viewMode = DayViewMode;
-            DateTime today = DateTime.Today;
+            
+            DateTime today = DateTime.Today;       
             calendar.SetViewRange(today, today);
+            
+
+            monthView.SelectionStart = today;
+            monthView.SelectionEnd = today;
+
+            switch (_viewMode)
+            {
+                case DayViewMode:
+                    ShowDayView();
+                    break;
+                case WeekViewMode:
+                    ShowWeekView();
+                    break;
+                case MonthViewMode:
+                    ShowMonthView();
+                    break;
+            }
+
         }
 
         private void twoWeeksButton_Click(object sender, EventArgs e)
