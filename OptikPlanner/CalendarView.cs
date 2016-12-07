@@ -28,6 +28,7 @@ namespace OptikPlanner
         private const string WeekViewMode = "week";
         private string _viewMode = WeekViewMode;
         private bool _justCreated = false;
+        private bool showStartDate = true;
 
         public CalendarView()
         {
@@ -211,28 +212,32 @@ namespace OptikPlanner
 
         private void calendar_LoadItems(object sender, CalendarLoadEventArgs e)
         {
-            AddAppointmentsToCalendar();
+            //AddAppointmentsToCalendar();
 
+            CalendarItem item = new CalendarItem(calendar, DateTime.Now, DateTime.Now,"Jaaaa");
 
+            
             //Color logic here
             var items = e.Calendar.Items;
+
+            items.Add(item);
 
             var systemColors = new ColorConverter().GetStandardValues();
             List<Color> colors = systemColors.Cast<Color>().ToList();
 
             int colorJump = 50;
 
-            foreach (var i in items)
-            {
-                APTDETAILS appointment = (APTDETAILS)i.Tag;
+            //foreach (var i in items)
+            //{
+            //    APTDETAILS appointment = (APTDETAILS)i.Tag;
 
-                int colorIndex = appointment.APD_USER + colorJump;
-                Color color = colors[colorIndex];
+            //    int colorIndex = appointment.APD_USER + colorJump;
+            //    Color color = colors[colorIndex];
 
 
-                i.ApplyColor(color);
+            //    i.ApplyColor(color);
 
-            }
+            //}
 
 
         }
