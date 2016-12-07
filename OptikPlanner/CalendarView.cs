@@ -91,6 +91,7 @@ namespace OptikPlanner
 
         private void ShowDayView()
         {
+            SetAllLabels();
             _viewMode = DayViewMode;
 
             calendar.SetViewRange(monthView.SelectionStart, monthView.SelectionStart);
@@ -98,6 +99,8 @@ namespace OptikPlanner
 
         private void ShowWeekView()
         {
+            SetAllLabels();
+
             _viewMode = WeekViewMode;
 
             DateTime today;
@@ -140,6 +143,7 @@ namespace OptikPlanner
         private void ShowTwoWeeksView()
         {
             //CHECK THE CALENDARRENDERER-CLASS - PerformItemLayout FOR DEBUGGING ~Danny
+            SetAllLabels();
 
             DateTime today = DateTime.Today;
             DateTime lastMonday;
@@ -169,6 +173,8 @@ namespace OptikPlanner
 
         private void ShowMonthView()
         {
+            SetAllLabels();
+
             _viewMode = MonthViewMode;
 
             DateTime selectedDate = calendar.ViewStart;
@@ -200,6 +206,7 @@ namespace OptikPlanner
         private void monthView2_SelectionChanged(object sender, EventArgs e)
         {
             calendar.SetViewRange(monthView.SelectionStart, monthView.SelectionEnd);
+            SetAllLabels();
         }
 
         private void calendar_LoadItems(object sender, CalendarLoadEventArgs e)
@@ -240,6 +247,7 @@ namespace OptikPlanner
 
         private void todayButton_Click(object sender, EventArgs e)
         {
+            _viewMode = DayViewMode;
             DateTime today = DateTime.Today;
             calendar.SetViewRange(today, today);
         }
@@ -380,13 +388,16 @@ namespace OptikPlanner
             switch (_viewMode)
             {
                 case DayViewMode:
-                    OneDayAhead();
+                    OneDayAhead();   
+                    SetAllLabels();                 
                     break;
                 case WeekViewMode:
                     OneWeekAhead();
+                    SetAllLabels();
                     break;
                 case MonthViewMode:
                     OneMonthAhead();
+                    SetAllLabels();
                     break;
             }
         }
@@ -396,6 +407,7 @@ namespace OptikPlanner
             var currentViewStart = calendar.ViewStart;
             var currentViewEnd = calendar.ViewEnd;
             calendar.SetViewRange(currentViewStart.AddDays(7), currentViewEnd.AddDays(7));
+            
         }
 
         private void OneWeekBack()
@@ -439,12 +451,15 @@ namespace OptikPlanner
             {
                 case DayViewMode:
                     OneDayBack();
+                    SetAllLabels();
                     break;
                 case WeekViewMode:
                     OneWeekBack();
+                    SetAllLabels();
                     break;
                 case MonthViewMode:
                     OneMonthBack();
+                    SetAllLabels();
                     break;
             }
         }
@@ -457,6 +472,13 @@ namespace OptikPlanner
             var form = new CreateAppointment(calendar.SelectedElementStart.Date);
             form.ShowDialog();
 
+        }
+
+        private void SetAllLabels()
+        {
+            SetWeekLabel();
+            SetMonthLabel();
+            SetYearLabel();
         }
     }
 }
