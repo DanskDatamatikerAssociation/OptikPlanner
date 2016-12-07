@@ -383,6 +383,7 @@ namespace OptikPlanner
                 Environment.SpecialFolder.ApplicationData), "CancelAppointmentLog.txt"));
         }
 
+
         private void calendarButtonRight_Click(object sender, EventArgs e)
         {
             switch (_viewMode)
@@ -479,6 +480,12 @@ namespace OptikPlanner
             SetWeekLabel();
             SetMonthLabel();
             SetYearLabel();
+
+        private void statisticShowButton_Click(object sender, EventArgs e)
+        {
+            StatisticsView window = new StatisticsView();
+            window.Show();
+
         }
     }
 }
