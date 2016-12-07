@@ -211,6 +211,7 @@ namespace OptikPlanner
 
         private void calendar_LoadItems(object sender, CalendarLoadEventArgs e)
         {
+            SetAllLabels();
             AddAppointmentsToCalendar();
 
 
@@ -356,14 +357,20 @@ namespace OptikPlanner
             else if (toolTip.Active == false)
             {
                 toolTip.Active = true;
-                Point tooltipPosition = PointToClient(Cursor.Position);
+                //Point tooltipPosition = PointToClient(Cursor.Position);
+                Point tooltipPosition = PointToClient(new Point(Cursor.Position.X, Cursor.Position.Y+40));
+
 
                 APTDETAILS a = (APTDETAILS)i.Tag;
+                var extraDetails = _calendarViewController.GetExtraAppointmentDetails(a);
                 if (a == null) return;
-                if (a.APD_DESCRIPTION == null) a.APD_DESCRIPTION = Encoding.Default.GetBytes("**Ingen beskrivelse**");
+                if (a.APD_DESCRIPTION == null || Encoding.Default.GetString(a.APD_DESCRIPTION).Equals("")) a.APD_DESCRIPTION = Encoding.Default.GetBytes("**Ingen beskrivelse**");
                 string textToShow = $"{a.APD_TIMEFROM} - {a.APD_TIMETO}\n" +
-                                    "Linseoptimering\n" +
-                                    $"Room number {a.APD_ROOM}\n" +
+                                    "\n" +
+                                    $"{extraDetails[0]}\n" +
+                                    $"Lokale nr. {a.APD_ROOM}\n" +
+                                    $"{extraDetails[2]}" +
+                                    "\n" +
                                     "\n" +
                                     $"'{Encoding.Default.GetString(a.APD_DESCRIPTION)}'";
                 toolTip.Show(textToShow, this, tooltipPosition);

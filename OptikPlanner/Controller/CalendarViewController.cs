@@ -31,6 +31,70 @@ namespace OptikPlanner.Controller
 
         }
 
+        public List<EYEEXAMROOMS> GetRooms()
+        {
+            //TESTDATA
+
+            //EYEEXAMROOMS room = new EYEEXAMROOMS();
+            //room.ERO_OPENFROM = "12:15";
+            //room.ERO_OPENTO = "13:00";
+            //room.ERO_NBR = 5;
+            //room.ERO_TYPE = "Linse";
+            //room.ERO_DESC = "linserum 5 første sal til venstre";
+            //room.ERO_SHORTDESC = "kort";
+
+
+            //return room;
+
+            using (db = new OptikItDbContext())
+            {
+                var rooms = from r in db.EYEEXAMROOMS select r;
+                return rooms.ToList();
+            }
+        }
+
+
+
+
+
+        public List<USERS> GetUsers()
+        {
+            //USERS user = new USERS();
+            //user.US_CPRNO = "2001927891";
+            //user.US_USERNAME = "MyUserName";
+            //user.US_STAMP = 1;
+
+
+            //return user;
+
+            using (db = new OptikItDbContext())
+            {
+                var users = from u in db.USERS select u;
+                return users.ToList();
+            }
+        }
+
+        public List<string> GetExtraAppointmentDetails(APTDETAILS appointment)
+        {
+            List<string> extraAppointmentDetails = new List<string>();
+
+            if (appointment.APD_TYPE.Equals(1)) extraAppointmentDetails.Add("Linseopsætning");
+            else if (appointment.APD_TYPE.Equals(0)) extraAppointmentDetails.Add("Steljustering");
+
+            var rooms = GetRooms();
+            var matchingRoom = rooms.Find(r => r.ERO_NBR.Equals(appointment.APD_ROOM));
+            if (matchingRoom != null) extraAppointmentDetails.Add(matchingRoom.ERO_SHORTDESC);
+
+
+            var users = GetUsers();
+            var matchingUser = users.Find(u => u.US_STAMP.Equals(appointment.APD_USER));
+            if (matchingUser != null) extraAppointmentDetails.Add(matchingUser.US_USERNAME);
+
+
+
+            return extraAppointmentDetails;
+        }
+
         public List<CalendarItem> GetAppointmentsAsCalendarItems()
         {
             List<CalendarItem> calendarItems = new List<CalendarItem>();
@@ -49,9 +113,11 @@ namespace OptikPlanner.Controller
                 string timeToHour = a.APD_TIMETO.Split(':').First();
                 string timeToMinute = a.APD_TIMETO.Split(':').Last();
 
-                string appointmentString = $"**Aftaletype her**\n" +
+                var extraDetails = GetExtraAppointmentDetails(a);
+
+                string appointmentString = $"{extraDetails[0]}\n" +
                                            $"Lokale nr. {a.APD_ROOM}\n" +
-                                           $"**Kundenavn her**";
+                                           $"{extraDetails[2]}";
 
                 CalendarItem c = new CalendarItem(_view.Calendar,
                     new DateTime(appointMentDateValue.Year, appointMentDateValue.Month, appointMentDateValue.Day,

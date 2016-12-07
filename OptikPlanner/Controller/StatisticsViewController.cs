@@ -18,8 +18,6 @@ namespace OptikPlanner.Controller
     {
         private OptikItDbContext _db;
         private IStatisticsView _view;
-        public List<Object> Months = new List<Object>();
-        public Calendar calendar { get; }
 
 
         public StatisticsViewController(IStatisticsView view)

@@ -35,8 +35,9 @@ namespace OptikPlanner.View
             Populate();
             _controller = new StatisticsViewController(this);
 
+            chooseTypeCombo.SelectedIndex = 0;
             showMonthCombo.SelectedIndex = DateTime.Now.Month;
-        
+            showYearCombo.Text = DateTime.Now.Year.ToString();
 
 
         }
@@ -48,23 +49,32 @@ namespace OptikPlanner.View
             {
                 if (!clickedGraf) SetupLoggingBarChart();
                 FillInCancellationData();
+                chooseAmountListBox.Enabled = false;
+                chooseDataLabel.Enabled = false;
             }
 
             if (chooseTypeCombo.SelectedIndex == 1)
             {
                 if (!clickedGraf) SetupRoomPieChart();
                 FillInRoomData();
+                chooseAmountListBox.Enabled = true;
+                chooseDataLabel.Enabled = true;
             }
             if (chooseTypeCombo.SelectedIndex == 2)
             {
-                if(!clickedGraf) SetUpEmployeePieChart();
+                if (!clickedGraf) SetUpEmployeePieChart();
                 FillInEmployeeData();
+                chooseAmountListBox.Enabled = true;
+                chooseDataLabel.Enabled = true;
             }
         }
 
         private void FillInRoomData()
         {
-            chooseDataLabel.Text = "Vælg lokaler";
+            int currentMonth = DateTime.Now.Month;
+            int currentYear = DateTime.Now.Year;
+
+            chooseDataLabel.Text = "Vælg lokale(r)";
             listView1.Columns.Clear();
             listView1.Items.Clear();
             listView1.Columns.Add("Lokale", 80);
@@ -77,21 +87,22 @@ namespace OptikPlanner.View
                 var room = rooms[i];
                 listView1.Items.Add(room.ERO_SHORTDESC);
                 listView1.Items[i].SubItems.Add(room.ERO_SHORTDESC);
-                listView1.Items[i].SubItems.Add(_controller.GetRoomUsageInHours(room).ToString());
-                listView1.Items[i].SubItems.Add(_controller.GetRoomAvailabilityInHours(room, 148).ToString());
+                listView1.Items[i].SubItems.Add(_controller.GetRoomUsageInHours(room, currentMonth, currentYear).ToString());
+                listView1.Items[i].SubItems.Add(_controller.GetRoomAvailabilityInHours(room, 148, currentMonth, currentYear).ToString());
 
             }
 
-            foreach (var s in _controller.GetRooms())
+            chooseAmountListBox.Items.Clear();
+            foreach (var s in rooms)
             {
                 chooseAmountListBox.Items.Add(s);
             }
-            
+
         }
 
         private void FillInEmployeeData()
         {
-            chooseDataLabel.Text = "Vælg medarbejder";
+            chooseDataLabel.Text = "Vælg medarbejder(e)";
             listView1.Columns.Clear();
             listView1.Items.Clear();
             listView1.Columns.Add("Navn", 200);
@@ -108,7 +119,9 @@ namespace OptikPlanner.View
                 listView1.Items[i].SubItems.Add(_controller.GetEmployeeAvailabilityInHours(user, 148).ToString());
 
             }
-            foreach (var s in _controller.GetUsers())
+
+            chooseAmountListBox.Items.Clear();
+            foreach (var s in users)
             {
                 chooseAmountListBox.Items.Add(s);
             }
@@ -129,8 +142,6 @@ namespace OptikPlanner.View
             listView1.Items[1].SubItems.Add(CancelAppointmentController.cancelPhoneList.Count.ToString());
             listView1.Items[2].SubItems.Add(CancelAppointmentController.cancelElseList.Count.ToString());
 
-            chooseDataLabel.Enabled = false;
-            chooseAmountListBox.Enabled = false;
             chooseAmountListBox.Items.Clear();
         }
 
@@ -193,22 +204,7 @@ namespace OptikPlanner.View
 
             clickedGraf = !clickedGraf;
         }
-        public void FillInCancellationData()
-        {
 
-            chooseDataLabel.Text = "Vælg aflysninger";
-            listView1.Columns.Clear();
-            listView1.Items.Clear();
-            listView1.Columns.Add("Grund", 150);
-            listView1.Columns.Add("aflysninger i ", 100);
-            //listView1.Columns.Add("aflysninger i ", 120);
-            listView1.Items.Add("Kunden ikke mødte op.");
-            listView1.Items.Add("Kunden har aflyst telefonisk");
-            listView1.Items.Add("der har været Andet i vejen.");
-            listView1.Items[0].SubItems.Add(CancelAppointmentController.noShowList.Count.ToString());
-            listView1.Items[1].SubItems.Add(CancelAppointmentController.cancelPhoneList.Count.ToString());
-            listView1.Items[2].SubItems.Add(CancelAppointmentController.cancelElseList.Count.ToString());
-        }
 
 
 
@@ -258,16 +254,16 @@ namespace OptikPlanner.View
             switch (chooseTypeCombo.Text)
             {
                 case "Aflysninger":
-                    if(!clickedGraf) SetupLoggingBarChart();
-                    FilterCancellations();
+                    if (!clickedGraf) SetupLoggingBarChart();
+                    else FilterCancellations();
                     break;
                 case "Lokaler":
-                    if(!clickedGraf) SetupRoomPieChart();
-                    FilterRoomData();
+                    if (!clickedGraf) SetupRoomPieChart();
+                    else FilterRoomData();
                     break;
                 case "Medarbejdere":
-                    if(!clickedGraf) SetUpEmployeePieChart();
-                    FilterEmployeeData();
+                    if (!clickedGraf) SetUpEmployeePieChart();
+                    else FilterEmployeeData();
                     break;
 
             }
@@ -276,22 +272,14 @@ namespace OptikPlanner.View
         private void compareMonthCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             SearchButton.Enabled = true;
-            //switch (chooseTypeCombo.Text)
-            //{
-            //    case "Aflysninger":
-            //        //CompareCancellations();
-            //        break;
-            //    case "Lokaler":
-            //        listView1.Hide();
-            //        SetupRoomComparisonChart();
-            //        break;
-
-            //}
+            compareYearCombo.Text = DateTime.Now.Year.ToString();
+            
 
         }
 
         private void FilterRoomData()
         {
+
             int chosenMonth = showMonthCombo.SelectedIndex;
             int chosenYear = DateTime.Now.Year;
 
@@ -302,10 +290,10 @@ namespace OptikPlanner.View
             }
             catch (FormatException ex)
             {
-                
+
             }
 
-            
+
 
             listView1.Columns.Clear();
             listView1.Items.Clear();
@@ -421,7 +409,7 @@ namespace OptikPlanner.View
 
             int chosenMonth = DateTime.Now.Month;
             int chosenYear = DateTime.Now.Year;
-            
+
 
             try
             {
@@ -431,7 +419,7 @@ namespace OptikPlanner.View
             }
             catch (FormatException ex)
             {
-                
+
             }
 
             Series series1 = new Series
@@ -566,7 +554,7 @@ namespace OptikPlanner.View
                 Name = "series",
                 IsVisibleInLegend = true,
                 Color = System.Drawing.Color.Blue,
-                
+
                 ChartType = SeriesChartType.Column
             };
 
@@ -623,20 +611,19 @@ namespace OptikPlanner.View
             int compareMonth = DateTime.Now.Month;
             int compareYear = DateTime.Now.Year;
 
-
             try
             {
-                chosenMonth = showMonthCombo.SelectedIndex;
-                chosenYear = int.Parse(showYearCombo.Text);
 
+                chosenMonth = showMonthCombo.SelectedIndex;
                 compareMonth = compareMonthCombo.SelectedIndex;
+
+                chosenYear = int.Parse(showYearCombo.Text);
                 compareYear = int.Parse(compareYearCombo.Text);
 
             }
-            catch (FormatException ex)
-            {
+            catch (FormatException ex) { }
 
-            }
+
 
             Series series = new Series
             {
@@ -649,14 +636,14 @@ namespace OptikPlanner.View
             Series comparisonSeries = new Series
             {
                 Name = "comparisonSeries",
-                IsVisibleInLegend =  true,
+                IsVisibleInLegend = true,
                 Color = Color.OrangeRed,
                 ChartType = SeriesChartType.Column
-            
+
             };
 
-            
-            chart1.Titles.Add($"Sammenligning mellem {showMonthCombo.Text} og {compareMonthCombo.Text} måned.");
+
+            chart1.Titles.Add($"Sammenligning mellem {showMonthCombo.Text} {chosenYear}  og {compareMonthCombo.Text} {compareYear}.");
             chart1.ChartAreas[0].AxisY.Title = "Timer brugt";
 
             series.LegendText = showMonthCombo.Text;
@@ -665,18 +652,18 @@ namespace OptikPlanner.View
             chart1.Series.Add(series);
             chart1.Series.Add(comparisonSeries);
 
-         
+
             var rooms = _controller.GetRooms();
 
             for (int i = 0; i < rooms.Count; i++)
             {
                 var room = rooms[i];
                 var timeUsedBar =
-                    series.Points.Add(_controller.GetRoomUsageInHours(room, chosenMonth));
+                    series.Points.Add(_controller.GetRoomUsageInHours(room, chosenMonth, chosenYear));
                 timeUsedBar.AxisLabel = room.ERO_SHORTDESC;
                 timeUsedBar.Label = timeUsedBar.YValues[0].ToString();
                 var timeUsedCompareBar =
-                    comparisonSeries.Points.Add(_controller.GetRoomUsageInHours(room, compareMonth));
+                    comparisonSeries.Points.Add(_controller.GetRoomUsageInHours(room, compareMonth, compareYear));
                 timeUsedCompareBar.Label = timeUsedCompareBar.YValues[0].ToString();
             }
 
@@ -686,6 +673,24 @@ namespace OptikPlanner.View
         private void SetupEmployeeComparisonChart()
         {
             SetDefaultBarCharSettings();
+
+            int chosenMonth = DateTime.Now.Month;
+            int chosenYear = DateTime.Now.Year;
+
+            int compareMonth = DateTime.Now.Month;
+            int compareYear = DateTime.Now.Year;
+
+            try
+            {
+
+                chosenMonth = showMonthCombo.SelectedIndex;
+                compareMonth = compareMonthCombo.SelectedIndex;
+
+                chosenYear = int.Parse(showYearCombo.Text);
+                compareYear = int.Parse(compareYearCombo.Text);
+
+            }
+            catch (FormatException ex) { }
 
             Series series = new Series
             {
@@ -704,7 +709,7 @@ namespace OptikPlanner.View
 
             };
 
-            chart1.Titles.Add($"Sammenligning mellem {showMonthCombo.Text} og {compareMonthCombo.Text} måned.");
+            chart1.Titles.Add($"Sammenligning mellem {showMonthCombo.Text} og {compareMonthCombo.Text}.");
             chart1.ChartAreas[0].AxisY.Title = "Timer brugt";
 
             series.LegendText = showMonthCombo.Text;
@@ -719,12 +724,12 @@ namespace OptikPlanner.View
             {
                 var user = users[i];
                 var timeUsedBar =
-                    series.Points.Add(_controller.GetEmployeeUsageInHours(user, showMonthCombo.SelectedIndex));
+                    series.Points.Add(_controller.GetEmployeeUsageInHours(user, chosenMonth, chosenYear));
                 timeUsedBar.AxisLabel = user.US_USERNAME;
                 timeUsedBar.Label = timeUsedBar.YValues[0].ToString();
                 var timeUsedCompareBar =
                     comparisonSeries.Points.Add(_controller.GetEmployeeUsageInHours(user,
-                        compareMonthCombo.SelectedIndex));
+                        compareMonth, compareYear));
                 timeUsedCompareBar.Label = timeUsedCompareBar.YValues[0].ToString();
             }
         }
@@ -777,9 +782,9 @@ namespace OptikPlanner.View
         }
         private void SearchButton_Click(object sender, EventArgs e)
         {
-            listView1.Hide();
-            clickedGraf = false;
-            chooseViewButton.Text = "Talbaseret";
+            chooseViewButton.Enabled = false;
+            chooseTypeCombo.Enabled = false;
+            GraficalButtonClick();
 
             switch (chooseTypeCombo.Text)
             {
@@ -796,8 +801,15 @@ namespace OptikPlanner.View
 
             }
 
-            compareMonthCombo.SelectedItem = null;
         }
-        
+
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            NumericButtonClick();
+            chooseViewButton.Enabled = true;
+            chooseTypeCombo.Enabled = true;
+            compareMonthCombo.SelectedItem = null;
+            compareYearCombo.SelectedItem = null;
+        }
     }
 }

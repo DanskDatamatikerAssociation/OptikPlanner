@@ -36,9 +36,9 @@ namespace OptikPlanner.View
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chooseTypeCombo = new System.Windows.Forms.ComboBox();
             this.DatoLabel = new System.Windows.Forms.Label();
             this.chooseAmountListBox = new System.Windows.Forms.CheckedListBox();
@@ -58,6 +58,7 @@ namespace OptikPlanner.View
             this.compareYearCombo = new System.Windows.Forms.ComboBox();
             this.SearchButton = new System.Windows.Forms.Button();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.resetButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,9 +79,10 @@ namespace OptikPlanner.View
             // DatoLabel
             // 
             this.DatoLabel.AutoSize = true;
-            this.DatoLabel.Location = new System.Drawing.Point(12, 73);
+            this.DatoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DatoLabel.Location = new System.Drawing.Point(8, 73);
             this.DatoLabel.Name = "DatoLabel";
-            this.DatoLabel.Size = new System.Drawing.Size(128, 13);
+            this.DatoLabel.Size = new System.Drawing.Size(152, 13);
             this.DatoLabel.TabIndex = 8;
             this.DatoLabel.Text = "Vælg fremvisningsperiode";
             // 
@@ -99,14 +101,14 @@ namespace OptikPlanner.View
             this.chooseDataLabel.AutoSize = true;
             this.chooseDataLabel.Location = new System.Drawing.Point(13, 131);
             this.chooseDataLabel.Name = "chooseDataLabel";
-            this.chooseDataLabel.Size = new System.Drawing.Size(58, 13);
+            this.chooseDataLabel.Size = new System.Drawing.Size(32, 13);
             this.chooseDataLabel.TabIndex = 11;
-            this.chooseDataLabel.Text = "Vælg antal";
+            this.chooseDataLabel.Text = "Vælg";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 18);
+            this.label3.Location = new System.Drawing.Point(8, 18);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(31, 13);
             this.label3.TabIndex = 13;
@@ -124,11 +126,12 @@ namespace OptikPlanner.View
             // compareLabel
             // 
             this.compareLabel.AutoSize = true;
-            this.compareLabel.Location = new System.Drawing.Point(11, 231);
+            this.compareLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.compareLabel.Location = new System.Drawing.Point(8, 231);
             this.compareLabel.Name = "compareLabel";
-            this.compareLabel.Size = new System.Drawing.Size(128, 13);
+            this.compareLabel.Size = new System.Drawing.Size(147, 13);
             this.compareLabel.TabIndex = 16;
-            this.compareLabel.Text = "Sammenlign periode med:";
+            this.compareLabel.Text = "Sammenlign periode med";
             // 
             // chooseViewLabel
             // 
@@ -152,7 +155,7 @@ namespace OptikPlanner.View
             // chooseperiodLabel
             // 
             this.chooseperiodLabel.AutoSize = true;
-            this.chooseperiodLabel.Location = new System.Drawing.Point(11, 86);
+            this.chooseperiodLabel.Location = new System.Drawing.Point(8, 86);
             this.chooseperiodLabel.Name = "chooseperiodLabel";
             this.chooseperiodLabel.Size = new System.Drawing.Size(39, 13);
             this.chooseperiodLabel.TabIndex = 19;
@@ -170,7 +173,7 @@ namespace OptikPlanner.View
             // compareMonthLabel
             // 
             this.compareMonthLabel.AutoSize = true;
-            this.compareMonthLabel.Location = new System.Drawing.Point(11, 244);
+            this.compareMonthLabel.Location = new System.Drawing.Point(8, 244);
             this.compareMonthLabel.Name = "compareMonthLabel";
             this.compareMonthLabel.Size = new System.Drawing.Size(39, 13);
             this.compareMonthLabel.TabIndex = 21;
@@ -179,7 +182,7 @@ namespace OptikPlanner.View
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(76, 244);
+            this.label6.Location = new System.Drawing.Point(71, 244);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(16, 13);
             this.label6.TabIndex = 22;
@@ -189,7 +192,7 @@ namespace OptikPlanner.View
             // 
             this.showMonthCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.showMonthCombo.FormattingEnabled = true;
-            this.showMonthCombo.Location = new System.Drawing.Point(14, 102);
+            this.showMonthCombo.Location = new System.Drawing.Point(11, 102);
             this.showMonthCombo.Name = "showMonthCombo";
             this.showMonthCombo.Size = new System.Drawing.Size(54, 21);
             this.showMonthCombo.TabIndex = 23;
@@ -209,7 +212,7 @@ namespace OptikPlanner.View
             // 
             this.compareMonthCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.compareMonthCombo.FormattingEnabled = true;
-            this.compareMonthCombo.Location = new System.Drawing.Point(13, 260);
+            this.compareMonthCombo.Location = new System.Drawing.Point(10, 260);
             this.compareMonthCombo.Name = "compareMonthCombo";
             this.compareMonthCombo.Size = new System.Drawing.Size(55, 21);
             this.compareMonthCombo.TabIndex = 25;
@@ -227,9 +230,9 @@ namespace OptikPlanner.View
             // SearchButton
             // 
             this.SearchButton.Enabled = false;
-            this.SearchButton.Location = new System.Drawing.Point(15, 287);
+            this.SearchButton.Location = new System.Drawing.Point(10, 287);
             this.SearchButton.Name = "SearchButton";
-            this.SearchButton.Size = new System.Drawing.Size(131, 23);
+            this.SearchButton.Size = new System.Drawing.Size(81, 23);
             this.SearchButton.TabIndex = 27;
             this.SearchButton.Text = "Sammenlign statistik";
             this.SearchButton.UseVisualStyleBackColor = true;
@@ -239,27 +242,38 @@ namespace OptikPlanner.View
             // 
             this.chart1.BorderlineColor = System.Drawing.Color.Gray;
             this.chart1.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
-            chartArea3.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chart1.Legends.Add(legend3);
+            chartArea8.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea8);
+            legend8.Name = "Legend1";
+            this.chart1.Legends.Add(legend8);
             this.chart1.Location = new System.Drawing.Point(192, 37);
             this.chart1.Name = "chart1";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series3.CustomProperties = "PieLineColor=Black, PieLabelStyle=Outside";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chart1.Series.Add(series3);
+            series8.ChartArea = "ChartArea1";
+            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series8.CustomProperties = "PieLineColor=Black, PieLabelStyle=Outside";
+            series8.Legend = "Legend1";
+            series8.Name = "Series1";
+            this.chart1.Series.Add(series8);
             this.chart1.Size = new System.Drawing.Size(416, 273);
             this.chart1.TabIndex = 28;
             this.chart1.Text = "chart1";
+            // 
+            // resetButton
+            // 
+            this.resetButton.Location = new System.Drawing.Point(93, 287);
+            this.resetButton.Name = "resetButton";
+            this.resetButton.Size = new System.Drawing.Size(53, 23);
+            this.resetButton.TabIndex = 29;
+            this.resetButton.Text = "Nulstil";
+            this.resetButton.UseVisualStyleBackColor = true;
+            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
             // 
             // StatisticsView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(626, 339);
+            this.Controls.Add(this.resetButton);
             this.Controls.Add(this.chooseTypeCombo);
             this.Controls.Add(this.SearchButton);
             this.Controls.Add(this.compareYearCombo);
@@ -314,5 +328,6 @@ namespace OptikPlanner.View
         private ComboBox compareYearCombo;
         private Button SearchButton;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private Button resetButton;
     }
 }
