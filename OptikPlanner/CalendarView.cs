@@ -480,6 +480,7 @@ namespace OptikPlanner
             SetWeekLabel();
             SetMonthLabel();
             SetYearLabel();
+        }
 
         private void statisticShowButton_Click(object sender, EventArgs e)
         {
