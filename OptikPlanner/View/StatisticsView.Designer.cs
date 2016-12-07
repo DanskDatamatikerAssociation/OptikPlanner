@@ -201,6 +201,7 @@ namespace OptikPlanner.View
             this.showYearCombo.Name = "showYearCombo";
             this.showYearCombo.Size = new System.Drawing.Size(72, 21);
             this.showYearCombo.TabIndex = 24;
+            this.showYearCombo.SelectedIndexChanged += new System.EventHandler(this.showYearCombo_SelectedIndexChanged);
             // 
             // compareMonthCombo
             // 

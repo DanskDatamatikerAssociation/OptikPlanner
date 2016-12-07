@@ -354,7 +354,7 @@
             this.calendarButtonRight.Image = global::OptikPlanner.Properties.Resources.arrow_right_small;
             this.calendarButtonRight.Location = new System.Drawing.Point(787, 31);
             this.calendarButtonRight.Name = "calendarButtonRight";
-            this.calendarButtonRight.Size = new System.Drawing.Size(20, 21);
+            this.calendarButtonRight.Size = new System.Drawing.Size(20, 20);
             this.calendarButtonRight.TabIndex = 27;
             this.calendarButtonRight.UseVisualStyleBackColor = false;
             this.calendarButtonRight.Click += new System.EventHandler(this.calendarButtonRight_Click);

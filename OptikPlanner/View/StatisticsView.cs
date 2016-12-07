@@ -35,7 +35,8 @@ namespace OptikPlanner.View
             Populate();
             _controller = new StatisticsViewController(this);
 
-            
+            showMonthCombo.SelectedIndex = DateTime.Now.Month;
+        
 
 
         }
@@ -170,7 +171,7 @@ namespace OptikPlanner.View
             listView1.Items.Clear();
             listView1.Columns.Add("Grund", 150);
             listView1.Columns.Add("aflysninger i ", 100);
-            listView1.Columns.Add("aflysninger i ", 120);
+            //listView1.Columns.Add("aflysninger i ", 120);
             listView1.Items.Add("Kunden ikke mødte op.");
             listView1.Items.Add("Kunden har aflyst telefonisk");
             listView1.Items.Add("der har været Andet i vejen.");
@@ -260,6 +261,10 @@ namespace OptikPlanner.View
                     listView1.Hide();
                     SetupRoomComparisonChart();
                     break;
+                case "Medarbejdere":
+                    listView1.Hide();
+                    SetupEmployeeComparisonChart();
+                    break;
 
             }
 
@@ -268,6 +273,19 @@ namespace OptikPlanner.View
         private void FilterRoomData()
         {
             int chosenMonth = showMonthCombo.SelectedIndex;
+            int chosenYear = DateTime.Now.Year;
+
+            try
+            {
+                chosenYear = int.Parse(showYearCombo.Text);
+
+            }
+            catch (FormatException ex)
+            {
+                
+            }
+
+            
 
             listView1.Columns.Clear();
             listView1.Items.Clear();
@@ -281,8 +299,8 @@ namespace OptikPlanner.View
                 var room = rooms[i];
                 listView1.Items.Add(room.ERO_SHORTDESC);
                 listView1.Items[i].SubItems.Add(room.ERO_SHORTDESC);
-                listView1.Items[i].SubItems.Add(_controller.GetRoomUsageInHours(room, chosenMonth).ToString());
-                listView1.Items[i].SubItems.Add(_controller.GetRoomAvailabilityInHours(room, 148, chosenMonth).ToString());
+                listView1.Items[i].SubItems.Add(_controller.GetRoomUsageInHours(room, chosenMonth, chosenYear).ToString());
+                listView1.Items[i].SubItems.Add(_controller.GetRoomAvailabilityInHours(room, 148, chosenMonth, chosenYear).ToString());
 
             }
         }
@@ -290,6 +308,17 @@ namespace OptikPlanner.View
         private void FilterEmployeeData()
         {
             int chosenMonth = showMonthCombo.SelectedIndex;
+            int chosenYear = DateTime.Now.Year;
+
+            try
+            {
+                chosenYear = int.Parse(showYearCombo.Text);
+
+            }
+            catch (FormatException ex)
+            {
+
+            }
 
             listView1.Columns.Clear();
             listView1.Items.Clear();
@@ -303,8 +332,8 @@ namespace OptikPlanner.View
             {
                 var user = users[i];
                 listView1.Items.Add(user.US_USERNAME);
-                listView1.Items[i].SubItems.Add(_controller.GetEmployeeUsageInHours(user, chosenMonth).ToString());
-                listView1.Items[i].SubItems.Add(_controller.GetEmployeeAvailabilityInHours(user, 148, chosenMonth).ToString());
+                listView1.Items[i].SubItems.Add(_controller.GetEmployeeUsageInHours(user, chosenMonth, chosenYear).ToString());
+                listView1.Items[i].SubItems.Add(_controller.GetEmployeeAvailabilityInHours(user, 148, chosenMonth, chosenYear).ToString());
 
             }
         }
@@ -368,6 +397,21 @@ namespace OptikPlanner.View
         {
             SetDefaultPieChartSettings();
 
+            int chosenMonth = DateTime.Now.Month;
+            int chosenYear = DateTime.Now.Year;
+            
+
+            try
+            {
+                chosenMonth = showMonthCombo.SelectedIndex;
+                chosenYear = int.Parse(showYearCombo.Text);
+
+            }
+            catch (FormatException ex)
+            {
+                
+            }
+
             Series series1 = new Series
             {
                 Name = "series1",
@@ -393,7 +437,7 @@ namespace OptikPlanner.View
             var rooms = _controller.GetRooms();
             foreach (var r in rooms)
             {
-                var roomPiece = series1.Points.Add(_controller.GetRoomUsageInHours(r, showMonthCombo.SelectedIndex));
+                var roomPiece = series1.Points.Add(_controller.GetRoomUsageInHours(r, chosenMonth, chosenYear));
                 roomPiece.LegendText = r.ERO_SHORTDESC;
                 var value = roomPiece.YValues[0];
                 var valuePercentage = _controller.GetValueAsPercentage(value, p1.YValues[0]);
@@ -406,6 +450,21 @@ namespace OptikPlanner.View
         private void SetUpEmployeePieChart()
         {
             SetDefaultPieChartSettings();
+
+            int chosenMonth = DateTime.Now.Month;
+            int chosenYear = DateTime.Now.Year;
+
+
+            try
+            {
+                chosenMonth = showMonthCombo.SelectedIndex;
+                chosenYear = int.Parse(showYearCombo.Text);
+
+            }
+            catch (FormatException ex)
+            {
+
+            }
 
             Series series1 = new Series
             {
@@ -435,7 +494,7 @@ namespace OptikPlanner.View
             var employees = _controller.GetUsers();
             foreach (var e in employees)
             {
-                var userPiece = series1.Points.Add(_controller.GetEmployeeUsageInHours(e, showMonthCombo.SelectedIndex));
+                var userPiece = series1.Points.Add(_controller.GetEmployeeUsageInHours(e, chosenMonth, chosenYear));
                 userPiece.LegendText = e.US_USERNAME;
                 var value = userPiece.YValues[0];
                 var valuePercentage = _controller.GetValueAsPercentage(value, p1.YValues[0]);
@@ -536,6 +595,27 @@ namespace OptikPlanner.View
         {
             SetDefaultBarCharSettings();
 
+            int chosenMonth = DateTime.Now.Month;
+            int chosenYear = DateTime.Now.Year;
+
+            int compareMonth = DateTime.Now.Month;
+            int compareYear = DateTime.Now.Year;
+
+
+            try
+            {
+                chosenMonth = showMonthCombo.SelectedIndex;
+                chosenYear = int.Parse(showYearCombo.Text);
+
+                compareMonth = compareMonthCombo.SelectedIndex;
+                compareYear = int.Parse(compareYearCombo.Text);
+
+            }
+            catch (FormatException ex)
+            {
+
+            }
+
             Series series = new Series
             {
                 Name = "series",
@@ -570,11 +650,11 @@ namespace OptikPlanner.View
             {
                 var room = rooms[i];
                 var timeUsedBar =
-                    series.Points.Add(_controller.GetRoomUsageInHours(room, showMonthCombo.SelectedIndex));
+                    series.Points.Add(_controller.GetRoomUsageInHours(room, chosenMonth));
                 timeUsedBar.AxisLabel = room.ERO_SHORTDESC;
                 timeUsedBar.Label = timeUsedBar.YValues[0].ToString();
                 var timeUsedCompareBar =
-                    comparisonSeries.Points.Add(_controller.GetRoomUsageInHours(room, compareMonthCombo.SelectedIndex));
+                    comparisonSeries.Points.Add(_controller.GetRoomUsageInHours(room, compareMonth));
                 timeUsedCompareBar.Label = timeUsedCompareBar.YValues[0].ToString();
             }
 
@@ -652,6 +732,26 @@ namespace OptikPlanner.View
             chart1.ChartAreas[0].Area3DStyle.Enable3D = true;
 
             chart1.ChartAreas[0].Position = new ElementPosition(-10, 10, 90, 90);
+        }
+
+        private void showYearCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (chooseTypeCombo.Text)
+            {
+                case "Aflysninger":
+                    if (!clickedGraf) SetupLoggingBarChart();
+                    FilterCancellations();
+                    break;
+                case "Lokaler":
+                    if (!clickedGraf) SetupRoomPieChart();
+                    FilterRoomData();
+                    break;
+                case "Medarbejdere":
+                    if (!clickedGraf) SetUpEmployeePieChart();
+                    FilterEmployeeData();
+                    break;
+
+            }
         }
     }
 }

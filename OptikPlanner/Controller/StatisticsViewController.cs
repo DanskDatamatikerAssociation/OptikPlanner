@@ -161,6 +161,35 @@ namespace OptikPlanner.Controller
             return totalUsageInHours;
         }
 
+        public double GetRoomUsageInHours(EYEEXAMROOMS room, int monthNr, int year)
+        {
+            var allAppointments = GetAppointments();
+            List<APTDETAILS> appointmentsByRoom = new List<APTDETAILS>();
+
+            foreach (var a in allAppointments)
+            {
+                if (a.APD_ROOM == room.ERO_NBR.Value && a.APD_DATE.Value.Month == monthNr && a.APD_DATE.Value.Year == year) appointmentsByRoom.Add(a);
+            }
+
+            List<TimeSpan> timeSpans = new List<TimeSpan>();
+
+            foreach (var a in appointmentsByRoom)
+            {
+                TimeSpan timeFrom = TimeSpan.Parse(a.APD_TIMEFROM);
+                TimeSpan timeTo = TimeSpan.Parse(a.APD_TIMETO);
+                TimeSpan timeElapsed = timeTo - timeFrom;
+
+                timeSpans.Add(timeElapsed);
+
+
+            }
+
+            double totalUsageInHours = 0;
+            foreach (var t in timeSpans) totalUsageInHours += t.TotalHours;
+
+            return totalUsageInHours;
+        }
+
         public double GetRoomAvailabilityInHours(EYEEXAMROOMS room, int totalRoomHoursPerMonth)
         {
             double usageInHours = GetRoomUsageInHours(room);
@@ -174,6 +203,13 @@ namespace OptikPlanner.Controller
             double usageInhours = GetRoomUsageInHours(room, monthNr);
 
             return totalRoomHoursPerMonth - usageInhours;
+        }
+
+        public double GetRoomAvailabilityInHours(EYEEXAMROOMS room, int totalRoomHoursPerMonth, int monthNr, int year)
+        {
+            double usageInHours = GetRoomUsageInHours(room, monthNr, year);
+
+            return totalRoomHoursPerMonth - usageInHours;
         }
 
         public string GetValueAsPercentage(double value, double outOf)
@@ -244,6 +280,35 @@ namespace OptikPlanner.Controller
             return totalUsageInHours;
         }
 
+        public double GetEmployeeUsageInHours(USERS employee, int monthNr, int year)
+        {
+            var allAppointments = GetAppointments();
+            List<APTDETAILS> appointmentsByEmployee = new List<APTDETAILS>();
+
+            foreach (var a in allAppointments)
+            {
+                if (a.APD_USER == employee.US_STAMP && a.APD_DATE.Value.Month == monthNr && a.APD_DATE.Value.Year == year) appointmentsByEmployee.Add(a);
+            }
+
+            List<TimeSpan> timeSpans = new List<TimeSpan>();
+
+            foreach (var a in appointmentsByEmployee)
+            {
+                TimeSpan timeFrom = TimeSpan.Parse(a.APD_TIMEFROM);
+                TimeSpan timeTo = TimeSpan.Parse(a.APD_TIMETO);
+                TimeSpan timeElapsed = timeTo - timeFrom;
+
+                timeSpans.Add(timeElapsed);
+
+
+            }
+
+            double totalUsageInHours = 0;
+            foreach (var t in timeSpans) totalUsageInHours += t.TotalHours;
+
+            return totalUsageInHours;
+        }
+
         public double GetEmployeeAvailabilityInHours(USERS employee, int totalHoursPerMonth)
         {
             double usageInHours = GetEmployeeUsageInHours(employee);
@@ -254,6 +319,13 @@ namespace OptikPlanner.Controller
         public double GetEmployeeAvailabilityInHours(USERS employee, int totalHoursPerMonth, int monthNr)
         {
             double usageInHours = GetEmployeeUsageInHours(employee, monthNr);
+
+            return totalHoursPerMonth - usageInHours;
+        }
+
+        public double GetEmployeeAvailabilityInHours(USERS employee, int totalHoursPerMonth, int monthNr, int year)
+        {
+            double usageInHours = GetEmployeeUsageInHours(employee, monthNr, year);
 
             return totalHoursPerMonth - usageInHours;
         }
