@@ -493,5 +493,10 @@ namespace OptikPlanner
             window.Show();
 
         }
+
+        private void CalendarView_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
