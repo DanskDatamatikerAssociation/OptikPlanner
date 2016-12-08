@@ -512,11 +512,11 @@ namespace OptikPlanner
             SetYearLabel();
         }
 
-        private void statisticShowButton_Click(object sender, EventArgs e)
+
+        private void statisticsButton_Click(object sender, EventArgs e)
         {
             StatisticsView window = new StatisticsView();
             window.Show();
-
         }
     }
 }

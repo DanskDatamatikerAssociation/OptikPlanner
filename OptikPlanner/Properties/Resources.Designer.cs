@@ -143,9 +143,29 @@ namespace OptikPlanner.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap OptikITLogo {
+            get {
+                object obj = ResourceManager.GetObject("OptikITLogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Plus_50 {
             get {
                 object obj = ResourceManager.GetObject("Plus-50", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Statistics_50 {
+            get {
+                object obj = ResourceManager.GetObject("Statistics-50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

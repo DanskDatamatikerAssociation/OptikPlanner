@@ -189,6 +189,8 @@
     <Content Include="Resources\newDay View-48.png" />
     <Content Include="Resources\newMonth View-48.png" />
     <Content Include="Resources\newWeek View-48.png" />
+    <None Include="Resources\Statistics-50.png" />
+    <None Include="Resources\OptikITLogo.jpg" />
     <Content Include="Resources\Today-50.png" />
   </ItemGroup>
   <ItemGroup>
