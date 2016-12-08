@@ -528,7 +528,6 @@
             this.Name = "CalendarView";
             this.Text = "OptikPlanner";
             this.Activated += new System.EventHandler(this.CalendarView_Activated);
-            this.Load += new System.EventHandler(this.CalendarView_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

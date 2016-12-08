@@ -41,11 +41,11 @@ namespace OptikPlanner.View
 
             _controller = new CreateAppointmentController(this);
 
-            //_customers = _controller.GetCustomers();
+            _customers = _controller.GetCustomers();
 
-            //GetDbData();
+            GetDbData();
 
-            //InitializeCprBox();
+            InitializeCprBox();
 
             //ClickedAppointment = _controller.GetClickedAppointment();
 
@@ -63,7 +63,7 @@ namespace OptikPlanner.View
             //initiate text statements
             userSelectionCombo.Text = "Vælg medarbejder...";
 
-            //if (ClickedAppointment != null) FillOutAppointment();
+            if (ClickedAppointment != null) FillOutAppointment();
 
             if (!selectedElement.Equals(DateTime.MinValue))
             {
@@ -236,6 +236,12 @@ namespace OptikPlanner.View
             
             int id = _controller.GetNextAppointmentId();
             DateTime date = new DateTime(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, dateTimePicker1.Value.Day, timeFromPicker.Value.Hour, timeFromPicker.Value.Minute, 0);
+            if (date < DateTime.Today)
+            {
+                MessageBox.Show("Du skal vælge et tidspunkt i fremtiden", "Fejl", MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                return;
+            }
             string timeFrom = timeFromPicker.Value.ToString("HH:mm");
             string timeTo = timeToPicker.Value.ToString("HH:mm");
             USERS user = (USERS)userCombo.SelectedItem;
@@ -269,7 +275,7 @@ namespace OptikPlanner.View
 
                 try
                 {
-                    if (result < 0)
+                    if (result > 0)
                         //(date <= DateTime.Now.AddMinutes(-1))
                     {
                         MessageBox.Show("Du skal vælge et tidspunkt i fremtiden", "Fejl", MessageBoxButtons.OK,
