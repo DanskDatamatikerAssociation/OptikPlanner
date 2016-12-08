@@ -15,6 +15,7 @@ using OptikPlanner.Misc;
 using Calendar = System.Globalization.Calendar;
 using System.IO;
 using System.Net.Sockets;
+using OptikPlanner.Model;
 
 namespace OptikPlanner.View
 {
@@ -38,8 +39,6 @@ namespace OptikPlanner.View
             chooseTypeCombo.SelectedIndex = 0;
             showMonthCombo.SelectedIndex = DateTime.Now.Month;
             showYearCombo.Text = DateTime.Now.Year.ToString();
-
-
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -49,25 +48,50 @@ namespace OptikPlanner.View
             {
                 if (!clickedGraf) SetupLoggingBarChart();
                 FillInCancellationData();
-                chooseAmountListBox.Enabled = false;
-                chooseDataLabel.Enabled = false;
+                EnableControls(false);
             }
 
             if (chooseTypeCombo.SelectedIndex == 1)
             {
                 if (!clickedGraf) SetupRoomPieChart();
                 FillInRoomData();
-                chooseAmountListBox.Enabled = true;
-                chooseDataLabel.Enabled = true;
+                FillRoomFilterBox();
+                CheckAllBoxes(true);
+                EnableControls(true);
             }
             if (chooseTypeCombo.SelectedIndex == 2)
             {
                 if (!clickedGraf) SetUpEmployeePieChart();
                 FillInEmployeeData();
-                chooseAmountListBox.Enabled = true;
-                chooseDataLabel.Enabled = true;
+                FillEmployeeFilterBox();
+                CheckAllBoxes(true);
+                EnableControls(true);
             }
         }
+
+        private void EnableControls(bool enable)
+        {
+            showAllCheckBox.Enabled = enable;
+            filterListBox.Enabled = enable;
+            chooseDataLabel.Enabled = enable;
+        }
+
+        private void FillRoomFilterBox()
+        {
+            var rooms = _controller.GetRooms();
+            filterListBox.Items.Clear();
+            foreach (var r in rooms) filterListBox.Items.Add(r);
+
+        }
+
+        private void FillEmployeeFilterBox()
+        {
+            var employees = _controller.GetUsers();
+            filterListBox.Items.Clear();
+            foreach (var e in employees) filterListBox.Items.Add(e);
+        }
+
+
 
         private void FillInRoomData()
         {
@@ -92,13 +116,10 @@ namespace OptikPlanner.View
 
             }
 
-            chooseAmountListBox.Items.Clear();
-            foreach (var s in rooms)
-            {
-                chooseAmountListBox.Items.Add(s);
-            }
+
 
         }
+
 
         private void FillInEmployeeData()
         {
@@ -120,11 +141,7 @@ namespace OptikPlanner.View
 
             }
 
-            chooseAmountListBox.Items.Clear();
-            foreach (var s in users)
-            {
-                chooseAmountListBox.Items.Add(s);
-            }
+
         }
 
         public void FillInCancellationData()
@@ -142,7 +159,7 @@ namespace OptikPlanner.View
             listView1.Items[1].SubItems.Add(CancelAppointmentController.cancelPhoneList.Count.ToString());
             listView1.Items[2].SubItems.Add(CancelAppointmentController.cancelElseList.Count.ToString());
 
-            chooseAmountListBox.Items.Clear();
+            filterListBox.Items.Clear();
         }
 
         public void Populate()
@@ -259,11 +276,11 @@ namespace OptikPlanner.View
                     break;
                 case "Lokaler":
                     if (!clickedGraf) SetupRoomPieChart();
-                    else FilterRoomData();
+                    else FilterRoomData(GetCheckedRooms());
                     break;
                 case "Medarbejdere":
                     if (!clickedGraf) SetUpEmployeePieChart();
-                    else FilterEmployeeData();
+                    else FilterEmployeeData(GetCheckedEmployees());
                     break;
 
             }
@@ -273,7 +290,7 @@ namespace OptikPlanner.View
         {
             SearchButton.Enabled = true;
             compareYearCombo.Text = DateTime.Now.Year.ToString();
-            
+
 
         }
 
@@ -305,6 +322,42 @@ namespace OptikPlanner.View
             for (int i = 0; i < rooms.Count; i++)
             {
                 var room = rooms[i];
+                listView1.Items.Add(room.ERO_SHORTDESC);
+                listView1.Items[i].SubItems.Add(room.ERO_SHORTDESC);
+                listView1.Items[i].SubItems.Add(_controller.GetRoomUsageInHours(room, chosenMonth, chosenYear).ToString());
+                listView1.Items[i].SubItems.Add(_controller.GetRoomAvailabilityInHours(room, 148, chosenMonth, chosenYear).ToString());
+
+            }
+        }
+
+        private void FilterRoomData(List<EYEEXAMROOMS> roomsToFillIn)
+        {
+
+            int chosenMonth = showMonthCombo.SelectedIndex;
+            int chosenYear = DateTime.Now.Year;
+
+            try
+            {
+                chosenYear = int.Parse(showYearCombo.Text);
+
+            }
+            catch (FormatException ex)
+            {
+
+            }
+
+
+
+            listView1.Columns.Clear();
+            listView1.Items.Clear();
+            listView1.Columns.Add("Lokale", 80);
+            listView1.Columns.Add("Type", 100);
+            listView1.Columns.Add("Timer brugt", 100);
+            listView1.Columns.Add("Tilgængelighed i timer", 120);
+
+            for (int i = 0; i < roomsToFillIn.Count; i++)
+            {
+                var room = roomsToFillIn[i];
                 listView1.Items.Add(room.ERO_SHORTDESC);
                 listView1.Items[i].SubItems.Add(room.ERO_SHORTDESC);
                 listView1.Items[i].SubItems.Add(_controller.GetRoomUsageInHours(room, chosenMonth, chosenYear).ToString());
@@ -345,6 +398,39 @@ namespace OptikPlanner.View
 
             }
         }
+
+        private void FilterEmployeeData(List<USERS> employeesToFillIn)
+        {
+            int chosenMonth = showMonthCombo.SelectedIndex;
+            int chosenYear = DateTime.Now.Year;
+
+            try
+            {
+                chosenYear = int.Parse(showYearCombo.Text);
+
+            }
+            catch (FormatException ex)
+            {
+
+            }
+
+            listView1.Columns.Clear();
+            listView1.Items.Clear();
+            listView1.Columns.Add("Navn", 200);
+            listView1.Columns.Add("Timer brugt", 80);
+            listView1.Columns.Add("Tilgængelighed i timer", 120);
+
+
+            for (int i = 0; i < employeesToFillIn.Count; i++)
+            {
+                var user = employeesToFillIn[i];
+                listView1.Items.Add(user.US_USERNAME);
+                listView1.Items[i].SubItems.Add(_controller.GetEmployeeUsageInHours(user, chosenMonth, chosenYear).ToString());
+                listView1.Items[i].SubItems.Add(_controller.GetEmployeeAvailabilityInHours(user, 148, chosenMonth, chosenYear).ToString());
+
+            }
+        }
+
         private void FilterCancellations()
         {
 
@@ -811,5 +897,99 @@ namespace OptikPlanner.View
             compareMonthCombo.SelectedItem = null;
             compareYearCombo.SelectedItem = null;
         }
+
+
+        private void filterListBox_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (chooseTypeCombo.Text.Equals("Lokaler"))
+            {
+                var checkedRooms = GetCheckedRooms();
+
+                if (e.NewValue == CheckState.Checked)
+                {
+                    var roomJustChecked = (EYEEXAMROOMS)filterListBox.Items[e.Index];
+                    checkedRooms.Add(roomJustChecked);
+                }
+                else if (e.NewValue == CheckState.Unchecked)
+                {
+                    var roomJustUnchecked = (EYEEXAMROOMS)filterListBox.Items[e.Index];
+                    checkedRooms.Remove(roomJustUnchecked);
+                    showAllCheckBox.Checked = false;
+                }
+
+                var orderedList = from r in checkedRooms orderby r.ERO_STAMP select r;
+
+                FilterRoomData(orderedList.ToList());
+            }
+            if (chooseTypeCombo.Text.Equals("Medarbejdere"))
+            {
+                var checkedEmployees = GetCheckedEmployees();
+
+                if (e.NewValue == CheckState.Checked)
+                {
+                    var emplyeeJustChecked = (USERS)filterListBox.Items[e.Index];
+                    checkedEmployees.Add(emplyeeJustChecked);
+                }
+                else if (e.NewValue == CheckState.Unchecked)
+                {
+                    var roomJustUnchecked = (USERS)filterListBox.Items[e.Index];
+                    checkedEmployees.Remove(roomJustUnchecked);
+                    showAllCheckBox.Checked = false;
+                }
+
+                var orderedList = from emp in checkedEmployees orderby emp.US_STAMP select emp;
+
+                FilterEmployeeData(orderedList.ToList());
+            }
+
+
+
+        }
+
+        private void CheckAllBoxes(bool checkThem)
+        {
+            showAllCheckBox.Checked = checkThem;
+            for (int i = 0; i < filterListBox.Items.Count; i++)
+            {
+                filterListBox.SetItemChecked(i, checkThem);
+
+            }
+
+
+
+        }
+
+        private void showAllCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (showAllCheckBox.Checked) CheckAllBoxes(true);
+
+        }
+
+        private List<EYEEXAMROOMS> GetCheckedRooms()
+        {
+            List<EYEEXAMROOMS> checkedRooms = new List<EYEEXAMROOMS>();
+            for (int i = 0; i < filterListBox.Items.Count; i++)
+            {
+                var room = (EYEEXAMROOMS)filterListBox.Items[i];
+                var isChecked = filterListBox.GetItemCheckState(i);
+                if (isChecked == CheckState.Checked) checkedRooms.Add(room);
+            }
+
+            return checkedRooms;
+        }
+
+        private List<USERS> GetCheckedEmployees()
+        {
+            List<USERS> checkedEmployees = new List<USERS>();
+            for (int i = 0; i < filterListBox.Items.Count; i++)
+            {
+                var employee = (USERS)filterListBox.Items[i];
+                var isChecked = filterListBox.GetItemCheckState(i);
+                if (isChecked == CheckState.Checked) checkedEmployees.Add(employee);
+            }
+
+            return checkedEmployees;
+        }
+
     }
 }

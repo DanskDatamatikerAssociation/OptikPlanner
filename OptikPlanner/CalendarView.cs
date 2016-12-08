@@ -27,7 +27,6 @@ namespace OptikPlanner
         private const string MonthViewMode = "month";
         private const string WeekViewMode = "week";
         private string _viewMode = WeekViewMode;
-        private bool _justCreated = false;
 
         public CalendarView()
         {
@@ -214,10 +213,17 @@ namespace OptikPlanner
         {
             SetAllLabels();
             AddAppointmentsToCalendar();
+            ApplyColorLogicToCalendarItems();
+
+            
 
 
+        }
+
+        private void ApplyColorLogicToCalendarItems()
+        {
             //Color logic here
-            var items = e.Calendar.Items;
+            var items = calendar.Items;
 
             var systemColors = new ColorConverter().GetStandardValues();
             List<Color> colors = systemColors.Cast<Color>().ToList();
@@ -235,8 +241,6 @@ namespace OptikPlanner
                 i.ApplyColor(color);
 
             }
-
-
         }
 
 

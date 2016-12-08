@@ -36,12 +36,11 @@ namespace OptikPlanner.View
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chooseTypeCombo = new System.Windows.Forms.ComboBox();
             this.DatoLabel = new System.Windows.Forms.Label();
-            this.chooseAmountListBox = new System.Windows.Forms.CheckedListBox();
             this.chooseDataLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.listView1 = new System.Windows.Forms.ListView();
@@ -59,6 +58,8 @@ namespace OptikPlanner.View
             this.SearchButton = new System.Windows.Forms.Button();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.resetButton = new System.Windows.Forms.Button();
+            this.filterListBox = new System.Windows.Forms.CheckedListBox();
+            this.showAllCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -85,16 +86,6 @@ namespace OptikPlanner.View
             this.DatoLabel.Size = new System.Drawing.Size(152, 13);
             this.DatoLabel.TabIndex = 8;
             this.DatoLabel.Text = "Vælg fremvisningsperiode";
-            // 
-            // chooseAmountListBox
-            // 
-            this.chooseAmountListBox.FormattingEnabled = true;
-            this.chooseAmountListBox.Items.AddRange(new object[] {
-            "Alle"});
-            this.chooseAmountListBox.Location = new System.Drawing.Point(11, 147);
-            this.chooseAmountListBox.Name = "chooseAmountListBox";
-            this.chooseAmountListBox.Size = new System.Drawing.Size(135, 64);
-            this.chooseAmountListBox.TabIndex = 9;
             // 
             // chooseDataLabel
             // 
@@ -242,18 +233,18 @@ namespace OptikPlanner.View
             // 
             this.chart1.BorderlineColor = System.Drawing.Color.Gray;
             this.chart1.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
-            chartArea8.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea8);
-            legend8.Name = "Legend1";
-            this.chart1.Legends.Add(legend8);
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(192, 37);
             this.chart1.Name = "chart1";
-            series8.ChartArea = "ChartArea1";
-            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series8.CustomProperties = "PieLineColor=Black, PieLabelStyle=Outside";
-            series8.Legend = "Legend1";
-            series8.Name = "Series1";
-            this.chart1.Series.Add(series8);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series1.CustomProperties = "PieLineColor=Black, PieLabelStyle=Outside";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(416, 273);
             this.chart1.TabIndex = 28;
             this.chart1.Text = "chart1";
@@ -268,11 +259,34 @@ namespace OptikPlanner.View
             this.resetButton.UseVisualStyleBackColor = true;
             this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
             // 
+            // filterListBox
+            // 
+            this.filterListBox.CheckOnClick = true;
+            this.filterListBox.FormattingEnabled = true;
+            this.filterListBox.Location = new System.Drawing.Point(10, 164);
+            this.filterListBox.Name = "filterListBox";
+            this.filterListBox.Size = new System.Drawing.Size(120, 64);
+            this.filterListBox.TabIndex = 31;
+            this.filterListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.filterListBox_ItemCheck);
+            // 
+            // showAllCheckBox
+            // 
+            this.showAllCheckBox.AutoSize = true;
+            this.showAllCheckBox.Location = new System.Drawing.Point(12, 147);
+            this.showAllCheckBox.Name = "showAllCheckBox";
+            this.showAllCheckBox.Size = new System.Drawing.Size(59, 17);
+            this.showAllCheckBox.TabIndex = 32;
+            this.showAllCheckBox.Text = "Vis alle";
+            this.showAllCheckBox.UseVisualStyleBackColor = true;
+            this.showAllCheckBox.CheckedChanged += new System.EventHandler(this.showAllCheckBox_CheckedChanged);
+            // 
             // StatisticsView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(626, 339);
+            this.Controls.Add(this.showAllCheckBox);
+            this.Controls.Add(this.filterListBox);
             this.Controls.Add(this.resetButton);
             this.Controls.Add(this.chooseTypeCombo);
             this.Controls.Add(this.SearchButton);
@@ -290,7 +304,6 @@ namespace OptikPlanner.View
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.chooseDataLabel);
-            this.Controls.Add(this.chooseAmountListBox);
             this.Controls.Add(this.DatoLabel);
             this.Controls.Add(this.chart1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -311,7 +324,6 @@ namespace OptikPlanner.View
 
         private System.Windows.Forms.ComboBox chooseTypeCombo;
         private Label DatoLabel;
-        private CheckedListBox chooseAmountListBox;
         private Label chooseDataLabel;
         private Label label3;
         private ListView listView1;
@@ -329,5 +341,7 @@ namespace OptikPlanner.View
         private Button SearchButton;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private Button resetButton;
+        private CheckedListBox filterListBox;
+        private CheckBox showAllCheckBox;
     }
 }
