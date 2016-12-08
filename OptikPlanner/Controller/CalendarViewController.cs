@@ -124,6 +124,7 @@ namespace OptikPlanner.Controller
                         int.Parse(timeFromHour), int.Parse(timeFromMinute), 0),
                     new DateTime(appointMentDateValue.Year, appointMentDateValue.Month, appointMentDateValue.Day,
                         int.Parse(timeToHour), int.Parse(timeToMinute), 0), appointmentString);
+                
                 c.Tag = a;
                 calendarItems.Add(c);
 

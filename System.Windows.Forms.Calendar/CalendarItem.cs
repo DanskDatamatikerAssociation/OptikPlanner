@@ -459,6 +459,9 @@ namespace System.Windows.Forms.Calendar
             {
                 return IsOpenStart || ((this.IsOnDayTop || Calendar.DaysMode == CalendarDaysMode.Short) && !StartDate.TimeOfDay.Equals(new TimeSpan(0, 0, 0)));
             }
+
+
+            
         }
 
         /// <summary>
