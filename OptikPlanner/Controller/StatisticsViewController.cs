@@ -297,8 +297,6 @@ namespace OptikPlanner.Controller
                 TimeSpan timeElapsed = timeTo - timeFrom;
 
                 timeSpans.Add(timeElapsed);
-
-
             }
 
             double totalUsageInHours = 0;
@@ -333,10 +331,20 @@ namespace OptikPlanner.Controller
             var noShowList = from s in CancelAppointmentController.noShowList where (s.Substring(3, 2).Equals(monthNr.ToString())) select s;
             return noShowList.ToList();
         }
+        public List<string> GetNoShowCancellations(int monthNr, int yearNr)
+        {
+            var noShowList = from s in CancelAppointmentController.noShowList where (s.Substring(3, 2).Equals(monthNr.ToString()) && s.Substring(6, 4).Equals(yearNr.ToString())) select s;
+            return noShowList.ToList();
+        }
 
         public List<string> GetPhoneCancellations(int monthNr)
         {
             var noShowList = from s in CancelAppointmentController.cancelPhoneList where (s.Substring(3, 2).Equals(monthNr.ToString())) select s;
+            return noShowList.ToList();
+        }
+        public List<string> GetPhoneCancellations(int monthNr, int yearNr)
+        {
+            var noShowList = from s in CancelAppointmentController.cancelPhoneList where (s.Substring(3, 2).Equals(monthNr.ToString()) && s.Substring(6, 4).Equals(yearNr.ToString())) select s;
             return noShowList.ToList();
         }
 
@@ -345,11 +353,11 @@ namespace OptikPlanner.Controller
             var noShowList = from s in CancelAppointmentController.cancelElseList where (s.Substring(3, 2).Equals(monthNr.ToString())) select s;
             return noShowList.ToList();
         }
-
-
-
-
-
+        public List<string> GetOtherReasonCancellations(int monthNr, int yearNr)
+        {
+            var noShowList = from s in CancelAppointmentController.cancelElseList where (s.Substring(3, 2).Equals(monthNr.ToString()) && s.Substring(6, 4).Equals(yearNr.ToString())) select s;
+            return noShowList.ToList();
+        }
     }
 }
 

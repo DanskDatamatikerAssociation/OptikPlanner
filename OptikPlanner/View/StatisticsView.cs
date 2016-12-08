@@ -37,7 +37,7 @@ namespace OptikPlanner.View
 
             chooseTypeCombo.SelectedIndex = 0;
             showMonthCombo.SelectedIndex = DateTime.Now.Month;
-            showYearCombo.Text = DateTime.Now.Year.ToString();
+            showYearCombo.SelectedItem = DateTime.Now.Year.ToString();
 
 
         }
@@ -134,14 +134,14 @@ namespace OptikPlanner.View
             listView1.Columns.Clear();
             listView1.Items.Clear();
             listView1.Columns.Add("Grund", 150);
-            listView1.Columns.Add("aflysninger i ", 100);
+            listView1.Columns.Add("aflysninger i ", 150);
             listView1.Items.Add("Kunden ikke mødte op.");
             listView1.Items.Add("Kunden har aflyst telefonisk");
             listView1.Items.Add("der har været Andet i vejen.");
             listView1.Items[0].SubItems.Add(CancelAppointmentController.noShowList.Count.ToString());
             listView1.Items[1].SubItems.Add(CancelAppointmentController.cancelPhoneList.Count.ToString());
             listView1.Items[2].SubItems.Add(CancelAppointmentController.cancelElseList.Count.ToString());
-
+            
             chooseAmountListBox.Items.Clear();
         }
 
@@ -350,16 +350,27 @@ namespace OptikPlanner.View
 
             int monthsNumber = showMonthCombo.SelectedIndex;
             string monthsName = showMonthCombo.SelectedItem.ToString();
-            listView1.Columns[1].Text = "Aflysninger i " + monthsName;
+            int yearsNumber = DateTime.Now.Year;
+            int yearsName = DateTime.Now.Year;
+
+            try
+            {
+                yearsNumber = int.Parse(showYearCombo.Text);
+            }
+            catch (Exception)
+            {
+            }
+
+            listView1.Columns[1].Text = "Aflysninger i " + monthsName + " " + yearsNumber;
 
             MonthClearList();
-            var noShowList = _controller.GetNoShowCancellations(monthsNumber);
+            var noShowList = _controller.GetNoShowCancellations(monthsNumber, yearsNumber);
             listView1.Items[0].SubItems.Add(noShowList.Count().ToString());
 
-            var cancelPhoneList = _controller.GetPhoneCancellations(monthsNumber);
+            var cancelPhoneList = _controller.GetPhoneCancellations(monthsNumber, yearsNumber);
             listView1.Items[1].SubItems.Add(cancelPhoneList.Count().ToString());
 
-            var cancelElseList = _controller.GetOtherReasonCancellations(monthsNumber);
+            var cancelElseList = _controller.GetOtherReasonCancellations(monthsNumber, yearsNumber);
             listView1.Items[2].SubItems.Add(cancelElseList.Count().ToString());
         }
 
@@ -567,11 +578,11 @@ namespace OptikPlanner.View
             };
 
 
-            chart1.Titles.Add($"Sammenligning mellem {showMonthCombo.Text} og {compareMonthCombo.Text} måned.");
+            chart1.Titles.Add($"Sammenligning mellem {showMonthCombo.Text} {showYearCombo.Text} og {compareMonthCombo.Text} {compareYearCombo.Text}");
             chart1.ChartAreas[0].AxisY.Title = "Antal";
 
-            series.LegendText = showMonthCombo.Text;
-            comparisonSeries.LegendText = compareMonthCombo.Text;
+            series.LegendText = showMonthCombo.Text + " " + showYearCombo.Text;
+            comparisonSeries.LegendText = compareMonthCombo.Text + " " + compareYearCombo.Text;
 
             chart1.Series.Add(series);
             chart1.Series.Add(comparisonSeries);
