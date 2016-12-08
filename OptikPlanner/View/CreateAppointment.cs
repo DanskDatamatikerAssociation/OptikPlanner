@@ -17,7 +17,6 @@ namespace OptikPlanner.View
     public partial class CreateAppointment : Form, ICreateAppointmentView
     {
         private CreateAppointmentController _controller;
-        private DateTime mPrevDate;
         Random rnd = new Random();
         private List<CUSTOMERS> _customers;
 
@@ -52,7 +51,6 @@ namespace OptikPlanner.View
             
             timeFromPicker.ShowUpDown = true;
             timeToPicker.ShowUpDown = true;
-            mPrevDate = dateTimePicker1.Value;
 
             //initiate text statements
             userSelectionCombo.Text = "Vælg medarbejder...";
@@ -194,31 +192,46 @@ namespace OptikPlanner.View
 
         private void timeFromPicker_ValueChanged(object sender, EventArgs e)
         {
-                DateTime dt = timeFromPicker.Value;
-                if ((dt.Minute * 60 + dt.Second) % 300 != 0)
-                {
-                    TimeSpan diff = dt - mPrevDate;
-                    if (diff.Ticks < 0) timeFromPicker.Value = mPrevDate.AddMinutes(-15);
-                    else timeFromPicker.Value = mPrevDate.AddMinutes(15);
-                }
-            mPrevDate = timeFromPicker.Value;
+            switch (timeFromPicker.Value.Minute)
+            {
+                case 1:
+                case 16:
+                case 31:
+                case 46:
+                    timeFromPicker.Value = timeFromPicker.Value.AddMinutes(14);
+                    break;
+                case 14:
+                case 29:
+                case 44:
+                    timeFromPicker.Value = timeFromPicker.Value.AddMinutes(-14);
+                    break;
+                case 59:
+                    timeFromPicker.Value = timeFromPicker.Value.AddMinutes(-74);
+                    break;
+            }
         }
         
         
 
         private void timeToPicker_ValueChanged(object sender, EventArgs e)
         {
-            
-                DateTime dt = timeToPicker.Value;
-                if ((dt.Minute * 60 + dt.Second) % 300 != 0)
-                {
-                    TimeSpan diff = dt - mPrevDate;
-                    if (diff.Ticks < 0) timeToPicker.Value = mPrevDate.AddMinutes(-15);
-                    else timeToPicker.Value = mPrevDate.AddMinutes(15);
-                }
-                
-            
-            mPrevDate = timeToPicker.Value;
+            switch (timeToPicker.Value.Minute)
+            {
+                case 1:
+                case 16:
+                case 31:
+                case 46:
+                    timeToPicker.Value = timeToPicker.Value.AddMinutes(14);
+                    break;
+                case 14:
+                case 29:
+                case 44:
+                    timeToPicker.Value = timeToPicker.Value.AddMinutes(-14);
+                    break;
+                case 59:
+                    timeToPicker.Value = timeToPicker.Value.AddMinutes(-74);
+                    break;
+            }
         }
         
 
