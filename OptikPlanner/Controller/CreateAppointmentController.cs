@@ -158,14 +158,14 @@ namespace OptikPlanner.Controller
 
             var rooms = GetRooms();
             var matchingRoom = rooms.Find(r => r.ERO_NBR.Equals(clickedAppointment.APD_ROOM));
-            if(matchingRoom != null) clickedAppointmentDetails.Add(matchingRoom.ERO_SHORTDESC);
+            if (matchingRoom != null) clickedAppointmentDetails.Add(matchingRoom.ERO_SHORTDESC);
 
 
             var users = GetUsers();
             var matchingUser = users.Find(u => u.US_STAMP.Equals(clickedAppointment.APD_USER));
             if (matchingUser != null) clickedAppointmentDetails.Add(matchingUser.US_USERNAME);
 
-            
+
 
             return clickedAppointmentDetails;
 

@@ -1,4 +1,6 @@
-﻿namespace OptikPlanner.View
+﻿using System;
+
+namespace OptikPlanner.View
 {
     partial class CreateAppointment
     {
@@ -61,12 +63,14 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.customerLibraryButton = new System.Windows.Forms.Button();
+            this.label16 = new System.Windows.Forms.Label();
+            this.previousAppointmentsBoc = new System.Windows.Forms.TextBox();
             this.cprBox = new CueTextBox();
             this.SuspendLayout();
             // 
             // okButton
             // 
-            this.okButton.Location = new System.Drawing.Point(38, 448);
+            this.okButton.Location = new System.Drawing.Point(38, 477);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 0;
@@ -76,7 +80,7 @@
             // 
             // cancelBox
             // 
-            this.cancelBox.Location = new System.Drawing.Point(141, 448);
+            this.cancelBox.Location = new System.Drawing.Point(141, 477);
             this.cancelBox.Name = "cancelBox";
             this.cancelBox.Size = new System.Drawing.Size(75, 23);
             this.cancelBox.TabIndex = 1;
@@ -96,7 +100,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(43, 116);
+            this.label2.Location = new System.Drawing.Point(43, 145);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(54, 13);
             this.label2.TabIndex = 3;
@@ -114,7 +118,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(183, 59);
+            this.label4.Location = new System.Drawing.Point(203, 59);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(46, 13);
             this.label4.TabIndex = 5;
@@ -123,7 +127,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(298, 59);
+            this.label5.Location = new System.Drawing.Point(318, 59);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(53, 13);
             this.label5.TabIndex = 6;
@@ -132,7 +136,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(177, 116);
+            this.label7.Location = new System.Drawing.Point(177, 145);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(39, 13);
             this.label7.TabIndex = 8;
@@ -141,7 +145,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(293, 116);
+            this.label8.Location = new System.Drawing.Point(293, 145);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(66, 13);
             this.label8.TabIndex = 9;
@@ -150,7 +154,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(39, 223);
+            this.label9.Location = new System.Drawing.Point(39, 252);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(57, 13);
             this.label9.TabIndex = 10;
@@ -158,7 +162,7 @@
             // 
             // firstNameBox
             // 
-            this.firstNameBox.Location = new System.Drawing.Point(165, 75);
+            this.firstNameBox.Location = new System.Drawing.Point(185, 75);
             this.firstNameBox.Name = "firstNameBox";
             this.firstNameBox.ReadOnly = true;
             this.firstNameBox.Size = new System.Drawing.Size(100, 20);
@@ -166,7 +170,7 @@
             // 
             // lastNameBox
             // 
-            this.lastNameBox.Location = new System.Drawing.Point(271, 75);
+            this.lastNameBox.Location = new System.Drawing.Point(291, 75);
             this.lastNameBox.Name = "lastNameBox";
             this.lastNameBox.ReadOnly = true;
             this.lastNameBox.Size = new System.Drawing.Size(100, 20);
@@ -174,14 +178,14 @@
             // 
             // telefonBox
             // 
-            this.telefonBox.Location = new System.Drawing.Point(19, 264);
+            this.telefonBox.Location = new System.Drawing.Point(19, 293);
             this.telefonBox.Name = "telefonBox";
             this.telefonBox.Size = new System.Drawing.Size(137, 20);
             this.telefonBox.TabIndex = 13;
             // 
             // beskrivelseBox
             // 
-            this.beskrivelseBox.Location = new System.Drawing.Point(20, 360);
+            this.beskrivelseBox.Location = new System.Drawing.Point(20, 389);
             this.beskrivelseBox.Name = "beskrivelseBox";
             this.beskrivelseBox.Size = new System.Drawing.Size(327, 57);
             this.beskrivelseBox.TabIndex = 14;
@@ -206,7 +210,7 @@
             this.aftaleCombo.Items.AddRange(new object[] {
             "Linseopsætning",
             "Steljustering"});
-            this.aftaleCombo.Location = new System.Drawing.Point(16, 132);
+            this.aftaleCombo.Location = new System.Drawing.Point(16, 161);
             this.aftaleCombo.Name = "aftaleCombo";
             this.aftaleCombo.Size = new System.Drawing.Size(121, 21);
             this.aftaleCombo.TabIndex = 16;
@@ -216,7 +220,7 @@
             // 
             this.lokaleCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.lokaleCombo.FormattingEnabled = true;
-            this.lokaleCombo.Location = new System.Drawing.Point(143, 132);
+            this.lokaleCombo.Location = new System.Drawing.Point(143, 161);
             this.lokaleCombo.Name = "lokaleCombo";
             this.lokaleCombo.Size = new System.Drawing.Size(121, 21);
             this.lokaleCombo.TabIndex = 17;
@@ -225,7 +229,7 @@
             // 
             this.userCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.userCombo.FormattingEnabled = true;
-            this.userCombo.Location = new System.Drawing.Point(270, 132);
+            this.userCombo.Location = new System.Drawing.Point(270, 161);
             this.userCombo.Name = "userCombo";
             this.userCombo.Size = new System.Drawing.Size(121, 21);
             this.userCombo.TabIndex = 18;
@@ -233,7 +237,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(39, 248);
+            this.label6.Location = new System.Drawing.Point(39, 277);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(80, 13);
             this.label6.TabIndex = 21;
@@ -242,7 +246,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(71, 298);
+            this.label11.Location = new System.Drawing.Point(71, 327);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(32, 13);
             this.label11.TabIndex = 23;
@@ -251,7 +255,7 @@
             // smsCheck
             // 
             this.smsCheck.AutoSize = true;
-            this.smsCheck.Location = new System.Drawing.Point(162, 266);
+            this.smsCheck.Location = new System.Drawing.Point(162, 295);
             this.smsCheck.Name = "smsCheck";
             this.smsCheck.Size = new System.Drawing.Size(88, 17);
             this.smsCheck.TabIndex = 25;
@@ -263,7 +267,7 @@
             // emailCheck
             // 
             this.emailCheck.AutoSize = true;
-            this.emailCheck.Location = new System.Drawing.Point(162, 317);
+            this.emailCheck.Location = new System.Drawing.Point(162, 346);
             this.emailCheck.Name = "emailCheck";
             this.emailCheck.Size = new System.Drawing.Size(83, 17);
             this.emailCheck.TabIndex = 26;
@@ -272,7 +276,7 @@
             // 
             // emailBox
             // 
-            this.emailBox.Location = new System.Drawing.Point(19, 314);
+            this.emailBox.Location = new System.Drawing.Point(19, 343);
             this.emailBox.Name = "emailBox";
             this.emailBox.Size = new System.Drawing.Size(137, 20);
             this.emailBox.TabIndex = 27;
@@ -280,7 +284,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(35, 344);
+            this.label10.Location = new System.Drawing.Point(35, 373);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(102, 13);
             this.label10.TabIndex = 28;
@@ -289,7 +293,7 @@
             // cancelAppointmentButton
             // 
             this.cancelAppointmentButton.Enabled = false;
-            this.cancelAppointmentButton.Location = new System.Drawing.Point(243, 448);
+            this.cancelAppointmentButton.Location = new System.Drawing.Point(243, 477);
             this.cancelAppointmentButton.Name = "cancelAppointmentButton";
             this.cancelAppointmentButton.Size = new System.Drawing.Size(75, 23);
             this.cancelAppointmentButton.TabIndex = 29;
@@ -299,7 +303,7 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(16, 179);
+            this.dateTimePicker1.Location = new System.Drawing.Point(16, 208);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker1.TabIndex = 31;
@@ -307,7 +311,7 @@
             // timeFromPicker
             // 
             this.timeFromPicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.timeFromPicker.Location = new System.Drawing.Point(222, 179);
+            this.timeFromPicker.Location = new System.Drawing.Point(222, 208);
             this.timeFromPicker.Name = "timeFromPicker";
             this.timeFromPicker.Size = new System.Drawing.Size(51, 20);
             this.timeFromPicker.TabIndex = 32;
@@ -316,7 +320,7 @@
             // timeToPicker
             // 
             this.timeToPicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.timeToPicker.Location = new System.Drawing.Point(296, 179);
+            this.timeToPicker.Location = new System.Drawing.Point(296, 208);
             this.timeToPicker.Name = "timeToPicker";
             this.timeToPicker.Size = new System.Drawing.Size(51, 20);
             this.timeToPicker.TabIndex = 33;
@@ -325,7 +329,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(279, 185);
+            this.label12.Location = new System.Drawing.Point(279, 214);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(10, 13);
             this.label12.TabIndex = 34;
@@ -334,7 +338,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(71, 163);
+            this.label13.Location = new System.Drawing.Point(71, 192);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(56, 13);
             this.label13.TabIndex = 35;
@@ -343,7 +347,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(231, 163);
+            this.label14.Location = new System.Drawing.Point(231, 192);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(19, 13);
             this.label14.TabIndex = 36;
@@ -352,7 +356,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(308, 163);
+            this.label15.Location = new System.Drawing.Point(308, 192);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(14, 13);
             this.label15.TabIndex = 37;
@@ -368,21 +372,41 @@
             this.customerLibraryButton.UseVisualStyleBackColor = true;
             this.customerLibraryButton.Click += new System.EventHandler(this.customerLibraryButton_Click);
             // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(19, 112);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(162, 13);
+            this.label16.TabIndex = 40;
+            this.label16.Text = "Tidligere aftalet på valgte kunde ";
+            // 
+            // previousAppointmentsBoc
+            // 
+            this.previousAppointmentsBoc.Location = new System.Drawing.Point(185, 109);
+            this.previousAppointmentsBoc.Name = "previousAppointmentsBoc";
+            this.previousAppointmentsBoc.ReadOnly = true;
+            this.previousAppointmentsBoc.Size = new System.Drawing.Size(206, 20);
+            this.previousAppointmentsBoc.TabIndex = 41;
+            this.previousAppointmentsBoc.MouseEnter += new System.EventHandler(this.previousAppointmentsBoc_MouseEnter);
+            this.previousAppointmentsBoc.MouseLeave += new System.EventHandler(this.previousAppointmentsBoc_MouseLeave);
+            // 
             // cprBox
             // 
             this.cprBox.Cue = "Indtast CPR";
             this.cprBox.Location = new System.Drawing.Point(22, 75);
             this.cprBox.Name = "cprBox";
             this.cprBox.Size = new System.Drawing.Size(100, 20);
-            this.cprBox.TabIndex = 38;
-            this.cprBox.TextChanged += new System.EventHandler(this.cueTextBox1_TextChanged);
+            this.cprBox.TabIndex = 42;
             this.cprBox.Leave += new System.EventHandler(this.cprBox_Leave);
             // 
             // CreateAppointment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(404, 492);
+            this.ClientSize = new System.Drawing.Size(435, 554);
+            this.Controls.Add(this.previousAppointmentsBoc);
+            this.Controls.Add(this.label16);
             this.Controls.Add(this.customerLibraryButton);
             this.Controls.Add(this.cprBox);
             this.Controls.Add(this.label15);
@@ -462,5 +486,7 @@
         private System.Windows.Forms.Label label15;
         private CueTextBox cprBox;
         private System.Windows.Forms.Button customerLibraryButton;
+        private System.Windows.Forms.Label label16;
+        public System.Windows.Forms.TextBox previousAppointmentsBoc;
     }
 }
