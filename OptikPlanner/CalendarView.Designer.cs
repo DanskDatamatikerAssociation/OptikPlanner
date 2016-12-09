@@ -425,7 +425,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "CalendarView";
-            this.Text = "OptikPlanner";
+            this.Text = "Optik Planner";
             this.Activated += new System.EventHandler(this.CalendarView_Activated);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
