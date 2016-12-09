@@ -630,10 +630,6 @@ namespace OptikPlanner
             newAppointmentButton.BackColor = Color.White;
         }
 
-        private void button8_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void button8_Enter(object sender, EventArgs e)
         {
