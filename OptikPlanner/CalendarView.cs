@@ -150,6 +150,9 @@ namespace OptikPlanner
             //    monthView.SelectionEnd = oneWeekAhead;
             //}
 
+            monthView.SelectionStart = lastMonday;
+            monthView.SelectionEnd = oneWeekAhead;
+
             calendar.SelectedElementStart = null;
 
 
@@ -327,10 +330,12 @@ namespace OptikPlanner
             currentWeek = CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(currentDate, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
 
             weekLabel.Text = currentWeek.ToString();
-            if (!monthView.SelectionStart.Equals(DateTime.MinValue))
-                weekLabel.Text =
-                    CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(monthView.SelectionStart,
-                        CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday).ToString();
+            //if (!monthView.SelectionStart.Equals(DateTime.MinValue))
+            //    weekLabel.Text =
+            //        CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(monthView.SelectionStart,
+            //            CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday).ToString();
+
+
 
         }
 
