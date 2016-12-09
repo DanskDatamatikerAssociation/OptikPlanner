@@ -19,6 +19,7 @@ namespace OptikPlanner.View
         public CreateCustomer()
         {
             InitializeComponent();
+            StartPosition = FormStartPosition.CenterParent;
             //userCombo.Items.Add(CustomerLibraryController.GetUser());
         }
         private void createCustomerButton_Click(object sender, EventArgs e)

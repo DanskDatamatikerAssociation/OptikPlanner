@@ -24,6 +24,9 @@ namespace OptikPlanner.View
         public CancelAppointment()
         {
             InitializeComponent();
+
+            StartPosition = FormStartPosition.CenterParent;
+
             _controller = new CancelAppointmentController(this);
             AddUsersToList();
             

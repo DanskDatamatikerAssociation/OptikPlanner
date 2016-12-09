@@ -32,10 +32,15 @@ namespace OptikPlanner
         {
             InitializeComponent();
 
+            StartPosition = FormStartPosition.CenterScreen;
+
             Calendar = calendar;
             _calendarViewController = new CalendarViewController(this);
 
             SetupCalendar();
+
+
+            
 
         }
 
@@ -50,6 +55,7 @@ namespace OptikPlanner
 
             calendar.AllowNew = false;
 
+            
             //Changes the current visible timerange on the calendar. 
             calendar.TimeUnitsOffset = -DateTime.Now.Hour * 2;
         }
@@ -93,7 +99,14 @@ namespace OptikPlanner
             SetAllLabels();
             _viewMode = DayViewMode;
 
-            calendar.SetViewRange(monthView.SelectionStart, monthView.SelectionStart);
+            calendar.SetViewRange(DateTime.Today, DateTime.Today);
+            if (!monthView.SelectionStart.Equals(DateTime.MinValue))
+                calendar.SetViewRange(monthView.SelectionStart, monthView.SelectionStart);
+            if (calendar.SelectedElementStart != null) calendar.SetViewRange(calendar.SelectedElementStart.Date, calendar.SelectedElementStart.Date);
+
+
+            calendar.SelectedElementStart = null;
+
         }
 
         private void ShowWeekView()
@@ -105,6 +118,7 @@ namespace OptikPlanner
             DateTime today;
             if (monthView.SelectionStart.Equals(DateTime.MinValue)) { today = DateTime.Today; }
             else today = monthView.SelectionStart;
+            if (calendar.SelectedElementStart != null) today = calendar.SelectedElementStart.Date;
 
             DateTime lastMonday;
             int daysSinceLastMonday = 1;
@@ -136,7 +150,7 @@ namespace OptikPlanner
             //    monthView.SelectionEnd = oneWeekAhead;
             //}
 
-
+            calendar.SelectedElementStart = null;
         }
 
         private void ShowTwoWeeksView()
@@ -177,6 +191,7 @@ namespace OptikPlanner
             _viewMode = MonthViewMode;
 
             DateTime selectedDate = calendar.ViewStart;
+            if (!monthView.SelectionStart.Equals(DateTime.MinValue)) selectedDate = monthView.SelectionStart;
             int daysInCurrentMonth = DateTime.DaysInMonth(selectedDate.Year, selectedDate.Month);
             DateTime firstDayOfMonth = new DateTime(selectedDate.Year, selectedDate.Month, 1);
             DateTime lastDayOfMonth = new DateTime(selectedDate.Year, selectedDate.Month, daysInCurrentMonth);
@@ -204,7 +219,19 @@ namespace OptikPlanner
 
         private void monthView2_SelectionChanged(object sender, EventArgs e)
         {
-            calendar.SetViewRange(monthView.SelectionStart, monthView.SelectionEnd);
+            switch (_viewMode)
+            {
+                case DayViewMode:
+                    ShowDayView();
+                    break;
+                case WeekViewMode:
+                    ShowWeekView();
+                    break;
+                case MonthViewMode:
+                    ShowMonthView();
+                    break;
+            }
+            //calendar.SetViewRange(monthView.SelectionStart, monthView.SelectionEnd);
 
             SetAllLabels();
         }
@@ -298,6 +325,10 @@ namespace OptikPlanner
             currentWeek = CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(currentDate, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
 
             weekLabel.Text = currentWeek.ToString();
+            if (!monthView.ViewStart.Equals(DateTime.MinValue))
+                weekLabel.Text =
+                    CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(monthView.SelectionStart,
+                        CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday).ToString();
 
         }
 

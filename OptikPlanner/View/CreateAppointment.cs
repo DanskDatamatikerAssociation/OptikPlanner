@@ -39,6 +39,8 @@ namespace OptikPlanner.View
         {
             InitializeComponent();
 
+            StartPosition = FormStartPosition.CenterParent;
+
             _controller = new CreateAppointmentController(this);
 
             _customers = _controller.GetCustomers();
@@ -52,7 +54,7 @@ namespace OptikPlanner.View
             //timepicking settings
             timeFromPicker.CustomFormat = "HH:mm";
             timeToPicker.CustomFormat = "HH:mm";
-            
+
             timeFromPicker.ShowUpDown = true;
             timeToPicker.ShowUpDown = true;
             mPrevDate = dateTimePicker1.Value;
@@ -103,7 +105,7 @@ namespace OptikPlanner.View
 
         //    dateTimePicker1.Value = selectedElement.Date;
         //    timeFromPicker.Text = selectedElement.TimeOfDay.ToString();
-            
+
         //}
 
         private void GetDbData()
@@ -113,16 +115,16 @@ namespace OptikPlanner.View
 
             var users = _controller.GetUsers();
             userSelectionCombo.Items.AddRange(users.ToArray());
-            userCombo.Items.AddRange(users.ToArray());       
-            
-                 
+            userCombo.Items.AddRange(users.ToArray());
+
+
 
         }
-        
+
         private void cueTextBox1_TextChanged(object sender, EventArgs e)
         {
 
-           
+
 
 
         }
@@ -146,7 +148,7 @@ namespace OptikPlanner.View
 
 
             aftaleCombo.Text = extraDetails[0];
-           // aftaleCombo.Enabled = false;
+            // aftaleCombo.Enabled = false;
 
             lokaleCombo.Text = extraDetails[1];
             //lokaleCombo.Enabled = false;
@@ -154,11 +156,11 @@ namespace OptikPlanner.View
             userCombo.Text = extraDetails[2];
             //userCombo.Enabled = false;
 
-            dateTimePicker1.Value =  ClickedAppointment.APD_DATE.GetValueOrDefault();
+            dateTimePicker1.Value = ClickedAppointment.APD_DATE.GetValueOrDefault();
             //dateTimePicker1.Enabled = false;
 
             timeFromPicker.Text = ClickedAppointment.APD_TIMEFROM;
-           // timeFromPicker.Enabled = false;
+            // timeFromPicker.Enabled = false;
 
             timeToPicker.Text = ClickedAppointment.APD_TIMETO;
             //timeToPicker.Enabled = false;
@@ -184,7 +186,7 @@ namespace OptikPlanner.View
             //ClickedAppointment = null;
 
         }
-        
+
 
         private void cancelBox_Click(object sender, EventArgs e)
         {
@@ -200,52 +202,62 @@ namespace OptikPlanner.View
 
         private void timeFromPicker_ValueChanged(object sender, EventArgs e)
         {
-                DateTime dtfrom = timeFromPicker.Value;
+            DateTime dtfrom = timeFromPicker.Value;
 
-                if ((dtfrom.Minute * 60 + dtfrom.Second) % 300 != 0)
-                {
-                    TimeSpan diff = dtfrom - mPrevDate;
-                    if (diff.Ticks < 0) timeFromPicker.Value = mPrevDate.AddMinutes(-15);
-                    else timeFromPicker.Value = mPrevDate.AddMinutes(15);
-                }
+            if ((dtfrom.Minute * 60 + dtfrom.Second) % 300 != 0)
+            {
+                TimeSpan diff = dtfrom - mPrevDate;
+                if (diff.Ticks < 0) timeFromPicker.Value = mPrevDate.AddMinutes(-15);
+                else timeFromPicker.Value = mPrevDate.AddMinutes(15);
+            }
             mPrevDate = timeFromPicker.Value;
         }
-        
-        
+
+
 
         private void timeToPicker_ValueChanged(object sender, EventArgs e)
         {
-            
-                DateTime dt = timeToPicker.Value;
-                if ((dt.Minute * 60 + dt.Second) % 300 != 0)
-                {
-                    TimeSpan diff = dt - mPrevDate;
-                    if (diff.Ticks < 0) timeToPicker.Value = mPrevDate.AddMinutes(-15);
-                    else timeToPicker.Value = mPrevDate.AddMinutes(15);
-                }
-                
-            
+
+            DateTime dt = timeToPicker.Value;
+            if ((dt.Minute * 60 + dt.Second) % 300 != 0)
+            {
+                TimeSpan diff = dt - mPrevDate;
+                if (diff.Ticks < 0) timeToPicker.Value = mPrevDate.AddMinutes(-15);
+                else timeToPicker.Value = mPrevDate.AddMinutes(15);
+            }
+
+
             mPrevDate = timeToPicker.Value;
 
-            
+
         }
-        
+
 
         private void okButton_Click(object sender, EventArgs e)
         {
-            
+
             int id = _controller.GetNextAppointmentId();
             DateTime date = new DateTime(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, dateTimePicker1.Value.Day, timeFromPicker.Value.Hour, timeFromPicker.Value.Minute, 0);
             if (date < DateTime.Today)
             {
-                MessageBox.Show("Du skal vælge et tidspunkt i fremtiden", "Fejl", MessageBoxButtons.OK,
+                if (ClickedAppointment == null)
+                {
+                    MessageBox.Show("Du skal vælge et tidspunkt i fremtiden", "Fejl", MessageBoxButtons.OK,
                             MessageBoxIcon.Error);
-                return;
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("Du kan ikke redigere en aftale der er overstået.", "Fejl", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    return;
+                }
+
             }
             string timeFrom = timeFromPicker.Value.ToString("HH:mm");
             string timeTo = timeToPicker.Value.ToString("HH:mm");
             USERS user = (USERS)userCombo.SelectedItem;
-            EYEEXAMROOMS room = (EYEEXAMROOMS) lokaleCombo.SelectedItem;
+            EYEEXAMROOMS room = (EYEEXAMROOMS)lokaleCombo.SelectedItem;
             CUSTOMERS customer = _customers.Find(c => c.CS_CPRNO.Equals(cprBox.Text));
             AppointmentType type;
             switch (aftaleCombo.Text)
@@ -276,7 +288,7 @@ namespace OptikPlanner.View
                 try
                 {
                     if (result > 0)
-                        //(date <= DateTime.Now.AddMinutes(-1))
+                    //(date <= DateTime.Now.AddMinutes(-1))
                     {
                         MessageBox.Show("Du skal vælge et tidspunkt i fremtiden", "Fejl", MessageBoxButtons.OK,
                             MessageBoxIcon.Error);
@@ -307,8 +319,11 @@ namespace OptikPlanner.View
                 appointment.APD_MOBILE = telefonBox.Text;
                 appointment.APD_EMAIL = emailBox.Text;
                 _controller.PutAppointment(appointment);
+
+
                 MessageBox.Show("Success! Aftalen er redigeret.", "Succes!", MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
+
                 this.Close();
             }
 
@@ -328,7 +343,7 @@ namespace OptikPlanner.View
 
         private void beskrivelseBox_TextChanged(object sender, EventArgs e)
         {
-                
+
         }
 
         private void customerLibraryButton_Click(object sender, EventArgs e)
