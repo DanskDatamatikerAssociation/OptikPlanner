@@ -33,6 +33,7 @@ namespace OptikPlanner.View
         public StatisticsView()
         {
             InitializeComponent();
+            StartPosition = FormStartPosition.CenterScreen;
             Populate();
             _controller = new StatisticsViewController(this);
 
