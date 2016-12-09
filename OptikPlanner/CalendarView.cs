@@ -146,12 +146,11 @@ namespace OptikPlanner
             //if (!monthView.SelectionStart.Equals(DateTime.MinValue) ||
             //    !monthView.SelectionEnd.Equals(DateTime.MinValue))
             //{
-            //    monthView.SelectionStart = lastMonday;
-            //    monthView.SelectionEnd = oneWeekAhead;
+            //    monthView.SelectionStart = calendar.ViewStart;
+            //    monthView.SelectionEnd = calendar.ViewEnd;
             //}
 
-            monthView.SelectionStart = lastMonday;
-            monthView.SelectionEnd = oneWeekAhead;
+
 
             calendar.SelectedElementStart = null;
 
