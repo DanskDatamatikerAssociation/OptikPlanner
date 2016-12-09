@@ -498,5 +498,102 @@ namespace OptikPlanner
         {
 
         }
+
+        private void calendar_DayHeaderClick(object sender, CalendarDayEventArgs e)
+        {
+            _viewMode = DayViewMode;
+            calendar.SetViewRange(e.CalendarDay.Date,e.CalendarDay.Date);
+            dayViewButton.Select();
+        }
+
+        private void monthLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void monthViewButton_Enter(object sender, EventArgs e)
+        {
+            monthViewButton.BackColor = Color.LightGray;
+        }
+
+        private void monthViewButton_Leave(object sender, EventArgs e)
+        {
+            monthViewButton.BackColor = Color.White;
+        }
+
+        private void weekViewButton_Enter(object sender, EventArgs e)
+        {
+            weekViewButton.BackColor = Color.LightGray;
+        }
+
+        private void weekViewButton_Leave(object sender, EventArgs e)
+        {
+            weekViewButton.BackColor = Color.White;
+        }
+
+        private void dayViewButton_Enter(object sender, EventArgs e)
+        {
+            dayViewButton.BackColor = Color.LightGray;
+        }
+
+        private void dayViewButton_Leave(object sender, EventArgs e)
+        {
+            dayViewButton.BackColor = Color.White;
+        }
+
+        private void twoWeeksButton_Enter(object sender, EventArgs e)
+        {
+            twoWeeksButton.BackColor = Color.LightGray;
+        }
+
+        private void twoWeeksButton_Leave(object sender, EventArgs e)
+        {
+            twoWeeksButton.BackColor = Color.White;
+        }
+
+        private void todayButton_Enter(object sender, EventArgs e)
+        {
+            todayButton.BackColor = Color.LightGray;
+        }
+
+        private void todayButton_Leave(object sender, EventArgs e)
+        {
+            todayButton.BackColor = Color.White;
+        }
+
+        private void newAppointmentButton_Enter(object sender, EventArgs e)
+        {
+            newAppointmentButton.BackColor = Color.LightGray;
+        }
+
+        private void newAppointmentButton_Leave(object sender, EventArgs e)
+        {
+            newAppointmentButton.BackColor = Color.White;
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button8_Enter(object sender, EventArgs e)
+        {
+            button8.BackColor = Color.LightGray;
+        }
+
+        private void button8_Leave(object sender, EventArgs e)
+        {
+            button8.BackColor = Color.White;
+        }
+
+        private void logButton_Enter(object sender, EventArgs e)
+        {
+            logButton.BackColor = Color.LightGray;
+        }
+
+        private void logButton_Leave(object sender, EventArgs e)
+        {
+            logButton.BackColor = Color.White;
+        }
     }
 }
