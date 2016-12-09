@@ -903,6 +903,7 @@ namespace OptikPlanner.View
         private void resetButton_Click(object sender, EventArgs e)
         {
             NumericButtonClick();
+            SearchButton.Enabled = false;
             chooseViewButton.Enabled = true;
             chooseTypeCombo.Enabled = true;
             compareMonthCombo.SelectedItem = null;

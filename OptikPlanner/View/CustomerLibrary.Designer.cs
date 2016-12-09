@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomerLibrary));
             this.editCustomerButton = new System.Windows.Forms.Button();
             this.createCustomerButton = new System.Windows.Forms.Button();
             this.deleteCustomerButton = new System.Windows.Forms.Button();
@@ -120,6 +121,7 @@
             this.Controls.Add(this.createCustomerButton);
             this.Controls.Add(this.editCustomerButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "CustomerLibrary";
             this.Text = "Kundekartotek";

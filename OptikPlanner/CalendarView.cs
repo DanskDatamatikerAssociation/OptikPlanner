@@ -518,5 +518,11 @@ namespace OptikPlanner
             StatisticsView window = new StatisticsView();
             window.Show();
         }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            CustomerLibrary window = new CustomerLibrary();
+            window.Show();
+        }
     }
 }

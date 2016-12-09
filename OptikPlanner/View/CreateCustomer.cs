@@ -48,12 +48,15 @@ namespace OptikPlanner.View
                         
                     }
                 }
+                Trace.WriteLine($"\n Ny kunde med navn: {firstNameBox.Text} {LastNameBox.Text} er blevet oprettet d. {DateTime.Now}");
+
                 //Trace.WriteLine($"\n{DateTime.Now}: ansatte: " + creater + " har ændret en kunde ved navn: " + firstNameBox.Text + " " + LastNameBox.Text);
             }
             else if (createCustomer2Button.Text == "Opret")
             {
                 CustomerLibraryController.GetCustomer().Add(customer);
-                //Trace.WriteLine($"\n{DateTime.Now}: ansatte: " + creater + " har oprettet en ny kunde ved navn: " + firstNameBox.Text + " " + LastNameBox.Text);
+                Trace.WriteLine($"\n Ny kunde med navn: {firstNameBox.Text} {LastNameBox.Text} er blevet rettet i d. {DateTime.Now}");
+
             }
 
             this.Close();

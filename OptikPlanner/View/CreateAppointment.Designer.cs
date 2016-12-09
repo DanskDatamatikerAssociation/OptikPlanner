@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateAppointment));
             this.okButton = new System.Windows.Forms.Button();
             this.cancelBox = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -70,7 +71,7 @@
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 0;
-            this.okButton.Text = "Ok / Gem";
+            this.okButton.Text = "Opret";
             this.okButton.UseVisualStyleBackColor = true;
             this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
@@ -418,9 +419,10 @@
             this.Controls.Add(this.cancelBox);
             this.Controls.Add(this.okButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "CreateAppointment";
-            this.Text = "CreateAppointment";
+            this.Text = "Opret aftale";
             this.ResumeLayout(false);
             this.PerformLayout();
 

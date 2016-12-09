@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateCustomer));
             this.cprBox = new CueTextBox();
             this.createCustomer2Button = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
@@ -186,6 +187,7 @@
             this.Controls.Add(this.createCustomer2Button);
             this.Controls.Add(this.cprBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "CreateCustomer";
             this.Text = "Opret kunde";

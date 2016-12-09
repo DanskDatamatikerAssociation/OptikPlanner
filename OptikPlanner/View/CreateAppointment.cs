@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.Windows.Forms.Calendar;
 using OptikPlanner.Controller;
 using OptikPlanner.Model;
+using System.Diagnostics;
 
 namespace OptikPlanner.View
 {
@@ -131,6 +132,9 @@ namespace OptikPlanner.View
         {
             var extraDetails = _controller.GetClickedAppointmentDetails();
 
+            this.Text = "Ret Aftale";
+            label1.Text = "Retter";
+            okButton.Text = "Ret";
 
             userSelectionCombo.Text = extraDetails[2];
             userSelectionCombo.Enabled = false;
@@ -280,6 +284,8 @@ namespace OptikPlanner.View
                     {
                         MessageBox.Show("Du skal vælge et tidspunkt i fremtiden", "Fejl", MessageBoxButtons.OK,
                             MessageBoxIcon.Error);
+                        //ny aftale
+                        Trace.WriteLine($"\n Ansatte: {userSelectionCombo.SelectedIndex} har Oprettet en ny aftale d. {DateTime.Now}");
                         return;
                     }
 
@@ -302,13 +308,14 @@ namespace OptikPlanner.View
             //To put an appointment
             else
             {
-
+                
                 appointment = new APTDETAILS(ClickedAppointment.APD_STAMP, user, room, date, timeFrom, timeTo, customer, type, description);
                 appointment.APD_MOBILE = telefonBox.Text;
                 appointment.APD_EMAIL = emailBox.Text;
                 _controller.PutAppointment(appointment);
                 MessageBox.Show("Success! Aftalen er redigeret.", "Succes!", MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
+                Trace.WriteLine($"\n Ansatte: {userSelectionCombo.SelectedIndex} har Rettet i en aftale d. {DateTime.Now}");
                 this.Close();
             }
 

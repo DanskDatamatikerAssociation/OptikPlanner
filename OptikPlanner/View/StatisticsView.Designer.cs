@@ -39,6 +39,7 @@ namespace OptikPlanner.View
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StatisticsView));
             this.chooseTypeCombo = new System.Windows.Forms.ComboBox();
             this.DatoLabel = new System.Windows.Forms.Label();
             this.chooseDataLabel = new System.Windows.Forms.Label();
@@ -307,6 +308,7 @@ namespace OptikPlanner.View
             this.Controls.Add(this.DatoLabel);
             this.Controls.Add(this.chart1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "StatisticsView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

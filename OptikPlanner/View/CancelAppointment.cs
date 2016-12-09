@@ -41,11 +41,6 @@ namespace OptikPlanner.View
         {
             Log();
             DeleteAppointment();
-
-
-
-
-
         }
 
         private void cancelButton_Click(object sender, EventArgs e)

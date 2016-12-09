@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CancelAppointment));
             this.cuCancelElseRadio = new System.Windows.Forms.RadioButton();
             this.cuCancelPhoneRadio = new System.Windows.Forms.RadioButton();
             this.cuCancelRadio = new System.Windows.Forms.RadioButton();
@@ -132,9 +133,10 @@
             this.Controls.Add(this.AflyserLabel);
             this.Controls.Add(this.cancelUserBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "CancelAppointment";
-            this.Text = "Er du sikker på du vil aflyse valgte aftale?";
+            this.Text = "Aflys valgte aftale";
             this.ResumeLayout(false);
             this.PerformLayout();
 
