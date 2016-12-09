@@ -151,6 +151,8 @@ namespace OptikPlanner
             //}
 
             calendar.SelectedElementStart = null;
+
+
         }
 
         private void ShowTwoWeeksView()
@@ -325,7 +327,7 @@ namespace OptikPlanner
             currentWeek = CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(currentDate, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
 
             weekLabel.Text = currentWeek.ToString();
-            if (!monthView.ViewStart.Equals(DateTime.MinValue))
+            if (!monthView.SelectionStart.Equals(DateTime.MinValue))
                 weekLabel.Text =
                     CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(monthView.SelectionStart,
                         CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday).ToString();
