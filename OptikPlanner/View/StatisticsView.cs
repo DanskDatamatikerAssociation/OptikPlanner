@@ -542,8 +542,9 @@ namespace OptikPlanner.View
 
 
             //Lokaler
-            var rooms = _controller.GetRooms();
-            foreach (var r in rooms)
+            //var rooms = _controller.GetRooms();
+            var checkedRooms = GetCheckedRooms();
+            foreach (var r in checkedRooms)
             {
                 var roomPiece = series1.Points.Add(_controller.GetRoomUsageInHours(r, chosenMonth, chosenYear));
                 roomPiece.LegendText = r.ERO_SHORTDESC;
@@ -599,8 +600,9 @@ namespace OptikPlanner.View
 
 
             //Medarbejdere
-            var employees = _controller.GetUsers();
-            foreach (var e in employees)
+            //var employees = _controller.GetUsers();
+            var checkedEmployees = GetCheckedEmployees();
+            foreach (var e in checkedEmployees)
             {
                 var userPiece = series1.Points.Add(_controller.GetEmployeeUsageInHours(e, chosenMonth, chosenYear));
                 userPiece.LegendText = e.US_USERNAME;
@@ -751,11 +753,12 @@ namespace OptikPlanner.View
             chart1.Series.Add(comparisonSeries);
 
 
-            var rooms = _controller.GetRooms();
+            //var rooms = _controller.GetRooms();
+            var checkedRooms = GetCheckedRooms();
 
-            for (int i = 0; i < rooms.Count; i++)
+            for (int i = 0; i < checkedRooms.Count; i++)
             {
-                var room = rooms[i];
+                var room = checkedRooms[i];
                 var timeUsedBar =
                     series.Points.Add(_controller.GetRoomUsageInHours(room, chosenMonth, chosenYear));
                 timeUsedBar.AxisLabel = room.ERO_SHORTDESC;
@@ -816,11 +819,12 @@ namespace OptikPlanner.View
             chart1.Series.Add(series);
             chart1.Series.Add(comparisonSeries);
 
-            var users = _controller.GetUsers();
+            //var users = _controller.GetUsers();
+            var checkedUsers = GetCheckedEmployees();
 
-            for (int i = 0; i < users.Count; i++)
+            for (int i = 0; i < checkedUsers.Count; i++)
             {
-                var user = users[i];
+                var user = checkedUsers[i];
                 var timeUsedBar =
                     series.Points.Add(_controller.GetEmployeeUsageInHours(user, chosenMonth, chosenYear));
                 timeUsedBar.AxisLabel = user.US_USERNAME;
@@ -922,17 +926,22 @@ namespace OptikPlanner.View
                 {
                     var roomJustChecked = (EYEEXAMROOMS)filterListBox.Items[e.Index];
                     checkedRooms.Add(roomJustChecked);
+
+
                 }
                 else if (e.NewValue == CheckState.Unchecked)
                 {
                     var roomJustUnchecked = (EYEEXAMROOMS)filterListBox.Items[e.Index];
                     checkedRooms.Remove(roomJustUnchecked);
                     showAllCheckBox.Checked = false;
+
+
                 }
 
                 var orderedList = from r in checkedRooms orderby r.ERO_STAMP select r;
 
                 FilterRoomData(orderedList.ToList());
+                if (!clickedGraf) this.BeginInvoke(new Action(SetupRoomPieChart));
             }
             if (chooseTypeCombo.Text.Equals("Medarbejdere"))
             {
@@ -953,8 +962,15 @@ namespace OptikPlanner.View
                 var orderedList = from emp in checkedEmployees orderby emp.US_STAMP select emp;
 
                 FilterEmployeeData(orderedList.ToList());
+                if (!clickedGraf)
+                    this.BeginInvoke(new Action(SetUpEmployeePieChart));
+
             }
 
+            //this.BeginInvoke(new Action(() =>
+            //{
+            //    //Do the after-check tasks here
+            //}));
 
 
         }

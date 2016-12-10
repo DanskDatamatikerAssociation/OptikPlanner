@@ -312,7 +312,7 @@ namespace OptikPlanner.View
             this.MaximizeBox = false;
             this.Name = "StatisticsView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Statistik visning";
+            this.Text = "Statistik";
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
