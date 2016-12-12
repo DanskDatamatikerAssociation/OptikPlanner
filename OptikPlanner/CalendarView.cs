@@ -43,6 +43,10 @@ namespace OptikPlanner
 
         private void SetupCalendar()
         {
+            var rooms = _calendarViewController.GetRooms();
+            var users = _calendarViewController.GetUsers();
+            var customers = _calendarViewController.GetCustomers();
+
             calendar.MaximumViewDays = 140;
             ShowWeekView();
             monthView.FirstDayOfWeek = DayOfWeek.Monday;
@@ -52,7 +56,11 @@ namespace OptikPlanner
 
             calendar.AllowNew = false;
 
-            
+            foreach (var r in rooms) checkRoomList.Items.Add(r);
+            foreach (var u in users) checkUsersList.Items.Add(u);
+            foreach (var c in customers) checkCustomerList.Items.Add(c);
+
+
             //Changes the current visible timerange on the calendar. 
             calendar.TimeUnitsOffset = -DateTime.Now.Hour * 2;
         }
@@ -678,7 +686,17 @@ namespace OptikPlanner
             }
             return checkedEmployees;
         }
-
+        private List<CUSTOMERS> GetCheckedCustomers()
+        {
+            List<CUSTOMERS> checkedCustomers = new List<CUSTOMERS>();
+            for (int i = 0; i < checkUsersList.Items.Count; i++)
+            {
+                var customer = (CUSTOMERS)checkCustomerList.Items[i];
+                var isChecked = checkCustomerList.GetItemCheckState(i);
+                if (isChecked == CheckState.Checked) checkedCustomers.Add(customer);
+            }
+            return checkedCustomers;
+        }
         private List<APTDETAILS> GetAllCheckedApt()
         {
             List<APTDETAILS> deletedApt = new List<APTDETAILS>();
@@ -712,6 +730,17 @@ namespace OptikPlanner
                 foreach (var apt in allApt)
                 {
                     if (emp.US_STAMP == apt.APD_USER)
+                    {
+                        checkedApt.Add(apt);
+                    }
+                }
+            }
+
+            foreach (var cus in GetCheckedCustomers())
+            {
+                foreach (var apt in allApt)
+                {
+                    if (cus.CS_STAMP == apt.APD_CUSTOMER)
                     {
                         checkedApt.Add(apt);
                     }

@@ -31,6 +31,23 @@ namespace OptikPlanner.Controller
 
         }
 
+        public List<CUSTOMERS> GetCustomers()
+        {
+            //    CUSTOMERS customer = new CUSTOMERS();
+            //    customer.CS_CPRNO = "2001926754";
+            //    customer.CS_FIRSTNAME = "Børge";
+            //    customer.CS_LASTNAME = "Jensen";
+
+
+            //    return customer;
+
+            using (db = new OptikItDbContext())
+            {
+                var customers = from c in db.CUSTOMERS select c;
+                return customers.ToList();
+            }
+        }
+
         public List<EYEEXAMROOMS> GetRooms()
         {
             //TESTDATA
@@ -163,11 +180,11 @@ namespace OptikPlanner.Controller
             //}
         }
 
-        public List<CalendarItem> GetAppointmentsAsCalendarItems(List<APTDETAILS> appointment)
+        public List<CalendarItem> GetAppointmentsAsCalendarItems(List<APTDETAILS> appointments)
         {
             List<CalendarItem> calendarItems = new List<CalendarItem>();
             
-            foreach (var a in appointment)
+            foreach (var a in appointments)
             {
                 string correctDateFormat = a.APD_DATE.Value.ToString("dd-MM-yy");
                 DateTime appointMentDateValue = DateTime.Parse(correctDateFormat);

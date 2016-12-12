@@ -67,6 +67,8 @@
             this.checkRoomList = new System.Windows.Forms.CheckedListBox();
             this.checkUsersList = new System.Windows.Forms.CheckedListBox();
             this.filtratingButton = new System.Windows.Forms.Button();
+            this.checkCustomerList = new System.Windows.Forms.CheckedListBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // fIlerToolStripMenuItem
@@ -143,7 +145,7 @@
             // 
             this.monthLabel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.monthLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.monthLabel.Location = new System.Drawing.Point(679, 171);
+            this.monthLabel.Location = new System.Drawing.Point(679, 234);
             this.monthLabel.Margin = new System.Windows.Forms.Padding(3, 0, 5, 0);
             this.monthLabel.Name = "monthLabel";
             this.monthLabel.Size = new System.Drawing.Size(107, 24);
@@ -389,7 +391,7 @@
             this.calendar.ItemsTimeFormat = "HH:mm tt";
             this.calendar.Location = new System.Drawing.Point(208, 95);
             this.calendar.Name = "calendar";
-            this.calendar.Size = new System.Drawing.Size(914, 627);
+            this.calendar.Size = new System.Drawing.Size(914, 690);
             this.calendar.TabIndex = 0;
             this.calendar.TabStop = false;
             this.calendar.Text = "Calendar";
@@ -468,7 +470,6 @@
             this.checkRoomList.Name = "checkRoomList";
             this.checkRoomList.Size = new System.Drawing.Size(185, 94);
             this.checkRoomList.TabIndex = 33;
-            this.checkRoomList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkRoomList_ItemCheck);
             // 
             // checkUsersList
             // 
@@ -477,11 +478,10 @@
             this.checkUsersList.Name = "checkUsersList";
             this.checkUsersList.Size = new System.Drawing.Size(185, 94);
             this.checkUsersList.TabIndex = 34;
-            this.checkUsersList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkUsersList_ItemCheck);
             // 
             // filtratingButton
             // 
-            this.filtratingButton.Location = new System.Drawing.Point(15, 699);
+            this.filtratingButton.Location = new System.Drawing.Point(12, 762);
             this.filtratingButton.Name = "filtratingButton";
             this.filtratingButton.Size = new System.Drawing.Size(75, 23);
             this.filtratingButton.TabIndex = 35;
@@ -489,13 +489,33 @@
             this.filtratingButton.UseVisualStyleBackColor = true;
             this.filtratingButton.Click += new System.EventHandler(this.filtratingButton_Click);
             // 
+            // checkCustomerList
+            // 
+            this.checkCustomerList.FormattingEnabled = true;
+            this.checkCustomerList.Location = new System.Drawing.Point(12, 656);
+            this.checkCustomerList.Name = "checkCustomerList";
+            this.checkCustomerList.Size = new System.Drawing.Size(185, 94);
+            this.checkCustomerList.TabIndex = 37;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(15, 633);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(154, 17);
+            this.checkBox1.TabIndex = 36;
+            this.checkBox1.Text = "Filtrer visning af alle kunder";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // CalendarView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(1116, 734);
+            this.ClientSize = new System.Drawing.Size(1116, 797);
+            this.Controls.Add(this.checkCustomerList);
             this.Controls.Add(this.filtratingButton);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.checkUsersList);
             this.Controls.Add(this.checkRoomList);
             this.Controls.Add(this.checkAllUsersBox);
@@ -565,6 +585,8 @@
         private System.Windows.Forms.CheckedListBox checkRoomList;
         private System.Windows.Forms.CheckedListBox checkUsersList;
         private System.Windows.Forms.Button filtratingButton;
+        private System.Windows.Forms.CheckedListBox checkCustomerList;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 
