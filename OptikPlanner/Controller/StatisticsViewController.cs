@@ -67,6 +67,45 @@ namespace OptikPlanner.Controller
             }
         }
 
+        public List<APTDETAILS> GetAppointments(int monthNr, int year)
+        {
+            try
+            {
+                List<APTDETAILS> roomsInTimeSpan = new List<APTDETAILS>();
+
+                using (_db = new OptikItDbContext())
+                {
+                    foreach (var a in _db.APTDETAILS)
+                    {
+                        if (a.APD_DATE.Value.Month == monthNr && a.APD_DATE.Value.Year == year) roomsInTimeSpan.Add(a);
+                    }
+                }
+
+                return roomsInTimeSpan;
+            }
+            catch (DbException ex)
+            {
+                Debug.WriteLine("Problem retrieving appointments from the database: '" + ex.Message + "'");
+                return new List<APTDETAILS>();
+            }
+        }
+
+        public string GetAppointmentType(APTDETAILS appointment)
+        {
+            switch (appointment.APD_TYPE)
+            {
+                case 0:
+                    return "Steljustering";
+
+                case 1:
+                    return "Linseopsætning";
+                case 2:
+                    return "Synsprøve";
+            }
+
+            return null;
+        }
+
         public List<EYEEXAMROOMS> GetRooms()
         {
             try
@@ -78,7 +117,7 @@ namespace OptikPlanner.Controller
             }
             catch (DbException ex)
             {
-                Debug.WriteLine("Problem retrieving appointments from the database: '" + ex.Message + "'");
+                Debug.WriteLine("Problem retrieving rooms from the database: '" + ex.Message + "'");
                 return new List<EYEEXAMROOMS>();
 
             }
@@ -95,7 +134,7 @@ namespace OptikPlanner.Controller
             }
             catch (DbException ex)
             {
-                Debug.WriteLine("Problem retrieving appointments from the database: '" + ex.Message + "'");
+                Debug.WriteLine("Problem retrieving users from the database: '" + ex.Message + "'");
                 return new List<USERS>();
 
             }
@@ -212,7 +251,7 @@ namespace OptikPlanner.Controller
 
         public string GetValueAsPercentage(double value, double outOf)
         {
-            double percentage = value/outOf*100;
+            double percentage = value / outOf * 100;
             return percentage.ToString("F") + "%";
         }
 
@@ -226,7 +265,7 @@ namespace OptikPlanner.Controller
             var allAppointments = GetAppointments();
             List<APTDETAILS> appointmentsByEmployee = new List<APTDETAILS>();
 
-            foreach(var a in allAppointments) if (a.APD_USER == employee.US_STAMP) appointmentsByEmployee.Add(a);
+            foreach (var a in allAppointments) if (a.APD_USER == employee.US_STAMP) appointmentsByEmployee.Add(a);
 
             List<TimeSpan> timeSpans = new List<TimeSpan>();
 
@@ -358,6 +397,8 @@ namespace OptikPlanner.Controller
             var noShowList = from s in CancelAppointmentController.cancelElseList where (s.Substring(3, 2).Equals(monthNr.ToString()) && s.Substring(6, 4).Equals(yearNr.ToString())) select s;
             return noShowList.ToList();
         }
+
+
     }
 }
 

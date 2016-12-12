@@ -37,37 +37,51 @@ namespace OptikPlanner.View
             Populate();
             _controller = new StatisticsViewController(this);
 
-            chooseTypeCombo.SelectedIndex = 0;
             showMonthCombo.SelectedIndex = DateTime.Now.Month;
             showYearCombo.Text = DateTime.Now.Year.ToString();
+            chooseTypeCombo.SelectedIndex = 0;
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            if (chooseTypeCombo.SelectedIndex == 0)
+            switch (chooseTypeCombo.Text)
             {
-                if (!clickedGraf) SetupLoggingBarChart();
-                FillInCancellationData();
-                EnableControls(false);
-            }
+                case "Aftaler":
+                    if(!clickedGraf) SetupAppointmentPieChart();
+                    FillInAppointmentData();
+                    EnableControls(false);
+                    break;
+                case "Aflysninger":
+                    if (!clickedGraf) SetupLoggingBarChart();
+                    FillInCancellationData();
+                    EnableControls(false);
+                    break;
+                case "Lokaler":
+                    if (!clickedGraf)
+                    {
+                        FillRoomFilterBox();
+                        SetupRoomPieChart();
+                    }
+                    FillInRoomData();
+                    FillRoomFilterBox();
+                    CheckAllBoxes(true);
+                    EnableControls(true);
+                    break;
+                case "Medarbejdere":
+                    if (!clickedGraf)
+                    {
+                        FillEmployeeFilterBox();
+                        SetUpEmployeePieChart();
+                    }
+                    FillInEmployeeData();
+                    FillEmployeeFilterBox();
+                    CheckAllBoxes(true);
+                    EnableControls(true);
+                    break;
 
-            if (chooseTypeCombo.SelectedIndex == 1)
-            {
-                if (!clickedGraf) SetupRoomPieChart();
-                FillInRoomData();
-                FillRoomFilterBox();
-                CheckAllBoxes(true);
-                EnableControls(true);
             }
-            if (chooseTypeCombo.SelectedIndex == 2)
-            {
-                if (!clickedGraf) SetUpEmployeePieChart();
-                FillInEmployeeData();
-                FillEmployeeFilterBox();
-                CheckAllBoxes(true);
-                EnableControls(true);
-            }
+            
         }
 
         private void EnableControls(bool enable)
@@ -90,6 +104,124 @@ namespace OptikPlanner.View
             var employees = _controller.GetUsers();
             filterListBox.Items.Clear();
             foreach (var e in employees) filterListBox.Items.Add(e);
+        }
+
+        private void FillInAppointmentData()
+        {
+            int currentMonth = showMonthCombo.SelectedIndex;
+            int currentYear = int.Parse(showYearCombo.Text);
+
+            var appointments = _controller.GetAppointments(currentMonth, currentYear);
+
+            listView1.Columns.Clear();
+            listView1.Items.Clear();
+            listView1.Columns.Add("Antal i alt", 80);
+
+            listView1.Items.Add(appointments.Count.ToString());
+
+            foreach (var a in appointments)
+            {
+                string type = _controller.GetAppointmentType(a);
+
+                
+                if (!ListViewContainsHeader(type))
+                {
+                    var column = listView1.Columns.Add(type, type, 120);
+                    ListViewItem.ListViewSubItem value = new ListViewItem.ListViewSubItem();
+                    listView1.Items[0].SubItems.Add(value);
+                    List<APTDETAILS> appointmentsWithTag = new List<APTDETAILS>();
+                    value.Tag = appointmentsWithTag;
+                    column.Tag = value;
+                }
+
+                var matchingColumn = listView1.Columns[type];
+                if (matchingColumn.Text.Equals(type))
+                {
+                    var subItem = (ListViewItem.ListViewSubItem) matchingColumn.Tag;
+                    var value = (List<APTDETAILS>) subItem.Tag;
+                    value.Add(a);
+                }
+                
+                filterListBox.Items.Clear();
+                
+
+            }
+
+
+
+            for (int i = 1; i < listView1.Columns.Count; i++)
+            {
+                ColumnHeader c = listView1.Columns[i];
+                var subItem = (ListViewItem.ListViewSubItem)c.Tag;
+                var value = (List<APTDETAILS>)subItem.Tag;
+                subItem.Text = value.Count.ToString();
+            }
+           
+            
+        }
+
+        private void FillInAppointmentData(int compareMonth, int compareYear)
+        {
+            int currentMonth = compareMonth;
+            int currentYear = compareYear;
+
+            var appointments = _controller.GetAppointments(currentMonth, currentYear);
+
+            listView1.Columns.Clear();
+            listView1.Items.Clear();
+            listView1.Columns.Add("Antal i alt", 80);
+
+            listView1.Items.Add(appointments.Count.ToString());
+
+            foreach (var a in appointments)
+            {
+                string type = _controller.GetAppointmentType(a);
+
+
+                if (!ListViewContainsHeader(type))
+                {
+                    var column = listView1.Columns.Add(type, type, 120);
+                    ListViewItem.ListViewSubItem value = new ListViewItem.ListViewSubItem();
+                    listView1.Items[0].SubItems.Add(value);
+                    List<APTDETAILS> appointmentsWithTag = new List<APTDETAILS>();
+                    value.Tag = appointmentsWithTag;
+                    column.Tag = value;
+                }
+
+                var matchingColumn = listView1.Columns[type];
+                if (matchingColumn.Text.Equals(type))
+                {
+                    var subItem = (ListViewItem.ListViewSubItem)matchingColumn.Tag;
+                    var value = (List<APTDETAILS>)subItem.Tag;
+                    value.Add(a);
+                }
+
+                filterListBox.Items.Clear();
+
+
+            }
+
+
+
+            for (int i = 1; i < listView1.Columns.Count; i++)
+            {
+                ColumnHeader c = listView1.Columns[i];
+                var subItem = (ListViewItem.ListViewSubItem)c.Tag;
+                var value = (List<APTDETAILS>)subItem.Tag;
+                subItem.Text = value.Count.ToString();
+            }
+
+
+        }
+
+        private bool ListViewContainsHeader(string header)
+        {
+            foreach (ColumnHeader c in listView1.Columns)
+            {
+                if (c.Text.Equals(header)) return true;
+            }
+
+            return false;
         }
 
 
@@ -235,6 +367,9 @@ namespace OptikPlanner.View
             {
                 switch (chooseTypeCombo.Text)
                 {
+                    case "Aftaler":
+                        SetupAppointmentPieChart();
+                        break;
                     case "Lokaler":
                         SetupRoomPieChart();
                         break;
@@ -271,6 +406,10 @@ namespace OptikPlanner.View
         {
             switch (chooseTypeCombo.Text)
             {
+                case "Aftaler":
+                    if(!clickedGraf) SetupAppointmentPieChart();
+                    FillInAppointmentData();
+                    break;
                 case "Aflysninger":
                     if (!clickedGraf) SetupLoggingBarChart();
                     else FilterCancellations();
@@ -500,6 +639,47 @@ namespace OptikPlanner.View
 
         }
 
+        private void SetupAppointmentPieChart()
+        {
+            FillInAppointmentData(); //Otherwise we risk that the list is null when trying to show the chart. 
+            SetDefaultPieChartSettings();
+
+            Series series1 = new Series
+            {
+                Name = "series1",
+                IsVisibleInLegend = true,
+                Color = System.Drawing.Color.BlueViolet,
+                ChartType = SeriesChartType.Pie
+            };
+
+            chart1.ChartAreas[0].BackColor = Color.Transparent;
+            chart1.Titles.Add("Typer aftaler");
+
+            //series1.SetCustomProperty("PieLabelStyle", "Outside");
+            chart1.Palette = ChartColorPalette.Pastel;
+            
+
+            chart1.Series.Add(series1);
+
+            for (int i = 1; i < listView1.Columns.Count; i++)
+            {
+                ColumnHeader c = listView1.Columns[i];
+                var subItem = (ListViewItem.ListViewSubItem)c.Tag;
+                var value = (List<APTDETAILS>)subItem.Tag;
+                subItem.Text = value.Count.ToString();
+
+                var piePiece = series1.Points.Add(value.Count);
+                piePiece.LegendText = c.Text;
+
+                var valueAsPercentage = _controller.GetValueAsPercentage(value.Count, int.Parse(listView1.Items[0].Text));
+                piePiece.Label = $"{value.Count} ({valueAsPercentage})";
+
+            }
+
+            chart1.Invalidate();
+
+
+        }
 
         private void SetupRoomPieChart()
         {
@@ -836,6 +1016,55 @@ namespace OptikPlanner.View
             }
         }
 
+        private void SetupAppointmentComparisonChart()
+        {
+            SetDefaultBarCharSettings();
+
+            int chosenMonth = DateTime.Now.Month;
+            int chosenYear = DateTime.Now.Year;
+
+            int compareMonth = DateTime.Now.Month;
+            int compareYear = DateTime.Now.Year;
+
+            try
+            {
+
+                chosenMonth = showMonthCombo.SelectedIndex;
+                compareMonth = compareMonthCombo.SelectedIndex;
+
+                chosenYear = int.Parse(showYearCombo.Text);
+                compareYear = int.Parse(compareYearCombo.Text);
+
+            }
+            catch (FormatException ex) { }
+
+            Series series = new Series
+            {
+                Name = "series",
+                IsVisibleInLegend = true,
+                Color = System.Drawing.Color.Blue,
+                ChartType = SeriesChartType.Column
+            };
+
+            Series comparisonSeries = new Series
+            {
+                Name = "comparisonSeries",
+                IsVisibleInLegend = true,
+                Color = Color.Green,
+                ChartType = SeriesChartType.Column
+
+            };
+
+            chart1.Titles.Add($"Sammenligning mellem {showMonthCombo.Text} {chosenYear} og {compareMonthCombo.Text} {compareYear}.");
+            chart1.ChartAreas[0].AxisY.Title = "Timer brugt";
+
+            series.LegendText = showMonthCombo.Text;
+            comparisonSeries.LegendText = compareMonthCombo.Text;
+
+            chart1.Series.Add(series);
+            chart1.Series.Add(comparisonSeries);
+        }
+
         private void SetDefaultBarCharSettings()
         {
             chart1.Series.Clear();
@@ -867,6 +1096,10 @@ namespace OptikPlanner.View
         {
             switch (chooseTypeCombo.Text)
             {
+                case "Aftaler":
+                    if(!clickedGraf) SetupAppointmentPieChart();
+                    FillInAppointmentData();
+                    break;
                 case "Aflysninger":
                     if (!clickedGraf) SetupLoggingBarChart();
                     FilterCancellations();

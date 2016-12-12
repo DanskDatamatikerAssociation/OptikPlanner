@@ -69,6 +69,7 @@ namespace OptikPlanner.View
             this.chooseTypeCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.chooseTypeCombo.FormattingEnabled = true;
             this.chooseTypeCombo.Items.AddRange(new object[] {
+            "Aftaler",
             "Aflysninger",
             "Lokaler",
             "Medarbejdere"});
