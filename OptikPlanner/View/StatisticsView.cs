@@ -48,7 +48,7 @@ namespace OptikPlanner.View
             switch (chooseTypeCombo.Text)
             {
                 case "Aftaler":
-                    if(!clickedGraf) SetupAppointmentPieChart();
+                    if (!clickedGraf) SetupAppointmentPieChart();
                     FillInAppointmentData();
                     EnableControls(false);
                     break;
@@ -81,7 +81,7 @@ namespace OptikPlanner.View
                     break;
 
             }
-            
+
         }
 
         private void EnableControls(bool enable)
@@ -111,6 +111,7 @@ namespace OptikPlanner.View
             int currentMonth = showMonthCombo.SelectedIndex;
             int currentYear = int.Parse(showYearCombo.Text);
 
+            var allAppointments = _controller.GetAppointments();
             var appointments = _controller.GetAppointments(currentMonth, currentYear);
 
             listView1.Columns.Clear();
@@ -119,11 +120,9 @@ namespace OptikPlanner.View
 
             listView1.Items.Add(appointments.Count.ToString());
 
-            foreach (var a in appointments)
+            foreach (var a in allAppointments)
             {
                 string type = _controller.GetAppointmentType(a);
-
-                
                 if (!ListViewContainsHeader(type))
                 {
                     var column = listView1.Columns.Add(type, type, 120);
@@ -133,17 +132,33 @@ namespace OptikPlanner.View
                     value.Tag = appointmentsWithTag;
                     column.Tag = value;
                 }
+            }
+
+            foreach (var a in appointments)
+            {
+                string type = _controller.GetAppointmentType(a);
+
+
+                //if (!ListViewContainsHeader(type))
+                //{
+                //    var column = listView1.Columns.Add(type, type, 120);
+                //    ListViewItem.ListViewSubItem value = new ListViewItem.ListViewSubItem();
+                //    listView1.Items[0].SubItems.Add(value);
+                //    List<APTDETAILS> appointmentsWithTag = new List<APTDETAILS>();
+                //    value.Tag = appointmentsWithTag;
+                //    column.Tag = value;
+                //}
 
                 var matchingColumn = listView1.Columns[type];
                 if (matchingColumn.Text.Equals(type))
                 {
-                    var subItem = (ListViewItem.ListViewSubItem) matchingColumn.Tag;
-                    var value = (List<APTDETAILS>) subItem.Tag;
+                    var subItem = (ListViewItem.ListViewSubItem)matchingColumn.Tag;
+                    var value = (List<APTDETAILS>)subItem.Tag;
                     value.Add(a);
                 }
-                
+
                 filterListBox.Items.Clear();
-                
+
 
             }
 
@@ -156,8 +171,8 @@ namespace OptikPlanner.View
                 var value = (List<APTDETAILS>)subItem.Tag;
                 subItem.Text = value.Count.ToString();
             }
-           
-            
+
+
         }
 
         private void FillInAppointmentData(int compareMonth, int compareYear)
@@ -407,7 +422,7 @@ namespace OptikPlanner.View
             switch (chooseTypeCombo.Text)
             {
                 case "Aftaler":
-                    if(!clickedGraf) SetupAppointmentPieChart();
+                    if (!clickedGraf) SetupAppointmentPieChart();
                     FillInAppointmentData();
                     break;
                 case "Aflysninger":
@@ -600,21 +615,6 @@ namespace OptikPlanner.View
             listView1.Items[2].SubItems.Add(cancelElseList.Count().ToString());
         }
 
-        //private void CompareCancellations()
-        //{
-
-        //    int monthsNumber = compareMonthCombo.SelectedIndex;
-        //    string compareName = compareMonthCombo.SelectedItem.ToString();
-        //    listView1.Columns[2].Text = "Aflysninger i " + compareName;
-
-        //    CompareClearList();
-        //    var noShowList = _controller.GetNoShowCancellations(monthsNumber);
-        //    listView1.Items[0].SubItems.Add(noShowList.Count().ToString());
-        //    var cancelPhoneList = _controller.GetPhoneCancellations(monthsNumber);
-        //    listView1.Items[1].SubItems.Add(cancelPhoneList.Count().ToString());
-        //    var cancelElseList = _controller.GetOtherReasonCancellations(monthsNumber);
-        //    listView1.Items[2].SubItems.Add(cancelElseList.Count().ToString());
-        //}
 
 
 
@@ -657,7 +657,7 @@ namespace OptikPlanner.View
 
             //series1.SetCustomProperty("PieLabelStyle", "Outside");
             chart1.Palette = ChartColorPalette.Pastel;
-            
+
 
             chart1.Series.Add(series1);
 
@@ -1042,7 +1042,7 @@ namespace OptikPlanner.View
             {
                 Name = "series",
                 IsVisibleInLegend = true,
-                Color = System.Drawing.Color.Blue,
+                Color = System.Drawing.Color.Red,
                 ChartType = SeriesChartType.Column
             };
 
@@ -1056,13 +1056,62 @@ namespace OptikPlanner.View
             };
 
             chart1.Titles.Add($"Sammenligning mellem {showMonthCombo.Text} {chosenYear} og {compareMonthCombo.Text} {compareYear}.");
-            chart1.ChartAreas[0].AxisY.Title = "Timer brugt";
+            chart1.ChartAreas[0].AxisY.Title = "Antal aftaler af type";
 
             series.LegendText = showMonthCombo.Text;
             comparisonSeries.LegendText = compareMonthCombo.Text;
 
             chart1.Series.Add(series);
             chart1.Series.Add(comparisonSeries);
+
+            int count = listView1.Columns.Count;
+            for (int i = 1; i < count; i++)
+            {
+                FillInAppointmentData();
+
+                ColumnHeader c = listView1.Columns[i];
+                var subItem = (ListViewItem.ListViewSubItem)c.Tag;
+                var value = (List<APTDETAILS>)subItem.Tag;
+                subItem.Text = value.Count.ToString();
+
+                var firstBar = series.Points.Add(value.Count);
+                firstBar.LegendText = c.Text;
+                firstBar.Label = value.Count.ToString();
+                firstBar.AxisLabel = c.Text;
+
+                FillInAppointmentData(compareMonth, compareYear);
+
+                try
+                {
+                    c = listView1.Columns[i];
+                    subItem = (ListViewItem.ListViewSubItem) c.Tag;
+                    value = (List<APTDETAILS>) subItem.Tag;
+                    subItem.Text = value.Count.ToString();
+
+                    var compareBar = comparisonSeries.Points.Add(value.Count);
+                    compareBar.LegendText = c.Text;
+                    compareBar.Label = value.Count.ToString();
+                    compareBar.AxisLabel = c.Text;
+                }
+                catch (ArgumentOutOfRangeException ex)
+                {
+                    var compareBar = comparisonSeries.Points.Add(0);
+                    compareBar.LegendText = c.Text;
+                    compareBar.Label = "0";
+                    compareBar.AxisLabel = "0";
+                }
+
+
+
+                FillInAppointmentData();
+
+
+            }
+
+
+
+
+
         }
 
         private void SetDefaultBarCharSettings()
@@ -1097,7 +1146,7 @@ namespace OptikPlanner.View
             switch (chooseTypeCombo.Text)
             {
                 case "Aftaler":
-                    if(!clickedGraf) SetupAppointmentPieChart();
+                    if (!clickedGraf) SetupAppointmentPieChart();
                     FillInAppointmentData();
                     break;
                 case "Aflysninger":
@@ -1123,7 +1172,9 @@ namespace OptikPlanner.View
 
             switch (chooseTypeCombo.Text)
             {
-
+                case "Aftaler":
+                    SetupAppointmentComparisonChart();
+                    break;
                 case "Aflysninger":
                     SetupLoggingComparisonChart();
                     break;
@@ -1141,11 +1192,12 @@ namespace OptikPlanner.View
         private void resetButton_Click(object sender, EventArgs e)
         {
             NumericButtonClick();
-            SearchButton.Enabled = false;
             chooseViewButton.Enabled = true;
             chooseTypeCombo.Enabled = true;
             compareMonthCombo.SelectedItem = null;
             compareYearCombo.SelectedItem = null;
+            SearchButton.Enabled = false;
+
         }
 
 
