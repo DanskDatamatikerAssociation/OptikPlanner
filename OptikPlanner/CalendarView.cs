@@ -768,6 +768,15 @@ namespace OptikPlanner
 
             }
         }
+        private void CheckAllCustomersBoxes(bool checkThem)
+        {
+            checkAllCustomers.Checked = checkThem;
+            for (int i = 0; i < checkCustomerList.Items.Count; i++)
+            {
+                checkCustomerList.SetItemChecked(i, checkThem);
+
+            }
+        }
         private void CheckAllUsersBoxes(bool checkThem)
         {
             checkAllUsersBox.Checked = checkThem;
@@ -786,6 +795,10 @@ namespace OptikPlanner
         private void checkAllUsersBox_CheckedChanged(object sender, EventArgs e)
         {
             if (checkAllUsersBox.Checked) CheckAllUsersBoxes(true);
+        }
+        private void checkAllCustomers_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkAllCustomers.Checked) CheckAllCustomersBoxes(true);
         }
         #endregion
 
