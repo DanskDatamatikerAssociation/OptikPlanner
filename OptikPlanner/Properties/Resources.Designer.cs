@@ -143,6 +143,16 @@ namespace OptikPlanner.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap magnifier_1787362_960_720 {
+            get {
+                object obj = ResourceManager.GetObject("magnifier-1787362_960_720", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap OptikITLogo {
             get {
                 object obj = ResourceManager.GetObject("OptikITLogo", resourceCulture);

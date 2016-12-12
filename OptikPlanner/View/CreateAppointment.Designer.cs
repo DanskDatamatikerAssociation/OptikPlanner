@@ -61,8 +61,8 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.customerLibraryButton = new System.Windows.Forms.Button();
             this.cprBox = new CueTextBox();
+            this.customerLibraryButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // okButton
@@ -359,16 +359,6 @@
             this.label15.TabIndex = 37;
             this.label15.Text = "til";
             // 
-            // customerLibraryButton
-            // 
-            this.customerLibraryButton.Location = new System.Drawing.Point(128, 73);
-            this.customerLibraryButton.Name = "customerLibraryButton";
-            this.customerLibraryButton.Size = new System.Drawing.Size(28, 23);
-            this.customerLibraryButton.TabIndex = 39;
-            this.customerLibraryButton.Text = "CL";
-            this.customerLibraryButton.UseVisualStyleBackColor = true;
-            this.customerLibraryButton.Click += new System.EventHandler(this.customerLibraryButton_Click);
-            // 
             // cprBox
             // 
             this.cprBox.Cue = "Indtast CPR";
@@ -378,6 +368,16 @@
             this.cprBox.TabIndex = 38;
             this.cprBox.TextChanged += new System.EventHandler(this.cueTextBox1_TextChanged);
             this.cprBox.Leave += new System.EventHandler(this.cprBox_Leave);
+            // 
+            // customerLibraryButton
+            // 
+            this.customerLibraryButton.Location = new System.Drawing.Point(128, 73);
+            this.customerLibraryButton.Name = "customerLibraryButton";
+            this.customerLibraryButton.Size = new System.Drawing.Size(28, 23);
+            this.customerLibraryButton.TabIndex = 39;
+            this.customerLibraryButton.Text = "CL";
+            this.customerLibraryButton.UseVisualStyleBackColor = true;
+            this.customerLibraryButton.Click += new System.EventHandler(this.customerLibraryButton_Click);
             // 
             // CreateAppointment
             // 
