@@ -161,13 +161,43 @@ namespace OptikPlanner.Controller
 
             //    return calendarItems;
             //}
-
-
-
-
-
-
         }
+
+        public List<CalendarItem> GetAppointmentsAsCalendarItems(List<APTDETAILS> appointment)
+        {
+            List<CalendarItem> calendarItems = new List<CalendarItem>();
+            
+            foreach (var a in appointment)
+            {
+                string correctDateFormat = a.APD_DATE.Value.ToString("dd-MM-yy");
+                DateTime appointMentDateValue = DateTime.Parse(correctDateFormat);
+
+                string timeFromHour = a.APD_TIMEFROM.Split(':').First();
+                string timeFromMinute = a.APD_TIMEFROM.Split(':').Last();
+
+                string timeToHour = a.APD_TIMETO.Split(':').First();
+                string timeToMinute = a.APD_TIMETO.Split(':').Last();
+
+                var extraDetails = GetExtraAppointmentDetails(a);
+
+                string appointmentString = $"{extraDetails[0]}\n" +
+                                           $"Lokale nr. {a.APD_ROOM}\n" +
+                                           $"{extraDetails[2]}";
+
+                CalendarItem c = new CalendarItem(_view.Calendar,
+                    new DateTime(appointMentDateValue.Year, appointMentDateValue.Month, appointMentDateValue.Day,
+                        int.Parse(timeFromHour), int.Parse(timeFromMinute), 0),
+                    new DateTime(appointMentDateValue.Year, appointMentDateValue.Month, appointMentDateValue.Day,
+                        int.Parse(timeToHour), int.Parse(timeToMinute), 0), appointmentString);
+
+                c.Tag = a;
+                calendarItems.Add(c);
+
+            }
+
+            return calendarItems;
+        }
+
     }
 }
 

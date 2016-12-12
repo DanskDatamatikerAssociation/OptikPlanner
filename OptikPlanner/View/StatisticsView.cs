@@ -1019,6 +1019,5 @@ namespace OptikPlanner.View
 
             return checkedEmployees;
         }
-
     }
 }

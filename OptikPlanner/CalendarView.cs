@@ -28,6 +28,7 @@ namespace OptikPlanner
         private const string WeekViewMode = "week";
         private string _viewMode = WeekViewMode;
 
+
         public CalendarView()
         {
             InitializeComponent();
@@ -38,10 +39,6 @@ namespace OptikPlanner
             _calendarViewController = new CalendarViewController(this);
 
             SetupCalendar();
-
-
-            
-
         }
 
         private void SetupCalendar()
@@ -654,6 +651,114 @@ namespace OptikPlanner
         {
             logButton.BackColor = Color.White;
         }
+
+        #region checkAllLists
         
+        private List<EYEEXAMROOMS> GetCheckedRooms()
+        {
+            List<EYEEXAMROOMS> checkedRooms = new List<EYEEXAMROOMS>();
+            for (int i = 0; i < checkRoomList.Items.Count; i++)
+            {
+                var room = (EYEEXAMROOMS)checkRoomList.Items[i];
+                var isChecked = checkRoomList.GetItemCheckState(i);
+                if (isChecked == CheckState.Checked) checkedRooms.Add(room);
+            }
+
+            return checkedRooms;
+        }
+
+        private List<USERS> GetCheckedEmployees()
+        {
+            List<USERS> checkedEmployees = new List<USERS>();
+            for (int i = 0; i < checkUsersList.Items.Count; i++)
+            {
+                var employee = (USERS)checkUsersList.Items[i];
+                var isChecked = checkUsersList.GetItemCheckState(i);
+                if (isChecked == CheckState.Checked) checkedEmployees.Add(employee);
+            }
+            return checkedEmployees;
+        }
+
+        private List<APTDETAILS> GetAllCheckedApt()
+        {
+            List<APTDETAILS> deletedApt = new List<APTDETAILS>();
+            List<APTDETAILS> allApt = new List<APTDETAILS>();
+            List<APTDETAILS> checkedApt = new List<APTDETAILS>();
+            //foreach appointment on calendarview lig i listen allApt
+            //lav en if som passer over GetCheckedRoom/Employees og retuner filtrerede aftaler?
+            //så calendarviewet kun fremviser de checkede felter i filtreringsboxes
+
+            //liste over alle calendaritems
+            var currentItems = calendar.Items;
+
+            foreach (var citem in currentItems)
+            {
+                allApt.Add((APTDETAILS)citem.Tag);
+            }
+
+            foreach (var room in GetCheckedRooms())
+            {
+                foreach (var apt in allApt)
+                {
+                    if (room.ERO_STAMP == apt.APD_ROOM)
+                    {
+                        checkedApt.Add(apt);
+                    }
+                }
+            }
+
+            foreach (var emp in GetCheckedEmployees())
+            {
+                foreach (var apt in allApt)
+                {
+                    if (emp.US_STAMP == apt.APD_USER)
+                    {
+                        checkedApt.Add(apt);
+                    }
+                }
+            }
+
+            return checkedApt;
+        }
+
+        private void filtratingButton_Click(object sender, EventArgs e)
+        {
+            Calendar.Items.Clear();
+            Calendar.Items.AddRange(_calendarViewController.GetAppointmentsAsCalendarItems(GetAllCheckedApt()));
+        }
+        #endregion
+
+
+        #region checkAllboxes
+        private void CheckAllRoomsBoxes(bool checkThem)
+        {
+            checkAllRoomsBox.Checked = checkThem;
+            for (int i = 0; i < checkRoomList.Items.Count; i++)
+            {
+                checkRoomList.SetItemChecked(i, checkThem);
+
+            }
+        }
+        private void CheckAllUsersBoxes(bool checkThem)
+        {
+            checkAllUsersBox.Checked = checkThem;
+            for (int i = 0; i < checkUsersList.Items.Count; i++)
+            {
+                checkUsersList.SetItemChecked(i, checkThem);
+
+            }
+        }
+
+        private void checkAllRoomsBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkAllRoomsBox.Checked) CheckAllRoomsBoxes(true);
+        }
+
+        private void checkAllUsersBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkAllUsersBox.Checked) CheckAllUsersBoxes(true);
+        }
+        #endregion
+
     }
 }

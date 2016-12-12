@@ -58,12 +58,15 @@
             this.twoWeeksButton = new System.Windows.Forms.Button();
             this.todayButton = new System.Windows.Forms.Button();
             this.newAppointmentButton = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.calendar = new System.Windows.Forms.Calendar.Calendar();
             this.monthView = new System.Windows.Forms.Calendar.MonthView();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.checkAllRoomsBox = new System.Windows.Forms.CheckBox();
+            this.checkAllUsersBox = new System.Windows.Forms.CheckBox();
+            this.checkRoomList = new System.Windows.Forms.CheckedListBox();
+            this.checkUsersList = new System.Windows.Forms.CheckedListBox();
+            this.filtratingButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // fIlerToolStripMenuItem
@@ -140,7 +143,7 @@
             // 
             this.monthLabel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.monthLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.monthLabel.Location = new System.Drawing.Point(679, 35);
+            this.monthLabel.Location = new System.Drawing.Point(679, 171);
             this.monthLabel.Margin = new System.Windows.Forms.Padding(3, 0, 5, 0);
             this.monthLabel.Name = "monthLabel";
             this.monthLabel.Size = new System.Drawing.Size(107, 24);
@@ -354,16 +357,6 @@
             this.newAppointmentButton.Enter += new System.EventHandler(this.newAppointmentButton_Enter);
             this.newAppointmentButton.Leave += new System.EventHandler(this.newAppointmentButton_Leave);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::OptikPlanner.Properties.Resources.OptikITLogo;
-            this.pictureBox1.Location = new System.Drawing.Point(2, 399);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(200, 112);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 29;
-            this.pictureBox1.TabStop = false;
-            // 
             // calendar
             // 
             this.calendar.AllowItemEdit = false;
@@ -394,9 +387,9 @@
         calendarHighlightRange4,
         calendarHighlightRange5};
             this.calendar.ItemsTimeFormat = "HH:mm tt";
-            this.calendar.Location = new System.Drawing.Point(208, 107);
+            this.calendar.Location = new System.Drawing.Point(208, 95);
             this.calendar.Name = "calendar";
-            this.calendar.Size = new System.Drawing.Size(914, 452);
+            this.calendar.Size = new System.Drawing.Size(914, 627);
             this.calendar.TabIndex = 0;
             this.calendar.TabStop = false;
             this.calendar.Text = "Calendar";
@@ -418,13 +411,13 @@
             this.monthView.DaySelectedTextColor = System.Drawing.SystemColors.HighlightText;
             this.monthView.FirstDayOfWeek = System.DayOfWeek.Monday;
             this.monthView.ItemPadding = new System.Windows.Forms.Padding(2);
-            this.monthView.Location = new System.Drawing.Point(2, 107);
+            this.monthView.Location = new System.Drawing.Point(2, 95);
             this.monthView.MonthTitleColor = System.Drawing.SystemColors.ActiveCaption;
             this.monthView.MonthTitleColorInactive = System.Drawing.SystemColors.InactiveCaption;
             this.monthView.MonthTitleTextColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.monthView.MonthTitleTextColorInactive = System.Drawing.SystemColors.InactiveCaptionText;
             this.monthView.Name = "monthView";
-            this.monthView.Size = new System.Drawing.Size(200, 286);
+            this.monthView.Size = new System.Drawing.Size(200, 277);
             this.monthView.TabIndex = 2;
             this.monthView.Text = "monthView";
             this.monthView.TodayBorderColor = System.Drawing.Color.Maroon;
@@ -446,13 +439,67 @@
             this.label8.Size = new System.Drawing.Size(2, 70);
             this.label8.TabIndex = 30;
             // 
+            // checkAllRoomsBox
+            // 
+            this.checkAllRoomsBox.AutoSize = true;
+            this.checkAllRoomsBox.Location = new System.Drawing.Point(15, 378);
+            this.checkAllRoomsBox.Name = "checkAllRoomsBox";
+            this.checkAllRoomsBox.Size = new System.Drawing.Size(138, 17);
+            this.checkAllRoomsBox.TabIndex = 31;
+            this.checkAllRoomsBox.Text = "Filtrer visning af alle rum";
+            this.checkAllRoomsBox.UseVisualStyleBackColor = true;
+            this.checkAllRoomsBox.CheckedChanged += new System.EventHandler(this.checkAllRoomsBox_CheckedChanged);
+            // 
+            // checkAllUsersBox
+            // 
+            this.checkAllUsersBox.AutoSize = true;
+            this.checkAllUsersBox.Location = new System.Drawing.Point(15, 510);
+            this.checkAllUsersBox.Name = "checkAllUsersBox";
+            this.checkAllUsersBox.Size = new System.Drawing.Size(185, 17);
+            this.checkAllUsersBox.TabIndex = 32;
+            this.checkAllUsersBox.Text = "Filtrer visning af alle medarbejdere";
+            this.checkAllUsersBox.UseVisualStyleBackColor = true;
+            this.checkAllUsersBox.CheckedChanged += new System.EventHandler(this.checkAllUsersBox_CheckedChanged);
+            // 
+            // checkRoomList
+            // 
+            this.checkRoomList.FormattingEnabled = true;
+            this.checkRoomList.Location = new System.Drawing.Point(12, 401);
+            this.checkRoomList.Name = "checkRoomList";
+            this.checkRoomList.Size = new System.Drawing.Size(185, 94);
+            this.checkRoomList.TabIndex = 33;
+            this.checkRoomList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkRoomList_ItemCheck);
+            // 
+            // checkUsersList
+            // 
+            this.checkUsersList.FormattingEnabled = true;
+            this.checkUsersList.Location = new System.Drawing.Point(12, 533);
+            this.checkUsersList.Name = "checkUsersList";
+            this.checkUsersList.Size = new System.Drawing.Size(185, 94);
+            this.checkUsersList.TabIndex = 34;
+            this.checkUsersList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkUsersList_ItemCheck);
+            // 
+            // filtratingButton
+            // 
+            this.filtratingButton.Location = new System.Drawing.Point(15, 699);
+            this.filtratingButton.Name = "filtratingButton";
+            this.filtratingButton.Size = new System.Drawing.Size(75, 23);
+            this.filtratingButton.TabIndex = 35;
+            this.filtratingButton.Text = "Filtrer";
+            this.filtratingButton.UseVisualStyleBackColor = true;
+            this.filtratingButton.Click += new System.EventHandler(this.filtratingButton_Click);
+            // 
             // CalendarView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(1116, 598);
-            this.Controls.Add(this.pictureBox1);
+            this.ClientSize = new System.Drawing.Size(1116, 734);
+            this.Controls.Add(this.filtratingButton);
+            this.Controls.Add(this.checkUsersList);
+            this.Controls.Add(this.checkRoomList);
+            this.Controls.Add(this.checkAllUsersBox);
+            this.Controls.Add(this.checkAllRoomsBox);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.statisticsButton);
@@ -478,8 +525,8 @@
             this.Name = "CalendarView";
             this.Text = "Optik Planner";
             this.Activated += new System.EventHandler(this.CalendarView_Activated);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -511,9 +558,13 @@
         private System.Windows.Forms.Button calendarButtonRight;
         private System.Windows.Forms.Button statisticShowButton;
         private System.Windows.Forms.Button statisticsButton;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.CheckBox checkAllRoomsBox;
+        private System.Windows.Forms.CheckBox checkAllUsersBox;
+        private System.Windows.Forms.CheckedListBox checkRoomList;
+        private System.Windows.Forms.CheckedListBox checkUsersList;
+        private System.Windows.Forms.Button filtratingButton;
     }
 }
 
