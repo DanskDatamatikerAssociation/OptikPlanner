@@ -106,8 +106,6 @@ namespace OptikPlanner
             else calendar.Items.AddRange(_calendarViewController.GetAppointmentsAsCalendarItems());
             ApplyColorLogicToCalendarItems();
 
-            //calendar.ViewStart = calendar.ViewStart;
-            //calendar.ViewEnd = calendar.ViewEnd;
         }
 
 
