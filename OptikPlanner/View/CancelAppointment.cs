@@ -56,32 +56,28 @@ namespace OptikPlanner.View
             try
             {
                 USERS deleter = (USERS)cancelUserBox.SelectedItem;
-                string reasonCancel = " Kunden ikke mødte op.";
-                string phoneCancel = " Kunden har aflyst telefonisk";
-                string elseCancel = " der har været Andet i vejen.";
+                string reasonCancel = " kunden ikke mødte op";
+                string phoneCancel = " kunden har aflyst telefonisk";
+                string elseCancel = " der har været Andet i vejen";
 
                 if (cuCancelRadio.Checked)
                 {
-                    Trace.WriteLine($"\n{DateTime.Now}: ansatte: " + deleter + " har aflyst denne aftale fordi" +
-                                    reasonCancel);
-
-
+                    Trace.WriteLine($"\n{DateTime.Now}: ansatte: {deleter} har aflyst denne aftale fordi kunden ikke mødte op");
+                    
                     Cancellation name = new Cancellation(Reason.IkkeMødtOp, deleter);
                     CancelAppointmentController.CancellationUsersList.Add(name);
                 }
                 if (cuCancelPhoneRadio.Checked)
                 {
-                    Trace.WriteLine($"\n{DateTime.Now}: ansatte: " + deleter + " har aflyst denne aftale fordi" +
-                                    phoneCancel);
-
+                    Trace.WriteLine($"\n{DateTime.Now}: ansatte: {deleter} har aflyst denne aftale fordi kunden har aflyst telefonisk");
+                   
                     Cancellation name = new Cancellation(Reason.AflystTelefonisk, deleter);
                     CancelAppointmentController.CancellationUsersList.Add(name);
                 }
                 if (cuCancelElseRadio.Checked)
                 {
-                    Trace.WriteLine($"\n{DateTime.Now}: ansatte: " + deleter + " har aflyst denne aftale fordi" +
-                                    elseCancel);
-
+                    Trace.WriteLine($"\n{DateTime.Now}: ansatte: {deleter} har aflyst denne aftale fordi der har været Andet i vejen");
+                  
                     Cancellation name = new Cancellation(Reason.Aflyst, deleter);
                     CancelAppointmentController.CancellationUsersList.Add(name);
                 }

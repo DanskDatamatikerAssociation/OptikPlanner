@@ -14,14 +14,13 @@ namespace OptikPlanner.Misc
     {
         public static void SetupTracing()
         {
-            
-            Trace.AutoFlush = true;
             var filename = Path.Combine(Environment.GetFolderPath(
                 Environment.SpecialFolder.ApplicationData), "CancelAppointmentLog.txt");
-            Directory.CreateDirectory(Path.GetDirectoryName(filename));
-            FileStream fs = new FileStream(filename, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Inheritable);
+
+            FileStream fs = new FileStream(filename, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);
             Trace.Listeners.Add(new TextWriterTraceListener(fs));
-            //fs.Close();
+            Trace.AutoFlush = true;
+            
         }
     }
 }
