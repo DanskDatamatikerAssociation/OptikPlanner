@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateCustomer));
             this.cprBox = new CueTextBox();
-            this.createCustomer2Button = new System.Windows.Forms.Button();
+            this.createCustomerButtonOK = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.firstNameBox = new CueTextBox();
             this.LastNameBox = new CueTextBox();
@@ -53,15 +53,16 @@
             this.cprBox.Size = new System.Drawing.Size(121, 20);
             this.cprBox.TabIndex = 1;
             // 
-            // createCustomer2Button
+            // createCustomerButtonOK
             // 
-            this.createCustomer2Button.Location = new System.Drawing.Point(25, 283);
-            this.createCustomer2Button.Name = "createCustomer2Button";
-            this.createCustomer2Button.Size = new System.Drawing.Size(75, 23);
-            this.createCustomer2Button.TabIndex = 2;
-            this.createCustomer2Button.Text = "Opret";
-            this.createCustomer2Button.UseVisualStyleBackColor = true;
-            this.createCustomer2Button.Click += new System.EventHandler(this.createCustomerButton_Click);
+            this.createCustomerButtonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.createCustomerButtonOK.Location = new System.Drawing.Point(25, 283);
+            this.createCustomerButtonOK.Name = "createCustomerButtonOK";
+            this.createCustomerButtonOK.Size = new System.Drawing.Size(75, 23);
+            this.createCustomerButtonOK.TabIndex = 2;
+            this.createCustomerButtonOK.Text = "Opret";
+            this.createCustomerButtonOK.UseVisualStyleBackColor = true;
+            this.createCustomerButtonOK.Click += new System.EventHandler(this.createCustomerButton_Click);
             // 
             // cancelButton
             // 
@@ -184,7 +185,7 @@
             this.Controls.Add(this.LastNameBox);
             this.Controls.Add(this.firstNameBox);
             this.Controls.Add(this.cancelButton);
-            this.Controls.Add(this.createCustomer2Button);
+            this.Controls.Add(this.createCustomerButtonOK);
             this.Controls.Add(this.cprBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -198,7 +199,7 @@
 
         #endregion
         public CueTextBox cprBox;
-        public System.Windows.Forms.Button createCustomer2Button;
+        public System.Windows.Forms.Button createCustomerButtonOK;
         private System.Windows.Forms.Button cancelButton;
         public CueTextBox LastNameBox;
         public CueTextBox adressBox;

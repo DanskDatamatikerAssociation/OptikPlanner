@@ -15,7 +15,7 @@ namespace OptikPlanner.View
 {
     public partial class CustomerLibrary : Form
     {
-
+        CustomerLibraryController _controller = new CustomerLibraryController();
         public CustomerLibrary()
         {
             InitializeComponent();
@@ -24,14 +24,18 @@ namespace OptikPlanner.View
             FillInView();
             ListViewBox.View = System.Windows.Forms.View.Details;
 
-           // InitializeCprBox();
+            ListViewBox.Columns.Add("CPR Nummer", 100);
+            ListViewBox.Columns.Add("Fornavn", 100);
+            ListViewBox.Columns.Add("Efternavn", 100);
         }
 
         private void editCustomerButton_Click(object sender, EventArgs e)
         {
             CreateCustomer window = new CreateCustomer();
-           // window.editorLabel.Text = "Retter";
-            window.createCustomer2Button.Text = "Gem";
+            
+
+            window.createCustomerButtonOK.Text = "Gem";
+            
             window.cprBox.Enabled = false;
             var test = ListViewBox.SelectedItems;
 
@@ -39,7 +43,7 @@ namespace OptikPlanner.View
             window.firstNameBox.Text = test[0].SubItems[1].Text;
             window.LastNameBox.Text = test[0].SubItems[2].Text;
 
-            foreach (var s in CustomerLibraryController.GetCustomer())
+            foreach (var s in _controller.GetCustomer())
             {
                 if (test[0].SubItems[0].Text.Equals(s.CS_CPRNO))
                 {
@@ -49,10 +53,14 @@ namespace OptikPlanner.View
                 }
             }
 
-            if (window.ShowDialog() == DialogResult.OK)
+            window.ShowDialog();
+
+            if (window.createCustomerButtonOK.DialogResult == DialogResult.OK)
             {
+                ListViewBox.Items.Clear();
                 FillInView();
             }
+
         }
 
         private void createCustomerButton_Click(object sender, EventArgs e)
@@ -60,26 +68,30 @@ namespace OptikPlanner.View
             //opret ikke eksisterende kunde
             CreateCustomer window = new CreateCustomer();
             //window.editorLabel.Text = "Opretter";
-            window.createCustomer2Button.Text = "Opret";
+            window.createCustomerButtonOK.Text = "Opret";
             window.ShowDialog();
+
+            if (window.ShowDialog() == DialogResult.OK)
+            {
+                ListViewBox.Items.Clear();
+                FillInView();
+            }
         }
 
         public void FillInView()
         {
-            ListViewBox.Columns.Add("CPR Nummer", 100);
-            ListViewBox.Columns.Add("Fornavn", 100);
-            ListViewBox.Columns.Add("Efternavn", 100);
-
-            foreach (var s in CustomerLibraryController.GetCustomer())
+            foreach (var s in _controller.GetCustomer())
             {
-                ListViewBox.Items.Add(new ListViewItem(new string[] { s.CS_CPRNO, s.CS_FIRSTNAME, s.CS_LASTNAME }));
+                var item = ListViewBox.Items.Add(new ListViewItem(new string[] { s.CS_CPRNO, s.CS_FIRSTNAME, s.CS_LASTNAME }));
+                item.Tag = s;
             }
         }
 
         private void deleteCustomerButton_Click(object sender, EventArgs e)
         {
-           
-                    for (int i = 0; i < ListViewBox.Items.Count; i++)
+            CUSTOMERS customer = (CUSTOMERS)ListViewBox.SelectedItems[0].Tag;
+
+            for (int i = 0; i < ListViewBox.Items.Count; i++)
                     {
                         if (ListViewBox.Items[i].Selected)
                         {
@@ -87,7 +99,9 @@ namespace OptikPlanner.View
                             i--;
                         }
                     }
-                }
+
+            _controller.DeleteCustomer(customer);
+        }
         
 
         private void closeWindowButton_Click(object sender, EventArgs e)
@@ -118,7 +132,7 @@ namespace OptikPlanner.View
         {
             ListViewBox.Items.Clear(); // clear list items before adding 
                                        // filter the items match with search key and add result to list view 
-            ListViewBox.Items.AddRange(CustomerLibraryController.GetCustomer()
+            ListViewBox.Items.AddRange(_controller.GetCustomer()
                 .Where(i => string.IsNullOrEmpty(cprBox.Text) || i.CS_CPRNO.StartsWith(cprBox.Text))
                 .Select(c => new ListViewItem(new string[] {c.CS_CPRNO, c.CS_FIRSTNAME, c.CS_LASTNAME})).ToArray());
         }

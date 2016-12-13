@@ -16,11 +16,11 @@ namespace OptikPlanner.View
 {
     public partial class CreateCustomer : Form
     {
+        CustomerLibraryController _controller = new CustomerLibraryController();
         public CreateCustomer()
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterParent;
-            //userCombo.Items.Add(CustomerLibraryController.GetUser());
         }
         private void createCustomerButton_Click(object sender, EventArgs e)
         {
@@ -34,36 +34,19 @@ namespace OptikPlanner.View
             customer.CS_EMAIL = emailBox.Text;
             customer.CS_PHONEMOBILE = phoneBox.Text;
 
-            if (createCustomer2Button.Text == "Gem")
+            if (createCustomerButtonOK.Text == "Gem")
             {
-                foreach (var s in CustomerLibraryController.GetCustomer())
-                {
-                    if (s.CS_CPRNO.Equals(cprBox.Text))
-                    {
-                        s.CS_CPRNO = cprBox.Text;
-                        s.CS_FIRSTNAME = firstNameBox.Text;
-                        s.CS_LASTNAME = LastNameBox.Text;
-                        s.CS_ADRESS1 = adressBox.Text;
-                        s.CS_EMAIL = emailBox.Text;
-                        s.CS_PHONEMOBILE = phoneBox.Text;
-                        
-                    }
-                }
+                _controller.PutCustomer(customer);
                 Trace.WriteLine($"\n Ny kunde med navn: {firstNameBox.Text} {LastNameBox.Text} er blevet oprettet d. {DateTime.Now}");
-
-                //Trace.WriteLine($"\n{DateTime.Now}: ansatte: " + creater + " har ændret en kunde ved navn: " + firstNameBox.Text + " " + LastNameBox.Text);
             }
-            else if (createCustomer2Button.Text == "Opret")
+            if (createCustomerButtonOK.Text == "Opret")
             {
-                CustomerLibraryController.GetCustomer().Add(customer);
+                _controller.PostCustomer(customer);
                 Trace.WriteLine($"\n Ny kunde med navn: {firstNameBox.Text} {LastNameBox.Text} er blevet rettet i d. {DateTime.Now}");
-
             }
-
             this.Close();
-            
-
         }
+
         private void cancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
