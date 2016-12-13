@@ -237,5 +237,12 @@ namespace OptikPlanner.Model
         public string CS_BONUSCARD_REF { get; set; }
 
         public DateTime? CS_BIRTHDAY { get; set; }
+
+        public override string ToString()
+        {
+            return String.Format($"{CS_FIRSTNAME} {CS_LASTNAME}");
+        }
     }
+
+    
 }

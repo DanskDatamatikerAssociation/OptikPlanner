@@ -69,6 +69,7 @@
             this.filtratingButton = new System.Windows.Forms.Button();
             this.checkCustomerList = new System.Windows.Forms.CheckedListBox();
             this.checkAllCustomers = new System.Windows.Forms.CheckBox();
+            this.resetFilteringButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // fIlerToolStripMenuItem
@@ -145,7 +146,7 @@
             // 
             this.monthLabel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.monthLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.monthLabel.Location = new System.Drawing.Point(679, 234);
+            this.monthLabel.Location = new System.Drawing.Point(679, 35);
             this.monthLabel.Margin = new System.Windows.Forms.Padding(3, 0, 5, 0);
             this.monthLabel.Name = "monthLabel";
             this.monthLabel.Size = new System.Drawing.Size(107, 24);
@@ -391,10 +392,11 @@
             this.calendar.ItemsTimeFormat = "HH:mm tt";
             this.calendar.Location = new System.Drawing.Point(208, 95);
             this.calendar.Name = "calendar";
-            this.calendar.Size = new System.Drawing.Size(914, 690);
+            this.calendar.Size = new System.Drawing.Size(914, 655);
             this.calendar.TabIndex = 0;
             this.calendar.TabStop = false;
             this.calendar.Text = "Calendar";
+            this.calendar.TimeScale = System.Windows.Forms.Calendar.CalendarTimeScale.FifteenMinutes;
             this.calendar.LoadItems += new System.Windows.Forms.Calendar.Calendar.CalendarLoadEventHandler(this.calendar_LoadItems);
             this.calendar.DayHeaderClick += new System.Windows.Forms.Calendar.Calendar.CalendarDayEventHandler(this.calendar_DayHeaderClick);
             this.calendar.ItemDoubleClick += new System.Windows.Forms.Calendar.Calendar.CalendarItemEventHandler(this.calendar1_ItemDoubleClick);
@@ -446,9 +448,9 @@
             this.checkAllRoomsBox.AutoSize = true;
             this.checkAllRoomsBox.Location = new System.Drawing.Point(15, 378);
             this.checkAllRoomsBox.Name = "checkAllRoomsBox";
-            this.checkAllRoomsBox.Size = new System.Drawing.Size(138, 17);
+            this.checkAllRoomsBox.Size = new System.Drawing.Size(93, 17);
             this.checkAllRoomsBox.TabIndex = 31;
-            this.checkAllRoomsBox.Text = "Filtrer visning af alle rum";
+            this.checkAllRoomsBox.Text = "Vis alle lokaler";
             this.checkAllRoomsBox.UseVisualStyleBackColor = true;
             this.checkAllRoomsBox.CheckedChanged += new System.EventHandler(this.checkAllRoomsBox_CheckedChanged);
             // 
@@ -457,27 +459,31 @@
             this.checkAllUsersBox.AutoSize = true;
             this.checkAllUsersBox.Location = new System.Drawing.Point(15, 510);
             this.checkAllUsersBox.Name = "checkAllUsersBox";
-            this.checkAllUsersBox.Size = new System.Drawing.Size(185, 17);
+            this.checkAllUsersBox.Size = new System.Drawing.Size(120, 17);
             this.checkAllUsersBox.TabIndex = 32;
-            this.checkAllUsersBox.Text = "Filtrer visning af alle medarbejdere";
+            this.checkAllUsersBox.Text = "Vis alle medarbejder";
             this.checkAllUsersBox.UseVisualStyleBackColor = true;
             this.checkAllUsersBox.CheckedChanged += new System.EventHandler(this.checkAllUsersBox_CheckedChanged);
             // 
             // checkRoomList
             // 
+            this.checkRoomList.CheckOnClick = true;
             this.checkRoomList.FormattingEnabled = true;
             this.checkRoomList.Location = new System.Drawing.Point(12, 401);
             this.checkRoomList.Name = "checkRoomList";
             this.checkRoomList.Size = new System.Drawing.Size(185, 94);
             this.checkRoomList.TabIndex = 33;
+            this.checkRoomList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkRoomList_ItemCheck);
             // 
             // checkUsersList
             // 
+            this.checkUsersList.CheckOnClick = true;
             this.checkUsersList.FormattingEnabled = true;
             this.checkUsersList.Location = new System.Drawing.Point(12, 533);
             this.checkUsersList.Name = "checkUsersList";
             this.checkUsersList.Size = new System.Drawing.Size(185, 94);
             this.checkUsersList.TabIndex = 34;
+            this.checkUsersList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkUsersList_ItemCheck);
             // 
             // filtratingButton
             // 
@@ -491,23 +497,34 @@
             // 
             // checkCustomerList
             // 
+            this.checkCustomerList.CheckOnClick = true;
             this.checkCustomerList.FormattingEnabled = true;
             this.checkCustomerList.Location = new System.Drawing.Point(12, 656);
             this.checkCustomerList.Name = "checkCustomerList";
             this.checkCustomerList.Size = new System.Drawing.Size(185, 94);
             this.checkCustomerList.TabIndex = 37;
+            this.checkCustomerList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkCustomerList_ItemCheck);
             // 
             // checkAllCustomers
             // 
             this.checkAllCustomers.AutoSize = true;
             this.checkAllCustomers.Location = new System.Drawing.Point(15, 633);
             this.checkAllCustomers.Name = "checkAllCustomers";
-            this.checkAllCustomers.Size = new System.Drawing.Size(154, 17);
+            this.checkAllCustomers.Size = new System.Drawing.Size(95, 17);
             this.checkAllCustomers.TabIndex = 36;
-            this.checkAllCustomers.Text = "Filtrer visning af alle kunder";
+            this.checkAllCustomers.Text = "Vis alle kunder";
             this.checkAllCustomers.UseVisualStyleBackColor = true;
             this.checkAllCustomers.CheckedChanged += new System.EventHandler(this.checkAllCustomers_CheckedChanged);
-
+            // 
+            // resetFilteringButton
+            // 
+            this.resetFilteringButton.Location = new System.Drawing.Point(94, 762);
+            this.resetFilteringButton.Name = "resetFilteringButton";
+            this.resetFilteringButton.Size = new System.Drawing.Size(75, 23);
+            this.resetFilteringButton.TabIndex = 38;
+            this.resetFilteringButton.Text = "Nulstil";
+            this.resetFilteringButton.UseVisualStyleBackColor = true;
+            this.resetFilteringButton.Click += new System.EventHandler(this.resetFilteringButton_Click);
             // 
             // CalendarView
             // 
@@ -515,6 +532,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1116, 797);
+            this.Controls.Add(this.resetFilteringButton);
             this.Controls.Add(this.checkCustomerList);
             this.Controls.Add(this.filtratingButton);
             this.Controls.Add(this.checkAllCustomers);
@@ -589,6 +607,7 @@
         private System.Windows.Forms.Button filtratingButton;
         private System.Windows.Forms.CheckedListBox checkCustomerList;
         private System.Windows.Forms.CheckBox checkAllCustomers;
+        private System.Windows.Forms.Button resetFilteringButton;
     }
 }
 

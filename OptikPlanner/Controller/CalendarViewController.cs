@@ -21,7 +21,7 @@ namespace OptikPlanner.Controller
             view.SetController(this);
         }
 
-        private List<APTDETAILS> GetAppointments()
+        public List<APTDETAILS> GetAppointments()
         {
             using (db = new OptikItDbContext())
             {
