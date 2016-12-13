@@ -7,7 +7,7 @@ namespace OptikPlanner.Model
         public OptikItDbContext()
             : base("name=OptikItDbContext")
         {
-            base.Configuration.ProxyCreationEnabled = false;
+            //base.Configuration.ProxyCreationEnabled = false;
         }
 
         public virtual DbSet<APTDETAILS> APTDETAILS { get; set; }
