@@ -16,6 +16,7 @@ namespace OptikPlanner.Controller
     public class CreateAppointmentController
     {
         private OptikItDbContext db;
+        List<APTDETAILS> allCustomerAppoinments = new List<APTDETAILS>();
 
         private static ICreateAppointmentView _view;
 

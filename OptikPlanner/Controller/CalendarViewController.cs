@@ -12,6 +12,7 @@ namespace OptikPlanner.Controller
     //Skal kun håndtere logik der indebærer models. 
     public class CalendarViewController
     {
+        private List<APTDETAILS> allCustomerAppointments = new List<APTDETAILS>(); 
         private OptikItDbContext db;
         private ICalendarView _view;
 
@@ -29,6 +30,93 @@ namespace OptikPlanner.Controller
                 return appointments.ToList();
             }
 
+        }
+        public List<APTDETAILS> GetAllAppointments()
+        {
+
+
+            APTDETAILS appointment = new APTDETAILS();
+            appointment.APD_CUSTOMER = 1;
+            appointment.APD_DATE = new DateTime(2016, 12, 30);
+
+            APTDETAILS appointment1 = new APTDETAILS();
+            appointment1.APD_CUSTOMER = 1;
+            appointment1.APD_DATE = new DateTime(2016, 12, 27);
+
+            APTDETAILS appointment2 = new APTDETAILS();
+            appointment2.APD_CUSTOMER = 1;
+            appointment2.APD_DATE = new DateTime(2016, 11, 25);
+
+            APTDETAILS appointment3 = new APTDETAILS();
+            appointment3.APD_CUSTOMER = 1;
+            appointment3.APD_DATE = new DateTime(2016, 11, 27);
+
+            APTDETAILS appointment4 = new APTDETAILS();
+            appointment4.APD_CUSTOMER = 1;
+            appointment4.APD_DATE = new DateTime(2016, 10, 27);
+
+            APTDETAILS appointment5 = new APTDETAILS();
+            appointment5.APD_CUSTOMER = 1;
+            appointment5.APD_DATE = new DateTime(2016, 12, 31);
+
+            APTDETAILS appointment6 = new APTDETAILS();
+            appointment6.APD_CUSTOMER = 1;
+            appointment6.APD_DATE = new DateTime(2016, 10, 25);
+
+            allCustomerAppointments.Add(appointment);
+            allCustomerAppointments.Add(appointment1);
+            allCustomerAppointments.Add(appointment2);
+            allCustomerAppointments.Add(appointment3);
+            allCustomerAppointments.Add(appointment4);
+            allCustomerAppointments.Add(appointment5);
+            allCustomerAppointments.Add(appointment6);
+
+            return allCustomerAppointments;
+        }
+
+        public List<APTDETAILS> GetFutureAppointments(CUSTOMERS customer)
+
+        {
+            List<APTDETAILS> futureCustomerAppoinments = new List<APTDETAILS>();
+
+            allCustomerAppointments = GetAllAppointments();
+            var now = DateTime.Now;
+
+            foreach (APTDETAILS a in allCustomerAppointments)
+
+                if (a.APD_CUSTOMER == customer.CS_STAMP && a.APD_DATE > now)
+                {
+                    futureCustomerAppoinments.Add(a);
+                }
+
+
+
+
+
+            return futureCustomerAppoinments;
+
+        }
+
+        public List<APTDETAILS> GetPastAppointments(CUSTOMERS customer)
+        {
+            allCustomerAppointments = GetAllAppointments();
+            List<APTDETAILS> pastAppointments = new List<APTDETAILS>();
+            List<APTDETAILS> twoLastAppointments = new List<APTDETAILS>();
+            var now = DateTime.Now;
+
+            foreach (APTDETAILS a in allCustomerAppointments)
+
+                if (a.APD_CUSTOMER == customer.CS_STAMP && a.APD_DATE < now)
+                {
+                    pastAppointments.Add(a);
+                }
+
+            for (int i = 0; i < 2; i++)
+            {
+                twoLastAppointments.Add(pastAppointments[i]);
+            }
+
+            return twoLastAppointments;
         }
 
         public List<EYEEXAMROOMS> GetRooms()

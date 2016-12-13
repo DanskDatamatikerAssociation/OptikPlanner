@@ -389,7 +389,7 @@
             this.calendar.TabIndex = 0;
             this.calendar.TabStop = false;
             this.calendar.Text = "Calendar";
-            this.calendar.LoadItems += new System.Windows.Forms.Calendar.Calendar.CalendarLoadEventHandler(this.calendar_LoadItems);
+            //this.calendar.LoadItems += new System.Windows.Forms.Calendar.Calendar.CalendarLoadEventHandler(this.calendar_LoadItems);
             this.calendar.DayHeaderClick += new System.Windows.Forms.Calendar.Calendar.CalendarDayEventHandler(this.calendar_DayHeaderClick);
             this.calendar.ItemDoubleClick += new System.Windows.Forms.Calendar.Calendar.CalendarItemEventHandler(this.calendar1_ItemDoubleClick);
             this.calendar.DoubleClick += new System.EventHandler(this.calendar_DoubleClick);

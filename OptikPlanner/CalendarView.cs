@@ -27,20 +27,33 @@ namespace OptikPlanner
         private const string MonthViewMode = "month";
         private const string WeekViewMode = "week";
         private string _viewMode = WeekViewMode;
-
+        
+        
+        private CustomerLibraryController _customerLibraryController = new CustomerLibraryController();
         public CalendarView()
         {
             InitializeComponent();
+            CUSTOMERS customer = new CUSTOMERS();
+            customer.CS_CPRNO = "20019267454";
+            customer.CS_FIRSTNAME = "Børge";
+            customer.CS_LASTNAME = "Jensen";
+            customer.CS_ADRESS1 = "Børgevej 210";
+            customer.CS_PHONEMOBILE = "28706520";
+            customer.CS_EMAIL = "enemail@gmail.com";
+            customer.CS_STAMP = 1;
+
 
             StartPosition = FormStartPosition.CenterScreen;
+            _customerLibraryController.GetFutureAppointments(customer);
+            _customerLibraryController.GetPastAppointments(customer);
 
             Calendar = calendar;
             _calendarViewController = new CalendarViewController(this);
 
             SetupCalendar();
 
+         
 
-            
 
         }
 
@@ -238,16 +251,16 @@ namespace OptikPlanner
             SetAllLabels();
         }
 
-        private void calendar_LoadItems(object sender, CalendarLoadEventArgs e)
-        {
-            SetAllLabels();
-            AddAppointmentsToCalendar();
-            ApplyColorLogicToCalendarItems();
+        //private void calendar_LoadItems(object sender, CalendarLoadEventArgs e)
+        //{
+        //    SetAllLabels();
+        //    AddAppointmentsToCalendar();
+        //    ApplyColorLogicToCalendarItems();
 
             
 
 
-        }
+        //}
 
         private void ApplyColorLogicToCalendarItems()
         {

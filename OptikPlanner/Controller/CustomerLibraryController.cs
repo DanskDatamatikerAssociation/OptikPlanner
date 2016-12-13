@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OptikPlanner.Model;
+using OptikPlanner.View;
 
 namespace OptikPlanner.Controller
 {
     class CustomerLibraryController
     {
-        OptikItDbContext db = new OptikItDbContext();
-        
+     
+            OptikItDbContext db = new OptikItDbContext();
+       
         public static USERS GetUser()
         {
             USERS user = new USERS();
@@ -21,9 +23,10 @@ namespace OptikPlanner.Controller
             return user;
         }
 
+
         public static List<CUSTOMERS> GetCustomer()
         {
-            
+
             CUSTOMERS customer = new CUSTOMERS();
             customer.CS_CPRNO = "20019267454";
             customer.CS_FIRSTNAME = "Børge";
@@ -31,6 +34,7 @@ namespace OptikPlanner.Controller
             customer.CS_ADRESS1 = "Børgevej 210";
             customer.CS_PHONEMOBILE = "28706520";
             customer.CS_EMAIL = "enemail@gmail.com";
+            customer.CS_STAMP = 1;
             CUSTOMERS customer1 = new CUSTOMERS();
             customer1.CS_CPRNO = "2113926994";
             customer1.CS_FIRSTNAME = "Daniel";
@@ -61,6 +65,10 @@ namespace OptikPlanner.Controller
 
             return customerlist;
         }
+
+
+
+
 
 
 
