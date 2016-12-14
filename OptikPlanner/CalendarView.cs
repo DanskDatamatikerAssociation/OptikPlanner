@@ -21,6 +21,7 @@ namespace OptikPlanner
 {
     public partial class CalendarView : Form, ICalendarView
     {
+        private CreateAppointmentController _createAppointmentController;
         private CalendarViewController _calendarViewController;
         public Calendar Calendar { get; }
         private const string DayViewMode = "day";
@@ -41,11 +42,10 @@ namespace OptikPlanner
             customer.CS_PHONEMOBILE = "28706520";
             customer.CS_EMAIL = "enemail@gmail.com";
             customer.CS_STAMP = 1;
-
-
             StartPosition = FormStartPosition.CenterScreen;
-            _customerLibraryController.GetFutureAppointments(customer);
-            _customerLibraryController.GetPastAppointments(customer);
+
+            //_createAppointmentController.GetFutureAppointments(customer);
+            //_createAppointmentController.GetPastAppointments(customer);
 
             Calendar = calendar;
             _calendarViewController = new CalendarViewController(this);
