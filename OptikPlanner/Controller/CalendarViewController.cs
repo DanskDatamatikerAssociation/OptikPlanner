@@ -21,7 +21,7 @@ namespace OptikPlanner.Controller
             view.SetController(this);
         }
 
-        private List<APTDETAILS> GetAppointments()
+        public List<APTDETAILS> GetAppointments()
         {
             using (db = new OptikItDbContext())
             {
@@ -29,6 +29,23 @@ namespace OptikPlanner.Controller
                 return appointments.ToList();
             }
 
+        }
+
+        public List<CUSTOMERS> GetCustomers()
+        {
+            //    CUSTOMERS customer = new CUSTOMERS();
+            //    customer.CS_CPRNO = "2001926754";
+            //    customer.CS_FIRSTNAME = "Børge";
+            //    customer.CS_LASTNAME = "Jensen";
+
+
+            //    return customer;
+
+            using (db = new OptikItDbContext())
+            {
+                var customers = from c in db.CUSTOMERS select c;
+                return customers.ToList();
+            }
         }
 
         public List<EYEEXAMROOMS> GetRooms()
@@ -161,13 +178,43 @@ namespace OptikPlanner.Controller
 
             //    return calendarItems;
             //}
-
-
-
-
-
-
         }
+
+        public List<CalendarItem> GetAppointmentsAsCalendarItems(List<APTDETAILS> appointments)
+        {
+            List<CalendarItem> calendarItems = new List<CalendarItem>();
+            
+            foreach (var a in appointments)
+            {
+                string correctDateFormat = a.APD_DATE.Value.ToString("dd-MM-yy");
+                DateTime appointMentDateValue = DateTime.Parse(correctDateFormat);
+
+                string timeFromHour = a.APD_TIMEFROM.Split(':').First();
+                string timeFromMinute = a.APD_TIMEFROM.Split(':').Last();
+
+                string timeToHour = a.APD_TIMETO.Split(':').First();
+                string timeToMinute = a.APD_TIMETO.Split(':').Last();
+
+                var extraDetails = GetExtraAppointmentDetails(a);
+
+                string appointmentString = $"{extraDetails[0]}\n" +
+                                           $"Lokale nr. {a.APD_ROOM}\n" +
+                                           $"{extraDetails[2]}";
+
+                CalendarItem c = new CalendarItem(_view.Calendar,
+                    new DateTime(appointMentDateValue.Year, appointMentDateValue.Month, appointMentDateValue.Day,
+                        int.Parse(timeFromHour), int.Parse(timeFromMinute), 0),
+                    new DateTime(appointMentDateValue.Year, appointMentDateValue.Month, appointMentDateValue.Day,
+                        int.Parse(timeToHour), int.Parse(timeToMinute), 0), appointmentString);
+
+                c.Tag = a;
+                calendarItems.Add(c);
+
+            }
+
+            return calendarItems;
+        }
+
     }
 }
 

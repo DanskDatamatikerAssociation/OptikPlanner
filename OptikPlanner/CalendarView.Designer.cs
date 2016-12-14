@@ -30,11 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CalendarView));
-            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange1 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
-            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange2 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
-            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange3 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
-            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange4 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
-            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange5 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
+            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange6 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
+            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange7 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
+            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange8 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
+            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange9 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
+            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange10 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
             this.fIlerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.indstillingerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
@@ -58,12 +58,18 @@
             this.twoWeeksButton = new System.Windows.Forms.Button();
             this.todayButton = new System.Windows.Forms.Button();
             this.newAppointmentButton = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.calendar = new System.Windows.Forms.Calendar.Calendar();
             this.monthView = new System.Windows.Forms.Calendar.MonthView();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.checkAllRoomsBox = new System.Windows.Forms.CheckBox();
+            this.checkAllUsersBox = new System.Windows.Forms.CheckBox();
+            this.checkRoomList = new System.Windows.Forms.CheckedListBox();
+            this.checkUsersList = new System.Windows.Forms.CheckedListBox();
+            this.filtratingButton = new System.Windows.Forms.Button();
+            this.checkCustomerList = new System.Windows.Forms.CheckedListBox();
+            this.checkAllCustomers = new System.Windows.Forms.CheckBox();
+            this.resetFilteringButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // fIlerToolStripMenuItem
@@ -354,16 +360,6 @@
             this.newAppointmentButton.Enter += new System.EventHandler(this.newAppointmentButton_Enter);
             this.newAppointmentButton.Leave += new System.EventHandler(this.newAppointmentButton_Leave);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::OptikPlanner.Properties.Resources.OptikITLogo;
-            this.pictureBox1.Location = new System.Drawing.Point(2, 399);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(200, 112);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 29;
-            this.pictureBox1.TabStop = false;
-            // 
             // calendar
             // 
             this.calendar.AllowItemEdit = false;
@@ -372,34 +368,35 @@
             this.calendar.BackColor = System.Drawing.SystemColors.ControlDark;
             this.calendar.FirstDayOfWeek = System.DayOfWeek.Monday;
             this.calendar.Font = new System.Drawing.Font("Segoe UI", 9F);
-            calendarHighlightRange1.DayOfWeek = System.DayOfWeek.Monday;
-            calendarHighlightRange1.EndTime = System.TimeSpan.Parse("17:00:00");
-            calendarHighlightRange1.StartTime = System.TimeSpan.Parse("08:00:00");
-            calendarHighlightRange2.DayOfWeek = System.DayOfWeek.Tuesday;
-            calendarHighlightRange2.EndTime = System.TimeSpan.Parse("17:00:00");
-            calendarHighlightRange2.StartTime = System.TimeSpan.Parse("08:00:00");
-            calendarHighlightRange3.DayOfWeek = System.DayOfWeek.Wednesday;
-            calendarHighlightRange3.EndTime = System.TimeSpan.Parse("17:00:00");
-            calendarHighlightRange3.StartTime = System.TimeSpan.Parse("08:00:00");
-            calendarHighlightRange4.DayOfWeek = System.DayOfWeek.Thursday;
-            calendarHighlightRange4.EndTime = System.TimeSpan.Parse("17:00:00");
-            calendarHighlightRange4.StartTime = System.TimeSpan.Parse("08:00:00");
-            calendarHighlightRange5.DayOfWeek = System.DayOfWeek.Friday;
-            calendarHighlightRange5.EndTime = System.TimeSpan.Parse("17:00:00");
-            calendarHighlightRange5.StartTime = System.TimeSpan.Parse("08:00:00");
+            calendarHighlightRange6.DayOfWeek = System.DayOfWeek.Monday;
+            calendarHighlightRange6.EndTime = System.TimeSpan.Parse("17:00:00");
+            calendarHighlightRange6.StartTime = System.TimeSpan.Parse("08:00:00");
+            calendarHighlightRange7.DayOfWeek = System.DayOfWeek.Tuesday;
+            calendarHighlightRange7.EndTime = System.TimeSpan.Parse("17:00:00");
+            calendarHighlightRange7.StartTime = System.TimeSpan.Parse("08:00:00");
+            calendarHighlightRange8.DayOfWeek = System.DayOfWeek.Wednesday;
+            calendarHighlightRange8.EndTime = System.TimeSpan.Parse("17:00:00");
+            calendarHighlightRange8.StartTime = System.TimeSpan.Parse("08:00:00");
+            calendarHighlightRange9.DayOfWeek = System.DayOfWeek.Thursday;
+            calendarHighlightRange9.EndTime = System.TimeSpan.Parse("17:00:00");
+            calendarHighlightRange9.StartTime = System.TimeSpan.Parse("08:00:00");
+            calendarHighlightRange10.DayOfWeek = System.DayOfWeek.Friday;
+            calendarHighlightRange10.EndTime = System.TimeSpan.Parse("17:00:00");
+            calendarHighlightRange10.StartTime = System.TimeSpan.Parse("08:00:00");
             this.calendar.HighlightRanges = new System.Windows.Forms.Calendar.CalendarHighlightRange[] {
-        calendarHighlightRange1,
-        calendarHighlightRange2,
-        calendarHighlightRange3,
-        calendarHighlightRange4,
-        calendarHighlightRange5};
+        calendarHighlightRange6,
+        calendarHighlightRange7,
+        calendarHighlightRange8,
+        calendarHighlightRange9,
+        calendarHighlightRange10};
             this.calendar.ItemsTimeFormat = "HH:mm tt";
-            this.calendar.Location = new System.Drawing.Point(208, 107);
+            this.calendar.Location = new System.Drawing.Point(208, 95);
             this.calendar.Name = "calendar";
-            this.calendar.Size = new System.Drawing.Size(914, 452);
+            this.calendar.Size = new System.Drawing.Size(914, 655);
             this.calendar.TabIndex = 0;
             this.calendar.TabStop = false;
             this.calendar.Text = "Calendar";
+            this.calendar.TimeScale = System.Windows.Forms.Calendar.CalendarTimeScale.FifteenMinutes;
             this.calendar.LoadItems += new System.Windows.Forms.Calendar.Calendar.CalendarLoadEventHandler(this.calendar_LoadItems);
             this.calendar.DayHeaderClick += new System.Windows.Forms.Calendar.Calendar.CalendarDayEventHandler(this.calendar_DayHeaderClick);
             this.calendar.ItemDoubleClick += new System.Windows.Forms.Calendar.Calendar.CalendarItemEventHandler(this.calendar1_ItemDoubleClick);
@@ -418,13 +415,13 @@
             this.monthView.DaySelectedTextColor = System.Drawing.SystemColors.HighlightText;
             this.monthView.FirstDayOfWeek = System.DayOfWeek.Monday;
             this.monthView.ItemPadding = new System.Windows.Forms.Padding(2);
-            this.monthView.Location = new System.Drawing.Point(2, 107);
+            this.monthView.Location = new System.Drawing.Point(2, 95);
             this.monthView.MonthTitleColor = System.Drawing.SystemColors.ActiveCaption;
             this.monthView.MonthTitleColorInactive = System.Drawing.SystemColors.InactiveCaption;
             this.monthView.MonthTitleTextColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.monthView.MonthTitleTextColorInactive = System.Drawing.SystemColors.InactiveCaptionText;
             this.monthView.Name = "monthView";
-            this.monthView.Size = new System.Drawing.Size(200, 286);
+            this.monthView.Size = new System.Drawing.Size(200, 277);
             this.monthView.TabIndex = 2;
             this.monthView.Text = "monthView";
             this.monthView.TodayBorderColor = System.Drawing.Color.Maroon;
@@ -446,13 +443,103 @@
             this.label8.Size = new System.Drawing.Size(2, 70);
             this.label8.TabIndex = 30;
             // 
+            // checkAllRoomsBox
+            // 
+            this.checkAllRoomsBox.AutoSize = true;
+            this.checkAllRoomsBox.Location = new System.Drawing.Point(15, 378);
+            this.checkAllRoomsBox.Name = "checkAllRoomsBox";
+            this.checkAllRoomsBox.Size = new System.Drawing.Size(93, 17);
+            this.checkAllRoomsBox.TabIndex = 31;
+            this.checkAllRoomsBox.Text = "Vis alle lokaler";
+            this.checkAllRoomsBox.UseVisualStyleBackColor = true;
+            this.checkAllRoomsBox.CheckedChanged += new System.EventHandler(this.checkAllRoomsBox_CheckedChanged);
+            // 
+            // checkAllUsersBox
+            // 
+            this.checkAllUsersBox.AutoSize = true;
+            this.checkAllUsersBox.Location = new System.Drawing.Point(15, 510);
+            this.checkAllUsersBox.Name = "checkAllUsersBox";
+            this.checkAllUsersBox.Size = new System.Drawing.Size(120, 17);
+            this.checkAllUsersBox.TabIndex = 32;
+            this.checkAllUsersBox.Text = "Vis alle medarbejder";
+            this.checkAllUsersBox.UseVisualStyleBackColor = true;
+            this.checkAllUsersBox.CheckedChanged += new System.EventHandler(this.checkAllUsersBox_CheckedChanged);
+            // 
+            // checkRoomList
+            // 
+            this.checkRoomList.CheckOnClick = true;
+            this.checkRoomList.FormattingEnabled = true;
+            this.checkRoomList.Location = new System.Drawing.Point(12, 401);
+            this.checkRoomList.Name = "checkRoomList";
+            this.checkRoomList.Size = new System.Drawing.Size(185, 94);
+            this.checkRoomList.TabIndex = 33;
+            this.checkRoomList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkRoomList_ItemCheck);
+            // 
+            // checkUsersList
+            // 
+            this.checkUsersList.CheckOnClick = true;
+            this.checkUsersList.FormattingEnabled = true;
+            this.checkUsersList.Location = new System.Drawing.Point(12, 533);
+            this.checkUsersList.Name = "checkUsersList";
+            this.checkUsersList.Size = new System.Drawing.Size(185, 94);
+            this.checkUsersList.TabIndex = 34;
+            this.checkUsersList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkUsersList_ItemCheck);
+            // 
+            // filtratingButton
+            // 
+            this.filtratingButton.Location = new System.Drawing.Point(12, 762);
+            this.filtratingButton.Name = "filtratingButton";
+            this.filtratingButton.Size = new System.Drawing.Size(75, 23);
+            this.filtratingButton.TabIndex = 35;
+            this.filtratingButton.Text = "Filtrer";
+            this.filtratingButton.UseVisualStyleBackColor = true;
+            this.filtratingButton.Click += new System.EventHandler(this.filtratingButton_Click);
+            // 
+            // checkCustomerList
+            // 
+            this.checkCustomerList.CheckOnClick = true;
+            this.checkCustomerList.FormattingEnabled = true;
+            this.checkCustomerList.Location = new System.Drawing.Point(12, 656);
+            this.checkCustomerList.Name = "checkCustomerList";
+            this.checkCustomerList.Size = new System.Drawing.Size(185, 94);
+            this.checkCustomerList.TabIndex = 37;
+            this.checkCustomerList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkCustomerList_ItemCheck);
+            // 
+            // checkAllCustomers
+            // 
+            this.checkAllCustomers.AutoSize = true;
+            this.checkAllCustomers.Location = new System.Drawing.Point(15, 633);
+            this.checkAllCustomers.Name = "checkAllCustomers";
+            this.checkAllCustomers.Size = new System.Drawing.Size(95, 17);
+            this.checkAllCustomers.TabIndex = 36;
+            this.checkAllCustomers.Text = "Vis alle kunder";
+            this.checkAllCustomers.UseVisualStyleBackColor = true;
+            this.checkAllCustomers.CheckedChanged += new System.EventHandler(this.checkAllCustomers_CheckedChanged);
+            // 
+            // resetFilteringButton
+            // 
+            this.resetFilteringButton.Location = new System.Drawing.Point(94, 762);
+            this.resetFilteringButton.Name = "resetFilteringButton";
+            this.resetFilteringButton.Size = new System.Drawing.Size(75, 23);
+            this.resetFilteringButton.TabIndex = 38;
+            this.resetFilteringButton.Text = "Nulstil";
+            this.resetFilteringButton.UseVisualStyleBackColor = true;
+            this.resetFilteringButton.Click += new System.EventHandler(this.resetFilteringButton_Click);
+            // 
             // CalendarView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(1116, 598);
-            this.Controls.Add(this.pictureBox1);
+            this.ClientSize = new System.Drawing.Size(1116, 797);
+            this.Controls.Add(this.resetFilteringButton);
+            this.Controls.Add(this.checkCustomerList);
+            this.Controls.Add(this.filtratingButton);
+            this.Controls.Add(this.checkAllCustomers);
+            this.Controls.Add(this.checkUsersList);
+            this.Controls.Add(this.checkRoomList);
+            this.Controls.Add(this.checkAllUsersBox);
+            this.Controls.Add(this.checkAllRoomsBox);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.statisticsButton);
@@ -478,8 +565,8 @@
             this.Name = "CalendarView";
             this.Text = "Optik Planner";
             this.Activated += new System.EventHandler(this.CalendarView_Activated);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -511,9 +598,16 @@
         private System.Windows.Forms.Button calendarButtonRight;
         private System.Windows.Forms.Button statisticShowButton;
         private System.Windows.Forms.Button statisticsButton;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.CheckBox checkAllRoomsBox;
+        private System.Windows.Forms.CheckBox checkAllUsersBox;
+        private System.Windows.Forms.CheckedListBox checkRoomList;
+        private System.Windows.Forms.CheckedListBox checkUsersList;
+        private System.Windows.Forms.Button filtratingButton;
+        private System.Windows.Forms.CheckedListBox checkCustomerList;
+        private System.Windows.Forms.CheckBox checkAllCustomers;
+        private System.Windows.Forms.Button resetFilteringButton;
     }
 }
 

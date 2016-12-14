@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -27,6 +28,9 @@ namespace OptikPlanner
         private const string MonthViewMode = "month";
         private const string WeekViewMode = "week";
         private string _viewMode = WeekViewMode;
+        private List<APTDETAILS> _filteredAppointments = new List<APTDETAILS>();
+        private List<APTDETAILS> _currentAppointments = new List<APTDETAILS>();
+        private bool _filtered = false;
 
         public CalendarView()
         {
@@ -38,14 +42,14 @@ namespace OptikPlanner
             _calendarViewController = new CalendarViewController(this);
 
             SetupCalendar();
-
-
-            
-
         }
 
         private void SetupCalendar()
         {
+            var rooms = _calendarViewController.GetRooms();
+            var users = _calendarViewController.GetUsers();
+            var customers = _calendarViewController.GetCustomers();
+
             calendar.MaximumViewDays = 140;
             ShowWeekView();
             monthView.FirstDayOfWeek = DayOfWeek.Monday;
@@ -55,7 +59,17 @@ namespace OptikPlanner
 
             calendar.AllowNew = false;
 
-            
+            foreach (var r in rooms) checkRoomList.Items.Add(r);
+            foreach (var u in users) checkUsersList.Items.Add(u);
+            foreach (var c in customers) checkCustomerList.Items.Add(c);
+
+            CheckAllCustomersBoxes(true);
+            CheckAllRoomsBoxes(true);
+            CheckAllUsersBoxes(true);
+            resetFilteringButton.Enabled = false;
+            filtratingButton.Enabled = false;
+
+
             //Changes the current visible timerange on the calendar. 
             calendar.TimeUnitsOffset = -DateTime.Now.Hour * 2;
         }
@@ -79,7 +93,7 @@ namespace OptikPlanner
                 var form = new CreateAppointment();
                 form.ShowDialog();
             }
-            
+
 
 
 
@@ -87,8 +101,10 @@ namespace OptikPlanner
 
         private void AddAppointmentsToCalendar()
         {
-            calendar.Items.Clear();
-            calendar.Items.AddRange(_calendarViewController.GetAppointmentsAsCalendarItems());
+            //calendar.Items.Clear();
+            if (_filtered) calendar.Items.AddRange(_calendarViewController.GetAppointmentsAsCalendarItems(_filteredAppointments));
+            else calendar.Items.AddRange(_calendarViewController.GetAppointmentsAsCalendarItems());
+            ApplyColorLogicToCalendarItems();
 
         }
 
@@ -246,7 +262,7 @@ namespace OptikPlanner
             AddAppointmentsToCalendar();
             ApplyColorLogicToCalendarItems();
 
-            
+
 
 
         }
@@ -284,10 +300,10 @@ namespace OptikPlanner
 
         private void todayButton_Click(object sender, EventArgs e)
         {
-            
-            DateTime today = DateTime.Today;       
+
+            DateTime today = DateTime.Today;
             calendar.SetViewRange(today, today);
-            
+
 
             monthView.SelectionStart = today;
             monthView.SelectionEnd = today;
@@ -418,7 +434,7 @@ namespace OptikPlanner
             {
                 toolTip.Active = true;
                 //Point tooltipPosition = PointToClient(Cursor.Position);
-                Point tooltipPosition = PointToClient(new Point(Cursor.Position.X, Cursor.Position.Y+40));
+                Point tooltipPosition = PointToClient(new Point(Cursor.Position.X, Cursor.Position.Y + 40));
 
 
                 APTDETAILS a = (APTDETAILS)i.Tag;
@@ -456,8 +472,8 @@ namespace OptikPlanner
             switch (_viewMode)
             {
                 case DayViewMode:
-                    OneDayAhead();   
-                    SetAllLabels();                 
+                    OneDayAhead();
+                    SetAllLabels();
                     break;
                 case WeekViewMode:
                     OneWeekAhead();
@@ -475,7 +491,7 @@ namespace OptikPlanner
             var currentViewStart = calendar.ViewStart;
             var currentViewEnd = calendar.ViewEnd;
             calendar.SetViewRange(currentViewStart.AddDays(7), currentViewEnd.AddDays(7));
-            
+
         }
 
         private void OneWeekBack()
@@ -534,7 +550,7 @@ namespace OptikPlanner
 
         private void calendar_DoubleClick(object sender, EventArgs e)
         {
-            
+
             CreateAppointment.ClickedAppointment = null;
             if (calendar.SelectedElementStart == null) return;
             var form = new CreateAppointment(calendar.SelectedElementStart.Date);
@@ -565,7 +581,7 @@ namespace OptikPlanner
         private void calendar_DayHeaderClick(object sender, CalendarDayEventArgs e)
         {
             _viewMode = DayViewMode;
-            calendar.SetViewRange(e.CalendarDay.Date,e.CalendarDay.Date);
+            calendar.SetViewRange(e.CalendarDay.Date, e.CalendarDay.Date);
             dayViewButton.Select();
         }
 
@@ -654,6 +670,195 @@ namespace OptikPlanner
         {
             logButton.BackColor = Color.White;
         }
-        
+
+        #region checkAllLists
+
+        private List<EYEEXAMROOMS> GetCheckedRooms()
+        {
+            List<EYEEXAMROOMS> checkedRooms = new List<EYEEXAMROOMS>();
+            for (int i = 0; i < checkRoomList.Items.Count; i++)
+            {
+                var room = (EYEEXAMROOMS)checkRoomList.Items[i];
+                var isChecked = checkRoomList.GetItemCheckState(i);
+                if (isChecked == CheckState.Checked) checkedRooms.Add(room);
+            }
+
+            return checkedRooms;
+        }
+
+        private List<USERS> GetCheckedEmployees()
+        {
+            List<USERS> checkedEmployees = new List<USERS>();
+            for (int i = 0; i < checkUsersList.Items.Count; i++)
+            {
+                var employee = (USERS)checkUsersList.Items[i];
+                var isChecked = checkUsersList.GetItemCheckState(i);
+                if (isChecked == CheckState.Checked) checkedEmployees.Add(employee);
+            }
+            return checkedEmployees;
+        }
+        private List<CUSTOMERS> GetCheckedCustomers()
+        {
+            List<CUSTOMERS> checkedCustomers = new List<CUSTOMERS>();
+            for (int i = 0; i < checkCustomerList.Items.Count; i++)
+            {
+                var customer = (CUSTOMERS)checkCustomerList.Items[i];
+                var isChecked = checkCustomerList.GetItemCheckState(i);
+                if (isChecked == CheckState.Checked) checkedCustomers.Add(customer);
+            }
+            return checkedCustomers;
+        }
+        private List<APTDETAILS> GetAllCheckedApt()
+        {
+            List<APTDETAILS> deletedApt = new List<APTDETAILS>();
+            List<APTDETAILS> allApt = _calendarViewController.GetAppointments();
+            List<APTDETAILS> currentAppointments = new List<APTDETAILS>();
+
+            //liste over alle calendaritems
+            var checkedRooms = GetCheckedRooms();
+            var checkedEmployees = GetCheckedEmployees();
+            var checkedCustomers = GetCheckedCustomers();
+
+            List<APTDETAILS> checkedApt = new List<APTDETAILS>();
+
+            if (checkedRooms.Count > 0)
+                checkedApt = (from room in checkedRooms from apt in allApt where room.ERO_NBR == apt.APD_ROOM select apt).ToList();
+
+            if (checkedEmployees.Count > 0) checkedApt = (from emp in checkedEmployees from apt in allApt where emp.US_STAMP == apt.APD_USER select apt).ToList();
+
+            if (checkedCustomers.Count > 0)
+                checkedApt =
+                    (from cust in checkedCustomers from apt in allApt where cust.CS_STAMP == apt.APD_CUSTOMER select apt).ToList();
+
+            if (checkedRooms.Count > 0 && checkedEmployees.Count > 0)
+            {
+                checkedApt = (from room in checkedRooms
+                              from emp in checkedEmployees
+                              from apt in allApt
+                              where room.ERO_NBR == apt.APD_ROOM && emp.US_STAMP == apt.APD_USER
+                              select apt).ToList();
+            }
+
+            if (checkedRooms.Count > 0 && checkedCustomers.Count > 0)
+            {
+                checkedApt = (from room in checkedRooms
+                              from cust in checkedCustomers
+                              from apt in allApt
+                              where room.ERO_NBR == apt.APD_ROOM && cust.CS_STAMP == apt.APD_CUSTOMER
+                              select apt).ToList();
+            }
+
+            if (checkedEmployees.Count > 0 && checkedCustomers.Count > 0)
+            {
+                checkedApt = (from emp in checkedEmployees
+                              from cust in checkedCustomers
+                              from apt in allApt
+                              where emp.US_STAMP == apt.APD_USER && cust.CS_STAMP == apt.APD_CUSTOMER
+                              select apt).ToList();
+            }
+
+            if (checkedRooms.Count > 0 && checkedEmployees.Count > 0 && checkedCustomers.Count > 0)
+            {
+                checkedApt = (from room in checkedRooms
+                              from cust in checkedCustomers
+                              from emp in checkedEmployees
+                              from apt in allApt
+                              where
+                              room.ERO_NBR == apt.APD_ROOM && cust.CS_STAMP == apt.APD_CUSTOMER && emp.US_STAMP == apt.APD_USER
+                              select apt).ToList();
+            }
+
+            calendar.Items.Clear();
+
+            return checkedApt;
+        }
+
+        private void filtratingButton_Click(object sender, EventArgs e)
+        {
+            _filtered = true;
+            _filteredAppointments = GetAllCheckedApt();
+            //Calendar.Items.AddRange(_calendarViewController.GetAppointmentsAsCalendarItems(_filteredAppointments));
+            AddAppointmentsToCalendar();
+            resetFilteringButton.Enabled = true;
+            filtratingButton.Enabled = false;
+        }
+        #endregion
+
+
+        #region checkAllboxes
+        private void CheckAllRoomsBoxes(bool checkThem)
+        {
+            checkAllRoomsBox.Checked = checkThem;
+            for (int i = 0; i < checkRoomList.Items.Count; i++)
+            {
+                checkRoomList.SetItemChecked(i, checkThem);
+
+            }
+        }
+        private void CheckAllCustomersBoxes(bool checkThem)
+        {
+            checkAllCustomers.Checked = checkThem;
+            for (int i = 0; i < checkCustomerList.Items.Count; i++)
+            {
+                checkCustomerList.SetItemChecked(i, checkThem);
+
+            }
+        }
+        private void CheckAllUsersBoxes(bool checkThem)
+        {
+            checkAllUsersBox.Checked = checkThem;
+            for (int i = 0; i < checkUsersList.Items.Count; i++)
+            {
+                checkUsersList.SetItemChecked(i, checkThem);
+
+            }
+        }
+
+        private void checkAllRoomsBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkAllRoomsBox.Checked) CheckAllRoomsBoxes(true);
+        }
+
+        private void checkAllUsersBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkAllUsersBox.Checked) CheckAllUsersBoxes(true);
+        }
+        private void checkAllCustomers_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkAllCustomers.Checked) CheckAllCustomersBoxes(true);
+        }
+        #endregion
+
+        private void resetFilteringButton_Click(object sender, EventArgs e)
+        {
+            _filtered = false;
+            calendar.Items.Clear();
+            AddAppointmentsToCalendar();
+            CheckAllCustomersBoxes(true);
+            CheckAllRoomsBoxes(true);
+            CheckAllUsersBoxes(true);
+            resetFilteringButton.Enabled = false;
+            filtratingButton.Enabled = false;
+        }
+
+        private void checkRoomList_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            filtratingButton.Enabled = true;
+            if (e.NewValue == CheckState.Unchecked) checkAllRoomsBox.Checked = false;
+        }
+
+        private void checkUsersList_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            filtratingButton.Enabled = true;
+            if (e.NewValue == CheckState.Unchecked) checkAllUsersBox.Checked = false;
+
+        }
+
+        private void checkCustomerList_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            filtratingButton.Enabled = true;
+            if (e.NewValue == CheckState.Unchecked) checkAllCustomers.Checked = false;
+
+        }
     }
 }
