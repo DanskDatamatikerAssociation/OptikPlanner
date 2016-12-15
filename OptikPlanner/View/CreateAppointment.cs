@@ -370,6 +370,7 @@ namespace OptikPlanner.View
                     firstNameBox.Text = c.CS_FIRSTNAME;
                     lastNameBox.Text = c.CS_LASTNAME;
 
+                    PopulateLastAndFutureAppointments();
                 }
             }
             
@@ -408,9 +409,36 @@ namespace OptikPlanner.View
         private void PopulateLastAndFutureAppointments()
         {
             if (cprBox.Text.Equals("")) return;
-            var customer = _controller.FindCustomerWithCpr(cprBox.Text);
+            lastFutureAppointmentsListView.Items.Clear();
 
+            var customer = _controller.FindCustomerWithCpr(cprBox.Text);
+            var twoLastAppointments = _controller.GetPastAppointments(customer);
+            var futureAppointments = _controller.GetFutureAppointments(customer);
+
+            var forrigeItem = lastFutureAppointmentsListView.Items.Add("--Forrige--");
+            forrigeItem.Font = new Font(forrigeItem.Font, FontStyle.Bold);
+            for (int i = 0; i < twoLastAppointments.Count; i++)
+            {
+                var appointment = twoLastAppointments[i];
+                var appointmentItem = lastFutureAppointmentsListView.Items.Add(appointment.APD_DATE.ToString());
+                var type = StatisticsViewController.GetAppointmentType(appointment);
+                appointmentItem.SubItems.Add(type);
+                var description = Encoding.Default.GetString(appointment.APD_DESCRIPTION);
+                appointmentItem.SubItems.Add(description);
+            }
             
+            var fremtidigeItem = lastFutureAppointmentsListView.Items.Add("--Fremtidige--");
+            fremtidigeItem.Font = new Font(fremtidigeItem.Font, FontStyle.Bold);
+            for (int i = 0; i < futureAppointments.Count; i++)
+            {
+                var appointment = futureAppointments[i];
+                var appointmentItem = lastFutureAppointmentsListView.Items.Add(appointment.APD_DATE.ToString());
+                var type = StatisticsViewController.GetAppointmentType(appointment);
+                appointmentItem.SubItems.Add(type);
+                var description = Encoding.Default.GetString(appointment.APD_DESCRIPTION);
+                appointmentItem.SubItems.Add(description);
+            }
+
         }
 
         private void SetupLastAndFutureAppointmentsListView()

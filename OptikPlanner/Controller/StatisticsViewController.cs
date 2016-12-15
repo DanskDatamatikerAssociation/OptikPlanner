@@ -90,7 +90,7 @@ namespace OptikPlanner.Controller
             }
         }
 
-        public string GetAppointmentType(APTDETAILS appointment)
+        public static string GetAppointmentType(APTDETAILS appointment)
         {
             switch (appointment.APD_TYPE)
             {

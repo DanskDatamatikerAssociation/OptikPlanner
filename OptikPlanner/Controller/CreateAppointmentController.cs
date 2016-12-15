@@ -211,6 +211,57 @@ namespace OptikPlanner.Controller
             return matchingCustomer;
         }
 
+        public List<APTDETAILS> GetFutureAppointments(CUSTOMERS customer)
+
+        {
+            List<APTDETAILS> futureCustomerAppoinments = new List<APTDETAILS>();
+
+            var allAppointments = GetAppointments();
+            var now = DateTime.Now;
+
+            foreach (APTDETAILS a in allAppointments)
+
+                if (a.APD_CUSTOMER == customer.CS_STAMP && a.APD_DATE > now)
+                {
+                    futureCustomerAppoinments.Add(a);
+                }
+
+
+
+            var sorted = (from a in futureCustomerAppoinments orderby a.APD_DATE select a).ToList();
+
+            return sorted;
+        }
+
+        public List<APTDETAILS> GetPastAppointments(CUSTOMERS customer)
+        {
+            var allAppointments = GetAppointments();
+            List<APTDETAILS> pastAppointments = new List<APTDETAILS>();
+            List<APTDETAILS> twoLastAppointments = new List<APTDETAILS>();
+            var now = DateTime.Now;
+
+            foreach (APTDETAILS a in allAppointments)
+
+                if (a.APD_CUSTOMER == customer.CS_STAMP && a.APD_DATE < now)
+                {
+                    pastAppointments.Add(a);
+                }
+
+            for (int i = 0; i < 2; i++)
+            {
+                try
+                {
+                    twoLastAppointments.Add(pastAppointments[i]);
+
+                }
+                catch (ArgumentOutOfRangeException) { }
+            }
+
+            var sorted = (from a in twoLastAppointments orderby a.APD_DATE select a).ToList();
+
+            return sorted;
+        }
+
 
 
     }
