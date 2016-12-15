@@ -329,7 +329,7 @@ namespace OptikPlanner.View
 
                 MessageBox.Show("Success! Aftalen er redigeret.", "Succes!", MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
-                Trace.WriteLine($"\n Ansatte: {userSelectionCombo.SelectedIndex} har Rettet i en aftale d. {DateTime.Now}");
+                Trace.WriteLine($"\n{DateTime.Now}: Aftale på dato {appointment.APD_DATE} med kunde {appointment.APD_FIRST} {appointment.APD_LAST} er blevet rettet.");
                 this.Close();
             }
 
