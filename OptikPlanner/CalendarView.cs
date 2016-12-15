@@ -16,6 +16,8 @@ using OptikPlanner.Model;
 using OptikPlanner.View;
 using System.Globalization;
 using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
 using Calendar = System.Windows.Forms.Calendar.Calendar;
 
 namespace OptikPlanner
@@ -31,17 +33,19 @@ namespace OptikPlanner
         private List<APTDETAILS> _filteredAppointments = new List<APTDETAILS>();
         private List<APTDETAILS> _currentAppointments = new List<APTDETAILS>();
         private bool _filtered = false;
+        
 
         public CalendarView()
         {
             InitializeComponent();
-
             StartPosition = FormStartPosition.CenterScreen;
-
+            Load(Path.Combine(Environment.GetFolderPath(
+                Environment.SpecialFolder.ApplicationData), "AppSettings.xml"));
             Calendar = calendar;
             _calendarViewController = new CalendarViewController(this);
-
             SetupCalendar();
+            this.FormClosed += CalendarView_Closing;
+
         }
 
         private void SetupCalendar()
@@ -845,6 +849,7 @@ namespace OptikPlanner
         {
             filtratingButton.Enabled = true;
             if (e.NewValue == CheckState.Unchecked) checkAllRoomsBox.Checked = false;
+            
         }
 
         private void checkUsersList_ItemCheck(object sender, ItemCheckEventArgs e)
@@ -859,6 +864,38 @@ namespace OptikPlanner
             filtratingButton.Enabled = true;
             if (e.NewValue == CheckState.Unchecked) checkAllCustomers.Checked = false;
 
+        }
+
+        private void CalendarStateLoad()
+        {
+            
+        }
+
+        private void CalendarView_Closing(object sender, System.Windows.Forms.FormClosedEventArgs e)
+        {
+            Save(Path.Combine(Environment.GetFolderPath(
+                Environment.SpecialFolder.ApplicationData), "AppSettings.xml"));
+
+
+            this.Close();
+        }
+
+        public void Save(string filePath)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(CalendarView));
+            TextWriter textWriter = new StreamWriter(filePath);
+            serializer.Serialize(textWriter, this);
+            textWriter.Close();
+        }
+
+        public static CalendarView Load(string filePath)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(CalendarView));
+            TextReader reader = new StreamReader(filePath);
+            CalendarView data = (CalendarView)serializer.Deserialize(reader);
+            reader.Close();
+
+            return data;
         }
     }
 }
