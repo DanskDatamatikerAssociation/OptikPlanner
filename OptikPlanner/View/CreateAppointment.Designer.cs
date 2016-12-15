@@ -61,17 +61,17 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.customerLibraryButton = new System.Windows.Forms.Button();
-            this.label16 = new System.Windows.Forms.Label();
+            this.customerAppLabel = new System.Windows.Forms.Label();
+            this.lastFutureAppointmentsListView = new System.Windows.Forms.ListView();
             this.showPreviousButton = new System.Windows.Forms.Button();
+            this.customerLibraryButton = new System.Windows.Forms.Button();
             this.cprBox = new CueTextBox();
-            this.cuAptListView = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
             // okButton
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.okButton.Location = new System.Drawing.Point(30, 476);
+            this.okButton.Location = new System.Drawing.Point(39, 466);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 0;
@@ -82,7 +82,7 @@
             // cancelBox
             // 
             this.cancelBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cancelBox.Location = new System.Drawing.Point(133, 476);
+            this.cancelBox.Location = new System.Drawing.Point(142, 466);
             this.cancelBox.Name = "cancelBox";
             this.cancelBox.Size = new System.Drawing.Size(75, 23);
             this.cancelBox.TabIndex = 1;
@@ -103,7 +103,7 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(35, 133);
+            this.label2.Location = new System.Drawing.Point(44, 123);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(54, 13);
             this.label2.TabIndex = 3;
@@ -140,7 +140,7 @@
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(169, 133);
+            this.label7.Location = new System.Drawing.Point(178, 123);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(39, 13);
             this.label7.TabIndex = 8;
@@ -150,7 +150,7 @@
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(285, 133);
+            this.label8.Location = new System.Drawing.Point(294, 123);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(66, 13);
             this.label8.TabIndex = 9;
@@ -160,7 +160,7 @@
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(31, 251);
+            this.label9.Location = new System.Drawing.Point(40, 241);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(57, 13);
             this.label9.TabIndex = 10;
@@ -185,7 +185,7 @@
             // telefonBox
             // 
             this.telefonBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.telefonBox.Location = new System.Drawing.Point(11, 292);
+            this.telefonBox.Location = new System.Drawing.Point(20, 282);
             this.telefonBox.Name = "telefonBox";
             this.telefonBox.Size = new System.Drawing.Size(137, 20);
             this.telefonBox.TabIndex = 13;
@@ -193,7 +193,7 @@
             // beskrivelseBox
             // 
             this.beskrivelseBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.beskrivelseBox.Location = new System.Drawing.Point(12, 388);
+            this.beskrivelseBox.Location = new System.Drawing.Point(21, 378);
             this.beskrivelseBox.Name = "beskrivelseBox";
             this.beskrivelseBox.Size = new System.Drawing.Size(327, 57);
             this.beskrivelseBox.TabIndex = 14;
@@ -219,7 +219,7 @@
             this.aftaleCombo.Items.AddRange(new object[] {
             "Linseopsætning",
             "Steljustering"});
-            this.aftaleCombo.Location = new System.Drawing.Point(8, 149);
+            this.aftaleCombo.Location = new System.Drawing.Point(17, 139);
             this.aftaleCombo.Name = "aftaleCombo";
             this.aftaleCombo.Size = new System.Drawing.Size(121, 21);
             this.aftaleCombo.TabIndex = 16;
@@ -230,7 +230,7 @@
             this.lokaleCombo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lokaleCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.lokaleCombo.FormattingEnabled = true;
-            this.lokaleCombo.Location = new System.Drawing.Point(135, 149);
+            this.lokaleCombo.Location = new System.Drawing.Point(144, 139);
             this.lokaleCombo.Name = "lokaleCombo";
             this.lokaleCombo.Size = new System.Drawing.Size(121, 21);
             this.lokaleCombo.TabIndex = 17;
@@ -240,7 +240,7 @@
             this.userCombo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.userCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.userCombo.FormattingEnabled = true;
-            this.userCombo.Location = new System.Drawing.Point(262, 149);
+            this.userCombo.Location = new System.Drawing.Point(271, 139);
             this.userCombo.Name = "userCombo";
             this.userCombo.Size = new System.Drawing.Size(121, 21);
             this.userCombo.TabIndex = 18;
@@ -249,7 +249,7 @@
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(31, 276);
+            this.label6.Location = new System.Drawing.Point(40, 266);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(80, 13);
             this.label6.TabIndex = 21;
@@ -259,7 +259,7 @@
             // 
             this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(63, 326);
+            this.label11.Location = new System.Drawing.Point(72, 316);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(32, 13);
             this.label11.TabIndex = 23;
@@ -269,7 +269,7 @@
             // 
             this.smsCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.smsCheck.AutoSize = true;
-            this.smsCheck.Location = new System.Drawing.Point(154, 294);
+            this.smsCheck.Location = new System.Drawing.Point(163, 284);
             this.smsCheck.Name = "smsCheck";
             this.smsCheck.Size = new System.Drawing.Size(88, 17);
             this.smsCheck.TabIndex = 25;
@@ -282,7 +282,7 @@
             // 
             this.emailCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.emailCheck.AutoSize = true;
-            this.emailCheck.Location = new System.Drawing.Point(154, 345);
+            this.emailCheck.Location = new System.Drawing.Point(163, 335);
             this.emailCheck.Name = "emailCheck";
             this.emailCheck.Size = new System.Drawing.Size(83, 17);
             this.emailCheck.TabIndex = 26;
@@ -292,7 +292,7 @@
             // emailBox
             // 
             this.emailBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.emailBox.Location = new System.Drawing.Point(11, 342);
+            this.emailBox.Location = new System.Drawing.Point(20, 332);
             this.emailBox.Name = "emailBox";
             this.emailBox.Size = new System.Drawing.Size(137, 20);
             this.emailBox.TabIndex = 27;
@@ -301,7 +301,7 @@
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(27, 372);
+            this.label10.Location = new System.Drawing.Point(36, 362);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(102, 13);
             this.label10.TabIndex = 28;
@@ -311,7 +311,7 @@
             // 
             this.cancelAppointmentButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cancelAppointmentButton.Enabled = false;
-            this.cancelAppointmentButton.Location = new System.Drawing.Point(235, 476);
+            this.cancelAppointmentButton.Location = new System.Drawing.Point(244, 466);
             this.cancelAppointmentButton.Name = "cancelAppointmentButton";
             this.cancelAppointmentButton.Size = new System.Drawing.Size(75, 23);
             this.cancelAppointmentButton.TabIndex = 29;
@@ -322,7 +322,7 @@
             // dateTimePicker1
             // 
             this.dateTimePicker1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(8, 207);
+            this.dateTimePicker1.Location = new System.Drawing.Point(17, 197);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker1.TabIndex = 31;
@@ -331,7 +331,7 @@
             // 
             this.timeFromPicker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.timeFromPicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.timeFromPicker.Location = new System.Drawing.Point(214, 207);
+            this.timeFromPicker.Location = new System.Drawing.Point(223, 197);
             this.timeFromPicker.Name = "timeFromPicker";
             this.timeFromPicker.Size = new System.Drawing.Size(51, 20);
             this.timeFromPicker.TabIndex = 32;
@@ -341,7 +341,7 @@
             // 
             this.timeToPicker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.timeToPicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.timeToPicker.Location = new System.Drawing.Point(288, 207);
+            this.timeToPicker.Location = new System.Drawing.Point(297, 197);
             this.timeToPicker.Name = "timeToPicker";
             this.timeToPicker.Size = new System.Drawing.Size(51, 20);
             this.timeToPicker.TabIndex = 33;
@@ -351,7 +351,7 @@
             // 
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(271, 213);
+            this.label12.Location = new System.Drawing.Point(280, 203);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(10, 13);
             this.label12.TabIndex = 34;
@@ -361,7 +361,7 @@
             // 
             this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(63, 191);
+            this.label13.Location = new System.Drawing.Point(72, 181);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(56, 13);
             this.label13.TabIndex = 35;
@@ -371,7 +371,7 @@
             // 
             this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(223, 191);
+            this.label14.Location = new System.Drawing.Point(232, 181);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(19, 13);
             this.label14.TabIndex = 36;
@@ -381,40 +381,58 @@
             // 
             this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(300, 191);
+            this.label15.Location = new System.Drawing.Point(309, 181);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(14, 13);
             this.label15.TabIndex = 37;
             this.label15.Text = "til";
             // 
+            // customerAppLabel
+            // 
+            this.customerAppLabel.AutoSize = true;
+            this.customerAppLabel.Enabled = false;
+            this.customerAppLabel.Location = new System.Drawing.Point(40, 99);
+            this.customerAppLabel.Name = "customerAppLabel";
+            this.customerAppLabel.Size = new System.Drawing.Size(122, 13);
+            this.customerAppLabel.TabIndex = 40;
+            this.customerAppLabel.Text = "Se valgte kundes aftaler";
+            this.customerAppLabel.Click += new System.EventHandler(this.label16_Click);
+            // 
+            // lastFutureAppointmentsListView
+            // 
+            this.lastFutureAppointmentsListView.Enabled = false;
+            this.lastFutureAppointmentsListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.lastFutureAppointmentsListView.Location = new System.Drawing.Point(22, 115);
+            this.lastFutureAppointmentsListView.Name = "lastFutureAppointmentsListView";
+            this.lastFutureAppointmentsListView.Size = new System.Drawing.Size(349, 240);
+            this.lastFutureAppointmentsListView.TabIndex = 43;
+            this.lastFutureAppointmentsListView.UseCompatibleStateImageBehavior = false;
+            this.lastFutureAppointmentsListView.View = System.Windows.Forms.View.Details;
+            this.lastFutureAppointmentsListView.Visible = false;
+            // 
+            // showPreviousButton
+            // 
+            this.showPreviousButton.Enabled = false;
+            this.showPreviousButton.FlatAppearance.BorderSize = 0;
+            this.showPreviousButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.showPreviousButton.Image = global::OptikPlanner.Properties.Resources.arrow_down_small;
+            this.showPreviousButton.Location = new System.Drawing.Point(20, 98);
+            this.showPreviousButton.Name = "showPreviousButton";
+            this.showPreviousButton.Size = new System.Drawing.Size(20, 16);
+            this.showPreviousButton.TabIndex = 41;
+            this.showPreviousButton.TabStop = false;
+            this.showPreviousButton.UseVisualStyleBackColor = true;
+            this.showPreviousButton.Click += new System.EventHandler(this.showPreviousButton_Click);
+            // 
             // customerLibraryButton
             // 
+            this.customerLibraryButton.Image = global::OptikPlanner.Properties.Resources.customerLibray_small;
             this.customerLibraryButton.Location = new System.Drawing.Point(128, 73);
             this.customerLibraryButton.Name = "customerLibraryButton";
             this.customerLibraryButton.Size = new System.Drawing.Size(28, 23);
             this.customerLibraryButton.TabIndex = 39;
-            this.customerLibraryButton.Text = "CL";
             this.customerLibraryButton.UseVisualStyleBackColor = true;
             this.customerLibraryButton.Click += new System.EventHandler(this.customerLibraryButton_Click);
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(162, 104);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(122, 13);
-            this.label16.TabIndex = 40;
-            this.label16.Text = "Se valgte kundes aftaler";
-            // 
-            // showPreviousButton
-            // 
-            this.showPreviousButton.Location = new System.Drawing.Point(290, 101);
-            this.showPreviousButton.Name = "showPreviousButton";
-            this.showPreviousButton.Size = new System.Drawing.Size(81, 19);
-            this.showPreviousButton.TabIndex = 41;
-            this.showPreviousButton.Text = "Udvid";
-            this.showPreviousButton.UseVisualStyleBackColor = true;
-            this.showPreviousButton.Click += new System.EventHandler(this.showPreviousButton_Click);
             // 
             // cprBox
             // 
@@ -426,24 +444,14 @@
             this.cprBox.TextChanged += new System.EventHandler(this.cueTextBox1_TextChanged);
             this.cprBox.Leave += new System.EventHandler(this.cprBox_Leave);
             // 
-            // cuAptListView
-            // 
-            this.cuAptListView.Enabled = false;
-            this.cuAptListView.Location = new System.Drawing.Point(30, 126);
-            this.cuAptListView.Name = "cuAptListView";
-            this.cuAptListView.Size = new System.Drawing.Size(349, 207);
-            this.cuAptListView.TabIndex = 43;
-            this.cuAptListView.UseCompatibleStateImageBehavior = false;
-            this.cuAptListView.Visible = false;
-            // 
             // CreateAppointment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(404, 520);
-            this.Controls.Add(this.cuAptListView);
+            this.ClientSize = new System.Drawing.Size(404, 517);
+            this.Controls.Add(this.lastFutureAppointmentsListView);
             this.Controls.Add(this.showPreviousButton);
-            this.Controls.Add(this.label16);
+            this.Controls.Add(this.customerAppLabel);
             this.Controls.Add(this.customerLibraryButton);
             this.Controls.Add(this.cprBox);
             this.Controls.Add(this.label15);
@@ -525,8 +533,8 @@
         private System.Windows.Forms.Label label15;
         private CueTextBox cprBox;
         private System.Windows.Forms.Button customerLibraryButton;
-        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label customerAppLabel;
         private System.Windows.Forms.Button showPreviousButton;
-        private System.Windows.Forms.ListView cuAptListView;
+        private System.Windows.Forms.ListView lastFutureAppointmentsListView;
     }
 }

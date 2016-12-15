@@ -83,6 +83,16 @@ namespace OptikPlanner.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap arrow_down_small {
+            get {
+                object obj = ResourceManager.GetObject("arrow_down_small", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap arrow_left_small {
             get {
                 object obj = ResourceManager.GetObject("arrow_left_small", resourceCulture);
@@ -136,6 +146,16 @@ namespace OptikPlanner.Properties {
         internal static System.Drawing.Bitmap calendar1_64x64 {
             get {
                 object obj = ResourceManager.GetObject("calendar1-64x64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap customerLibray_small {
+            get {
+                object obj = ResourceManager.GetObject("customerLibray_small", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

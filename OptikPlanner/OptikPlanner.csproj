@@ -181,10 +181,12 @@
   <ItemGroup>
     <None Include="Resources\arrow_left_small.png" />
     <None Include="Resources\arrow_right_small.png" />
+    <Content Include="Resources\arrow_down_small.png" />
     <Content Include="Resources\Calendar 14-50.png" />
     <Content Include="Resources\Calendar Plus-50.png" />
     <Content Include="Resources\Calendar-50.png" />
     <None Include="Resources\magnifier-1787362_960_720.png" />
+    <None Include="Resources\customerLibray_small.png" />
     <Content Include="Resources\Month View-50.png" />
     <Content Include="Resources\newCalendar Plus-48.png" />
     <Content Include="Resources\newDay View-48.png" />

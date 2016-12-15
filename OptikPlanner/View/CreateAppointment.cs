@@ -211,7 +211,7 @@ namespace OptikPlanner.View
         {
             DateTime dtfrom = timeFromPicker.Value;
 
-            if ((dtfrom.Minute*60 + dtfrom.Second)%300 != 0)
+            if ((dtfrom.Minute * 60 + dtfrom.Second) % 300 != 0)
             {
                 TimeSpan diff = dtfrom - mPrevDate;
                 if (diff.Ticks < 0) timeFromPicker.Value = mPrevDate.AddMinutes(-15);
@@ -226,7 +226,7 @@ namespace OptikPlanner.View
         {
 
             DateTime dt = timeToPicker.Value;
-            if ((dt.Minute*60 + dt.Second)%300 != 0)
+            if ((dt.Minute * 60 + dt.Second) % 300 != 0)
             {
                 TimeSpan diff = dt - mPrevDate;
                 if (diff.Ticks < 0) timeToPicker.Value = mPrevDate.AddMinutes(-15);
@@ -264,8 +264,8 @@ namespace OptikPlanner.View
             }
             string timeFrom = timeFromPicker.Value.ToString("HH:mm");
             string timeTo = timeToPicker.Value.ToString("HH:mm");
-            USERS user = (USERS) userCombo.SelectedItem;
-            EYEEXAMROOMS room = (EYEEXAMROOMS) lokaleCombo.SelectedItem;
+            USERS user = (USERS)userCombo.SelectedItem;
+            EYEEXAMROOMS room = (EYEEXAMROOMS)lokaleCombo.SelectedItem;
             CUSTOMERS customer = _customers.Find(c => c.CS_CPRNO.Equals(cprBox.Text));
             AppointmentType type;
             switch (aftaleCombo.Text)
@@ -296,7 +296,7 @@ namespace OptikPlanner.View
                 try
                 {
                     if (result > 0)
-                        //(date <= DateTime.Now.AddMinutes(-1))
+                    //(date <= DateTime.Now.AddMinutes(-1))
                     {
                         MessageBox.Show("Du skal vælge et tidspunkt i fremtiden", "Fejl", MessageBoxButtons.OK,
                             MessageBoxIcon.Error);
@@ -378,7 +378,7 @@ namespace OptikPlanner.View
                     PopulateLastAndFutureAppointments();
                 }
             }
-            
+
         }
 
         private void InitializeCprBox()
@@ -400,11 +400,12 @@ namespace OptikPlanner.View
             if (SelectedCustomer != null)
             {
                 cprBox.Text = SelectedCustomer.CS_CPRNO;
-                cprBox.Enabled = false;
 
                 firstNameBox.Text = SelectedCustomer.CS_FIRSTNAME;
 
                 lastNameBox.Text = SelectedCustomer.CS_LASTNAME;
+
+                PopulateLastAndFutureAppointments();
 
                 SelectedCustomer = null;
 
@@ -415,29 +416,31 @@ namespace OptikPlanner.View
         private void PopulateLastAndFutureAppointments()
         {
             if (cprBox.Text.Equals("")) return;
+            customerAppLabel.Enabled = true;
+            showPreviousButton.Enabled = true;
+
             lastFutureAppointmentsListView.Items.Clear();
 
             var customer = _controller.FindCustomerWithCpr(cprBox.Text);
             var twoLastAppointments = _controller.GetPastAppointments(customer);
             var futureAppointments = _controller.GetFutureAppointments(customer);
 
-            var forrigeItem = lastFutureAppointmentsListView.Items.Add("--Forrige--");
-            forrigeItem.Font = new Font(forrigeItem.Font, FontStyle.Bold);
-            for (int i = 0; i < twoLastAppointments.Count; i++)
+            var forrigeItem = lastFutureAppointmentsListView.Items.Add("Forrige");
+            forrigeItem.Font = new Font(forrigeItem.Font, FontStyle.Bold | FontStyle.Underline);
+
+            foreach (var appointment in twoLastAppointments)
             {
-                var appointment = twoLastAppointments[i];
                 var appointmentItem = lastFutureAppointmentsListView.Items.Add(appointment.APD_DATE.ToString());
                 var type = StatisticsViewController.GetAppointmentType(appointment);
                 appointmentItem.SubItems.Add(type);
                 var description = Encoding.Default.GetString(appointment.APD_DESCRIPTION);
                 appointmentItem.SubItems.Add(description);
             }
-            
-            var fremtidigeItem = lastFutureAppointmentsListView.Items.Add("--Fremtidige--");
-            fremtidigeItem.Font = new Font(fremtidigeItem.Font, FontStyle.Bold);
-            for (int i = 0; i < futureAppointments.Count; i++)
+
+            var fremtidigeItem = lastFutureAppointmentsListView.Items.Add("Fremtidige");
+            fremtidigeItem.Font = new Font(fremtidigeItem.Font, FontStyle.Bold | FontStyle.Underline);
+            foreach (var appointment in futureAppointments)
             {
-                var appointment = futureAppointments[i];
                 var appointmentItem = lastFutureAppointmentsListView.Items.Add(appointment.APD_DATE.ToString());
                 var type = StatisticsViewController.GetAppointmentType(appointment);
                 appointmentItem.SubItems.Add(type);
@@ -450,9 +453,10 @@ namespace OptikPlanner.View
         private void SetupLastAndFutureAppointmentsListView()
         {
 
-            lastFutureAppointmentsListView.Columns.Add("Dato", 120);
-            lastFutureAppointmentsListView.Columns.Add("Type", 120);
+            lastFutureAppointmentsListView.Columns.Add("Dato", 125);
+            lastFutureAppointmentsListView.Columns.Add("Type", 100);
             lastFutureAppointmentsListView.Columns.Add("Beskrivelse", 120);
+        }
 
 
         private void showPreviousButton_Click(object sender, EventArgs e)
@@ -467,19 +471,24 @@ namespace OptikPlanner.View
 
         private void ExpandButtonClick()
         {
-            showPreviousButton.Text = "Kollaps";
+            showPreviousButton.Image = Image.FromFile(@"C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\Resources\arrow_up_small.png");
             this.Size = new System.Drawing.Size(420, 800);
-            cuAptListView.Enabled = true;
-            cuAptListView.Visible = true;
+            lastFutureAppointmentsListView.Enabled = true;
+            lastFutureAppointmentsListView.Visible = true;
         }
         private void CollapseButtonClick()
         {
-            showPreviousButton.Text = "Udvid";      
-            this.Size = new System.Drawing.Size(420, 583);
-            cuAptListView.Enabled = false;
-            cuAptListView.Visible = false;
+            showPreviousButton.Image = Image.FromFile(@"C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlanner\Resources\arrow_down_small.png");
+            this.Size = new System.Drawing.Size(420, 555);
+            lastFutureAppointmentsListView.Enabled = false;
+            lastFutureAppointmentsListView.Visible = false;
 
 
+        }
+
+        private void label16_Click(object sender, EventArgs e)
+        {
+            showPreviousButton_Click(sender, e);
         }
     }
 }

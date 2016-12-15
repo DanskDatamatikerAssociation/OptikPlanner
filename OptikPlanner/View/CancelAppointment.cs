@@ -42,6 +42,11 @@ namespace OptikPlanner.View
 
         private void CancelAppointButton_Click(object sender, EventArgs e)
         {
+            if (cancelUserBox.SelectedItem == null)
+            {
+                MessageBox.Show("Du skal vælge en medarbejder.", "Fejl");
+                return;
+            }
             Log();
             DeleteAppointment();
         }
@@ -104,7 +109,10 @@ namespace OptikPlanner.View
             foreach (var e in employees) cancelUserBox.Items.Add(e);
         }
 
-
+        private void cuCancelRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            CancelAppointButton.Enabled = true;
+        }
     }
 
     

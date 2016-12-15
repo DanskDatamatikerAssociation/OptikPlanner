@@ -109,6 +109,7 @@ namespace OptikPlanner.View
             // 
             // listView1
             // 
+            this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listView1.Location = new System.Drawing.Point(192, 37);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(416, 273);

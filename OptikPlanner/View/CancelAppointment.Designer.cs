@@ -42,13 +42,14 @@
             // cuCancelElseRadio
             // 
             this.cuCancelElseRadio.AutoSize = true;
-            this.cuCancelElseRadio.Location = new System.Drawing.Point(103, 143);
+            this.cuCancelElseRadio.Location = new System.Drawing.Point(103, 134);
             this.cuCancelElseRadio.Name = "cuCancelElseRadio";
             this.cuCancelElseRadio.Size = new System.Drawing.Size(53, 17);
             this.cuCancelElseRadio.TabIndex = 14;
             this.cuCancelElseRadio.TabStop = true;
             this.cuCancelElseRadio.Text = "Andet";
             this.cuCancelElseRadio.UseVisualStyleBackColor = true;
+            this.cuCancelElseRadio.CheckedChanged += new System.EventHandler(this.cuCancelRadio_CheckedChanged);
             // 
             // cuCancelPhoneRadio
             // 
@@ -60,6 +61,7 @@
             this.cuCancelPhoneRadio.TabStop = true;
             this.cuCancelPhoneRadio.Text = "Kunde har aflyst telefonisk";
             this.cuCancelPhoneRadio.UseVisualStyleBackColor = true;
+            this.cuCancelPhoneRadio.CheckedChanged += new System.EventHandler(this.cuCancelRadio_CheckedChanged);
             // 
             // cuCancelRadio
             // 
@@ -71,6 +73,7 @@
             this.cuCancelRadio.TabStop = true;
             this.cuCancelRadio.Text = "Kunde ikke mødt op";
             this.cuCancelRadio.UseVisualStyleBackColor = true;
+            this.cuCancelRadio.CheckedChanged += new System.EventHandler(this.cuCancelRadio_CheckedChanged);
             // 
             // label1
             // 
@@ -86,22 +89,23 @@
             this.AflyserLabel.AutoSize = true;
             this.AflyserLabel.Location = new System.Drawing.Point(12, 27);
             this.AflyserLabel.Name = "AflyserLabel";
-            this.AflyserLabel.Size = new System.Drawing.Size(38, 13);
+            this.AflyserLabel.Size = new System.Drawing.Size(41, 13);
             this.AflyserLabel.TabIndex = 9;
-            this.AflyserLabel.Text = "Aflyser";
+            this.AflyserLabel.Text = "Aflyser:";
             // 
             // cancelUserBox
             // 
+            this.cancelUserBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cancelUserBox.FormattingEnabled = true;
             this.cancelUserBox.Location = new System.Drawing.Point(102, 24);
             this.cancelUserBox.Name = "cancelUserBox";
             this.cancelUserBox.Size = new System.Drawing.Size(121, 21);
             this.cancelUserBox.TabIndex = 8;
-            this.cancelUserBox.Text = "Vælg medarbejder...";
             // 
             // CancelAppointButton
             // 
-            this.CancelAppointButton.Location = new System.Drawing.Point(67, 200);
+            this.CancelAppointButton.Enabled = false;
+            this.CancelAppointButton.Location = new System.Drawing.Point(66, 172);
             this.CancelAppointButton.Name = "CancelAppointButton";
             this.CancelAppointButton.Size = new System.Drawing.Size(75, 23);
             this.CancelAppointButton.TabIndex = 16;
@@ -111,7 +115,7 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(177, 200);
+            this.cancelButton.Location = new System.Drawing.Point(177, 172);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 17;
@@ -123,7 +127,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(297, 259);
+            this.ClientSize = new System.Drawing.Size(297, 212);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.CancelAppointButton);
             this.Controls.Add(this.cuCancelElseRadio);
