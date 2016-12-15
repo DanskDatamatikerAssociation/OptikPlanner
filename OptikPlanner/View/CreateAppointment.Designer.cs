@@ -61,8 +61,9 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.cprBox = new CueTextBox();
             this.customerLibraryButton = new System.Windows.Forms.Button();
+            this.lastFutureAppointmentsListView = new System.Windows.Forms.ListView();
+            this.cprBox = new CueTextBox();
             this.SuspendLayout();
             // 
             // okButton
@@ -359,16 +360,6 @@
             this.label15.TabIndex = 37;
             this.label15.Text = "til";
             // 
-            // cprBox
-            // 
-            this.cprBox.Cue = "Indtast CPR";
-            this.cprBox.Location = new System.Drawing.Point(22, 75);
-            this.cprBox.Name = "cprBox";
-            this.cprBox.Size = new System.Drawing.Size(100, 20);
-            this.cprBox.TabIndex = 38;
-            this.cprBox.TextChanged += new System.EventHandler(this.cueTextBox1_TextChanged);
-            this.cprBox.Leave += new System.EventHandler(this.cprBox_Leave);
-            // 
             // customerLibraryButton
             // 
             this.customerLibraryButton.Location = new System.Drawing.Point(128, 73);
@@ -379,11 +370,31 @@
             this.customerLibraryButton.UseVisualStyleBackColor = true;
             this.customerLibraryButton.Click += new System.EventHandler(this.customerLibraryButton_Click);
             // 
+            // lastFutureAppointmentsListView
+            // 
+            this.lastFutureAppointmentsListView.Location = new System.Drawing.Point(20, 490);
+            this.lastFutureAppointmentsListView.Name = "lastFutureAppointmentsListView";
+            this.lastFutureAppointmentsListView.Size = new System.Drawing.Size(351, 204);
+            this.lastFutureAppointmentsListView.TabIndex = 40;
+            this.lastFutureAppointmentsListView.UseCompatibleStateImageBehavior = false;
+            this.lastFutureAppointmentsListView.View = System.Windows.Forms.View.Details;
+            // 
+            // cprBox
+            // 
+            this.cprBox.Cue = "Indtast CPR";
+            this.cprBox.Location = new System.Drawing.Point(22, 75);
+            this.cprBox.Name = "cprBox";
+            this.cprBox.Size = new System.Drawing.Size(100, 20);
+            this.cprBox.TabIndex = 38;
+            this.cprBox.TextChanged += new System.EventHandler(this.cueTextBox1_TextChanged);
+            this.cprBox.Leave += new System.EventHandler(this.cprBox_Leave);
+            // 
             // CreateAppointment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(404, 492);
+            this.ClientSize = new System.Drawing.Size(404, 721);
+            this.Controls.Add(this.lastFutureAppointmentsListView);
             this.Controls.Add(this.customerLibraryButton);
             this.Controls.Add(this.cprBox);
             this.Controls.Add(this.label15);
@@ -465,5 +476,6 @@
         private System.Windows.Forms.Label label15;
         private CueTextBox cprBox;
         private System.Windows.Forms.Button customerLibraryButton;
+        private System.Windows.Forms.ListView lastFutureAppointmentsListView;
     }
 }

@@ -204,6 +204,13 @@ namespace OptikPlanner.Controller
             }
         }
 
+        public CUSTOMERS FindCustomerWithCpr(string cpr)
+        {
+            var customers = GetCustomers();
+            var matchingCustomer = customers.Find(c => c.CS_CPRNO == cpr);
+            return matchingCustomer;
+        }
+
 
 
     }

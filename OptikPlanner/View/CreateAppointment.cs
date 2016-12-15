@@ -50,6 +50,8 @@ namespace OptikPlanner.View
 
             InitializeCprBox();
 
+            SetupLastAndFutureAppointmentsListView();
+
             //ClickedAppointment = _controller.GetClickedAppointment();
 
             //timepicking settings
@@ -367,8 +369,10 @@ namespace OptikPlanner.View
                 {
                     firstNameBox.Text = c.CS_FIRSTNAME;
                     lastNameBox.Text = c.CS_LASTNAME;
+
                 }
             }
+            
         }
 
         private void InitializeCprBox()
@@ -399,6 +403,24 @@ namespace OptikPlanner.View
                 SelectedCustomer = null;
 
             }
+        }
+
+        private void PopulateLastAndFutureAppointments()
+        {
+            if (cprBox.Text.Equals("")) return;
+            var customer = _controller.FindCustomerWithCpr(cprBox.Text);
+
+            
+        }
+
+        private void SetupLastAndFutureAppointmentsListView()
+        {
+
+            lastFutureAppointmentsListView.Columns.Add("Dato", 120);
+            lastFutureAppointmentsListView.Columns.Add("Type", 120);
+            lastFutureAppointmentsListView.Columns.Add("Beskrivelse", 120);
+
+
         }
     }
 }
