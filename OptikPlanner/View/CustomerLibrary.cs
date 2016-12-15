@@ -16,6 +16,7 @@ namespace OptikPlanner.View
     public partial class CustomerLibrary : Form
     {
         CustomerLibraryController _controller = new CustomerLibraryController();
+        public static bool FromAppointmentCreation { get; set; }
         public CustomerLibrary()
         {
             InitializeComponent();
@@ -110,11 +111,19 @@ namespace OptikPlanner.View
         }
         private void ListViewBox_DoubleClick(object sender, EventArgs e)
         {
-            
-            if (ListViewBox.SelectedItems.Count == 1)
+            CUSTOMERS selectedCustomer = (CUSTOMERS) ListViewBox.SelectedItems[0].Tag;
+            if (FromAppointmentCreation)
+            {
+                CreateAppointment.SelectedCustomer = selectedCustomer;
+                FromAppointmentCreation = false;
+                this.Close();
+            }
+            else if (ListViewBox.SelectedItems.Count == 1)
             {
                 editCustomerButton_Click(sender, e);
             }
+
+
         }
 
         private void ListViewBox_SelectedIndexChanged(object sender, EventArgs e)

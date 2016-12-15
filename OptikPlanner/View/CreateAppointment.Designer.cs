@@ -423,6 +423,7 @@
             this.MaximizeBox = false;
             this.Name = "CreateAppointment";
             this.Text = "Opret aftale";
+            this.Activated += new System.EventHandler(this.CreateAppointment_Activated);
             this.ResumeLayout(false);
             this.PerformLayout();
 
