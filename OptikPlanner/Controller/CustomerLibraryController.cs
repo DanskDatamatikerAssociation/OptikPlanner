@@ -11,7 +11,7 @@ namespace OptikPlanner.Controller
 {
     class CustomerLibraryController
     {
-        private OptikItDbContext db = new OptikItDbContext();
+        private OptikItDbContext db;
         
         public List<USERS> GetUser()
         {

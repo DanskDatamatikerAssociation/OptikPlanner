@@ -29,8 +29,8 @@ namespace OptikPlanner
         private const string WeekViewMode = "week";
         private string _viewMode = WeekViewMode;
         private List<APTDETAILS> _filteredAppointments = new List<APTDETAILS>();
-        private List<APTDETAILS> _currentAppointments = new List<APTDETAILS>();
         private bool _filtered = false;
+        private List<APTDETAILS> _currentVisibleAppointments;
 
         public CalendarView()
         {
@@ -41,6 +41,7 @@ namespace OptikPlanner
             Calendar = calendar;
             _calendarViewController = new CalendarViewController(this);
 
+            _currentVisibleAppointments = _calendarViewController.GetAppointments();
             SetupCalendar();
         }
 
@@ -102,8 +103,9 @@ namespace OptikPlanner
         private void AddAppointmentsToCalendar()
         {
             //calendar.Items.Clear();
+
             if (_filtered) calendar.Items.AddRange(_calendarViewController.GetAppointmentsAsCalendarItems(_filteredAppointments));
-            else calendar.Items.AddRange(_calendarViewController.GetAppointmentsAsCalendarItems());
+            else calendar.Items.AddRange(_calendarViewController.GetAppointmentsAsCalendarItems(_currentVisibleAppointments));
             ApplyColorLogicToCalendarItems();
 
         }
@@ -251,7 +253,6 @@ namespace OptikPlanner
                     ShowMonthView();
                     break;
             }
-            //calendar.SetViewRange(monthView.SelectionStart, monthView.SelectionEnd);
 
             SetAllLabels();
         }
@@ -260,7 +261,6 @@ namespace OptikPlanner
         {
             SetAllLabels();
             AddAppointmentsToCalendar();
-            ApplyColorLogicToCalendarItems();
 
 
 
