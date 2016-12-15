@@ -61,6 +61,7 @@ namespace OptikPlanner.View
             this.resetButton = new System.Windows.Forms.Button();
             this.filterListBox = new System.Windows.Forms.CheckedListBox();
             this.showAllCheckBox = new System.Windows.Forms.CheckBox();
+            this.ExportButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -129,7 +130,7 @@ namespace OptikPlanner.View
             // chooseViewLabel
             // 
             this.chooseViewLabel.AutoSize = true;
-            this.chooseViewLabel.Location = new System.Drawing.Point(436, 9);
+            this.chooseViewLabel.Location = new System.Drawing.Point(358, 13);
             this.chooseViewLabel.Name = "chooseViewLabel";
             this.chooseViewLabel.Size = new System.Drawing.Size(88, 13);
             this.chooseViewLabel.TabIndex = 17;
@@ -137,7 +138,7 @@ namespace OptikPlanner.View
             // 
             // chooseViewButton
             // 
-            this.chooseViewButton.Location = new System.Drawing.Point(530, 4);
+            this.chooseViewButton.Location = new System.Drawing.Point(452, 8);
             this.chooseViewButton.Name = "chooseViewButton";
             this.chooseViewButton.Size = new System.Drawing.Size(75, 23);
             this.chooseViewButton.TabIndex = 18;
@@ -282,11 +283,22 @@ namespace OptikPlanner.View
             this.showAllCheckBox.UseVisualStyleBackColor = true;
             this.showAllCheckBox.CheckedChanged += new System.EventHandler(this.showAllCheckBox_CheckedChanged);
             // 
+            // ExportButton
+            // 
+            this.ExportButton.Location = new System.Drawing.Point(533, 8);
+            this.ExportButton.Name = "ExportButton";
+            this.ExportButton.Size = new System.Drawing.Size(75, 23);
+            this.ExportButton.TabIndex = 33;
+            this.ExportButton.Text = "Eksportér";
+            this.ExportButton.UseVisualStyleBackColor = true;
+            this.ExportButton.Click += new System.EventHandler(this.ExportButton_Click);
+            // 
             // StatisticsView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(626, 339);
+            this.Controls.Add(this.ExportButton);
             this.Controls.Add(this.showAllCheckBox);
             this.Controls.Add(this.filterListBox);
             this.Controls.Add(this.resetButton);
@@ -346,5 +358,6 @@ namespace OptikPlanner.View
         private Button resetButton;
         private CheckedListBox filterListBox;
         private CheckBox showAllCheckBox;
+        private Button ExportButton;
     }
 }

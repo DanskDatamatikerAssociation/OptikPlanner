@@ -1304,5 +1304,10 @@ namespace OptikPlanner.View
 
             return checkedEmployees;
         }
+
+        private void ExportButton_Click(object sender, EventArgs e)
+        {
+            ExportToCsv.ExportToCSV(listView1);
+        }
     }
 }
