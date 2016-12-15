@@ -64,8 +64,8 @@
             this.customerLibraryButton = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
             this.showPreviousButton = new System.Windows.Forms.Button();
-            this.cuAptListView = new System.Windows.Forms.ListView();
             this.cprBox = new CueTextBox();
+            this.cuAptListView = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
             // okButton
@@ -416,16 +416,6 @@
             this.showPreviousButton.UseVisualStyleBackColor = true;
             this.showPreviousButton.Click += new System.EventHandler(this.showPreviousButton_Click);
             // 
-            // cuAptListView
-            // 
-            this.cuAptListView.Enabled = false;
-            this.cuAptListView.Location = new System.Drawing.Point(30, 126);
-            this.cuAptListView.Name = "cuAptListView";
-            this.cuAptListView.Size = new System.Drawing.Size(349, 207);
-            this.cuAptListView.TabIndex = 43;
-            this.cuAptListView.UseCompatibleStateImageBehavior = false;
-            this.cuAptListView.Visible = false;
-            // 
             // cprBox
             // 
             this.cprBox.Cue = "Indtast CPR";
@@ -435,6 +425,16 @@
             this.cprBox.TabIndex = 38;
             this.cprBox.TextChanged += new System.EventHandler(this.cueTextBox1_TextChanged);
             this.cprBox.Leave += new System.EventHandler(this.cprBox_Leave);
+            // 
+            // cuAptListView
+            // 
+            this.cuAptListView.Enabled = false;
+            this.cuAptListView.Location = new System.Drawing.Point(30, 126);
+            this.cuAptListView.Name = "cuAptListView";
+            this.cuAptListView.Size = new System.Drawing.Size(349, 207);
+            this.cuAptListView.TabIndex = 43;
+            this.cuAptListView.UseCompatibleStateImageBehavior = false;
+            this.cuAptListView.Visible = false;
             // 
             // CreateAppointment
             // 
