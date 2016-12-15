@@ -29,7 +29,7 @@ namespace OptikPlanner
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new CalendarView());
-            Application.Run(new CalendarView());
+            Application.Run(new CreateAppointment());
             //Application.Run(new StatisticsView());
            
 
