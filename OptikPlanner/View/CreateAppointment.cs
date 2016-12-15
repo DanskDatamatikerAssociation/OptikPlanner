@@ -23,7 +23,7 @@ namespace OptikPlanner.View
         private List<CUSTOMERS> _customers;
         private DateTime dateTimeFrom;
         private DateTime dateTimeTo;
-
+        public static CUSTOMERS SelectedCustomer { get; set; }
 
 
 
@@ -354,6 +354,7 @@ namespace OptikPlanner.View
 
         private void customerLibraryButton_Click(object sender, EventArgs e)
         {
+            CustomerLibrary.FromAppointmentCreation = true;
             var form = new CustomerLibrary();
             form.Show();
         }
@@ -382,6 +383,22 @@ namespace OptikPlanner.View
             cprBox.AutoCompleteCustomSource = allowedTypes;
             cprBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cprBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+        }
+
+        private void CreateAppointment_Activated(object sender, EventArgs e)
+        {
+            if (SelectedCustomer != null)
+            {
+                cprBox.Text = SelectedCustomer.CS_CPRNO;
+                cprBox.Enabled = false;
+
+                firstNameBox.Text = SelectedCustomer.CS_FIRSTNAME;
+
+                lastNameBox.Text = SelectedCustomer.CS_LASTNAME;
+
+                SelectedCustomer = null;
+
+            }
         }
     }
 }

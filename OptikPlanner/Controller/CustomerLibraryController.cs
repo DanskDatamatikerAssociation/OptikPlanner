@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,57 +11,91 @@ namespace OptikPlanner.Controller
 {
     class CustomerLibraryController
     {
-        OptikItDbContext db = new OptikItDbContext();
+        private OptikItDbContext db = new OptikItDbContext();
         
-        public static USERS GetUser()
+        public List<USERS> GetUser()
         {
-            USERS user = new USERS();
-            user.US_CPRNO = "2001927891";
-            user.US_USERNAME = "MyUserName";
-            user.US_STAMP = 1;
-
-            return user;
+            using (db = new OptikItDbContext())
+            {
+                var users = from u in db.USERS select u;
+                return users.ToList();
+            }
         }
 
-        public static List<CUSTOMERS> GetCustomer()
+        public void PostCustomer(CUSTOMERS customer)
         {
-            
-            CUSTOMERS customer = new CUSTOMERS();
-            customer.CS_CPRNO = "20019267454";
-            customer.CS_FIRSTNAME = "Børge";
-            customer.CS_LASTNAME = "Jensen";
-            customer.CS_ADRESS1 = "Børgevej 210";
-            customer.CS_PHONEMOBILE = "28706520";
-            customer.CS_EMAIL = "enemail@gmail.com";
-            CUSTOMERS customer1 = new CUSTOMERS();
-            customer1.CS_CPRNO = "2113926994";
-            customer1.CS_FIRSTNAME = "Daniel";
-            customer1.CS_LASTNAME = "Parbst";
-            customer1.CS_ADRESS1 = "Danielvej 210";
-            customer1.CS_PHONEMOBILE = "28706520";
-            customer1.CS_EMAIL = "enemail@gmail.com";
-            CUSTOMERS customer2 = new CUSTOMERS();
-            customer2.CS_CPRNO = "2001916774";
-            customer2.CS_FIRSTNAME = "Danny";
-            customer2.CS_LASTNAME = "Nielsen";
-            customer2.CS_ADRESS1 = "Dannyvej 210";
-            customer2.CS_PHONEMOBILE = "28706520";
-            customer2.CS_EMAIL = "enemail@gmail.com";
-            CUSTOMERS customer3 = new CUSTOMERS();
-            customer3.CS_CPRNO = "2001944224";
-            customer3.CS_FIRSTNAME = "Andreas";
-            customer3.CS_LASTNAME = "Edelmann";
-            customer3.CS_ADRESS1 = "Andreasvej 210";
-            customer3.CS_PHONEMOBILE = "28706520";
-            customer3.CS_EMAIL = "enemail@gmail.com";
+            using (db = new OptikItDbContext())
+            {
+                try
+                {
+                    db.CUSTOMERS.Add(customer);
+                    db.SaveChanges();
+                }
+                catch (DbEntityValidationException dbEx)
+                {
+                    foreach (var validationErrors in dbEx.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            Trace.TraceInformation("Property: {0} Error: {1}", validationError.PropertyName,
+                                validationError.ErrorMessage);
+                        }
+                    }
+                }
+            }
+        }
 
-            List<CUSTOMERS> customerlist = new List<CUSTOMERS>();
-            customerlist.Add(customer);
-            customerlist.Add(customer1);
-            customerlist.Add(customer2);
-            customerlist.Add(customer3);
+        public void PutCustomer(CUSTOMERS customer)
+        {
+            using (db = new OptikItDbContext())
+            {
+                var appointmentToEditQuery = from a in db.CUSTOMERS where a.CS_CPRNO == customer.CS_CPRNO select a;
+                foreach (var a in appointmentToEditQuery)
+                {
+                    a.CS_CPRNO = customer.CS_CPRNO;
+                    a.CS_FIRSTNAME = customer.CS_FIRSTNAME;
+                    a.CS_LASTNAME = customer.CS_LASTNAME;
+                    a.CS_ADRESS1 = customer.CS_ADRESS1;
+                    a.CS_PHONEMOBILE = customer.CS_PHONEMOBILE;
+                    a.CS_EMAIL = customer.CS_EMAIL;
+                }
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception)
+                {
 
-            return customerlist;
+                }
+            }
+        }
+
+        public void DeleteCustomer(CUSTOMERS customer)
+        {
+            using (db = new OptikItDbContext())
+            {
+                var removeQuery = from a in db.CUSTOMERS where a.CS_STAMP == customer.CS_STAMP select a;
+                foreach (var a in removeQuery) db.CUSTOMERS.Remove(a);
+
+                try
+                {
+                    db.SaveChanges();
+
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+        }
+
+        public List<CUSTOMERS> GetCustomer()
+        {
+            using (db = new OptikItDbContext())
+            {
+                var customers = from c in db.CUSTOMERS select c;
+                return customers.ToList();
+            }
         }
 
 
