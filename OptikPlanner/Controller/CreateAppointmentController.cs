@@ -147,30 +147,20 @@ namespace OptikPlanner.Controller
             }
         }
 
-        public List<string> GetClickedAppointmentDetails()
+        public EYEEXAMROOMS GetAppointmentRoom(APTDETAILS appointment)
         {
-            List<string> clickedAppointmentDetails = new List<string>();
-
-            var clickedAppointment = CreateAppointment.ClickedAppointment;
-
-            if (clickedAppointment.APD_TYPE.Equals(1)) clickedAppointmentDetails.Add("Linseopsætning");
-            else if (clickedAppointment.APD_TYPE.Equals(0)) clickedAppointmentDetails.Add("Steljustering");
-
             var rooms = GetRooms();
-            var matchingRoom = rooms.Find(r => r.ERO_NBR.Equals(clickedAppointment.APD_ROOM));
-            if(matchingRoom != null) clickedAppointmentDetails.Add(matchingRoom.ERO_SHORTDESC);
-
-
-            var users = GetUsers();
-            var matchingUser = users.Find(u => u.US_STAMP.Equals(clickedAppointment.APD_USER));
-            if (matchingUser != null) clickedAppointmentDetails.Add(matchingUser.US_USERNAME);
-
-            
-
-            return clickedAppointmentDetails;
-
-
+            var matchingRoom = rooms.Find(r => r.ERO_NBR.Equals(appointment.APD_ROOM));
+            return matchingRoom;
         }
+
+        public USERS GetAppointmentUser(APTDETAILS appointment)
+        {
+            var users = GetUsers();
+            var matchingUser = users.Find(u => u.US_STAMP == appointment.APD_USER);
+            return matchingUser;
+        }
+
 
         public void PutAppointment(APTDETAILS appointment)
         {

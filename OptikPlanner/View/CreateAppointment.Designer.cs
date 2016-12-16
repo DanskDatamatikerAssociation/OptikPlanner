@@ -217,8 +217,22 @@
             this.aftaleCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.aftaleCombo.FormattingEnabled = true;
             this.aftaleCombo.Items.AddRange(new object[] {
-            "Linseopsætning",
-            "Steljustering"});
+            "Synsprøve",
+            "Ny tilpasning",
+            "Linsekontrol",
+            "Udlevering",
+            "Efterkontrol",
+            "Svagsynsoptik",
+            "Møde",
+            "Genudmåling",
+            "FRI",
+            "Leverandør",
+            "PBS",
+            "Brevkæde",
+            "Lukkedag",
+            "Udlevering af briller",
+            "Sygehus apotek",
+            "Værksted arbejde"});
             this.aftaleCombo.Location = new System.Drawing.Point(17, 139);
             this.aftaleCombo.Name = "aftaleCombo";
             this.aftaleCombo.Size = new System.Drawing.Size(121, 21);

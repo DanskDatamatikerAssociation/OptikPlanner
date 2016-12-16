@@ -95,12 +95,9 @@ namespace OptikPlanner.Controller
         {
             List<string> extraAppointmentDetails = new List<string>();
 
-            if (appointment.APD_TYPE.Equals(1)) extraAppointmentDetails.Add("Linseopsætning");
-            else if (appointment.APD_TYPE.Equals(0)) extraAppointmentDetails.Add("Steljustering");
+            
 
-            var rooms = GetRooms();
-            var matchingRoom = rooms.Find(r => r.ERO_NBR.Equals(appointment.APD_ROOM));
-            if (matchingRoom != null) extraAppointmentDetails.Add(matchingRoom.ERO_SHORTDESC);
+            
 
 
             var users = GetUsers();
@@ -110,6 +107,81 @@ namespace OptikPlanner.Controller
 
 
             return extraAppointmentDetails;
+        }
+
+        public static string GetAppointmentType(APTDETAILS appointment)
+        {
+            string type = "";
+            switch (appointment.APD_TYPE)
+            {
+                case 1:
+                    type = "Synsprøve";
+                    break;
+                case 2:
+                    type = "Ny tilpasning";
+                    break;
+                case 3:
+                    type = "Linsekontrol";
+                    break;
+                case 4:
+                    type = "Udlevering";
+                    break;
+                case 5:
+                    type = "Efterkontrol";
+                    break;
+                case 6:
+                    type = "Svagsynsoptik";
+                    break;
+                case 7:
+                    type = "Møde";
+                    break;
+                case 8:
+                    type = "Genudmåling";
+                    break;
+                case 9:
+                    type = "FRI";
+                    break;
+                case 10:
+                    type = "Leverandør";
+                    break;
+                case 12:
+                    type = "PBS";
+                    break;
+                case 13:
+                    type = "Brevkæde";
+                    break;
+                case 14:
+                    type = "Lukkedag";
+                    break;
+                case 15:
+                    type = "Udlevering af briller";
+                    break;
+                case 16:
+                    type = "Sygehus apotek";
+                    break;
+                case 17:
+                    type = "Værksted arbejde";
+                    break;
+                default:
+                    type = "Synsprøve";
+                    break;
+
+            }
+            return type;
+        }
+
+        public EYEEXAMROOMS GetAppointmentRoom(APTDETAILS appointment)
+        {
+            var rooms = GetRooms();
+            var matchingRoom = rooms.Find(r => r.ERO_NBR.Equals(appointment.APD_ROOM));
+            return matchingRoom;
+        }
+
+        public USERS GetAppointmentUser(APTDETAILS appointment)
+        {
+            var users = GetUsers();
+            var matchingUser = users.Find(u => u.US_STAMP == appointment.APD_USER);
+            return matchingUser;
         }
 
         public List<CalendarItem> GetAppointmentsAsCalendarItems()
@@ -132,9 +204,13 @@ namespace OptikPlanner.Controller
 
                 var extraDetails = GetExtraAppointmentDetails(a);
 
-                string appointmentString = $"{extraDetails[0]}\n" +
+                var type = GetAppointmentType(a);
+                var room = GetAppointmentRoom(a);
+                var user = GetAppointmentUser(a);
+                
+                string appointmentString = $"{type}\n" +
                                            $"Lokale nr. {a.APD_ROOM}\n" +
-                                           $"{extraDetails[2]}";
+                                           $"{user.US_USERNAME}";
 
                 CalendarItem c = new CalendarItem(_view.Calendar,
                     new DateTime(appointMentDateValue.Year, appointMentDateValue.Month, appointMentDateValue.Day,
@@ -195,11 +271,13 @@ namespace OptikPlanner.Controller
                 string timeToHour = a.APD_TIMETO.Split(':').First();
                 string timeToMinute = a.APD_TIMETO.Split(':').Last();
 
-                var extraDetails = GetExtraAppointmentDetails(a);
+                var type = GetAppointmentType(a);
+                var room = GetAppointmentRoom(a);
+                var user = GetAppointmentUser(a);
 
-                string appointmentString = $"{extraDetails[0]}\n" +
+                string appointmentString = $"{type}\n" +
                                            $"Lokale nr. {a.APD_ROOM}\n" +
-                                           $"{extraDetails[2]}";
+                                           $"{user.US_USERNAME}";
 
                 CalendarItem c = new CalendarItem(_view.Calendar,
                     new DateTime(appointMentDateValue.Year, appointMentDateValue.Month, appointMentDateValue.Day,

@@ -122,7 +122,7 @@ namespace OptikPlanner.View
 
             foreach (var a in allAppointments)
             {
-                string type = StatisticsViewController.GetAppointmentType(a);
+                string type = CalendarViewController.GetAppointmentType(a);
                 if (!ListViewContainsHeader(type))
                 {
                     var column = listView1.Columns.Add(type, type, 120);
@@ -136,7 +136,7 @@ namespace OptikPlanner.View
 
             foreach (var a in appointments)
             {
-                string type = StatisticsViewController.GetAppointmentType(a);
+                string type = CalendarViewController.GetAppointmentType(a);
 
 
                 //if (!ListViewContainsHeader(type))

@@ -7,8 +7,23 @@ namespace OptikPlanner.Model
 {
     public enum AppointmentType
     {
-        Steloptimering = 0,
-        Linsejustering = 1
+        Synsprøve = 1,
+        NyTilpasning = 2,
+        LinseKontrol = 3,
+        Udlevering = 4,
+        Efterkontrol = 5,
+        Svagsynsoptik = 6,
+        Møde = 7,
+        Genudmåling = 8,
+        FRI = 9,
+        Leverandør = 10,
+        PBS = 12,
+        Brevkæde = 13,
+        Lukkedag = 14,
+        UdleveringAfBriller = 15,
+        SygehusApotek = 16,
+        Værkstedarbejde = 17,
+
     }
 
     public partial class APTDETAILS

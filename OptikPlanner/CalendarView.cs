@@ -31,6 +31,7 @@ namespace OptikPlanner
         private List<APTDETAILS> _filteredAppointments = new List<APTDETAILS>();
         private bool _filtered = false;
         private List<APTDETAILS> _currentVisibleAppointments;
+        public static bool AddedNewAppointment;
 
         public CalendarView()
         {
@@ -105,7 +106,7 @@ namespace OptikPlanner
             //calendar.Items.Clear();
 
             if (_filtered) calendar.Items.AddRange(_calendarViewController.GetAppointmentsAsCalendarItems(_filteredAppointments));
-            else calendar.Items.AddRange(_calendarViewController.GetAppointmentsAsCalendarItems(_currentVisibleAppointments));
+            else calendar.Items.AddRange(_calendarViewController.GetAppointmentsAsCalendarItems());
             ApplyColorLogicToCalendarItems();
 
         }
@@ -438,14 +439,16 @@ namespace OptikPlanner
 
 
                 APTDETAILS a = (APTDETAILS)i.Tag;
-                var extraDetails = _calendarViewController.GetExtraAppointmentDetails(a);
+                var type = CalendarViewController.GetAppointmentType(a);
+                var room = _calendarViewController.GetAppointmentRoom(a);
+                var user = _calendarViewController.GetAppointmentUser(a);
                 if (a == null) return;
                 if (a.APD_DESCRIPTION == null || Encoding.Default.GetString(a.APD_DESCRIPTION).Equals("")) a.APD_DESCRIPTION = Encoding.Default.GetBytes("**Ingen beskrivelse**");
                 string textToShow = $"{a.APD_TIMEFROM} - {a.APD_TIMETO}\n" +
                                     "\n" +
-                                    $"{extraDetails[0]}\n" +
+                                    $"{type}\n" +
                                     $"Lokale nr. {a.APD_ROOM}\n" +
-                                    $"{extraDetails[2]}" +
+                                    $"{user.US_USERNAME}" +
                                     "\n" +
                                     "\n" +
                                     $"'{Encoding.Default.GetString(a.APD_DESCRIPTION)}'";

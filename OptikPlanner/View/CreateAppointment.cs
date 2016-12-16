@@ -65,7 +65,8 @@ namespace OptikPlanner.View
 
             timeFromPicker.Value = new DateTime(1999, 12, 12, DateTime.Now.Hour, 00, 00);
             timeToPicker.Value = new DateTime(1999, 12, 12, DateTime.Now.Hour, 00, 00);
-
+            
+            
             //initiate text statements
             userSelectionCombo.Text = "Vælg medarbejder...";
 
@@ -135,13 +136,14 @@ namespace OptikPlanner.View
 
         private void FillOutAppointment()
         {
-            var extraDetails = _controller.GetClickedAppointmentDetails();
 
             this.Text = "Ret Aftale";
             label1.Text = "Retter";
             okButton.Text = "Ret";
 
-            userSelectionCombo.Text = extraDetails[2];
+            var user = _controller.GetAppointmentUser(ClickedAppointment);
+
+            userSelectionCombo.Text = user.US_USERNAME;
             userSelectionCombo.Enabled = false;
 
             cprBox.Text = ClickedAppointment.APD_CPR;
@@ -153,14 +155,17 @@ namespace OptikPlanner.View
 
             lastNameBox.Text = ClickedAppointment.APD_LAST;
 
+            var type = CalendarViewController.GetAppointmentType(ClickedAppointment);
 
-            aftaleCombo.Text = extraDetails[0];
+            aftaleCombo.Text = type;
             // aftaleCombo.Enabled = false;
 
-            lokaleCombo.Text = extraDetails[1];
+            var room = _controller.GetAppointmentRoom(ClickedAppointment);
+
+            lokaleCombo.Text = room.ERO_SHORTDESC;
             //lokaleCombo.Enabled = false;
 
-            userCombo.Text = extraDetails[2];
+            userCombo.Text = user.US_USERNAME;
             //userCombo.Enabled = false;
 
             dateTimePicker1.Value = ClickedAppointment.APD_DATE.GetValueOrDefault();
@@ -270,14 +275,56 @@ namespace OptikPlanner.View
             AppointmentType type;
             switch (aftaleCombo.Text)
             {
-                case "Steljustering":
-                    type = AppointmentType.Steloptimering;
+                case "Synsprøve":
+                    type = AppointmentType.Synsprøve;
                     break;
-                case "Linseopsætning":
-                    type = AppointmentType.Linsejustering;
+                case "Ny tilpasning":
+                    type = AppointmentType.NyTilpasning;
+                    break;
+                case "Linsekontrol":
+                    type = AppointmentType.LinseKontrol;
+                    break;
+                case "Udlevering":
+                    type = AppointmentType.Udlevering;
+                    break;
+                case "Efterkontrol":
+                    type = AppointmentType.Efterkontrol;
+                    break;
+                case "Svagsynsoptik":
+                    type = AppointmentType.Svagsynsoptik;
+                    break;
+                case "Møde":
+                    type = AppointmentType.Møde;
+                    break;
+                case "Genudmåling":
+                    type = AppointmentType.Genudmåling;
+                    break;
+                case "FRI":
+                    type = AppointmentType.FRI;
+                    break;
+                case "Leverandør":
+                    type = AppointmentType.Leverandør;
+                    break;
+                case "PBS":
+                    type = AppointmentType.PBS;
+                    break;
+                case "Brevkæde":
+                    type = AppointmentType.Brevkæde;
+                    break;
+                case "Lukkedag":
+                    type = AppointmentType.Lukkedag;
+                    break;
+                case "Udlevering af briller":
+                    type = AppointmentType.UdleveringAfBriller;
+                    break;
+                case "Sygehus apotek":
+                    type = AppointmentType.SygehusApotek;
+                    break;
+                case "Værksted arbejde":
+                    type = AppointmentType.Værkstedarbejde;
                     break;
                 default:
-                    type = AppointmentType.Linsejustering;
+                    type = AppointmentType.Synsprøve;
                     break;
 
             }
@@ -320,7 +367,11 @@ namespace OptikPlanner.View
                     MessageBox.Show("Der er fejl i den indtastede data. Prøv igen.",
                         "Fejl i oprettelse", MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
+
+                    CalendarView.AddedNewAppointment = true;
+
                 }
+
             }
             //To put an appointment
             else
@@ -338,6 +389,8 @@ namespace OptikPlanner.View
                 Trace.WriteLine(
                     $"\n{DateTime.Now}: Aftale på dato {appointment.APD_DATE} med kunde {appointment.APD_FIRST} {appointment.APD_LAST} er blevet rettet.");
                 this.Close();
+
+                CalendarView.AddedNewAppointment = true;
             }
 
 
