@@ -45,7 +45,6 @@ namespace OptikPlanner.View
 
             _controller = new CreateAppointmentController(this);
 
-            _customers = _controller.GetCustomers();
 
             GetDbData();
 
@@ -115,6 +114,8 @@ namespace OptikPlanner.View
 
         private void GetDbData()
         {
+            _customers = _controller.GetCustomers();
+
             var rooms = _controller.GetRooms();
             lokaleCombo.Items.AddRange(rooms.ToArray());
 

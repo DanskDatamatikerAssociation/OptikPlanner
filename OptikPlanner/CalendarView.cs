@@ -283,6 +283,7 @@ namespace OptikPlanner
                 APTDETAILS appointment = (APTDETAILS)i.Tag;
 
                 int colorIndex = appointment.APD_USER + colorJump;
+                if (appointment.APD_USER == 11) colorIndex = 2 + colorJump;
                 Color color = colors[colorIndex];
 
 

@@ -20,7 +20,7 @@ namespace OptikPlanner.View
         public CustomerLibrary()
         {
             InitializeComponent();
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.CenterScreen;
             ListViewBox.Clear();
             FillInView();
             ListViewBox.View = System.Windows.Forms.View.Details;
