@@ -726,7 +726,7 @@ namespace OptikPlanner
             List<APTDETAILS> checkedApt = new List<APTDETAILS>();
 
             if (checkedRooms.Count > 0)
-                checkedApt = (from room in checkedRooms from apt in allApt where room.ERO_NBR == apt.APD_ROOM select apt).ToList();
+                checkedApt = (from room in checkedRooms from apt in allApt where room.ERO_STAMP == apt.APD_ROOM select apt).ToList();
 
             if (checkedEmployees.Count > 0) checkedApt = (from emp in checkedEmployees from apt in allApt where emp.US_STAMP == apt.APD_USER select apt).ToList();
 
@@ -739,7 +739,7 @@ namespace OptikPlanner
                 checkedApt = (from room in checkedRooms
                               from emp in checkedEmployees
                               from apt in allApt
-                              where room.ERO_NBR == apt.APD_ROOM && emp.US_STAMP == apt.APD_USER
+                              where room.ERO_STAMP == apt.APD_ROOM && emp.US_STAMP == apt.APD_USER
                               select apt).ToList();
             }
 
@@ -748,7 +748,7 @@ namespace OptikPlanner
                 checkedApt = (from room in checkedRooms
                               from cust in checkedCustomers
                               from apt in allApt
-                              where room.ERO_NBR == apt.APD_ROOM && cust.CS_STAMP == apt.APD_CUSTOMER
+                              where room.ERO_STAMP == apt.APD_ROOM && cust.CS_STAMP == apt.APD_CUSTOMER
                               select apt).ToList();
             }
 
@@ -768,7 +768,7 @@ namespace OptikPlanner
                               from emp in checkedEmployees
                               from apt in allApt
                               where
-                              room.ERO_NBR == apt.APD_ROOM && cust.CS_STAMP == apt.APD_CUSTOMER && emp.US_STAMP == apt.APD_USER
+                              room.ERO_STAMP == apt.APD_ROOM && cust.CS_STAMP == apt.APD_CUSTOMER && emp.US_STAMP == apt.APD_USER
                               select apt).ToList();
             }
 
