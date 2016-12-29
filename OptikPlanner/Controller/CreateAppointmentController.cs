@@ -21,6 +21,7 @@ namespace OptikPlanner.Controller
 
         public CreateAppointmentController(ICreateAppointmentView view)
         {
+            if (view == null) return;
             _view = view;
             view.SetController(this);
         }

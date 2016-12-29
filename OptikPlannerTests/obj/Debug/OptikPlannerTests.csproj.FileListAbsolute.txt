@@ -1,0 +1,16 @@
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlannerTests\bin\Debug\OptikPlannerTests.dll.config
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlannerTests\bin\Debug\OptikPlannerTests.dll
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlannerTests\bin\Debug\OptikPlannerTests.pdb
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlannerTests\bin\Debug\EntityFramework.dll
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlannerTests\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlannerTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlannerTests\bin\Debug\OptikPlanner.exe
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlannerTests\bin\Debug\System.Windows.Forms.Calendar.dll
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlannerTests\bin\Debug\OptikPlanner.pdb
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlannerTests\bin\Debug\EntityFramework.xml
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlannerTests\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlannerTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlannerTests\bin\Debug\System.Windows.Forms.Calendar.pdb
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlannerTests\obj\Debug\OptikPlannerTests.csprojResolveAssemblyReference.cache
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlannerTests\obj\Debug\OptikPlannerTests.dll
+C:\Users\Danny\Documents\GitHub\OptikPlanner\OptikPlannerTests\obj\Debug\OptikPlannerTests.pdb

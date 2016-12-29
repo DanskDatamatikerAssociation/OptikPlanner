@@ -22,10 +22,10 @@ namespace OptikPlanner.Controller
 
         public StatisticsViewController(IStatisticsView view)
         {
+            if (view == null) return;
             _view = view;
             _view.SetController(this);
 
-            OptikItDbContext db = new OptikItDbContext();
         }
 
         public int TotalCancelStatistics()
@@ -36,19 +36,6 @@ namespace OptikPlanner.Controller
 
             return list + list1 + list2;
         }
-
-        //public List<string> GetCancellations()
-        //{
-        //    List<string> LogStrings = new List<string>();
-        //    string[] Lines = System.IO.File.ReadAllLines(Path.Combine(Environment.GetFolderPath(
-        //        Environment.SpecialFolder.ApplicationData), "CancelAppointmentLog.txt"));
-        //    foreach (var s in Lines)
-        //    {
-        //        LogStrings.Add(s);
-        //    }
-        //    return LogStrings;
-        //}
-
 
 
         public List<APTDETAILS> GetAppointments()

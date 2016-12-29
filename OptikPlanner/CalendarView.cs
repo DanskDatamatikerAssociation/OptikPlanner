@@ -131,7 +131,6 @@ namespace OptikPlanner
         private void ShowWeekView()
         {
             SetAllLabels();
-
             _viewMode = WeekViewMode;
 
             DateTime today;
@@ -145,15 +144,12 @@ namespace OptikPlanner
             {
                 while (true)
                 {
-
                     lastMonday = today.AddDays(-daysSinceLastMonday);
                     if (lastMonday.DayOfWeek == DayOfWeek.Monday)
                     {
                         break;
                     }
                     daysSinceLastMonday++;
-
-
                 }
             }
             else lastMonday = today;
@@ -161,18 +157,7 @@ namespace OptikPlanner
             DateTime oneWeekAhead = lastMonday.AddDays(6);
 
             calendar.SetViewRange(lastMonday, oneWeekAhead);
-
-            //if (!monthView.SelectionStart.Equals(DateTime.MinValue) ||
-            //    !monthView.SelectionEnd.Equals(DateTime.MinValue))
-            //{
-            //    monthView.SelectionStart = calendar.ViewStart;
-            //    monthView.SelectionEnd = calendar.ViewEnd;
-            //}
-
-
-
             calendar.SelectedElementStart = null;
-
 
         }
 
@@ -726,7 +711,7 @@ namespace OptikPlanner
             List<APTDETAILS> checkedApt = new List<APTDETAILS>();
 
             if (checkedRooms.Count > 0)
-                checkedApt = (from room in checkedRooms from apt in allApt where room.ERO_STAMP == apt.APD_ROOM select apt).ToList();
+                checkedApt = (from room in checkedRooms from apt in allApt where room.ERO_NBR == apt.APD_ROOM select apt).ToList();
 
             if (checkedEmployees.Count > 0) checkedApt = (from emp in checkedEmployees from apt in allApt where emp.US_STAMP == apt.APD_USER select apt).ToList();
 

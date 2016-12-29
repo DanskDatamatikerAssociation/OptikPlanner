@@ -17,6 +17,7 @@ namespace OptikPlanner.Controller
 
         public CalendarViewController(ICalendarView view)
         {
+            if (view == null) return;
             _view = view;
             view.SetController(this);
         }
@@ -187,9 +188,7 @@ namespace OptikPlanner.Controller
         public List<CalendarItem> GetAppointmentsAsCalendarItems()
         {
             List<CalendarItem> calendarItems = new List<CalendarItem>();
-
             var appointments = GetAppointments();
-
 
             foreach (var a in appointments)
             {
@@ -202,8 +201,6 @@ namespace OptikPlanner.Controller
                 string timeToHour = a.APD_TIMETO.Split(':').First();
                 string timeToMinute = a.APD_TIMETO.Split(':').Last();
 
-                var extraDetails = GetExtraAppointmentDetails(a);
-
                 var type = GetAppointmentType(a);
                 var room = GetAppointmentRoom(a);
                 var user = GetAppointmentUser(a);
@@ -213,47 +210,17 @@ namespace OptikPlanner.Controller
                                            $"{user.US_USERNAME}";
 
                 CalendarItem c = new CalendarItem(_view.Calendar,
-                    new DateTime(appointMentDateValue.Year, appointMentDateValue.Month, appointMentDateValue.Day,
+                    new DateTime(appointMentDateValue.Year, 
+                    appointMentDateValue.Month, appointMentDateValue.Day,
                         int.Parse(timeFromHour), int.Parse(timeFromMinute), 0),
-                    new DateTime(appointMentDateValue.Year, appointMentDateValue.Month, appointMentDateValue.Day,
+                    new DateTime(appointMentDateValue.Year, 
+                    appointMentDateValue.Month, appointMentDateValue.Day,
                         int.Parse(timeToHour), int.Parse(timeToMinute), 0), appointmentString);
                 
                 c.Tag = a;
                 calendarItems.Add(c);
-
             }
-
             return calendarItems;
-
-            //public List<CalendarItem> GetAppointmentsAsCalendarItems()
-            //{
-            //    List<CalendarItem> calendarItems = new List<CalendarItem>();
-
-            //    var appointments = GetAppointments();
-
-
-            //    foreach (var a in appointments)
-            //    {
-            //        string correctDateFormat = a.APD_DATE.Value.ToString("dd-MM-yy");
-            //        DateTime appointMentDateValue = DateTime.Parse(correctDateFormat);
-
-            //        string timeFromHour = a.APD_TIMEFROM.Split(':').First();
-            //        string timeFromMinute = a.APD_TIMEFROM.Split(':').Last();
-
-            //        string timeToHour = a.APD_TIMETO.Split(':').First();
-            //        string timeToMinute = a.APD_TIMETO.Split(':').Last();
-
-            //        string appointmentString = $"**Aftaletype her**\n" +
-            //                                   $"Lokale nr. {a.APD_ROOM}\n" +
-            //                                   $"**Kundenavn her**";
-
-            //        CalendarItem c = new CalendarItem(_view.Calendar, new DateTime(appointMentDateValue.Year, appointMentDateValue.Month, appointMentDateValue.Day, int.Parse(timeFromHour), int.Parse(timeFromMinute), 0), new DateTime(appointMentDateValue.Year, appointMentDateValue.Month, appointMentDateValue.Day, int.Parse(timeToHour), int.Parse(timeToMinute), 0), appointmentString);
-            //        c.Tag = a;
-            //        calendarItems.Add(c);
-            //    }
-
-            //    return calendarItems;
-            //}
         }
 
         public List<CalendarItem> GetAppointmentsAsCalendarItems(List<APTDETAILS> appointments)

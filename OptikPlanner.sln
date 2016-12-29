@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Windows.Forms.Calend
 EndProject
 Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "ModelingProject", "ModelingProject\ModelingProject.modelproj", "{8174C8B2-5F00-42C0-B8BF-69E8EF80D39D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OptikPlannerTests", "OptikPlannerTests\OptikPlannerTests.csproj", "{45235B09-0111-4AE0-B8F8-B1B669801EC4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{8174C8B2-5F00-42C0-B8BF-69E8EF80D39D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8174C8B2-5F00-42C0-B8BF-69E8EF80D39D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8174C8B2-5F00-42C0-B8BF-69E8EF80D39D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45235B09-0111-4AE0-B8F8-B1B669801EC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45235B09-0111-4AE0-B8F8-B1B669801EC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45235B09-0111-4AE0-B8F8-B1B669801EC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45235B09-0111-4AE0-B8F8-B1B669801EC4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
