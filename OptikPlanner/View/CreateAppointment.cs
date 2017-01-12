@@ -49,6 +49,7 @@ namespace OptikPlanner.View
             GetDbData();
 
             InitializeCprBox();
+            InitializeAppointmentBox();
 
             SetupLastAndFutureAppointmentsListView();
 
@@ -543,6 +544,29 @@ namespace OptikPlanner.View
         private void label16_Click(object sender, EventArgs e)
         {
             showPreviousButton_Click(sender, e);
+        }
+
+        private void aftaleCombo_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void InitializeAppointmentBox()
+        {
+            AutoCompleteStringCollection allowedTypes = new AutoCompleteStringCollection();
+
+            List<string> aftaleTyper = new List<string>()
+            {
+               "Synsprøve", "Ny tilpasning", "Linsekontrol", "Udlevering", "Efterkontrol", "Svagsynsoptik", "Møde", "Genudmåling",
+                "FRI", "Leverandør", "PBS", "Brevkæde", "Lukkedag", "Udlevering af briller", "Sygehus apotek", "Værksted arbejde"
+            };
+
+
+            allowedTypes.AddRange(aftaleTyper.ToArray());
+
+            aftaleCombo.AutoCompleteCustomSource = allowedTypes;
+            aftaleCombo.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            aftaleCombo.AutoCompleteSource = AutoCompleteSource.CustomSource;
         }
     }
 }

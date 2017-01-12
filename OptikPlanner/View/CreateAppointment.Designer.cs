@@ -214,7 +214,6 @@
             // aftaleCombo
             // 
             this.aftaleCombo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.aftaleCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.aftaleCombo.FormattingEnabled = true;
             this.aftaleCombo.Items.AddRange(new object[] {
             "Synsprøve",
@@ -238,6 +237,7 @@
             this.aftaleCombo.Size = new System.Drawing.Size(121, 21);
             this.aftaleCombo.TabIndex = 16;
             this.aftaleCombo.Tag = "";
+            this.aftaleCombo.TextChanged += new System.EventHandler(this.aftaleCombo_TextChanged);
             // 
             // lokaleCombo
             // 

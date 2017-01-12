@@ -33,11 +33,15 @@ namespace OptikPlanner
         private List<APTDETAILS> _currentVisibleAppointments;
         public static bool AddedNewAppointment;
 
+
         public CalendarView()
         {
             InitializeComponent();
 
             StartPosition = FormStartPosition.CenterScreen;
+
+            contextMenuStrip1.Items.Add("Deaktiver");
+
 
             Calendar = calendar;
             _calendarViewController = new CalendarViewController(this);
@@ -863,6 +867,17 @@ namespace OptikPlanner
             filtratingButton.Enabled = true;
             if (e.NewValue == CheckState.Unchecked) checkAllCustomers.Checked = false;
 
+        }
+
+        private void checkUsersList_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                var userIndex = checkUsersList.IndexFromPoint(e.Location);
+                
+
+                contextMenuStrip1.Show();
+            }
         }
     }
 }
