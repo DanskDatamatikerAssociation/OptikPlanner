@@ -73,7 +73,7 @@ namespace OptikPlanner.View
             "Aflysninger",
             "Lokaler",
             "Medarbejdere"});
-            this.chooseTypeCombo.Location = new System.Drawing.Point(15, 53);
+            this.chooseTypeCombo.Location = new System.Drawing.Point(14, 37);
             this.chooseTypeCombo.Name = "chooseTypeCombo";
             this.chooseTypeCombo.Size = new System.Drawing.Size(135, 21);
             this.chooseTypeCombo.TabIndex = 0;
@@ -92,16 +92,17 @@ namespace OptikPlanner.View
             // chooseDataLabel
             // 
             this.chooseDataLabel.AutoSize = true;
-            this.chooseDataLabel.Location = new System.Drawing.Point(15, 195);
+            this.chooseDataLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chooseDataLabel.Location = new System.Drawing.Point(11, 195);
             this.chooseDataLabel.Name = "chooseDataLabel";
-            this.chooseDataLabel.Size = new System.Drawing.Size(32, 13);
+            this.chooseDataLabel.Size = new System.Drawing.Size(36, 13);
             this.chooseDataLabel.TabIndex = 11;
             this.chooseDataLabel.Text = "Vælg";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 37);
+            this.label3.Location = new System.Drawing.Point(11, 21);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(31, 13);
             this.label3.TabIndex = 13;
