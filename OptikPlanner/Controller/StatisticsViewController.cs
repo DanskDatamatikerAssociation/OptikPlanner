@@ -290,6 +290,34 @@ namespace OptikPlanner.Controller
 
         }
 
+        public int GetEmployeeNumberOfAppointments(USERS employee, int monthNr, int year)
+        {
+            var allAppointments = GetAppointments();
+            List<APTDETAILS> appointmentsByEmployee = new List<APTDETAILS>();
+
+            foreach (var a in allAppointments)
+            {
+                if (a.APD_USER == employee.US_STAMP && a.APD_DATE.Value.Month == monthNr && a.APD_DATE.Value.Year == year) appointmentsByEmployee.Add(a);
+            }
+
+            return appointmentsByEmployee.Count;
+
+        }
+
+        public int GetEmployeeNumberOfAppointments(USERS employee)
+        {
+            var allAppointments = GetAppointments();
+            List<APTDETAILS> appointmentsByEmployee = new List<APTDETAILS>();
+
+            foreach (var a in allAppointments)
+            {
+                if (a.APD_USER == employee.US_STAMP) appointmentsByEmployee.Add(a);
+            }
+
+            return appointmentsByEmployee.Count;
+
+        }
+
         public double GetEmployeeUsageInHours(USERS employee, int monthNr)
         {
             var allAppointments = GetAppointments();

@@ -32,6 +32,7 @@ namespace OptikPlanner
         private bool _filtered = false;
         private List<APTDETAILS> _currentVisibleAppointments;
         public static bool AddedNewAppointment;
+        private int _userIndex;
 
 
         public CalendarView()
@@ -41,6 +42,7 @@ namespace OptikPlanner
             StartPosition = FormStartPosition.CenterScreen;
 
             contextMenuStrip1.Items.Add("Deaktiver");
+            
 
 
             Calendar = calendar;
@@ -648,6 +650,13 @@ namespace OptikPlanner
             todayButton.BackColor = Color.White;
         }
 
+        private void DisableUserClick()
+        {
+            checkUsersList.Items.Clear();
+
+        }
+
+
         private void newAppointmentButton_Enter(object sender, EventArgs e)
         {
             newAppointmentButton.BackColor = Color.LightGray;
@@ -873,11 +882,16 @@ namespace OptikPlanner
         {
             if (e.Button == MouseButtons.Right)
             {
-                var userIndex = checkUsersList.IndexFromPoint(e.Location);
-                
+                _userIndex = checkUsersList.IndexFromPoint(e.Location);
+                checkUsersList.SetSelected(checkUsersList.IndexFromPoint(e.Location), true);
 
                 contextMenuStrip1.Show();
             }
+        }
+
+        private void contextMenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            checkUsersList.Items.RemoveAt(_userIndex);
         }
     }
 }

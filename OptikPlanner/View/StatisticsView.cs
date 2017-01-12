@@ -33,9 +33,15 @@ namespace OptikPlanner.View
         public StatisticsView()
         {
             InitializeComponent();
+
+            listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+
             StartPosition = FormStartPosition.CenterScreen;
             Populate();
             _controller = new StatisticsViewController(this);
+
+            
 
             showMonthCombo.SelectedIndex = DateTime.Now.Month;
             showYearCombo.Text = DateTime.Now.Year.ToString();
@@ -277,6 +283,7 @@ namespace OptikPlanner.View
             listView1.Columns.Add("Navn", 200);
             listView1.Columns.Add("Timer brugt", 80);
             listView1.Columns.Add("Tilgængelighed i timer", 120);
+            listView1.Columns.Add("Antal aftaler", 80);
 
             var users = _controller.GetUsers();
 
@@ -286,6 +293,7 @@ namespace OptikPlanner.View
                 listView1.Items.Add(user.US_USERNAME);
                 listView1.Items[i].SubItems.Add(_controller.GetEmployeeUsageInHours(user).ToString());
                 listView1.Items[i].SubItems.Add(_controller.GetEmployeeAvailabilityInHours(user, 148).ToString());
+                listView1.Items[i].SubItems.Add(_controller.GetEmployeeNumberOfAppointments(user).ToString());
 
             }
 
@@ -541,6 +549,7 @@ namespace OptikPlanner.View
             listView1.Columns.Add("Navn", 200);
             listView1.Columns.Add("Timer brugt", 80);
             listView1.Columns.Add("Tilgængelighed i timer", 120);
+            listView1.Columns.Add("Antal aftaler", 120);
 
             var users = _controller.GetUsers();
 
@@ -550,6 +559,8 @@ namespace OptikPlanner.View
                 listView1.Items.Add(user.US_USERNAME);
                 listView1.Items[i].SubItems.Add(_controller.GetEmployeeUsageInHours(user, chosenMonth, chosenYear).ToString());
                 listView1.Items[i].SubItems.Add(_controller.GetEmployeeAvailabilityInHours(user, 148, chosenMonth, chosenYear).ToString());
+                listView1.Items[i].SubItems.Add(
+                    _controller.GetEmployeeNumberOfAppointments(user, chosenMonth, chosenYear).ToString());
 
             }
         }
@@ -574,6 +585,7 @@ namespace OptikPlanner.View
             listView1.Columns.Add("Navn", 200);
             listView1.Columns.Add("Timer brugt", 80);
             listView1.Columns.Add("Tilgængelighed i timer", 120);
+            listView1.Columns.Add("Antal aftaler", 120);
 
 
             for (int i = 0; i < employeesToFillIn.Count; i++)
@@ -582,6 +594,8 @@ namespace OptikPlanner.View
                 listView1.Items.Add(user.US_USERNAME);
                 listView1.Items[i].SubItems.Add(_controller.GetEmployeeUsageInHours(user, chosenMonth, chosenYear).ToString());
                 listView1.Items[i].SubItems.Add(_controller.GetEmployeeAvailabilityInHours(user, 148, chosenMonth, chosenYear).ToString());
+                listView1.Items[i].SubItems.Add(
+                    _controller.GetEmployeeNumberOfAppointments(user, chosenMonth, chosenYear).ToString());
 
             }
         }

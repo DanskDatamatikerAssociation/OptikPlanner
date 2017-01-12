@@ -66,11 +66,11 @@
             this.checkAllUsersBox = new System.Windows.Forms.CheckBox();
             this.checkRoomList = new System.Windows.Forms.CheckedListBox();
             this.checkUsersList = new System.Windows.Forms.CheckedListBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.filtratingButton = new System.Windows.Forms.Button();
             this.checkCustomerList = new System.Windows.Forms.CheckedListBox();
             this.checkAllCustomers = new System.Windows.Forms.CheckBox();
             this.resetFilteringButton = new System.Windows.Forms.Button();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.SuspendLayout();
             // 
             // fIlerToolStripMenuItem
@@ -488,6 +488,12 @@
             this.checkUsersList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkUsersList_ItemCheck);
             this.checkUsersList.MouseDown += new System.Windows.Forms.MouseEventHandler(this.checkUsersList_MouseDown);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 26);
+            this.contextMenuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStrip1_ItemClicked);
+            // 
             // filtratingButton
             // 
             this.filtratingButton.Location = new System.Drawing.Point(12, 762);
@@ -528,11 +534,6 @@
             this.resetFilteringButton.Text = "Nulstil";
             this.resetFilteringButton.UseVisualStyleBackColor = true;
             this.resetFilteringButton.Click += new System.EventHandler(this.resetFilteringButton_Click);
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // CalendarView
             // 
