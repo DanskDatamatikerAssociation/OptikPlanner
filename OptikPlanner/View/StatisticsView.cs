@@ -655,7 +655,7 @@ namespace OptikPlanner.View
             chart1.ChartAreas[0].BackColor = Color.Transparent;
             chart1.Titles.Add("Typer aftaler");
 
-            //series1.SetCustomProperty("PieLabelStyle", "Outside");
+            series1.SetCustomProperty("PieLabelStyle", "Outside");
             chart1.Palette = ChartColorPalette.Pastel;
 
 
@@ -1138,7 +1138,7 @@ namespace OptikPlanner.View
 
             chart1.ChartAreas[0].Area3DStyle.Enable3D = true;
 
-            chart1.ChartAreas[0].Position = new ElementPosition(-10, 10, 90, 90);
+            //chart1.ChartAreas[0].Position = new ElementPosition(-10, 10, 90, 90);
         }
 
         private void showYearCombo_SelectedIndexChanged(object sender, EventArgs e)
