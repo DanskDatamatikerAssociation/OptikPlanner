@@ -79,7 +79,7 @@ namespace OptikPlanner
 
 
             //Changes the current visible timerange on the calendar. 
-            calendar.TimeUnitsOffset = -DateTime.Now.Hour * 2;
+            calendar.TimeUnitsOffset = -DateTime.Now.Hour * 4;
         }
 
 

@@ -150,7 +150,7 @@ namespace OptikPlanner.Controller
         public EYEEXAMROOMS GetAppointmentRoom(APTDETAILS appointment)
         {
             var rooms = GetRooms();
-            var matchingRoom = rooms.Find(r => r.ERO_STAMP.Equals(appointment.APD_ROOM));
+            var matchingRoom = rooms.Find(r => r.ERO_NBR.Equals(appointment.APD_ROOM));
             return matchingRoom;
         }
 
