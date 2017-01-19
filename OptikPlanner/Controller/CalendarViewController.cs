@@ -202,8 +202,6 @@ namespace OptikPlanner.Controller
                 string timeToHour = a.APD_TIMETO.Split(':').First();
                 string timeToMinute = a.APD_TIMETO.Split(':').Last();
 
-                var extraDetails = GetExtraAppointmentDetails(a);
-
                 var type = GetAppointmentType(a);
                 var room = GetAppointmentRoom(a);
                 var user = GetAppointmentUser(a);

@@ -42,7 +42,7 @@ namespace OptikPlanner
             StartPosition = FormStartPosition.CenterScreen;
 
             contextMenuStrip1.Items.Add("Deaktiver");
-            
+
 
 
             Calendar = calendar;
@@ -54,9 +54,11 @@ namespace OptikPlanner
 
         private void SetupCalendar()
         {
-            var rooms = _calendarViewController.GetRooms();
-            var users = _calendarViewController.GetUsers();
-            var customers = _calendarViewController.GetCustomers();
+            var rooms = from room in _calendarViewController.GetRooms() orderby room.ERO_NBR select room;
+            var users = from user in _calendarViewController.GetUsers() orderby user.US_USERNAME select user;
+            var customers = from customer in _calendarViewController.GetCustomers()
+                orderby customer.CS_FIRSTNAME
+                select customer;
 
             calendar.MaximumViewDays = 140;
             ShowWeekView();
@@ -727,63 +729,30 @@ namespace OptikPlanner
         }
         private List<APTDETAILS> GetAllCheckedApt()
         {
-            List<APTDETAILS> deletedApt = new List<APTDETAILS>();
-            List<APTDETAILS> allApt = _calendarViewController.GetAppointments();
-            List<APTDETAILS> currentAppointments = new List<APTDETAILS>();
 
-            //liste over alle calendaritems
+            List<APTDETAILS> allApt = _calendarViewController.GetAppointments();
+
             var checkedRooms = GetCheckedRooms();
             var checkedEmployees = GetCheckedEmployees();
             var checkedCustomers = GetCheckedCustomers();
 
             List<APTDETAILS> checkedApt = new List<APTDETAILS>();
 
-            if (checkedRooms.Count > 0)
-                checkedApt = (from room in checkedRooms from apt in allApt where room.ERO_STAMP == apt.APD_ROOM select apt).ToList();
+            var checkedAptQuery = (from room in checkedRooms
+                                   from user in checkedEmployees
+                                   from customer in checkedCustomers
+                                   from apt in allApt
+                                   where
+                                   room.ERO_STAMP == apt.APD_ROOM && user.US_STAMP == apt.APD_USER && customer.CS_STAMP == apt.APD_CUSTOMER
+                                   || room.ERO_STAMP == apt.APD_ROOM && user.US_STAMP == apt.APD_USER
+                                   || room.ERO_STAMP == apt.APD_ROOM && customer.CS_STAMP == apt.APD_CUSTOMER
+                                   || user.US_STAMP == apt.APD_USER && customer.CS_STAMP == apt.APD_CUSTOMER
+                                   select apt).ToList();
 
-            if (checkedEmployees.Count > 0) checkedApt = (from emp in checkedEmployees from apt in allApt where emp.US_STAMP == apt.APD_USER select apt).ToList();
-
-            if (checkedCustomers.Count > 0)
-                checkedApt =
-                    (from cust in checkedCustomers from apt in allApt where cust.CS_STAMP == apt.APD_CUSTOMER select apt).ToList();
-
-            if (checkedRooms.Count > 0 && checkedEmployees.Count > 0)
+            foreach (var apt in checkedAptQuery)
             {
-                checkedApt = (from room in checkedRooms
-                              from emp in checkedEmployees
-                              from apt in allApt
-                              where room.ERO_STAMP == apt.APD_ROOM && emp.US_STAMP == apt.APD_USER
-                              select apt).ToList();
-            }
-
-            if (checkedRooms.Count > 0 && checkedCustomers.Count > 0)
-            {
-                checkedApt = (from room in checkedRooms
-                              from cust in checkedCustomers
-                              from apt in allApt
-                              where room.ERO_STAMP == apt.APD_ROOM && cust.CS_STAMP == apt.APD_CUSTOMER
-                              select apt).ToList();
-            }
-
-            if (checkedEmployees.Count > 0 && checkedCustomers.Count > 0)
-            {
-                checkedApt = (from emp in checkedEmployees
-                              from cust in checkedCustomers
-                              from apt in allApt
-                              where emp.US_STAMP == apt.APD_USER && cust.CS_STAMP == apt.APD_CUSTOMER
-                              select apt).ToList();
-            }
-
-            if (checkedRooms.Count > 0 && checkedEmployees.Count > 0 && checkedCustomers.Count > 0)
-            {
-                checkedApt = (from room in checkedRooms
-                              from cust in checkedCustomers
-                              from emp in checkedEmployees
-                              from apt in allApt
-                              where
-                              room.ERO_STAMP == apt.APD_ROOM && cust.CS_STAMP == apt.APD_CUSTOMER && emp.US_STAMP == apt.APD_USER
-                              select apt).ToList();
-            }
+                if (!checkedApt.Contains(apt)) checkedApt.Add(apt);
+            }               
 
             calendar.Items.Clear();
 
@@ -892,6 +861,12 @@ namespace OptikPlanner
         private void contextMenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             checkUsersList.Items.RemoveAt(_userIndex);
+        }
+
+        private void monthView_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawRectangle(Pens.Black, this.Bounds);
+
         }
     }
 }

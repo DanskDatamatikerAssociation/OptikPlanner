@@ -30,11 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CalendarView));
-            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange1 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
-            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange2 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
-            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange3 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
-            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange4 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
-            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange5 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
+            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange6 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
+            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange7 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
+            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange8 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
+            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange9 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
+            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange10 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
             this.fIlerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.indstillingerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
@@ -71,6 +71,12 @@
             this.checkCustomerList = new System.Windows.Forms.CheckedListBox();
             this.checkAllCustomers = new System.Windows.Forms.CheckBox();
             this.resetFilteringButton = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.calendar.SuspendLayout();
             this.SuspendLayout();
             // 
             // fIlerToolStripMenuItem
@@ -367,33 +373,37 @@
             this.calendar.AllowItemResize = false;
             this.calendar.AllowNew = false;
             this.calendar.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.calendar.Controls.Add(this.label12);
+            this.calendar.Controls.Add(this.label11);
+            this.calendar.Controls.Add(this.label10);
+            this.calendar.Controls.Add(this.label9);
             this.calendar.FirstDayOfWeek = System.DayOfWeek.Monday;
             this.calendar.Font = new System.Drawing.Font("Segoe UI", 9F);
-            calendarHighlightRange1.DayOfWeek = System.DayOfWeek.Monday;
-            calendarHighlightRange1.EndTime = System.TimeSpan.Parse("17:00:00");
-            calendarHighlightRange1.StartTime = System.TimeSpan.Parse("08:00:00");
-            calendarHighlightRange2.DayOfWeek = System.DayOfWeek.Tuesday;
-            calendarHighlightRange2.EndTime = System.TimeSpan.Parse("17:00:00");
-            calendarHighlightRange2.StartTime = System.TimeSpan.Parse("08:00:00");
-            calendarHighlightRange3.DayOfWeek = System.DayOfWeek.Wednesday;
-            calendarHighlightRange3.EndTime = System.TimeSpan.Parse("17:00:00");
-            calendarHighlightRange3.StartTime = System.TimeSpan.Parse("08:00:00");
-            calendarHighlightRange4.DayOfWeek = System.DayOfWeek.Thursday;
-            calendarHighlightRange4.EndTime = System.TimeSpan.Parse("17:00:00");
-            calendarHighlightRange4.StartTime = System.TimeSpan.Parse("08:00:00");
-            calendarHighlightRange5.DayOfWeek = System.DayOfWeek.Friday;
-            calendarHighlightRange5.EndTime = System.TimeSpan.Parse("17:00:00");
-            calendarHighlightRange5.StartTime = System.TimeSpan.Parse("08:00:00");
+            calendarHighlightRange6.DayOfWeek = System.DayOfWeek.Monday;
+            calendarHighlightRange6.EndTime = System.TimeSpan.Parse("17:00:00");
+            calendarHighlightRange6.StartTime = System.TimeSpan.Parse("08:00:00");
+            calendarHighlightRange7.DayOfWeek = System.DayOfWeek.Tuesday;
+            calendarHighlightRange7.EndTime = System.TimeSpan.Parse("17:00:00");
+            calendarHighlightRange7.StartTime = System.TimeSpan.Parse("08:00:00");
+            calendarHighlightRange8.DayOfWeek = System.DayOfWeek.Wednesday;
+            calendarHighlightRange8.EndTime = System.TimeSpan.Parse("17:00:00");
+            calendarHighlightRange8.StartTime = System.TimeSpan.Parse("08:00:00");
+            calendarHighlightRange9.DayOfWeek = System.DayOfWeek.Thursday;
+            calendarHighlightRange9.EndTime = System.TimeSpan.Parse("17:00:00");
+            calendarHighlightRange9.StartTime = System.TimeSpan.Parse("08:00:00");
+            calendarHighlightRange10.DayOfWeek = System.DayOfWeek.Friday;
+            calendarHighlightRange10.EndTime = System.TimeSpan.Parse("17:00:00");
+            calendarHighlightRange10.StartTime = System.TimeSpan.Parse("08:00:00");
             this.calendar.HighlightRanges = new System.Windows.Forms.Calendar.CalendarHighlightRange[] {
-        calendarHighlightRange1,
-        calendarHighlightRange2,
-        calendarHighlightRange3,
-        calendarHighlightRange4,
-        calendarHighlightRange5};
+        calendarHighlightRange6,
+        calendarHighlightRange7,
+        calendarHighlightRange8,
+        calendarHighlightRange9,
+        calendarHighlightRange10};
             this.calendar.ItemsTimeFormat = "HH:mm tt";
             this.calendar.Location = new System.Drawing.Point(208, 95);
             this.calendar.Name = "calendar";
-            this.calendar.Size = new System.Drawing.Size(914, 655);
+            this.calendar.Size = new System.Drawing.Size(896, 690);
             this.calendar.TabIndex = 0;
             this.calendar.TabStop = false;
             this.calendar.Text = "Calendar";
@@ -460,9 +470,9 @@
             this.checkAllUsersBox.AutoSize = true;
             this.checkAllUsersBox.Location = new System.Drawing.Point(15, 510);
             this.checkAllUsersBox.Name = "checkAllUsersBox";
-            this.checkAllUsersBox.Size = new System.Drawing.Size(120, 17);
+            this.checkAllUsersBox.Size = new System.Drawing.Size(126, 17);
             this.checkAllUsersBox.TabIndex = 32;
-            this.checkAllUsersBox.Text = "Vis alle medarbejder";
+            this.checkAllUsersBox.Text = "Vis alle medarbejdere";
             this.checkAllUsersBox.UseVisualStyleBackColor = true;
             this.checkAllUsersBox.CheckedChanged += new System.EventHandler(this.checkAllUsersBox_CheckedChanged);
             // 
@@ -491,14 +501,14 @@
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             this.contextMenuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStrip1_ItemClicked);
             // 
             // filtratingButton
             // 
-            this.filtratingButton.Location = new System.Drawing.Point(12, 762);
+            this.filtratingButton.Location = new System.Drawing.Point(12, 763);
             this.filtratingButton.Name = "filtratingButton";
-            this.filtratingButton.Size = new System.Drawing.Size(75, 23);
+            this.filtratingButton.Size = new System.Drawing.Size(96, 23);
             this.filtratingButton.TabIndex = 35;
             this.filtratingButton.Text = "Filtrer";
             this.filtratingButton.UseVisualStyleBackColor = true;
@@ -527,13 +537,53 @@
             // 
             // resetFilteringButton
             // 
-            this.resetFilteringButton.Location = new System.Drawing.Point(94, 762);
+            this.resetFilteringButton.Location = new System.Drawing.Point(114, 763);
             this.resetFilteringButton.Name = "resetFilteringButton";
-            this.resetFilteringButton.Size = new System.Drawing.Size(75, 23);
+            this.resetFilteringButton.Size = new System.Drawing.Size(83, 23);
             this.resetFilteringButton.TabIndex = 38;
             this.resetFilteringButton.Text = "Nulstil";
             this.resetFilteringButton.UseVisualStyleBackColor = true;
             this.resetFilteringButton.Click += new System.EventHandler(this.resetFilteringButton_Click);
+            // 
+            // label9
+            // 
+            this.label9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label9.Location = new System.Drawing.Point(0, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(2, 690);
+            this.label9.TabIndex = 39;
+            // 
+            // label10
+            // 
+            this.label10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label10.Location = new System.Drawing.Point(894, -4);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(2, 695);
+            this.label10.TabIndex = 40;
+            // 
+            // label11
+            // 
+            this.label11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label11.Location = new System.Drawing.Point(0, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(896, 2);
+            this.label11.TabIndex = 41;
+            // 
+            // label12
+            // 
+            this.label12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label12.Location = new System.Drawing.Point(0, 688);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(896, 2);
+            this.label12.TabIndex = 42;
+            // 
+            // label13
+            // 
+            this.label13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label13.Location = new System.Drawing.Point(5, 373);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(200, 2);
+            this.label13.TabIndex = 43;
             // 
             // CalendarView
             // 
@@ -541,6 +591,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1116, 797);
+            this.Controls.Add(this.label13);
             this.Controls.Add(this.resetFilteringButton);
             this.Controls.Add(this.checkCustomerList);
             this.Controls.Add(this.filtratingButton);
@@ -574,6 +625,7 @@
             this.Name = "CalendarView";
             this.Text = "Optik Planner";
             this.Activated += new System.EventHandler(this.CalendarView_Activated);
+            this.calendar.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -618,6 +670,11 @@
         private System.Windows.Forms.CheckBox checkAllCustomers;
         private System.Windows.Forms.Button resetFilteringButton;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label13;
     }
 }
 

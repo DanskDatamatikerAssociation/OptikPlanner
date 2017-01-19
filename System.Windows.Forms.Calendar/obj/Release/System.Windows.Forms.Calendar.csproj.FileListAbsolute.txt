@@ -1,0 +1,5 @@
+C:\Users\Danny\Documents\GitHub\OptikPlanner\System.Windows.Forms.Calendar\bin\Release\System.Windows.Forms.Calendar.dll
+C:\Users\Danny\Documents\GitHub\OptikPlanner\System.Windows.Forms.Calendar\bin\Release\System.Windows.Forms.Calendar.pdb
+C:\Users\Danny\Documents\GitHub\OptikPlanner\System.Windows.Forms.Calendar\obj\Release\System.Windows.Forms.Calendar.csprojResolveAssemblyReference.cache
+C:\Users\Danny\Documents\GitHub\OptikPlanner\System.Windows.Forms.Calendar\obj\Release\System.Windows.Forms.Calendar.dll
+C:\Users\Danny\Documents\GitHub\OptikPlanner\System.Windows.Forms.Calendar\obj\Release\System.Windows.Forms.Calendar.pdb

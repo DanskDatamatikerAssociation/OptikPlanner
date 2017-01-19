@@ -83,7 +83,7 @@ namespace OptikPlanner.View
             // 
             this.DatoLabel.AutoSize = true;
             this.DatoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DatoLabel.Location = new System.Drawing.Point(9, 111);
+            this.DatoLabel.Location = new System.Drawing.Point(9, 91);
             this.DatoLabel.Name = "DatoLabel";
             this.DatoLabel.Size = new System.Drawing.Size(152, 13);
             this.DatoLabel.TabIndex = 8;
@@ -93,7 +93,7 @@ namespace OptikPlanner.View
             // 
             this.chooseDataLabel.AutoSize = true;
             this.chooseDataLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chooseDataLabel.Location = new System.Drawing.Point(11, 195);
+            this.chooseDataLabel.Location = new System.Drawing.Point(11, 157);
             this.chooseDataLabel.Name = "chooseDataLabel";
             this.chooseDataLabel.Size = new System.Drawing.Size(36, 13);
             this.chooseDataLabel.TabIndex = 11;
@@ -113,7 +113,7 @@ namespace OptikPlanner.View
             this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listView1.Location = new System.Drawing.Point(167, 37);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(612, 428);
+            this.listView1.Size = new System.Drawing.Size(612, 409);
             this.listView1.TabIndex = 14;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -122,7 +122,7 @@ namespace OptikPlanner.View
             // 
             this.compareLabel.AutoSize = true;
             this.compareLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.compareLabel.Location = new System.Drawing.Point(10, 350);
+            this.compareLabel.Location = new System.Drawing.Point(9, 345);
             this.compareLabel.Name = "compareLabel";
             this.compareLabel.Size = new System.Drawing.Size(147, 13);
             this.compareLabel.TabIndex = 16;
@@ -150,7 +150,7 @@ namespace OptikPlanner.View
             // chooseperiodLabel
             // 
             this.chooseperiodLabel.AutoSize = true;
-            this.chooseperiodLabel.Location = new System.Drawing.Point(9, 124);
+            this.chooseperiodLabel.Location = new System.Drawing.Point(9, 104);
             this.chooseperiodLabel.Name = "chooseperiodLabel";
             this.chooseperiodLabel.Size = new System.Drawing.Size(39, 13);
             this.chooseperiodLabel.TabIndex = 19;
@@ -159,7 +159,7 @@ namespace OptikPlanner.View
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(72, 124);
+            this.label4.Location = new System.Drawing.Point(72, 104);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(16, 13);
             this.label4.TabIndex = 20;
@@ -168,7 +168,7 @@ namespace OptikPlanner.View
             // compareMonthLabel
             // 
             this.compareMonthLabel.AutoSize = true;
-            this.compareMonthLabel.Location = new System.Drawing.Point(10, 363);
+            this.compareMonthLabel.Location = new System.Drawing.Point(9, 358);
             this.compareMonthLabel.Name = "compareMonthLabel";
             this.compareMonthLabel.Size = new System.Drawing.Size(39, 13);
             this.compareMonthLabel.TabIndex = 21;
@@ -177,7 +177,7 @@ namespace OptikPlanner.View
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(73, 363);
+            this.label6.Location = new System.Drawing.Point(72, 358);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(16, 13);
             this.label6.TabIndex = 22;
@@ -187,7 +187,7 @@ namespace OptikPlanner.View
             // 
             this.showMonthCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.showMonthCombo.FormattingEnabled = true;
-            this.showMonthCombo.Location = new System.Drawing.Point(12, 140);
+            this.showMonthCombo.Location = new System.Drawing.Point(12, 120);
             this.showMonthCombo.Name = "showMonthCombo";
             this.showMonthCombo.Size = new System.Drawing.Size(54, 21);
             this.showMonthCombo.TabIndex = 23;
@@ -197,7 +197,7 @@ namespace OptikPlanner.View
             // 
             this.showYearCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.showYearCombo.FormattingEnabled = true;
-            this.showYearCombo.Location = new System.Drawing.Point(75, 140);
+            this.showYearCombo.Location = new System.Drawing.Point(75, 120);
             this.showYearCombo.Name = "showYearCombo";
             this.showYearCombo.Size = new System.Drawing.Size(72, 21);
             this.showYearCombo.TabIndex = 24;
@@ -207,7 +207,7 @@ namespace OptikPlanner.View
             // 
             this.compareMonthCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.compareMonthCombo.FormattingEnabled = true;
-            this.compareMonthCombo.Location = new System.Drawing.Point(12, 379);
+            this.compareMonthCombo.Location = new System.Drawing.Point(11, 374);
             this.compareMonthCombo.Name = "compareMonthCombo";
             this.compareMonthCombo.Size = new System.Drawing.Size(55, 21);
             this.compareMonthCombo.TabIndex = 25;
@@ -217,7 +217,7 @@ namespace OptikPlanner.View
             // 
             this.compareYearCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.compareYearCombo.FormattingEnabled = true;
-            this.compareYearCombo.Location = new System.Drawing.Point(76, 379);
+            this.compareYearCombo.Location = new System.Drawing.Point(75, 374);
             this.compareYearCombo.Name = "compareYearCombo";
             this.compareYearCombo.Size = new System.Drawing.Size(72, 21);
             this.compareYearCombo.TabIndex = 26;
@@ -225,7 +225,7 @@ namespace OptikPlanner.View
             // SearchButton
             // 
             this.SearchButton.Enabled = false;
-            this.SearchButton.Location = new System.Drawing.Point(12, 423);
+            this.SearchButton.Location = new System.Drawing.Point(11, 423);
             this.SearchButton.Name = "SearchButton";
             this.SearchButton.Size = new System.Drawing.Size(81, 23);
             this.SearchButton.TabIndex = 27;
@@ -249,7 +249,7 @@ namespace OptikPlanner.View
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(612, 428);
+            this.chart1.Size = new System.Drawing.Size(612, 409);
             this.chart1.TabIndex = 28;
             this.chart1.Text = "chart1";
             // 
@@ -267,16 +267,16 @@ namespace OptikPlanner.View
             // 
             this.filterListBox.CheckOnClick = true;
             this.filterListBox.FormattingEnabled = true;
-            this.filterListBox.Location = new System.Drawing.Point(12, 228);
+            this.filterListBox.Location = new System.Drawing.Point(12, 190);
             this.filterListBox.Name = "filterListBox";
-            this.filterListBox.Size = new System.Drawing.Size(136, 94);
+            this.filterListBox.Size = new System.Drawing.Size(136, 124);
             this.filterListBox.TabIndex = 31;
             this.filterListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.filterListBox_ItemCheck);
             // 
             // showAllCheckBox
             // 
             this.showAllCheckBox.AutoSize = true;
-            this.showAllCheckBox.Location = new System.Drawing.Point(14, 211);
+            this.showAllCheckBox.Location = new System.Drawing.Point(14, 173);
             this.showAllCheckBox.Name = "showAllCheckBox";
             this.showAllCheckBox.Size = new System.Drawing.Size(59, 17);
             this.showAllCheckBox.TabIndex = 32;
@@ -288,7 +288,7 @@ namespace OptikPlanner.View
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 472);
+            this.ClientSize = new System.Drawing.Size(792, 455);
             this.Controls.Add(this.showAllCheckBox);
             this.Controls.Add(this.filterListBox);
             this.Controls.Add(this.resetButton);
@@ -316,6 +316,7 @@ namespace OptikPlanner.View
             this.Name = "StatisticsView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Statistik";
+            this.Load += new System.EventHandler(this.StatisticsView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

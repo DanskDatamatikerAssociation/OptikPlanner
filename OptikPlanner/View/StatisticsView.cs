@@ -281,7 +281,7 @@ namespace OptikPlanner.View
             listView1.Columns.Clear();
             listView1.Items.Clear();
             listView1.Columns.Add("Navn", 200);
-            listView1.Columns.Add("Timer brugt", 80);
+            listView1.Columns.Add("Arbejdstimer", 80);
             listView1.Columns.Add("Tilgængelighed i timer", 120);
             listView1.Columns.Add("Antal aftaler", 80);
 
@@ -547,7 +547,7 @@ namespace OptikPlanner.View
             listView1.Columns.Clear();
             listView1.Items.Clear();
             listView1.Columns.Add("Navn", 200);
-            listView1.Columns.Add("Timer brugt", 80);
+            listView1.Columns.Add("Arbejdstimer", 80);
             listView1.Columns.Add("Tilgængelighed i timer", 120);
             listView1.Columns.Add("Antal aftaler", 120);
 
@@ -583,7 +583,7 @@ namespace OptikPlanner.View
             listView1.Columns.Clear();
             listView1.Items.Clear();
             listView1.Columns.Add("Navn", 200);
-            listView1.Columns.Add("Timer brugt", 80);
+            listView1.Columns.Add("Arbejdstimer", 80);
             listView1.Columns.Add("Tilgængelighed i timer", 120);
             listView1.Columns.Add("Antal aftaler", 120);
 
@@ -1005,7 +1005,7 @@ namespace OptikPlanner.View
             };
 
             chart1.Titles.Add($"Sammenligning mellem {showMonthCombo.Text} {chosenYear} og {compareMonthCombo.Text} {compareYear}.");
-            chart1.ChartAreas[0].AxisY.Title = "Timer brugt";
+            chart1.ChartAreas[0].AxisY.Title = "Arbejdstimer";
 
             series.LegendText = showMonthCombo.Text;
             comparisonSeries.LegendText = compareMonthCombo.Text;
@@ -1317,6 +1317,11 @@ namespace OptikPlanner.View
             }
 
             return checkedEmployees;
+        }
+
+        private void StatisticsView_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
