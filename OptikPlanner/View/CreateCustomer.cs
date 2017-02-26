@@ -24,7 +24,6 @@ namespace OptikPlanner.View
         }
         private void createCustomerButton_Click(object sender, EventArgs e)
         {
-           // USERS creater = (USERS)userCombo.SelectedItem;
             CUSTOMERS customer = new CUSTOMERS();
 
             customer.CS_CPRNO = cprBox.Text;
