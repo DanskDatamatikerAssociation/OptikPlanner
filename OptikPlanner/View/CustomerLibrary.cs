@@ -60,6 +60,7 @@ namespace OptikPlanner.View
             {
                 ListViewBox.Items.Clear();
                 FillInView();
+                window.Close();
             }
 
         }
@@ -76,6 +77,7 @@ namespace OptikPlanner.View
             {
                 ListViewBox.Items.Clear();
                 FillInView();
+                window.Close();
             }
         }
 
