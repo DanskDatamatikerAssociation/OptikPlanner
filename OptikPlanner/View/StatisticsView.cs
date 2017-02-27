@@ -114,6 +114,7 @@ namespace OptikPlanner.View
 
         private void FillInAppointmentData()
         {
+
             int currentMonth = showMonthCombo.SelectedIndex;
             int currentYear = int.Parse(showYearCombo.Text);
 
@@ -165,7 +166,6 @@ namespace OptikPlanner.View
 
                 filterListBox.Items.Clear();
 
-
             }
 
 
@@ -178,7 +178,8 @@ namespace OptikPlanner.View
                 subItem.Text = value.Count.ToString();
             }
 
-
+            //Fix for disappearing scrollbar.
+            listView1.Columns[0].Width += 1;
         }
 
         private void FillInAppointmentData(int compareMonth, int compareYear)
@@ -280,10 +281,15 @@ namespace OptikPlanner.View
             chooseDataLabel.Text = "Vælg medarbejder(e)";
             listView1.Columns.Clear();
             listView1.Items.Clear();
-            listView1.Columns.Add("Navn", 200);
-            listView1.Columns.Add("Arbejdstimer", 80);
-            listView1.Columns.Add("Tilgængelighed i timer", 120);
-            listView1.Columns.Add("Antal aftaler", 80);
+            int newWidth = listView1.Width/4;
+            //listView1.Columns.Add("Navn", 200);
+            //listView1.Columns.Add("Arbejdstimer", 80);
+            //listView1.Columns.Add("Tilgængelighed i timer", 120);
+            //listView1.Columns.Add("Antal aftaler", 80);
+            listView1.Columns.Add("Navn", newWidth);
+            listView1.Columns.Add("Arbejdstimer", newWidth);
+            listView1.Columns.Add("Tilgængelighed i timer", newWidth);
+            listView1.Columns.Add("Antal aftaler", newWidth);
 
             var users = _controller.GetUsers();
 
@@ -306,8 +312,11 @@ namespace OptikPlanner.View
             chooseDataLabel.Text = "Vælg aflysninger";
             listView1.Columns.Clear();
             listView1.Items.Clear();
-            listView1.Columns.Add("Grund", 150);
-            listView1.Columns.Add("aflysninger i ", 150);
+            int newWidth = listView1.Width/2;
+            listView1.Columns.Add("Grund", 200);
+            listView1.Columns.Add("aflysninger i " + showMonthCombo.Text + showYearCombo.Text, listView1.Width-200);
+            //listView1.Columns.Add("Grund", newWidth);
+            //listView1.Columns.Add("aflysninger i " + showMonthCombo.Text + showYearCombo.Text, newWidth);
             listView1.Items.Add("Kunden ikke mødte op.");
             listView1.Items.Add("Kunden har aflyst telefonisk");
             listView1.Items.Add("der har været Andet i vejen.");
@@ -509,14 +518,20 @@ namespace OptikPlanner.View
 
             }
 
-
+            int newWidth = listView1.Width/4;
 
             listView1.Columns.Clear();
             listView1.Items.Clear();
-            listView1.Columns.Add("Lokale", 80);
-            listView1.Columns.Add("Type", 100);
-            listView1.Columns.Add("Timer brugt", 100);
-            listView1.Columns.Add("Tilgængelighed i timer", 120);
+            //listView1.Columns.Add("Lokale", 80);
+            //listView1.Columns.Add("Type", 100);
+            //listView1.Columns.Add("Timer brugt", 100);
+            //listView1.Columns.Add("Tilgængelighed i timer", 120);
+            listView1.Columns.Add("Lokale", newWidth);
+            listView1.Columns.Add("Type", newWidth);
+            listView1.Columns.Add("Timer brugt", newWidth);
+            listView1.Columns.Add("Tilgængelighed i timer", newWidth);
+
+
 
             for (int i = 0; i < roomsToFillIn.Count; i++)
             {
@@ -546,10 +561,12 @@ namespace OptikPlanner.View
 
             listView1.Columns.Clear();
             listView1.Items.Clear();
-            listView1.Columns.Add("Navn", 200);
-            listView1.Columns.Add("Arbejdstimer", 80);
-            listView1.Columns.Add("Tilgængelighed i timer", 120);
-            listView1.Columns.Add("Antal aftaler", 120);
+            //listView1.Columns.Add("Navn", 200);
+            //listView1.Columns.Add("Arbejdstimer", 80);
+            //listView1.Columns.Add("Tilgængelighed i timer", 120);
+            //listView1.Columns.Add("Antal aftaler", 120);
+
+
 
             var users = _controller.GetUsers();
 
@@ -582,10 +599,16 @@ namespace OptikPlanner.View
 
             listView1.Columns.Clear();
             listView1.Items.Clear();
-            listView1.Columns.Add("Navn", 200);
-            listView1.Columns.Add("Arbejdstimer", 80);
-            listView1.Columns.Add("Tilgængelighed i timer", 120);
-            listView1.Columns.Add("Antal aftaler", 120);
+ 
+            int newWidth = listView1.Width / 4;
+            //listView1.Columns.Add("Navn", 200);
+            //listView1.Columns.Add("Arbejdstimer", 80);
+            //listView1.Columns.Add("Tilgængelighed i timer", 120);
+            //listView1.Columns.Add("Antal aftaler", 80);
+            listView1.Columns.Add("Navn", newWidth);
+            listView1.Columns.Add("Arbejdstimer", newWidth);
+            listView1.Columns.Add("Tilgængelighed i timer", newWidth);
+            listView1.Columns.Add("Antal aftaler", newWidth);
 
 
             for (int i = 0; i < employeesToFillIn.Count; i++)
