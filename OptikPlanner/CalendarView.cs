@@ -752,7 +752,12 @@ namespace OptikPlanner
             foreach (var apt in checkedAptQuery)
             {
                 if (!checkedApt.Contains(apt)) checkedApt.Add(apt);
-            }               
+            }
+
+            //Works
+            //var checkAptQuery = allApt.Where(a => checkedRooms.All(r => r.ERO_NBR == a.APD_ROOM));    
+
+
 
             calendar.Items.Clear();
 
