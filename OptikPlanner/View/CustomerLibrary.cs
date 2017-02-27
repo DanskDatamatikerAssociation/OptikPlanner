@@ -44,7 +44,7 @@ namespace OptikPlanner.View
             window.firstNameBox.Text = test[0].SubItems[1].Text;
             window.LastNameBox.Text = test[0].SubItems[2].Text;
 
-            foreach (var s in _controller.GetCustomer())
+            foreach (var s in _controller.GetCustomers())
             {
                 if (test[0].SubItems[0].Text.Equals(s.CS_CPRNO))
                 {
@@ -60,18 +60,20 @@ namespace OptikPlanner.View
             {
                 ListViewBox.Items.Clear();
                 FillInView();
-                window.Close();
+                
             }
+            
 
         }
 
         private void createCustomerButton_Click(object sender, EventArgs e)
         {
             //opret ikke eksisterende kunde
+
             CreateCustomer window = new CreateCustomer();
-            //window.editorLabel.Text = "Opretter";
+
             window.createCustomerButtonOK.Text = "Opret";
-            window.ShowDialog();
+            //window.ShowDialog();
 
             if (window.ShowDialog() == DialogResult.OK)
             {
@@ -83,7 +85,7 @@ namespace OptikPlanner.View
 
         public void FillInView()
         {
-            foreach (var s in _controller.GetCustomer())
+            foreach (var s in _controller.GetCustomers())
             {
                 var item = ListViewBox.Items.Add(new ListViewItem(new string[] { s.CS_CPRNO, s.CS_FIRSTNAME, s.CS_LASTNAME }));
                 item.Tag = s;
@@ -143,7 +145,7 @@ namespace OptikPlanner.View
         {
             ListViewBox.Items.Clear(); // clear list items before adding 
                                        // filter the items match with search key and add result to list view 
-            ListViewBox.Items.AddRange(_controller.GetCustomer()
+            ListViewBox.Items.AddRange(_controller.GetCustomers()
                 .Where(i => string.IsNullOrEmpty(cprBox.Text) || i.CS_CPRNO.StartsWith(cprBox.Text))
                 .Select(c => new ListViewItem(new string[] {c.CS_CPRNO, c.CS_FIRSTNAME, c.CS_LASTNAME})).ToArray());
         }

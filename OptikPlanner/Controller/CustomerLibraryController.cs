@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace OptikPlanner.Controller
     class CustomerLibraryController
     {
         private OptikItDbContext db;
-        
+
         public List<USERS> GetUser()
         {
             using (db = new OptikItDbContext())
@@ -42,6 +43,29 @@ namespace OptikPlanner.Controller
                         }
                     }
                 }
+            }
+        }
+
+        public int GetNextCustomerId()
+        {
+            using (db = new OptikItDbContext())
+            {
+                List<CUSTOMERS> customers;
+                try
+                {
+                    customers = GetCustomers();
+
+                    int currentId = customers.Last().CS_STAMP;
+
+                    return currentId + 1;
+                }
+                catch (DbException ex)
+                {
+                    return 0;
+                }
+
+
+
             }
         }
 
@@ -89,7 +113,7 @@ namespace OptikPlanner.Controller
             }
         }
 
-        public List<CUSTOMERS> GetCustomer()
+        public List<CUSTOMERS> GetCustomers()
         {
             using (db = new OptikItDbContext())
             {

@@ -26,6 +26,10 @@ namespace OptikPlanner.View
         {
             CUSTOMERS customer = new CUSTOMERS();
 
+            int newId = _controller.GetNextCustomerId();
+
+            customer.CS_STAMP = newId;
+            customer.CS_CUSTNO = newId;
             customer.CS_CPRNO = cprBox.Text;
             customer.CS_FIRSTNAME = firstNameBox.Text;
             customer.CS_LASTNAME = LastNameBox.Text;
@@ -37,11 +41,13 @@ namespace OptikPlanner.View
             {
                 _controller.PutCustomer(customer);
                 Trace.WriteLine($"\n Ny kunde med navn: {firstNameBox.Text} {LastNameBox.Text} er blevet oprettet d. {DateTime.Now}");
+                this.Close();
             }
             if (createCustomerButtonOK.Text == "Opret")
             {
                 _controller.PostCustomer(customer);
                 Trace.WriteLine($"\n Ny kunde med navn: {firstNameBox.Text} {LastNameBox.Text} er blevet rettet i d. {DateTime.Now}");
+                this.Close();
             }
             this.Close();
         }
