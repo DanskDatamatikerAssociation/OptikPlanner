@@ -33,26 +33,26 @@ namespace OptikPlanner.Controller
         public static void GetNoShows()
         {
             
-            if (!File.Exists(Path.Combine(Environment.GetFolderPath(
-                Environment.SpecialFolder.ApplicationData), "CancelAppointmentLog.txt")))
-            {
-                return;
-            }
+            //if (!File.Exists(Path.Combine(Environment.GetFolderPath(
+            //    Environment.SpecialFolder.ApplicationData), "CancelAppointmentLog.txt")))
+            //{
+            //    return;
+            //}
 
-            Lines = System.IO.File.ReadAllLines(Path.Combine(Environment.GetFolderPath(
-                Environment.SpecialFolder.ApplicationData), "CancelAppointmentLog.txt"), Encoding.UTF8);
+            ////Lines = System.IO.File.ReadAllLines(Path.Combine(Environment.GetFolderPath(
+            ////    Environment.SpecialFolder.ApplicationData), "CancelAppointmentLog.txt"), Encoding.UTF8);
 
-            if (Lines == null)
-            {
-                cancelPhoneList.Add("Log oprettet succesfuldt");
-            }
-            foreach (string s in Lines)
-            {
-                if (s.Contains("Kunden ikke"))
-                { 
-                    noShowList.Add(s);
-                }
-            }
+            //if (Lines == null)
+            //{
+            //    cancelPhoneList.Add("Log oprettet succesfuldt");
+            //}
+            //foreach (string s in Lines)
+            //{
+            //    if (s.Contains("Kunden ikke"))
+            //    { 
+            //        noShowList.Add(s);
+            //    }
+            //}
             
         }
 

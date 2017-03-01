@@ -205,10 +205,15 @@ namespace OptikPlanner.Controller
                 var type = GetAppointmentType(a);
                 var room = GetAppointmentRoom(a);
                 var user = GetAppointmentUser(a);
-                
-                string appointmentString = $"{type}\n" +
-                                           $"Lokale nr. {a.APD_ROOM}\n" +
-                                           $"{user.US_USERNAME}";
+
+                string appointmentString = "";
+
+                if (user != null)
+                {
+                     appointmentString = $"{type}\n" +
+                                               $"Lokale nr. {a.APD_ROOM}\n" +
+                                               $"{user.US_USERNAME}";
+                }
 
                 CalendarItem c = new CalendarItem(_view.Calendar,
                     new DateTime(appointMentDateValue.Year, appointMentDateValue.Month, appointMentDateValue.Day,
@@ -273,9 +278,16 @@ namespace OptikPlanner.Controller
                 var room = GetAppointmentRoom(a);
                 var user = GetAppointmentUser(a);
 
-                string appointmentString = $"{type}\n" +
-                                           $"Lokale nr. {a.APD_ROOM}\n" +
-                                           $"{user.US_USERNAME}";
+                string appointmentString = "";
+
+                if (user != null)
+                {
+
+
+                     appointmentString = $"{type}\n" +
+                                               $"Lokale nr. {a.APD_ROOM}\n" +
+                                               $"{user.US_USERNAME}";
+                }
 
                 CalendarItem c = new CalendarItem(_view.Calendar,
                     new DateTime(appointMentDateValue.Year, appointMentDateValue.Month, appointMentDateValue.Day,

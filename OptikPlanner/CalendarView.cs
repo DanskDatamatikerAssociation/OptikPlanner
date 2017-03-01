@@ -197,7 +197,8 @@ namespace OptikPlanner
             {
                 while (true)
                 {
-                    lastMonday = new DateTime(today.Year, today.Month, today.Day - daysSinceLastMonday);
+                    lastMonday = new DateTime(today.Year, today.Month, today.Day).AddDays(-daysSinceLastMonday);
+                    
                     if (lastMonday.DayOfWeek == DayOfWeek.Monday)
                     {
                         break;
@@ -451,7 +452,7 @@ namespace OptikPlanner
                 var type = CalendarViewController.GetAppointmentType(a);
                 var room = _calendarViewController.GetAppointmentRoom(a);
                 var user = _calendarViewController.GetAppointmentUser(a);
-                if (a == null) return;
+                if (a == null || user == null) return;
                 if (a.APD_DESCRIPTION == null || Encoding.Default.GetString(a.APD_DESCRIPTION).Equals("")) a.APD_DESCRIPTION = Encoding.Default.GetBytes("**Ingen beskrivelse**");
                 string textToShow = $"{a.APD_TIMEFROM} - {a.APD_TIMETO}\n" +
                                     "\n" +
