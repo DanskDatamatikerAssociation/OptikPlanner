@@ -13,6 +13,9 @@ using OptikPlanner.Model;
 
 namespace OptikPlanner.View
 {
+    /// <summary>
+    /// the CustomerLibrary view to handle view-related and controller functions
+    /// </summary>
     public partial class CustomerLibrary : Form
     {
         CustomerLibraryController _controller = new CustomerLibraryController();
@@ -30,6 +33,11 @@ namespace OptikPlanner.View
             ListViewBox.Columns.Add("Efternavn", 100);
         }
 
+        /// <summary>
+        /// button to edit customer and saves changes to db
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void editCustomerButton_Click(object sender, EventArgs e)
         {
             CreateCustomer window = new CreateCustomer();
@@ -66,6 +74,11 @@ namespace OptikPlanner.View
 
         }
 
+        /// <summary>
+        /// opens the CreateCustomer view to create a new customer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void createCustomerButton_Click(object sender, EventArgs e)
         {
             //opret ikke eksisterende kunde
@@ -83,6 +96,9 @@ namespace OptikPlanner.View
             }
         }
 
+        /// <summary>
+        /// Adds customer details to the ListView of customers
+        /// </summary>
         public void FillInView()
         {
             foreach (var s in _controller.GetCustomers())
@@ -92,6 +108,11 @@ namespace OptikPlanner.View
             }
         }
 
+        /// <summary>
+        /// Deletes selected customer from view and db
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void deleteCustomerButton_Click(object sender, EventArgs e)
         {
             CUSTOMERS customer = (CUSTOMERS)ListViewBox.SelectedItems[0].Tag;

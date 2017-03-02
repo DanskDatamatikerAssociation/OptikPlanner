@@ -10,10 +10,17 @@ using OptikPlanner.Model;
 
 namespace OptikPlanner.Controller
 {
+    /// <summary>
+    /// Manages the connection between the CustomerLibrary and the model classes mirrored from db
+    /// </summary>
     class CustomerLibraryController
     {
         private OptikItDbContext db;
 
+        /// <summary>
+        /// Gets all users / employees from db
+        /// </summary>
+        /// <returns></returns>
         public List<USERS> GetUser()
         {
             using (db = new OptikItDbContext())
@@ -23,6 +30,10 @@ namespace OptikPlanner.Controller
             }
         }
 
+        /// <summary>
+        /// creates new specified customer in db
+        /// </summary>
+        /// <param name="customer"></param>
         public void PostCustomer(CUSTOMERS customer)
         {
             using (db = new OptikItDbContext())
@@ -46,6 +57,10 @@ namespace OptikPlanner.Controller
             }
         }
 
+        /// <summary>
+        /// Gets the next customer from db by ID
+        /// </summary>
+        /// <returns></returns>
         public int GetNextCustomerId()
         {
             using (db = new OptikItDbContext())
@@ -63,12 +78,13 @@ namespace OptikPlanner.Controller
                 {
                     return 0;
                 }
-
-
-
             }
         }
 
+        /// <summary>
+        /// edits specified customer in db
+        /// </summary>
+        /// <param name="customer"></param>
         public void PutCustomer(CUSTOMERS customer)
         {
             using (db = new OptikItDbContext())
@@ -94,6 +110,10 @@ namespace OptikPlanner.Controller
             }
         }
 
+        /// <summary>
+        /// Deletes specified custoemr from db
+        /// </summary>
+        /// <param name="customer"></param>
         public void DeleteCustomer(CUSTOMERS customer)
         {
             using (db = new OptikItDbContext())
@@ -113,6 +133,10 @@ namespace OptikPlanner.Controller
             }
         }
 
+        /// <summary>
+        /// Gets all customers from db
+        /// </summary>
+        /// <returns></returns>
         public List<CUSTOMERS> GetCustomers()
         {
             using (db = new OptikItDbContext())

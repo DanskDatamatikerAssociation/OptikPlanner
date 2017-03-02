@@ -7,6 +7,9 @@ using OptikPlanner.Controller;
 
 namespace OptikPlanner.View
 {
+    /// <summary>
+    /// Interface for CancelAppointmentView
+    /// </summary>
     public interface ICancelAppointmentView
     {
         void SetController(CancelAppointmentController controller);

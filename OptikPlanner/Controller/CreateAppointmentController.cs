@@ -13,6 +13,9 @@ using OptikPlanner.View;
 
 namespace OptikPlanner.Controller
 {
+    /// <summary>
+    /// Manages the connection between the CreateAppointment and the model classes mirrored from db
+    /// </summary>
     public class CreateAppointmentController
     {
         private OptikItDbContext db;
@@ -25,23 +28,12 @@ namespace OptikPlanner.Controller
             view.SetController(this);
         }
 
-
+        /// <summary>
+        /// post new appointment to the db
+        /// </summary>
+        /// <param name="appointment"></param>
         public void PostAppointment(APTDETAILS appointment)
         {
-            //CUSTOMERS customer = new CUSTOMERS
-            //{
-            //    CS_STAMP = 1,
-            //    CS_FIRSTNAME = "Test",
-            //    CS_LASTNAME = "Upload"
-            //};
-
-            //USERS user = new USERS {US_STAMP = 1};
-
-            //EYEEXAMROOMS room = new EYEEXAMROOMS() {ERO_STAMP = 1};
-
-
-            //APTDETAILS appointment = new APTDETAILS(10, user, room, DateTime.Now, "11:15", "14:30", customer, "Test aftale");
-
             using (db = new OptikItDbContext())
             {
                 try
@@ -59,23 +51,28 @@ namespace OptikPlanner.Controller
                                 validationError.ErrorMessage);
                         }
                     }
-
-
                 }
             }
-
         }
 
+
+        /// <summary>
+        /// Gets the next appoint ID
+        /// </summary>
+        /// <returns></returns>
         public int GetNextAppointmentId()
         {
             var appointments = GetAppointments();
             if (appointments.Count == 0) return 0;
 
             return appointments.Last().APD_STAMP + 1;
-
-
+            
         }
 
+        /// <summary>
+        /// Gets all the appointments in the db
+        /// </summary>
+        /// <returns></returns>
         public List<APTDETAILS> GetAppointments()
         {
             using (db = new OptikItDbContext())
@@ -83,63 +80,40 @@ namespace OptikPlanner.Controller
                 var appointments = from a in db.APTDETAILS select a;
                 return appointments.ToList();
             }
-
         }
 
-
+        /// <summary>
+        /// Gets all rooms from the db
+        /// </summary>
+        /// <returns></returns>
         public List<EYEEXAMROOMS> GetRooms()
         {
-            //TESTDATA
-
-            //EYEEXAMROOMS room = new EYEEXAMROOMS();
-            //room.ERO_OPENFROM = "12:15";
-            //room.ERO_OPENTO = "13:00";
-            //room.ERO_NBR = 5;
-            //room.ERO_TYPE = "Linse";
-            //room.ERO_DESC = "linserum 5 første sal til venstre";
-            //room.ERO_SHORTDESC = "kort";
-
-
-            //return room;
-
             using (db = new OptikItDbContext())
             {
                 var rooms = from r in db.EYEEXAMROOMS select r;
                 return rooms.ToList();
             }
         }
-
-
-
-
-
+        
+        /// <summary>
+        /// Gets all users / employees from the db
+        /// </summary>
+        /// <returns></returns>
         public List<USERS> GetUsers()
         {
-            //USERS user = new USERS();
-            //user.US_CPRNO = "2001927891";
-            //user.US_USERNAME = "MyUserName";
-            //user.US_STAMP = 1;
-
-
-            //return user;
-
             using (db = new OptikItDbContext())
             {
                 var users = from u in db.USERS select u;
                 return users.ToList();
             }
         }
-
+        
+        /// <summary>
+        /// Gets all the customers from the db
+        /// </summary>
+        /// <returns></returns>
         public List<CUSTOMERS> GetCustomers()
         {
-            //    CUSTOMERS customer = new CUSTOMERS();
-            //    customer.CS_CPRNO = "2001926754";
-            //    customer.CS_FIRSTNAME = "Børge";
-            //    customer.CS_LASTNAME = "Jensen";
-
-
-            //    return customer;
-
             using (db = new OptikItDbContext())
             {
                 var customers = from c in db.CUSTOMERS select c;
@@ -147,6 +121,11 @@ namespace OptikPlanner.Controller
             }
         }
 
+        /// <summary>
+        /// gets the appointment with specificed room
+        /// </summary>
+        /// <param name="appointment"></param>
+        /// <returns></returns>
         public EYEEXAMROOMS GetAppointmentRoom(APTDETAILS appointment)
         {
             var rooms = GetRooms();
@@ -154,6 +133,11 @@ namespace OptikPlanner.Controller
             return matchingRoom;
         }
 
+        /// <summary>
+        /// Gets the appointment with the specified user / employee
+        /// </summary>
+        /// <param name="appointment"></param>
+        /// <returns></returns>
         public USERS GetAppointmentUser(APTDETAILS appointment)
         {
             var users = GetUsers();
@@ -161,7 +145,10 @@ namespace OptikPlanner.Controller
             return matchingUser;
         }
 
-
+        /// <summary>
+        /// edits the specified appoint in the db
+        /// </summary>
+        /// <param name="appointment"></param>
         public void PutAppointment(APTDETAILS appointment)
         {
             using (db = new OptikItDbContext())
@@ -178,11 +165,7 @@ namespace OptikPlanner.Controller
                     a.APD_ROOM = appointment.APD_ROOM;
                     a.APD_MOBILE = appointment.APD_MOBILE;
                     a.APD_EMAIL = appointment.APD_EMAIL;
-
-
-                }
-
-
+                 }
                 try
                 {
                     db.SaveChanges();
@@ -194,6 +177,12 @@ namespace OptikPlanner.Controller
             }
         }
 
+
+        /// <summary>
+        /// find specified customer with cpr
+        /// </summary>
+        /// <param name="cpr"></param>
+        /// <returns></returns>
         public CUSTOMERS FindCustomerWithCpr(string cpr)
         {
             var customers = GetCustomers();
@@ -201,6 +190,11 @@ namespace OptikPlanner.Controller
             return matchingCustomer;
         }
 
+        /// <summary>
+        /// Gets all future appointments of specified customer
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <returns></returns>
         public List<APTDETAILS> GetFutureAppointments(CUSTOMERS customer)
 
         {
@@ -223,6 +217,11 @@ namespace OptikPlanner.Controller
             return sorted;
         }
 
+        /// <summary>
+        /// Gets the last 2 appointments from specified customer
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <returns></returns>
         public List<APTDETAILS> GetPastAppointments(CUSTOMERS customer)
         {
             var allAppointments = GetAppointments();
@@ -251,8 +250,5 @@ namespace OptikPlanner.Controller
 
             return sorted;
         }
-
-
-
     }
 }

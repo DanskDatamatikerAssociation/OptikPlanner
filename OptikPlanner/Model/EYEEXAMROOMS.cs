@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OptikPlanner.Model
 {
+    /// <summary>
+    /// Direct mirror of the rooms in db
+    /// </summary>
     public partial class EYEEXAMROOMS
     {
         public int? ERO_NBR { get; set; }

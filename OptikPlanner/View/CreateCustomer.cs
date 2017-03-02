@@ -14,6 +14,9 @@ using OptikPlanner.Model;
 
 namespace OptikPlanner.View
 {
+    /// <summary>
+    /// the CreateCustomer view to handle view-related and controller functions
+    /// </summary>
     public partial class CreateCustomer : Form
     {
         CustomerLibraryController _controller = new CustomerLibraryController();
@@ -22,6 +25,12 @@ namespace OptikPlanner.View
             InitializeComponent();
             StartPosition = FormStartPosition.CenterParent;
         }
+
+        /// <summary>
+        /// creates customer and adds to db + logging
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void createCustomerButton_Click(object sender, EventArgs e)
         {
             CUSTOMERS customer = new CUSTOMERS();

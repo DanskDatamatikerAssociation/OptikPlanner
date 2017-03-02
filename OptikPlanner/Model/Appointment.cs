@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace OptikPlanner.Model
 {
-    //public enum AppointmentType
-    //{
-    //    Steloptimering,
-    //    Linejustering
-    //}
-
+    /// <summary>
+    /// Appointment class to represent appointments from the db
+    /// </summary>
     class Appointment
     {
 

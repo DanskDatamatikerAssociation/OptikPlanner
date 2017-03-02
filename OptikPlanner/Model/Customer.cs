@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace OptikPlanner.Model
 {
+
+    /// <summary>
+    /// Customer class to represent the customers from the db
+    /// </summary>
     class Customer
     {
         public int Id { get; set; }

@@ -16,6 +16,9 @@ using OptikPlanner.Model;
 
 namespace OptikPlanner.View
 {
+    /// <summary>
+    /// the CancelAppointment view to handle view-related and controller functions
+    /// </summary>
     public partial class CancelAppointment : Form, ICancelAppointmentView
     {
         private CancelAppointmentController _controller;
@@ -56,6 +59,9 @@ namespace OptikPlanner.View
             this.Close();
         }
 
+        /// <summary>
+        /// Gets the specified radio button for cancellation reason then proceeds to save a log of specified reason for cancellation
+        /// </summary>
         private void Log()
         {
             try
@@ -94,6 +100,9 @@ namespace OptikPlanner.View
             }
         }
 
+        /// <summary>
+        /// deletes the appointment
+        /// </summary>
         private void DeleteAppointment()
         {
             _controller.DeleteAppointment(AppointmentToDelete);
@@ -103,6 +112,9 @@ namespace OptikPlanner.View
             createAppointmentForm.Close();
         }
 
+        /// <summary>
+        /// adds all users to list of users 
+        /// </summary>
         private void AddUsersToList()
         {
             var employees = _controller.GetEmployees();

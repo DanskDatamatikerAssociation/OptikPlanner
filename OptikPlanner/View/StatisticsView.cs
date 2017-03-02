@@ -19,6 +19,9 @@ using OptikPlanner.Model;
 
 namespace OptikPlanner.View
 {
+    /// <summary>
+    /// The StatisticsView to handle view-related and controller functions
+    /// </summary>
     public partial class StatisticsView : Form, IStatisticsView
     {
         private StatisticsViewController _controller;
@@ -40,14 +43,16 @@ namespace OptikPlanner.View
             StartPosition = FormStartPosition.CenterScreen;
             Populate();
             _controller = new StatisticsViewController(this);
-
-            
-
             showMonthCombo.SelectedIndex = DateTime.Now.Month;
             showYearCombo.Text = DateTime.Now.Year.ToString();
             chooseTypeCombo.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// changes the listbox items depending on case
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -90,6 +95,10 @@ namespace OptikPlanner.View
 
         }
 
+        /// <summary>
+        /// to enable / disable functions during different views
+        /// </summary>
+        /// <param name="enable"></param>
         private void EnableControls(bool enable)
         {
             showAllCheckBox.Enabled = enable;
@@ -97,6 +106,9 @@ namespace OptikPlanner.View
             chooseDataLabel.Enabled = enable;
         }
 
+        /// <summary>
+        /// fills the FilterBox with rooms
+        /// </summary>
         private void FillRoomFilterBox()
         {
             var rooms = _controller.GetRooms();
@@ -105,6 +117,9 @@ namespace OptikPlanner.View
 
         }
 
+        /// <summary>
+        /// Fills the FilterBox with Employees
+        /// </summary>
         private void FillEmployeeFilterBox()
         {
             var employees = _controller.GetUsers();
@@ -112,6 +127,9 @@ namespace OptikPlanner.View
             foreach (var e in employees) filterListBox.Items.Add(e);
         }
 
+        /// <summary>
+        /// fills the listview with appointment data
+        /// </summary>
         private void FillInAppointmentData()
         {
 
@@ -144,18 +162,6 @@ namespace OptikPlanner.View
             foreach (var a in appointments)
             {
                 string type = CalendarViewController.GetAppointmentType(a);
-
-
-                //if (!ListViewContainsHeader(type))
-                //{
-                //    var column = listView1.Columns.Add(type, type, 120);
-                //    ListViewItem.ListViewSubItem value = new ListViewItem.ListViewSubItem();
-                //    listView1.Items[0].SubItems.Add(value);
-                //    List<APTDETAILS> appointmentsWithTag = new List<APTDETAILS>();
-                //    value.Tag = appointmentsWithTag;
-                //    column.Tag = value;
-                //}
-
                 var matchingColumn = listView1.Columns[type];
                 if (matchingColumn.Text.Equals(type))
                 {
@@ -177,11 +183,15 @@ namespace OptikPlanner.View
                 var value = (List<APTDETAILS>)subItem.Tag;
                 subItem.Text = value.Count.ToString();
             }
-
             //Fix for disappearing scrollbar.
             listView1.Columns[0].Width += 1;
         }
 
+        /// <summary>
+        /// fills the listview with appointment data with compared month & year
+        /// </summary>
+        /// <param name="compareMonth"></param>
+        /// <param name="compareYear"></param>
         private void FillInAppointmentData(int compareMonth, int compareYear)
         {
             int currentMonth = compareMonth;
@@ -247,7 +257,9 @@ namespace OptikPlanner.View
         }
 
 
-
+        /// <summary>
+        /// Fills the listview with room data
+        /// </summary>
         private void FillInRoomData()
         {
             int currentMonth = DateTime.Now.Month;
@@ -268,24 +280,18 @@ namespace OptikPlanner.View
                 listView1.Items[i].SubItems.Add(room.ERO_SHORTDESC);
                 listView1.Items[i].SubItems.Add(_controller.GetRoomUsageInHours(room, currentMonth, currentYear).ToString());
                 listView1.Items[i].SubItems.Add(_controller.GetRoomAvailabilityInHours(room, 148, currentMonth, currentYear).ToString());
-
             }
-
-
-
         }
 
-
+        /// <summary>
+        /// fills the listview with employee data
+        /// </summary>
         private void FillInEmployeeData()
         {
             chooseDataLabel.Text = "Vælg medarbejder(e)";
             listView1.Columns.Clear();
             listView1.Items.Clear();
             int newWidth = listView1.Width/4;
-            //listView1.Columns.Add("Navn", 200);
-            //listView1.Columns.Add("Arbejdstimer", 80);
-            //listView1.Columns.Add("Tilgængelighed i timer", 120);
-            //listView1.Columns.Add("Antal aftaler", 80);
             listView1.Columns.Add("Navn", newWidth);
             listView1.Columns.Add("Arbejdstimer", newWidth);
             listView1.Columns.Add("Tilgængelighed i timer", newWidth);
@@ -300,12 +306,12 @@ namespace OptikPlanner.View
                 listView1.Items[i].SubItems.Add(_controller.GetEmployeeUsageInHours(user).ToString());
                 listView1.Items[i].SubItems.Add(_controller.GetEmployeeAvailabilityInHours(user, 148).ToString());
                 listView1.Items[i].SubItems.Add(_controller.GetEmployeeNumberOfAppointments(user).ToString());
-
             }
-
-
         }
 
+        /// <summary>
+        /// fills the listview with cancellation data
+        /// </summary>
         public void FillInCancellationData()
         {
 
@@ -315,8 +321,6 @@ namespace OptikPlanner.View
             int newWidth = listView1.Width/2;
             listView1.Columns.Add("Grund", 200);
             listView1.Columns.Add("aflysninger i " + showMonthCombo.Text + showYearCombo.Text, listView1.Width-200);
-            //listView1.Columns.Add("Grund", newWidth);
-            //listView1.Columns.Add("aflysninger i " + showMonthCombo.Text + showYearCombo.Text, newWidth);
             listView1.Items.Add("Kunden ikke mødte op.");
             listView1.Items.Add("Kunden har aflyst telefonisk");
             listView1.Items.Add("der har været Andet i vejen.");
@@ -327,6 +331,9 @@ namespace OptikPlanner.View
             filterListBox.Items.Clear();
         }
 
+        /// <summary>
+        /// hard coded populate for combo boxes - months & years
+        /// </summary>
         public void Populate()
         {
             chooseperiodLabel.Text = "måned";
@@ -377,6 +384,11 @@ namespace OptikPlanner.View
             }
         }
 
+        /// <summary>
+        /// numeric or graphical view choice
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void chooseViewButton_Click(object sender, EventArgs e)
         {
             if (clickedGraf)
@@ -389,7 +401,9 @@ namespace OptikPlanner.View
 
 
 
-
+        /// <summary>
+        /// graphical view choice sets view to display speicifed case
+        /// </summary>
         private void GraficalButtonClick()
         {
             chooseViewButton.Text = "Talbaseret";
@@ -413,17 +427,15 @@ namespace OptikPlanner.View
                         break;
                     default:
                         SetupLoggingComparisonChart();
-                        //ClearChart();
                         break;
                 }
             }
-
             chart1.Show();
-
-            // indsæt fremvisning af Danny's diagrammer
-
         }
 
+        /// <summary>
+        /// Numeric view choice sets view to display listview of numbers and hides charts
+        /// </summary>
         private void NumericButtonClick()
         {
             chooseViewButton.Text = "Grafisk";
@@ -434,6 +446,11 @@ namespace OptikPlanner.View
 
         }
 
+        /// <summary>
+        /// gets specific month on specified case
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void showMonthCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (chooseTypeCombo.Text)
@@ -458,6 +475,11 @@ namespace OptikPlanner.View
             }
         }
 
+        /// <summary>
+        /// compare months
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void compareMonthCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             SearchButton.Enabled = true;
@@ -466,6 +488,9 @@ namespace OptikPlanner.View
 
         }
 
+        /// <summary>
+        /// filters room data 
+        /// </summary>
         private void FilterRoomData()
         {
 
@@ -481,9 +506,6 @@ namespace OptikPlanner.View
             {
 
             }
-
-
-
             listView1.Columns.Clear();
             listView1.Items.Clear();
             listView1.Columns.Add("Lokale", 80);
@@ -502,9 +524,12 @@ namespace OptikPlanner.View
             }
         }
 
+        /// <summary>
+        /// filters room data to compare
+        /// </summary>
+        /// <param name="roomsToFillIn"></param>
         private void FilterRoomData(List<EYEEXAMROOMS> roomsToFillIn)
         {
-
             int chosenMonth = showMonthCombo.SelectedIndex;
             int chosenYear = DateTime.Now.Year;
 
@@ -519,19 +544,12 @@ namespace OptikPlanner.View
             }
 
             int newWidth = listView1.Width/4;
-
             listView1.Columns.Clear();
             listView1.Items.Clear();
-            //listView1.Columns.Add("Lokale", 80);
-            //listView1.Columns.Add("Type", 100);
-            //listView1.Columns.Add("Timer brugt", 100);
-            //listView1.Columns.Add("Tilgængelighed i timer", 120);
             listView1.Columns.Add("Lokale", newWidth);
             listView1.Columns.Add("Type", newWidth);
             listView1.Columns.Add("Timer brugt", newWidth);
             listView1.Columns.Add("Tilgængelighed i timer", newWidth);
-
-
 
             for (int i = 0; i < roomsToFillIn.Count; i++)
             {
@@ -544,6 +562,9 @@ namespace OptikPlanner.View
             }
         }
 
+        /// <summary>
+        /// filters employee data
+        /// </summary>
         private void FilterEmployeeData()
         {
             int chosenMonth = showMonthCombo.SelectedIndex;
@@ -561,12 +582,6 @@ namespace OptikPlanner.View
 
             listView1.Columns.Clear();
             listView1.Items.Clear();
-            //listView1.Columns.Add("Navn", 200);
-            //listView1.Columns.Add("Arbejdstimer", 80);
-            //listView1.Columns.Add("Tilgængelighed i timer", 120);
-            //listView1.Columns.Add("Antal aftaler", 120);
-
-
 
             var users = _controller.GetUsers();
 
@@ -582,6 +597,10 @@ namespace OptikPlanner.View
             }
         }
 
+        /// <summary>
+        /// filter Employee data to compare
+        /// </summary>
+        /// <param name="employeesToFillIn"></param>
         private void FilterEmployeeData(List<USERS> employeesToFillIn)
         {
             int chosenMonth = showMonthCombo.SelectedIndex;
@@ -601,10 +620,6 @@ namespace OptikPlanner.View
             listView1.Items.Clear();
  
             int newWidth = listView1.Width / 4;
-            //listView1.Columns.Add("Navn", 200);
-            //listView1.Columns.Add("Arbejdstimer", 80);
-            //listView1.Columns.Add("Tilgængelighed i timer", 120);
-            //listView1.Columns.Add("Antal aftaler", 80);
             listView1.Columns.Add("Navn", newWidth);
             listView1.Columns.Add("Arbejdstimer", newWidth);
             listView1.Columns.Add("Tilgængelighed i timer", newWidth);
@@ -623,6 +638,9 @@ namespace OptikPlanner.View
             }
         }
 
+        /// <summary>
+        /// filter cancellation data
+        /// </summary>
         private void FilterCancellations()
         {
 
@@ -652,9 +670,9 @@ namespace OptikPlanner.View
             listView1.Items[2].SubItems.Add(cancelElseList.Count().ToString());
         }
 
-
-
-
+        /// <summary>
+        /// clears month choice
+        /// </summary>
         public void MonthClearList()
         {
             while (listView1.Items[0].SubItems.Count > 1 && listView1.Items[1].SubItems.Count > 1 && listView1.Items[2].SubItems.Count > 1)
@@ -665,6 +683,10 @@ namespace OptikPlanner.View
             }
 
         }
+
+        /// <summary>
+        /// clears compared choice
+        /// </summary>
         public void CompareClearList()
         {
             while (listView1.Items[0].SubItems.Count > 2 && listView1.Items[1].SubItems.Count > 2 && listView1.Items[2].SubItems.Count > 2)
@@ -676,6 +698,9 @@ namespace OptikPlanner.View
 
         }
 
+        /// <summary>
+        /// set up of the pie charts for graphical view
+        /// </summary>
         private void SetupAppointmentPieChart()
         {
             FillInAppointmentData(); //Otherwise we risk that the list is null when trying to show the chart. 
@@ -714,10 +739,11 @@ namespace OptikPlanner.View
             }
 
             chart1.Invalidate();
-
-
         }
 
+        /// <summary>
+        /// fills the piechart with room data
+        /// </summary>
         private void SetupRoomPieChart()
         {
             SetDefaultPieChartSettings();
@@ -757,9 +783,6 @@ namespace OptikPlanner.View
             p1.LegendText = "Tilgængelighed";
             var p1Value = p1.YValues[0];
 
-
-            //Lokaler
-            //var rooms = _controller.GetRooms();
             var checkedRooms = GetCheckedRooms();
             foreach (var r in checkedRooms)
             {
@@ -773,6 +796,9 @@ namespace OptikPlanner.View
             chart1.Invalidate();
         }
 
+        /// <summary>
+        /// fills the pie chart with employee data
+        /// </summary>
         private void SetUpEmployeePieChart()
         {
             SetDefaultPieChartSettings();
@@ -814,10 +840,7 @@ namespace OptikPlanner.View
             var p1 = series1.Points.Add(148);
             p1.LegendText = "Tilgængelighed";
             var p1Value = p1.YValues[0];
-
-
-            //Medarbejdere
-            //var employees = _controller.GetUsers();
+            
             var checkedEmployees = GetCheckedEmployees();
             foreach (var e in checkedEmployees)
             {
@@ -831,6 +854,9 @@ namespace OptikPlanner.View
             chart1.Invalidate();
         }
 
+        /// <summary>
+        /// fills the pie chart with logging data
+        /// </summary>
         private void SetupLoggingBarChart()
         {
             SetDefaultBarCharSettings();
@@ -862,6 +888,9 @@ namespace OptikPlanner.View
             chart1.Invalidate();
         }
 
+        /// <summary>
+        /// sets up the bar chart for logging comparison
+        /// </summary>
         private void SetupLoggingComparisonChart()
         {
             SetDefaultBarCharSettings();
@@ -918,6 +947,9 @@ namespace OptikPlanner.View
             chart1.Invalidate();
         }
 
+        /// <summary>
+        /// sets up the bar chart for room comparison
+        /// </summary>
         private void SetupRoomComparisonChart()
         {
             SetDefaultBarCharSettings();
@@ -968,9 +1000,7 @@ namespace OptikPlanner.View
 
             chart1.Series.Add(series);
             chart1.Series.Add(comparisonSeries);
-
-
-            //var rooms = _controller.GetRooms();
+            
             var checkedRooms = GetCheckedRooms();
 
             for (int i = 0; i < checkedRooms.Count; i++)
@@ -988,6 +1018,10 @@ namespace OptikPlanner.View
             chart1.Invalidate();
         }
 
+
+        /// <summary>
+        /// sets up the bar chart for employee comparison
+        /// </summary>
         private void SetupEmployeeComparisonChart()
         {
             SetDefaultBarCharSettings();
@@ -1053,6 +1087,9 @@ namespace OptikPlanner.View
             }
         }
 
+        /// <summary>
+        /// sets up the bar chart for appointment comparison
+        /// </summary>
         private void SetupAppointmentComparisonChart()
         {
             SetDefaultBarCharSettings();
@@ -1137,20 +1174,14 @@ namespace OptikPlanner.View
                     compareBar.Label = "0";
                     compareBar.AxisLabel = "0";
                 }
-
-
-
+                
                 FillInAppointmentData();
-
-
             }
-
-
-
-
-
         }
 
+        /// <summary>
+        /// set up default bar charts
+        /// </summary>
         private void SetDefaultBarCharSettings()
         {
             chart1.Series.Clear();
@@ -1163,6 +1194,9 @@ namespace OptikPlanner.View
             chart1.ChartAreas[0].Area3DStyle.Enable3D = false;
         }
 
+        /// <summary>
+        /// set up default pie charts
+        /// </summary>
         private void SetDefaultPieChartSettings()
         {
             chart1.ChartAreas[0].BackColor = Color.Transparent;
@@ -1178,6 +1212,11 @@ namespace OptikPlanner.View
             //chart1.ChartAreas[0].Position = new ElementPosition(-10, 10, 90, 90);
         }
 
+        /// <summary>
+        /// shows yearcombo data with specified case
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void showYearCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (chooseTypeCombo.Text)
@@ -1201,6 +1240,12 @@ namespace OptikPlanner.View
 
             }
         }
+
+        /// <summary>
+        /// Ok button for filtration
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SearchButton_Click(object sender, EventArgs e)
         {
             chooseViewButton.Enabled = false;
@@ -1226,6 +1271,12 @@ namespace OptikPlanner.View
 
         }
 
+
+        /// <summary>
+        /// resets all filtrations
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void resetButton_Click(object sender, EventArgs e)
         {
             NumericButtonClick();
@@ -1237,7 +1288,11 @@ namespace OptikPlanner.View
 
         }
 
-
+        /// <summary>
+        /// filters listbox items
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void filterListBox_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             if (chooseTypeCombo.Text.Equals("Lokaler"))
@@ -1288,26 +1343,20 @@ namespace OptikPlanner.View
                     this.BeginInvoke(new Action(SetUpEmployeePieChart));
 
             }
-
-            //this.BeginInvoke(new Action(() =>
-            //{
-            //    //Do the after-check tasks here
-            //}));
-
-
         }
 
+
+        /// <summary>
+        /// checks all boxes on listbox
+        /// </summary>
+        /// <param name="checkThem"></param>
         private void CheckAllBoxes(bool checkThem)
         {
             showAllCheckBox.Checked = checkThem;
             for (int i = 0; i < filterListBox.Items.Count; i++)
             {
                 filterListBox.SetItemChecked(i, checkThem);
-
             }
-
-
-
         }
 
         private void showAllCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -1316,6 +1365,10 @@ namespace OptikPlanner.View
 
         }
 
+        /// <summary>
+        /// get all checked rooms
+        /// </summary>
+        /// <returns></returns>
         private List<EYEEXAMROOMS> GetCheckedRooms()
         {
             List<EYEEXAMROOMS> checkedRooms = new List<EYEEXAMROOMS>();
@@ -1329,6 +1382,10 @@ namespace OptikPlanner.View
             return checkedRooms;
         }
 
+        /// <summary>
+        /// get all checked employees
+        /// </summary>
+        /// <returns></returns>
         private List<USERS> GetCheckedEmployees()
         {
             List<USERS> checkedEmployees = new List<USERS>();

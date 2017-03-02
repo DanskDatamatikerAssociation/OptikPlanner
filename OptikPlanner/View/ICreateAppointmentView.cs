@@ -5,6 +5,9 @@ using OptikPlanner.Model;
 namespace OptikPlanner.View
 
 {
+    /// <summary>
+    /// interface for CreateAppointmentView
+    /// </summary>
     public interface ICreateAppointmentView
     {
         //APTDETAILS ClickedAppointment { get; set; }

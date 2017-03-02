@@ -20,6 +20,9 @@ using Calendar = System.Windows.Forms.Calendar.Calendar;
 
 namespace OptikPlanner
 {
+    /// <summary>
+    /// the CalendarView to handle view-related and controller functions
+    /// </summary>
     public partial class CalendarView : Form, ICalendarView
     {
         private CalendarViewController _calendarViewController;
@@ -52,6 +55,9 @@ namespace OptikPlanner
             SetupCalendar();
         }
 
+        /// <summary>
+        /// Sets up the calendar to match desired view
+        /// </summary>
         private void SetupCalendar()
         {
             var rooms = from room in _calendarViewController.GetRooms() orderby room.ERO_NBR select room;
@@ -89,11 +95,13 @@ namespace OptikPlanner
         public void SetController(CalendarViewController controller)
         {
             _calendarViewController = controller;
-
-
         }
 
-
+        /// <summary>
+        /// Item click to access specified appointment details
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void calendar1_ItemDoubleClick(object sender, CalendarItemEventArgs e)
         {
             if (e.Item.Selected)
@@ -103,24 +111,22 @@ namespace OptikPlanner
                 var form = new CreateAppointment();
                 form.ShowDialog();
             }
-
-
-
-
         }
 
+        /// <summary>
+        /// add all apointments to the calendar
+        /// </summary>
         private void AddAppointmentsToCalendar()
         {
-            //calendar.Items.Clear();
-
             if (_filtered) calendar.Items.AddRange(_calendarViewController.GetAppointmentsAsCalendarItems(_filteredAppointments));
             else calendar.Items.AddRange(_calendarViewController.GetAppointmentsAsCalendarItems());
             ApplyColorLogicToCalendarItems();
-
         }
 
 
-
+        /// <summary>
+        /// show day mode
+        /// </summary>
         private void ShowDayView()
         {
             SetAllLabels();
@@ -136,6 +142,9 @@ namespace OptikPlanner
 
         }
 
+        /// <summary>
+        /// Show week mode
+        /// </summary>
         private void ShowWeekView()
         {
             SetAllLabels();
@@ -169,21 +178,13 @@ namespace OptikPlanner
             DateTime oneWeekAhead = lastMonday.AddDays(6);
 
             calendar.SetViewRange(lastMonday, oneWeekAhead);
-
-            //if (!monthView.SelectionStart.Equals(DateTime.MinValue) ||
-            //    !monthView.SelectionEnd.Equals(DateTime.MinValue))
-            //{
-            //    monthView.SelectionStart = calendar.ViewStart;
-            //    monthView.SelectionEnd = calendar.ViewEnd;
-            //}
-
-
-
             calendar.SelectedElementStart = null;
-
-
         }
 
+
+        /// <summary>
+        /// show two week schedule from present date
+        /// </summary>
         private void ShowTwoWeeksView()
         {
             //CHECK THE CALENDARRENDERER-CLASS - PerformItemLayout FOR DEBUGGING ~Danny
@@ -216,6 +217,9 @@ namespace OptikPlanner
 
         }
 
+        /// <summary>
+        /// Show month mode
+        /// </summary>
         private void ShowMonthView()
         {
             SetAllLabels();
@@ -232,23 +236,42 @@ namespace OptikPlanner
 
         }
 
+        /// <summary>
+        /// Button to access week view
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void weekViewButton_Click(object sender, EventArgs e)
         {
             ShowWeekView();
         }
 
+        /// <summary>
+        /// button to access day view
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dayViewButton_Click(object sender, EventArgs e)
         {
             ShowDayView();
         }
 
+        /// <summary>
+        /// button to access month view
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void monthViewButton_Click(object sender, EventArgs e)
         {
             ShowMonthView();
         }
 
 
-
+        /// <summary>
+        /// Corrects the viewmode
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void monthView2_SelectionChanged(object sender, EventArgs e)
         {
             switch (_viewMode)
@@ -267,16 +290,20 @@ namespace OptikPlanner
             SetAllLabels();
         }
 
+        /// <summary>
+        /// load all calendar items
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void calendar_LoadItems(object sender, CalendarLoadEventArgs e)
         {
             SetAllLabels();
             AddAppointmentsToCalendar();
-
-
-
-
         }
 
+        /// <summary>
+        /// apply colors to all appointments (specified by employee)
+        /// </summary>
         private void ApplyColorLogicToCalendarItems()
         {
             //Color logic here
@@ -301,7 +328,11 @@ namespace OptikPlanner
             }
         }
 
-
+        /// <summary>
+        /// button to create new appointment
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void newAppointmentButton_Click(object sender, EventArgs e)
         {
             CreateAppointment.ClickedAppointment = null;
@@ -309,6 +340,11 @@ namespace OptikPlanner
             newForm.ShowDialog();
         }
 
+        /// <summary>
+        /// button to show today
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void todayButton_Click(object sender, EventArgs e)
         {
 
@@ -334,12 +370,20 @@ namespace OptikPlanner
 
         }
 
+        /// <summary>
+        /// button to show two weeks view
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void twoWeeksButton_Click(object sender, EventArgs e)
         {
 
             ShowTwoWeeksView();
         }
 
+        /// <summary>
+        /// sets the layout for week view
+        /// </summary>
         public void SetWeekLabel()
         {
             DateTime currentDate;
@@ -356,15 +400,11 @@ namespace OptikPlanner
             currentWeek = CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(currentDate, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
 
             weekLabel.Text = currentWeek.ToString();
-            //if (!monthView.SelectionStart.Equals(DateTime.MinValue))
-            //    weekLabel.Text =
-            //        CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(monthView.SelectionStart,
-            //            CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday).ToString();
-
-
-
         }
 
+        /// <summary>
+        /// Sets the layout for month view
+        /// </summary>
         public void SetMonthLabel()
         {
             DateTime currentDate;
@@ -417,6 +457,9 @@ namespace OptikPlanner
 
         }
 
+        /// <summary>
+        /// sets the layout for year view
+        /// </summary>
         public void SetYearLabel()
         {
 
@@ -433,6 +476,11 @@ namespace OptikPlanner
 
         }
 
+        /// <summary>
+        /// mouseover tooltip view to show brief description
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void calendar_MouseMove(object sender, MouseEventArgs e)
         {
             CalendarItem i = calendar.ItemAt(calendar.PointToClient(Cursor.Position));
@@ -466,20 +514,33 @@ namespace OptikPlanner
             }
         }
 
+        /// <summary>
+        /// refreshes appointments on the view
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CalendarView_Activated(object sender, EventArgs e)
         {
-            //Refreshes the appointment on to view.
             calendar.ViewStart = calendar.ViewStart;
             calendar.ViewEnd = calendar.ViewEnd;
         }
 
+        /// <summary>
+        /// button to access the log
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void logButton_Click(object sender, EventArgs e)
         {
             Process.Start(Path.Combine(Environment.GetFolderPath(
                 Environment.SpecialFolder.ApplicationData), "CancelAppointmentLog.txt"));
         }
 
-
+        /// <summary>
+        /// right click function
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void calendarButtonRight_Click(object sender, EventArgs e)
         {
             switch (_viewMode)
@@ -499,6 +560,9 @@ namespace OptikPlanner
             }
         }
 
+        /// <summary>
+        /// show one week ahead (for arrow navigation)
+        /// </summary>
         private void OneWeekAhead()
         {
             var currentViewStart = calendar.ViewStart;
@@ -507,6 +571,9 @@ namespace OptikPlanner
 
         }
 
+        /// <summary>
+        /// show one week back (for arrow navigation)
+        /// </summary>
         private void OneWeekBack()
         {
             var currentViewStart = calendar.ViewStart;
@@ -514,6 +581,9 @@ namespace OptikPlanner
             calendar.SetViewRange(currentViewStart.AddDays(-7), currentViewEnd.AddDays(-7));
         }
 
+        /// <summary>
+        /// show one month ahead (for arrow navigation)
+        /// </summary>
         private void OneMonthAhead()
         {
             var currentViewStart = calendar.ViewStart;
@@ -521,6 +591,9 @@ namespace OptikPlanner
             calendar.SetViewRange(currentViewStart.AddMonths(1), currentViewEnd.AddMonths(1));
         }
 
+        /// <summary>
+        /// Show one month back (for arrow navigation)
+        /// </summary>
         private void OneMonthBack()
         {
             var currentViewStart = calendar.ViewStart;
@@ -528,6 +601,9 @@ namespace OptikPlanner
             calendar.SetViewRange(currentViewStart.AddMonths(-1), currentViewEnd.AddMonths(-1));
         }
 
+        /// <summary>
+        /// show one day ahead (for arrow navigation)
+        /// </summary>
         private void OneDayAhead()
         {
             var currentViewStart = calendar.ViewStart;
@@ -535,6 +611,9 @@ namespace OptikPlanner
             calendar.SetViewRange(currentViewStart.AddDays(1), currentViewEnd.AddDays(1));
         }
 
+        /// <summary>
+        /// show one day back (for arrow navigation)
+        /// </summary>
         private void OneDayBack()
         {
             var currentViewStart = calendar.ViewStart;
@@ -542,6 +621,11 @@ namespace OptikPlanner
             calendar.SetViewRange(currentViewStart.AddDays(-1), currentViewEnd.AddDays(-1));
         }
 
+        /// <summary>
+        /// calendar left click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void calendarButtonLeft_Click(object sender, EventArgs e)
         {
             switch (_viewMode)
@@ -561,6 +645,12 @@ namespace OptikPlanner
             }
         }
 
+
+        /// <summary>
+        /// calendar doubleclick - accessing detailed view of appointment or create new
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void calendar_DoubleClick(object sender, EventArgs e)
         {
 
@@ -571,6 +661,9 @@ namespace OptikPlanner
 
         }
 
+        /// <summary>
+        /// sets all view labels
+        /// </summary>
         private void SetAllLabels()
         {
             SetWeekLabel();
@@ -578,19 +671,33 @@ namespace OptikPlanner
             SetYearLabel();
         }
 
-
+        /// <summary>
+        /// button to access statistics
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void statisticsButton_Click(object sender, EventArgs e)
         {
             StatisticsView window = new StatisticsView();
             window.Show();
         }
 
+        /// <summary>
+        /// button to access Custoemr Library
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button8_Click(object sender, EventArgs e)
         {
             CustomerLibrary window = new CustomerLibrary();
             window.Show();
         }
 
+        /// <summary>
+        /// specific day click to access specified day only view
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void calendar_DayHeaderClick(object sender, CalendarDayEventArgs e)
         {
             _viewMode = DayViewMode;
@@ -598,36 +705,28 @@ namespace OptikPlanner
             dayViewButton.Select();
         }
 
-        private void monthLabel_Click(object sender, EventArgs e)
-        {
 
-        }
-
+        #region Color changes on activity
         private void monthViewButton_Enter(object sender, EventArgs e)
         {
             monthViewButton.BackColor = Color.LightGray;
         }
-
         private void monthViewButton_Leave(object sender, EventArgs e)
         {
             monthViewButton.BackColor = Color.White;
         }
-
         private void weekViewButton_Enter(object sender, EventArgs e)
         {
             weekViewButton.BackColor = Color.LightGray;
         }
-
         private void weekViewButton_Leave(object sender, EventArgs e)
         {
             weekViewButton.BackColor = Color.White;
         }
-
         private void dayViewButton_Enter(object sender, EventArgs e)
         {
             dayViewButton.BackColor = Color.LightGray;
         }
-
         private void dayViewButton_Leave(object sender, EventArgs e)
         {
             dayViewButton.BackColor = Color.White;
@@ -689,10 +788,15 @@ namespace OptikPlanner
         private void logButton_Leave(object sender, EventArgs e)
         {
             logButton.BackColor = Color.White;
-        }
+        } 
+        #endregion
 
         #region checkAllLists
 
+        /// <summary>
+        /// sorting of checked rooms
+        /// </summary>
+        /// <returns></returns>
         private List<EYEEXAMROOMS> GetCheckedRooms()
         {
             List<EYEEXAMROOMS> checkedRooms = new List<EYEEXAMROOMS>();
@@ -706,6 +810,10 @@ namespace OptikPlanner
             return checkedRooms;
         }
 
+        /// <summary>
+        /// sorting of checked employees
+        /// </summary>
+        /// <returns></returns>
         private List<USERS> GetCheckedEmployees()
         {
             List<USERS> checkedEmployees = new List<USERS>();
@@ -717,6 +825,11 @@ namespace OptikPlanner
             }
             return checkedEmployees;
         }
+
+        /// <summary>
+        /// sorting of checked customers
+        /// </summary>
+        /// <returns></returns>
         private List<CUSTOMERS> GetCheckedCustomers()
         {
             List<CUSTOMERS> checkedCustomers = new List<CUSTOMERS>();
@@ -728,6 +841,12 @@ namespace OptikPlanner
             }
             return checkedCustomers;
         }
+
+
+        /// <summary>
+        /// sorting of checked appointments
+        /// </summary>
+        /// <returns></returns>
         private List<APTDETAILS> GetAllCheckedApt()
         {
 
@@ -757,14 +876,15 @@ namespace OptikPlanner
 
             //Works
             //var checkAptQuery = allApt.Where(a => checkedRooms.All(r => r.ERO_NBR == a.APD_ROOM));    
-
-
-
             calendar.Items.Clear();
-
             return checkedApt;
         }
 
+        /// <summary>
+        /// button for filtration 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void filtratingButton_Click(object sender, EventArgs e)
         {
             _filtered = true;
@@ -778,6 +898,11 @@ namespace OptikPlanner
 
 
         #region checkAllboxes
+
+        /// <summary>
+        /// check if all rooms are checked
+        /// </summary>
+        /// <param name="checkThem"></param>
         private void CheckAllRoomsBoxes(bool checkThem)
         {
             checkAllRoomsBox.Checked = checkThem;
@@ -787,6 +912,11 @@ namespace OptikPlanner
 
             }
         }
+
+        /// <summary>
+        /// check of all customers are checked
+        /// </summary>
+        /// <param name="checkThem"></param>
         private void CheckAllCustomersBoxes(bool checkThem)
         {
             checkAllCustomers.Checked = checkThem;
@@ -796,6 +926,11 @@ namespace OptikPlanner
 
             }
         }
+
+        /// <summary>
+        /// check of all customers are checked
+        /// </summary>
+        /// <param name="checkThem"></param>
         private void CheckAllUsersBoxes(bool checkThem)
         {
             checkAllUsersBox.Checked = checkThem;
@@ -806,6 +941,7 @@ namespace OptikPlanner
             }
         }
 
+        ///
         private void checkAllRoomsBox_CheckedChanged(object sender, EventArgs e)
         {
             if (checkAllRoomsBox.Checked) CheckAllRoomsBoxes(true);
@@ -821,6 +957,11 @@ namespace OptikPlanner
         }
         #endregion
 
+        /// <summary>
+        /// filter reset button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void resetFilteringButton_Click(object sender, EventArgs e)
         {
             _filtered = false;

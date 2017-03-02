@@ -160,7 +160,6 @@
             this.monthLabel.TabIndex = 23;
             this.monthLabel.Text = "November";
             this.monthLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.monthLabel.Click += new System.EventHandler(this.monthLabel_Click);
             // 
             // yearLabel
             // 

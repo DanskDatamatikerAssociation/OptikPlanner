@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace OptikPlanner.Model
 {
+    /// <summary>
+    /// User class to represent the users from the db
+    /// </summary>
     class User
     {
         public int Id { get; set; }

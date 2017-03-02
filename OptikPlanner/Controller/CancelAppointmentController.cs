@@ -12,6 +12,10 @@ using OptikPlanner.View;
 
 namespace OptikPlanner.Controller
 {
+
+    /// <summary>
+    /// Manages the connection between the CancelAppointment and the model classes mirrored from db
+    /// </summary>
     public class CancelAppointmentController
     {
         private OptikItDbContext _db;
@@ -30,6 +34,9 @@ namespace OptikPlanner.Controller
             _view.SetController(this);
         }
 
+        /// <summary>
+        /// Get all the cancellations from log that has been cancelled by customer not showing
+        /// </summary>
         public static void GetNoShows()
         {
             
@@ -56,6 +63,9 @@ namespace OptikPlanner.Controller
             
         }
 
+        /// <summary>
+        /// Get all the cancellations from log that has been cancelled by phone
+        /// </summary>
         public static void GetPhoneCancels()
         {
             if (!File.Exists(Path.Combine(Environment.GetFolderPath(
@@ -77,6 +87,9 @@ namespace OptikPlanner.Controller
             }
         }
 
+        /// <summary>
+        /// Get all the cancellations from log that has been cancelled by another reason
+        /// </summary>
         public static void GetElseCancels()
         {
             if (!File.Exists(Path.Combine(Environment.GetFolderPath(
@@ -97,6 +110,10 @@ namespace OptikPlanner.Controller
             }
         }
 
+        /// <summary>
+        /// cancels / deletes the specified appointment from db
+        /// </summary>
+        /// <param name="appointment"></param>
         public void DeleteAppointment(APTDETAILS appointment)
         {
             using (_db = new OptikItDbContext())
@@ -116,6 +133,11 @@ namespace OptikPlanner.Controller
             }
         }
 
+
+        /// <summary>
+        /// Gets all the employees from the db
+        /// </summary>
+        /// <returns></returns>
         public List<USERS> GetEmployees()
         {
             using (_db = new OptikItDbContext())

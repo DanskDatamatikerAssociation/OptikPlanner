@@ -2,6 +2,9 @@ using System.Data.Entity;
 
 namespace OptikPlanner.Model
 {
+    /// <summary>
+    /// DB context
+    /// </summary>
     public partial class OptikItDbContext : DbContext
     {
         public OptikItDbContext()

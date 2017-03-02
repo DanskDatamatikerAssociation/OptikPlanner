@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace OptikPlanner.Model
 {
+    /// <summary>
+    /// Room class to represent the rooms from the db
+    /// </summary>
     class Room
     {
         public int Id { get; set; }

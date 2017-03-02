@@ -14,6 +14,9 @@ using OptikPlanner.Misc;
 
 namespace OptikPlanner.Controller
 {
+    /// <summary>
+    /// Manages the connection between the StatisticsView and the model classes mirrored from db
+    /// </summary>
     public class StatisticsViewController
     {
         private OptikItDbContext _db;
@@ -28,6 +31,11 @@ namespace OptikPlanner.Controller
             OptikItDbContext db = new OptikItDbContext();
         }
 
+
+        /// <summary>
+        /// Gets all the log statistics of cancelled appointments
+        /// </summary>
+        /// <returns></returns>
         public int TotalCancelStatistics()
         {
             var list = CancelAppointmentController.noShowList.Count;
@@ -37,20 +45,10 @@ namespace OptikPlanner.Controller
             return list + list1 + list2;
         }
 
-        //public List<string> GetCancellations()
-        //{
-        //    List<string> LogStrings = new List<string>();
-        //    string[] Lines = System.IO.File.ReadAllLines(Path.Combine(Environment.GetFolderPath(
-        //        Environment.SpecialFolder.ApplicationData), "CancelAppointmentLog.txt"));
-        //    foreach (var s in Lines)
-        //    {
-        //        LogStrings.Add(s);
-        //    }
-        //    return LogStrings;
-        //}
-
-
-
+        /// <summary>
+        /// Gets all the appointments from db
+        /// </summary>
+        /// <returns></returns>
         public List<APTDETAILS> GetAppointments()
         {
             try
@@ -67,6 +65,12 @@ namespace OptikPlanner.Controller
             }
         }
 
+        /// <summary>
+        /// Gets all apointments in the specified parametre timeslot
+        /// </summary>
+        /// <param name="monthNr"></param>
+        /// <param name="year"></param>
+        /// <returns></returns>
         public List<APTDETAILS> GetAppointments(int monthNr, int year)
         {
             try
@@ -90,6 +94,11 @@ namespace OptikPlanner.Controller
             }
         }
 
+        /// <summary>
+        /// gets all the appointment with the specified appointment type
+        /// </summary>
+        /// <param name="appointment"></param>
+        /// <returns></returns>
         public static string GetAppointmentType(APTDETAILS appointment)
         {
             switch (appointment.APD_TYPE)
@@ -106,6 +115,10 @@ namespace OptikPlanner.Controller
             return null;
         }
 
+        /// <summary>
+        /// Gets all the rooms from db
+        /// </summary>
+        /// <returns></returns>
         public List<EYEEXAMROOMS> GetRooms()
         {
             try
@@ -123,8 +136,10 @@ namespace OptikPlanner.Controller
             }
         }
 
-        
-
+        /// <summary>
+        /// Gets all the users / employees from the db
+        /// </summary>
+        /// <returns></returns>
         public List<USERS> GetUsers()
         {
             try
@@ -142,6 +157,11 @@ namespace OptikPlanner.Controller
             }
         }
 
+        /// <summary>
+        /// Gets the specified room availability in hours
+        /// </summary>
+        /// <param name="room"></param>
+        /// <returns></returns>
         public double GetRoomUsageInHours(EYEEXAMROOMS room)
         {
             var allAppointments = GetAppointments();
@@ -161,8 +181,6 @@ namespace OptikPlanner.Controller
                 TimeSpan timeElapsed = timeTo - timeFrom;
 
                 timeSpans.Add(timeElapsed);
-
-
             }
 
             double totalUsageInHours = 0;
@@ -171,6 +189,13 @@ namespace OptikPlanner.Controller
             return totalUsageInHours;
         }
 
+
+        /// <summary>
+        /// Gets the specified room availability in hours in the timeslot parametres (month only)
+        /// </summary>
+        /// <param name="room"></param>
+        /// <param name="monthNr"></param>
+        /// <returns></returns>
         public double GetRoomUsageInHours(EYEEXAMROOMS room, int monthNr)
         {
             var allAppointments = GetAppointments();
@@ -200,6 +225,13 @@ namespace OptikPlanner.Controller
             return totalUsageInHours;
         }
 
+        /// <summary>
+        /// Gets the specified room availability in hours in the timeslot parametres (month & year)
+        /// </summary>
+        /// <param name="room"></param>
+        /// <param name="monthNr"></param>
+        /// <param name="year"></param>
+        /// <returns></returns>
         public double GetRoomUsageInHours(EYEEXAMROOMS room, int monthNr, int year)
         {
             var allAppointments = GetAppointments();
@@ -229,6 +261,12 @@ namespace OptikPlanner.Controller
             return totalUsageInHours;
         }
 
+        /// <summary>
+        /// Gets the specified room usage per month
+        /// </summary>
+        /// <param name="room"></param>
+        /// <param name="totalRoomHoursPerMonth"></param>
+        /// <returns></returns>
         public double GetRoomAvailabilityInHours(EYEEXAMROOMS room, int totalRoomHoursPerMonth)
         {
             double usageInHours = GetRoomUsageInHours(room);
@@ -237,6 +275,13 @@ namespace OptikPlanner.Controller
 
         }
 
+        /// <summary>
+        /// Gets the specified room usage per month in specified month
+        /// </summary>
+        /// <param name="room"></param>
+        /// <param name="totalRoomHoursPerMonth"></param>
+        /// <param name="monthNr"></param>
+        /// <returns></returns>
         public double GetRoomAvailabilityInHours(EYEEXAMROOMS room, int totalRoomHoursPerMonth, int monthNr)
         {
             double usageInhours = GetRoomUsageInHours(room, monthNr);
@@ -244,6 +289,14 @@ namespace OptikPlanner.Controller
             return totalRoomHoursPerMonth - usageInhours;
         }
 
+        /// <summary>
+        /// Gets the specified room usage per month in specified month and year
+        /// </summary>
+        /// <param name="room"></param>
+        /// <param name="totalRoomHoursPerMonth"></param>
+        /// <param name="monthNr"></param>
+        /// <param name="year"></param>
+        /// <returns></returns>
         public double GetRoomAvailabilityInHours(EYEEXAMROOMS room, int totalRoomHoursPerMonth, int monthNr, int year)
         {
             double usageInHours = GetRoomUsageInHours(room, monthNr, year);
@@ -251,17 +304,23 @@ namespace OptikPlanner.Controller
             return totalRoomHoursPerMonth - usageInHours;
         }
 
+        /// <summary>
+        /// Converter for availability in hours to percentage
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="outOf"></param>
+        /// <returns></returns>
         public string GetValueAsPercentage(double value, double outOf)
         {
             double percentage = value / outOf * 100;
             return percentage.ToString("F") + "%";
         }
 
-        public List<APTDETAILS> ShowMonth()
-        {
-            return new List<APTDETAILS>();
-        }
-
+        /// <summary>
+        /// Gets the specified employee usage hours
+        /// </summary>
+        /// <param name="employee"></param>
+        /// <returns></returns>
         public double GetEmployeeUsageInHours(USERS employee)
         {
             var allAppointments = GetAppointments();
@@ -290,6 +349,13 @@ namespace OptikPlanner.Controller
 
         }
 
+        /// <summary>
+        /// Gets the number of appointments for the specified employee in the specified year and month
+        /// </summary>
+        /// <param name="employee"></param>
+        /// <param name="monthNr"></param>
+        /// <param name="year"></param>
+        /// <returns></returns>
         public int GetEmployeeNumberOfAppointments(USERS employee, int monthNr, int year)
         {
             var allAppointments = GetAppointments();
@@ -304,6 +370,11 @@ namespace OptikPlanner.Controller
 
         }
 
+        /// <summary>
+        /// Gets the number of appointments for the specified employee
+        /// </summary>
+        /// <param name="employee"></param>
+        /// <returns></returns>
         public int GetEmployeeNumberOfAppointments(USERS employee)
         {
             var allAppointments = GetAppointments();
@@ -318,6 +389,12 @@ namespace OptikPlanner.Controller
 
         }
 
+        /// <summary>
+        /// Gets the number of hours for the specified employee in specific month
+        /// </summary>
+        /// <param name="employee"></param>
+        /// <param name="monthNr"></param>
+        /// <returns></returns>
         public double GetEmployeeUsageInHours(USERS employee, int monthNr)
         {
             var allAppointments = GetAppointments();
@@ -337,16 +414,20 @@ namespace OptikPlanner.Controller
                 TimeSpan timeElapsed = timeTo - timeFrom;
 
                 timeSpans.Add(timeElapsed);
-
-
             }
 
             double totalUsageInHours = 0;
             foreach (var t in timeSpans) totalUsageInHours += t.TotalHours;
-
             return totalUsageInHours;
         }
 
+        /// <summary>
+        /// Gets the amount of hours used by specified employee in specified year & month
+        /// </summary>
+        /// <param name="employee"></param>
+        /// <param name="monthNr"></param>
+        /// <param name="year"></param>
+        /// <returns></returns>
         public double GetEmployeeUsageInHours(USERS employee, int monthNr, int year)
         {
             var allAppointments = GetAppointments();
@@ -374,6 +455,12 @@ namespace OptikPlanner.Controller
             return totalUsageInHours;
         }
 
+        /// <summary>
+        /// Gets the total amount of hours for employees per month
+        /// </summary>
+        /// <param name="employee"></param>
+        /// <param name="totalHoursPerMonth"></param>
+        /// <returns></returns>
         public double GetEmployeeAvailabilityInHours(USERS employee, int totalHoursPerMonth)
         {
             double usageInHours = GetEmployeeUsageInHours(employee);
@@ -381,6 +468,13 @@ namespace OptikPlanner.Controller
             return totalHoursPerMonth - usageInHours;
         }
 
+        /// <summary>
+        /// Gets the total amount of hours for a month for a specified employee in a specific month
+        /// </summary>
+        /// <param name="employee"></param>
+        /// <param name="totalHoursPerMonth"></param>
+        /// <param name="monthNr"></param>
+        /// <returns></returns>
         public double GetEmployeeAvailabilityInHours(USERS employee, int totalHoursPerMonth, int monthNr)
         {
             double usageInHours = GetEmployeeUsageInHours(employee, monthNr);
@@ -388,6 +482,14 @@ namespace OptikPlanner.Controller
             return totalHoursPerMonth - usageInHours;
         }
 
+        /// <summary>
+        /// Gets the total amount of hours for a specified employee in a specific month & year
+        /// </summary>
+        /// <param name="employee"></param>
+        /// <param name="totalHoursPerMonth"></param>
+        /// <param name="monthNr"></param>
+        /// <param name="year"></param>
+        /// <returns></returns>
         public double GetEmployeeAvailabilityInHours(USERS employee, int totalHoursPerMonth, int monthNr, int year)
         {
             double usageInHours = GetEmployeeUsageInHours(employee, monthNr, year);
@@ -395,40 +497,76 @@ namespace OptikPlanner.Controller
             return totalHoursPerMonth - usageInHours;
         }
 
+
+        /// <summary>
+        /// Get no show cancellations from the log in a specified month
+        /// </summary>
+        /// <param name="monthNr"></param>
+        /// <returns></returns>
         public List<string> GetNoShowCancellations(int monthNr)
         {
             var noShowList = from s in CancelAppointmentController.noShowList where (s.Substring(3, 2).Equals(monthNr.ToString())) select s;
             return noShowList.ToList();
         }
+
+        /// <summary>
+        /// Get no show cancellations from the log in a specified month & year
+        /// </summary>
+        /// <param name="monthNr"></param>
+        /// <param name="yearNr"></param>
+        /// <returns></returns>
         public List<string> GetNoShowCancellations(int monthNr, int yearNr)
         {
             var noShowList = from s in CancelAppointmentController.noShowList where (s.Substring(3, 2).Equals(monthNr.ToString()) && s.Substring(6, 4).Equals(yearNr.ToString())) select s;
             return noShowList.ToList();
         }
 
+        /// <summary>
+        /// Get phone cancellationsfrom the log in a specified month
+        /// </summary>
+        /// <param name="monthNr"></param>
+        /// <returns></returns>
         public List<string> GetPhoneCancellations(int monthNr)
         {
             var noShowList = from s in CancelAppointmentController.cancelPhoneList where (s.Substring(3, 2).Equals(monthNr.ToString())) select s;
             return noShowList.ToList();
         }
+
+        /// <summary>
+        /// Get phone cancellationsfrom the log in a specified month & year
+        /// </summary>
+        /// <param name="monthNr"></param>
+        /// <param name="yearNr"></param>
+        /// <returns></returns>
         public List<string> GetPhoneCancellations(int monthNr, int yearNr)
         {
             var noShowList = from s in CancelAppointmentController.cancelPhoneList where (s.Substring(3, 2).Equals(monthNr.ToString()) && s.Substring(6, 4).Equals(yearNr.ToString())) select s;
             return noShowList.ToList();
         }
 
+        /// <summary>
+        /// Get all other reasons for cancellation from the log in a specified month
+        /// </summary>
+        /// <param name="monthNr"></param>
+        /// <returns></returns>
         public List<string> GetOtherReasonCancellations(int monthNr)
         {
             var noShowList = from s in CancelAppointmentController.cancelElseList where (s.Substring(3, 2).Equals(monthNr.ToString())) select s;
             return noShowList.ToList();
         }
+
+        /// <summary>
+        /// Get all other reasons for cancellation from the log in a specified month & year
+        /// </summary>
+        /// <param name="monthNr"></param>
+        /// <param name="yearNr"></param>
+        /// <returns></returns>
         public List<string> GetOtherReasonCancellations(int monthNr, int yearNr)
         {
             var noShowList = from s in CancelAppointmentController.cancelElseList where (s.Substring(3, 2).Equals(monthNr.ToString()) && s.Substring(6, 4).Equals(yearNr.ToString())) select s;
             return noShowList.ToList();
         }
-
-
+        
     }
 }
 

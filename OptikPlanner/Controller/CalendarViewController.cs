@@ -9,6 +9,9 @@ using OptikPlanner.View;
 
 namespace OptikPlanner.Controller
 {
+    /// <summary>
+    /// Manages the connection between the CalendarView and the model classes mirrored from db
+    /// </summary>
     //Skal kun håndtere logik der indebærer models. 
     public class CalendarViewController
     {
@@ -21,6 +24,10 @@ namespace OptikPlanner.Controller
             view.SetController(this);
         }
 
+        /// <summary>
+        /// Gets all the appointments in the db
+        /// </summary>
+        /// <returns></returns>
         public List<APTDETAILS> GetAppointments()
         {
             using (db = new OptikItDbContext())
@@ -31,38 +38,26 @@ namespace OptikPlanner.Controller
 
         }
 
+        /// <summary>
+        /// Gets all the customers in the db
+        /// </summary>
+        /// <returns></returns>
         public List<CUSTOMERS> GetCustomers()
         {
-            //    CUSTOMERS customer = new CUSTOMERS();
-            //    customer.CS_CPRNO = "2001926754";
-            //    customer.CS_FIRSTNAME = "Børge";
-            //    customer.CS_LASTNAME = "Jensen";
-
-
-            //    return customer;
-
-            using (db = new OptikItDbContext())
+           using (db = new OptikItDbContext())
             {
                 var customers = from c in db.CUSTOMERS select c;
                 return customers.ToList();
             }
         }
 
+        /// <summary>
+        /// Gets all the rooms in the db
+        /// </summary>
+        /// <returns></returns>
+
         public List<EYEEXAMROOMS> GetRooms()
         {
-            //TESTDATA
-
-            //EYEEXAMROOMS room = new EYEEXAMROOMS();
-            //room.ERO_OPENFROM = "12:15";
-            //room.ERO_OPENTO = "13:00";
-            //room.ERO_NBR = 5;
-            //room.ERO_TYPE = "Linse";
-            //room.ERO_DESC = "linserum 5 første sal til venstre";
-            //room.ERO_SHORTDESC = "kort";
-
-
-            //return room;
-
             using (db = new OptikItDbContext())
             {
                 var rooms = from r in db.EYEEXAMROOMS select r;
@@ -70,20 +65,12 @@ namespace OptikPlanner.Controller
             }
         }
 
-
-
-
-
+        /// <summary>
+        /// gets all the users / employees from the db
+        /// </summary>
+        /// <returns></returns>
         public List<USERS> GetUsers()
         {
-            //USERS user = new USERS();
-            //user.US_CPRNO = "2001927891";
-            //user.US_USERNAME = "MyUserName";
-            //user.US_STAMP = 1;
-
-
-            //return user;
-
             using (db = new OptikItDbContext())
             {
                 var users = from u in db.USERS select u;
@@ -91,24 +78,28 @@ namespace OptikPlanner.Controller
             }
         }
 
+        /// <summary>
+        /// gets specific appointments with specific users.
+        /// </summary>
+        /// <param name="appointment"></param>
+        /// <returns></returns>
         public List<string> GetExtraAppointmentDetails(APTDETAILS appointment)
         {
             List<string> extraAppointmentDetails = new List<string>();
-
             
-
-            
-
-
             var users = GetUsers();
             var matchingUser = users.Find(u => u.US_STAMP.Equals(appointment.APD_USER));
             if (matchingUser != null) extraAppointmentDetails.Add(matchingUser.US_USERNAME);
-
-
-
+            
             return extraAppointmentDetails;
         }
 
+
+        /// <summary>
+        /// Returns the appointment type of the specified appointment
+        /// </summary>
+        /// <param name="appointment"></param>
+        /// <returns></returns>
         public static string GetAppointmentType(APTDETAILS appointment)
         {
             string type = "";
@@ -170,6 +161,11 @@ namespace OptikPlanner.Controller
             return type;
         }
 
+        /// <summary>
+        /// returns the room of the specified appointment
+        /// </summary>
+        /// <param name="appointment"></param>
+        /// <returns></returns>
         public EYEEXAMROOMS GetAppointmentRoom(APTDETAILS appointment)
         {
             var rooms = GetRooms();
@@ -177,6 +173,11 @@ namespace OptikPlanner.Controller
             return matchingRoom;
         }
 
+        /// <summary>
+        /// returns the user / employee of the specified appointment 
+        /// </summary>
+        /// <param name="appointment"></param>
+        /// <returns></returns>
         public USERS GetAppointmentUser(APTDETAILS appointment)
         {
             var users = GetUsers();
@@ -184,6 +185,10 @@ namespace OptikPlanner.Controller
             return matchingUser;
         }
 
+        /// <summary>
+        /// converts the db appointments into calendarItems
+        /// </summary>
+        /// <returns></returns>
         public List<CalendarItem> GetAppointmentsAsCalendarItems()
         {
             List<CalendarItem> calendarItems = new List<CalendarItem>();
@@ -225,39 +230,15 @@ namespace OptikPlanner.Controller
                 calendarItems.Add(c);
 
             }
-
             return calendarItems;
-
-            //public List<CalendarItem> GetAppointmentsAsCalendarItems()
-            //{
-            //    List<CalendarItem> calendarItems = new List<CalendarItem>();
-
-            //    var appointments = GetAppointments();
-
-
-            //    foreach (var a in appointments)
-            //    {
-            //        string correctDateFormat = a.APD_DATE.Value.ToString("dd-MM-yy");
-            //        DateTime appointMentDateValue = DateTime.Parse(correctDateFormat);
-
-            //        string timeFromHour = a.APD_TIMEFROM.Split(':').First();
-            //        string timeFromMinute = a.APD_TIMEFROM.Split(':').Last();
-
-            //        string timeToHour = a.APD_TIMETO.Split(':').First();
-            //        string timeToMinute = a.APD_TIMETO.Split(':').Last();
-
-            //        string appointmentString = $"**Aftaletype her**\n" +
-            //                                   $"Lokale nr. {a.APD_ROOM}\n" +
-            //                                   $"**Kundenavn her**";
-
-            //        CalendarItem c = new CalendarItem(_view.Calendar, new DateTime(appointMentDateValue.Year, appointMentDateValue.Month, appointMentDateValue.Day, int.Parse(timeFromHour), int.Parse(timeFromMinute), 0), new DateTime(appointMentDateValue.Year, appointMentDateValue.Month, appointMentDateValue.Day, int.Parse(timeToHour), int.Parse(timeToMinute), 0), appointmentString);
-            //        c.Tag = a;
-            //        calendarItems.Add(c);
-            //    }
-
-            //    return calendarItems;
-            //}
         }
+
+
+        /// <summary>
+        /// converts the specified appointment into calendarItem
+        /// </summary>
+        /// <param name="appointments"></param>
+        /// <returns></returns>
 
         public List<CalendarItem> GetAppointmentsAsCalendarItems(List<APTDETAILS> appointments)
         {

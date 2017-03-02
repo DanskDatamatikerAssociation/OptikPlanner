@@ -25,7 +25,9 @@ namespace OptikPlanner.Model
         Værkstedarbejde = 17,
 
     }
-
+    /// <summary>
+    /// direct mirror of the appointment details in the db
+    /// </summary>
     public partial class APTDETAILS
     {
         [Key]

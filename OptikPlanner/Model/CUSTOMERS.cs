@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OptikPlanner.Model
 {
+    /// <summary>
+    /// Direct mirror of the Customers in DB
+    /// </summary>
     public partial class CUSTOMERS
     {
         [Key]
