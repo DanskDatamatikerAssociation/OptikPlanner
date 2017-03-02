@@ -125,7 +125,7 @@ namespace OptikPlanner
 
 
         /// <summary>
-        /// show day mode
+        /// Show day mode
         /// </summary>
         private void ShowDayView()
         {
@@ -291,7 +291,7 @@ namespace OptikPlanner
         }
 
         /// <summary>
-        /// load all calendar items
+        /// Loads all calendar items
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -302,7 +302,7 @@ namespace OptikPlanner
         }
 
         /// <summary>
-        /// apply colors to all appointments (specified by employee)
+        /// Apply colors to all appointments (specified by employee)
         /// </summary>
         private void ApplyColorLogicToCalendarItems()
         {
